@@ -1,0 +1,1533 @@
+{
+	"textures": [
+		{
+			"image": "pokemon.png",
+			"size": {
+				"w": 128,
+				"h": 1053
+			},
+			"sprites": [
+				{
+					"filename": "pokemon-sprites2-alpha_49.png",
+					"region": {
+						"x": 1,
+						"y": 1,
+						"w": 64,
+						"h": 64
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pokemon-sprites2-alpha_69.png",
+					"region": {
+						"x": 67,
+						"y": 1,
+						"w": 57,
+						"h": 56
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pokemon-sprites2-alpha_70.png",
+					"region": {
+						"x": 67,
+						"y": 59,
+						"w": 57,
+						"h": 56
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pokemon-sprites2-alpha_50.png",
+					"region": {
+						"x": 1,
+						"y": 67,
+						"w": 64,
+						"h": 64
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pokemon-sprites2-alpha_64.png",
+					"region": {
+						"x": 67,
+						"y": 117,
+						"w": 56,
+						"h": 56
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pokemon-sprites2-alpha_85.png",
+					"region": {
+						"x": 1,
+						"y": 133,
+						"w": 63,
+						"h": 64
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pokemon-sprites2-alpha_65.png",
+					"region": {
+						"x": 66,
+						"y": 175,
+						"w": 56,
+						"h": 56
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pokemon-sprites2-alpha_86.png",
+					"region": {
+						"x": 1,
+						"y": 199,
+						"w": 63,
+						"h": 64
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pokemon-sprites2-alpha_44.png",
+					"region": {
+						"x": 66,
+						"y": 233,
+						"w": 55,
+						"h": 54
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pokemon-sprites2-alpha_37.png",
+					"region": {
+						"x": 123,
+						"y": 233,
+						"w": 4,
+						"h": 7
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pokemon-sprites2-alpha_38.png",
+					"region": {
+						"x": 123,
+						"y": 242,
+						"w": 4,
+						"h": 7
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pokemon-sprites2-alpha_87.png",
+					"region": {
+						"x": 1,
+						"y": 265,
+						"w": 62,
+						"h": 62
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pokemon-sprites2-alpha_88.png",
+					"region": {
+						"x": 65,
+						"y": 289,
+						"w": 62,
+						"h": 62
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pokemon-sprites2-alpha_45.png",
+					"region": {
+						"x": 1,
+						"y": 329,
+						"w": 55,
+						"h": 54
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pokemon-sprites2-alpha_06.png",
+					"region": {
+						"x": 58,
+						"y": 329,
+						"w": 5,
+						"h": 8
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pokemon-sprites2-alpha_13.png",
+					"region": {
+						"x": 58,
+						"y": 339,
+						"w": 5,
+						"h": 8
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pokemon-sprites2-alpha_19.png",
+					"region": {
+						"x": 58,
+						"y": 349,
+						"w": 5,
+						"h": 8
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pokemon-sprites2-alpha_51.png",
+					"region": {
+						"x": 65,
+						"y": 353,
+						"w": 54,
+						"h": 59
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pokemon-sprites2-alpha_32.png",
+					"region": {
+						"x": 58,
+						"y": 359,
+						"w": 5,
+						"h": 8
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pokemon-sprites2-alpha_14.png",
+					"region": {
+						"x": 58,
+						"y": 369,
+						"w": 5,
+						"h": 7
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pokemon-sprites2-alpha_15.png",
+					"region": {
+						"x": 58,
+						"y": 378,
+						"w": 5,
+						"h": 7
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pokemon-sprites2-alpha_01.png",
+					"region": {
+						"x": 121,
+						"y": 353,
+						"w": 6,
+						"h": 7
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pokemon-sprites2-alpha_02.png",
+					"region": {
+						"x": 121,
+						"y": 362,
+						"w": 6,
+						"h": 7
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pokemon-sprites2-alpha_04.png",
+					"region": {
+						"x": 121,
+						"y": 371,
+						"w": 6,
+						"h": 7
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pokemon-sprites2-alpha_21.png",
+					"region": {
+						"x": 121,
+						"y": 380,
+						"w": 6,
+						"h": 7
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pokemon-sprites2-alpha_30.png",
+					"region": {
+						"x": 121,
+						"y": 389,
+						"w": 6,
+						"h": 7
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pokemon-sprites2-alpha_52.png",
+					"region": {
+						"x": 1,
+						"y": 385,
+						"w": 54,
+						"h": 59
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pokemon-sprites2-alpha_17.png",
+					"region": {
+						"x": 121,
+						"y": 398,
+						"w": 5,
+						"h": 7
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pokemon-sprites2-alpha_18.png",
+					"region": {
+						"x": 121,
+						"y": 407,
+						"w": 5,
+						"h": 7
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pokemon-sprites2-alpha_29.png",
+					"region": {
+						"x": 57,
+						"y": 387,
+						"w": 5,
+						"h": 7
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pokemon-sprites2-alpha_05.png",
+					"region": {
+						"x": 57,
+						"y": 396,
+						"w": 5,
+						"h": 5
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pokemon-sprites2-alpha_07.png",
+					"region": {
+						"x": 57,
+						"y": 403,
+						"w": 5,
+						"h": 5
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pokemon-sprites2-alpha_08.png",
+					"region": {
+						"x": 57,
+						"y": 410,
+						"w": 5,
+						"h": 5
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pokemon-sprites2-alpha_67.png",
+					"region": {
+						"x": 64,
+						"y": 414,
+						"w": 53,
+						"h": 64
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pokemon-sprites2-alpha_09.png",
+					"region": {
+						"x": 57,
+						"y": 417,
+						"w": 5,
+						"h": 5
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pokemon-sprites2-alpha_10.png",
+					"region": {
+						"x": 57,
+						"y": 424,
+						"w": 5,
+						"h": 5
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pokemon-sprites2-alpha_12.png",
+					"region": {
+						"x": 57,
+						"y": 431,
+						"w": 5,
+						"h": 5
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pokemon-sprites2-alpha_16.png",
+					"region": {
+						"x": 57,
+						"y": 438,
+						"w": 5,
+						"h": 5
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pokemon-sprites2-alpha_20.png",
+					"region": {
+						"x": 57,
+						"y": 445,
+						"w": 5,
+						"h": 5
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pokemon-sprites2-alpha_68.png",
+					"region": {
+						"x": 1,
+						"y": 446,
+						"w": 53,
+						"h": 64
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pokemon-sprites2-alpha_22.png",
+					"region": {
+						"x": 56,
+						"y": 452,
+						"w": 5,
+						"h": 5
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pokemon-sprites2-alpha_23.png",
+					"region": {
+						"x": 56,
+						"y": 459,
+						"w": 5,
+						"h": 5
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pokemon-sprites2-alpha_24.png",
+					"region": {
+						"x": 56,
+						"y": 466,
+						"w": 5,
+						"h": 5
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pokemon-sprites2-alpha_25.png",
+					"region": {
+						"x": 56,
+						"y": 473,
+						"w": 5,
+						"h": 5
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pokemon-sprites2-alpha_03.png",
+					"region": {
+						"x": 119,
+						"y": 416,
+						"w": 7,
+						"h": 7
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pokemon-sprites2-alpha_11.png",
+					"region": {
+						"x": 119,
+						"y": 425,
+						"w": 7,
+						"h": 7
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pokemon-sprites2-alpha_26.png",
+					"region": {
+						"x": 119,
+						"y": 434,
+						"w": 7,
+						"h": 7
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pokemon-sprites2-alpha_27.png",
+					"region": {
+						"x": 119,
+						"y": 443,
+						"w": 5,
+						"h": 5
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pokemon-sprites2-alpha_28.png",
+					"region": {
+						"x": 119,
+						"y": 450,
+						"w": 5,
+						"h": 5
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pokemon-sprites2-alpha_31.png",
+					"region": {
+						"x": 119,
+						"y": 457,
+						"w": 5,
+						"h": 5
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pokemon-sprites2-alpha_33.png",
+					"region": {
+						"x": 119,
+						"y": 464,
+						"w": 5,
+						"h": 5
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pokemon-sprites2-alpha_34.png",
+					"region": {
+						"x": 119,
+						"y": 471,
+						"w": 5,
+						"h": 5
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pokemon-sprites2-alpha_35.png",
+					"region": {
+						"x": 119,
+						"y": 478,
+						"w": 5,
+						"h": 5
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pokemon-sprites2-alpha_62.png",
+					"region": {
+						"x": 56,
+						"y": 480,
+						"w": 51,
+						"h": 48
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pokemon-sprites2-alpha_91.png",
+					"region": {
+						"x": 109,
+						"y": 485,
+						"w": 18,
+						"h": 21
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pokemon-sprites2-alpha_84.png",
+					"region": {
+						"x": 109,
+						"y": 508,
+						"w": 17,
+						"h": 20
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pokemon-sprites2-alpha_63.png",
+					"region": {
+						"x": 1,
+						"y": 512,
+						"w": 51,
+						"h": 48
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pokemon-sprites2-alpha_59.png",
+					"region": {
+						"x": 54,
+						"y": 530,
+						"w": 49,
+						"h": 45
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pokemon-sprites2-alpha_48.png",
+					"region": {
+						"x": 105,
+						"y": 530,
+						"w": 21,
+						"h": 22
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pokemon-sprites2-alpha_61.png",
+					"region": {
+						"x": 105,
+						"y": 554,
+						"w": 21,
+						"h": 17
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pokemon-sprites2-alpha_60.png",
+					"region": {
+						"x": 1,
+						"y": 562,
+						"w": 49,
+						"h": 45
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pokemon-sprites2-alpha_55.png",
+					"region": {
+						"x": 105,
+						"y": 573,
+						"w": 20,
+						"h": 22
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pokemon-sprites2-alpha_100.png",
+					"region": {
+						"x": 52,
+						"y": 577,
+						"w": 48,
+						"h": 48
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pokemon-sprites2-alpha_46.png",
+					"region": {
+						"x": 1,
+						"y": 609,
+						"w": 48,
+						"h": 48
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pokemon-sprites2-alpha_71.png",
+					"region": {
+						"x": 102,
+						"y": 597,
+						"w": 24,
+						"h": 22
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pokemon-sprites2-alpha_74.png",
+					"region": {
+						"x": 102,
+						"y": 621,
+						"w": 24,
+						"h": 22
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pokemon-sprites2-alpha_47.png",
+					"region": {
+						"x": 51,
+						"y": 627,
+						"w": 48,
+						"h": 48
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pokemon-sprites2-alpha_56.png",
+					"region": {
+						"x": 101,
+						"y": 645,
+						"w": 26,
+						"h": 22
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pokemon-sprites2-alpha_89.png",
+					"region": {
+						"x": 101,
+						"y": 669,
+						"w": 26,
+						"h": 21
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pokemon-sprites2-alpha_82.png",
+					"region": {
+						"x": 1,
+						"y": 659,
+						"w": 46,
+						"h": 50
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pokemon-sprites2-alpha_83.png",
+					"region": {
+						"x": 49,
+						"y": 677,
+						"w": 46,
+						"h": 50
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pokemon-sprites2-alpha_93.png",
+					"region": {
+						"x": 97,
+						"y": 692,
+						"w": 30,
+						"h": 56
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pokemon-sprites2-alpha_77.png",
+					"region": {
+						"x": 1,
+						"y": 711,
+						"w": 44,
+						"h": 42
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pokemon-sprites2-alpha_78.png",
+					"region": {
+						"x": 47,
+						"y": 729,
+						"w": 44,
+						"h": 42
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pokemon-sprites2-alpha_80.png",
+					"region": {
+						"x": 1,
+						"y": 755,
+						"w": 42,
+						"h": 52
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pokemon-sprites2-alpha_94.png",
+					"region": {
+						"x": 93,
+						"y": 750,
+						"w": 30,
+						"h": 56
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pokemon-sprites2-alpha_81.png",
+					"region": {
+						"x": 45,
+						"y": 773,
+						"w": 42,
+						"h": 52
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pokemon-sprites2-alpha_95.png",
+					"region": {
+						"x": 1,
+						"y": 809,
+						"w": 41,
+						"h": 54
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pokemon-sprites2-alpha_41.png",
+					"region": {
+						"x": 89,
+						"y": 808,
+						"w": 37,
+						"h": 44
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pokemon-sprites2-alpha_96.png",
+					"region": {
+						"x": 44,
+						"y": 827,
+						"w": 41,
+						"h": 54
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pokemon-sprites2-alpha_98.png",
+					"region": {
+						"x": 1,
+						"y": 865,
+						"w": 41,
+						"h": 50
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pokemon-sprites2-alpha_39.png",
+					"region": {
+						"x": 87,
+						"y": 854,
+						"w": 40,
+						"h": 37
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pokemon-sprites2-alpha_99.png",
+					"region": {
+						"x": 44,
+						"y": 883,
+						"w": 41,
+						"h": 50
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pokemon-sprites2-alpha_40.png",
+					"region": {
+						"x": 87,
+						"y": 893,
+						"w": 40,
+						"h": 37
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pokemon-sprites2-alpha_75.png",
+					"region": {
+						"x": 87,
+						"y": 932,
+						"w": 40,
+						"h": 35
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pokemon-sprites2-alpha_76.png",
+					"region": {
+						"x": 1,
+						"y": 917,
+						"w": 40,
+						"h": 35
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pokemon-sprites2-alpha_57.png",
+					"region": {
+						"x": 43,
+						"y": 935,
+						"w": 39,
+						"h": 36
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pokemon-sprites2-alpha_58.png",
+					"region": {
+						"x": 1,
+						"y": 954,
+						"w": 39,
+						"h": 36
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pokemon-sprites2-alpha_42.png",
+					"region": {
+						"x": 84,
+						"y": 969,
+						"w": 37,
+						"h": 44
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pokemon-sprites2-alpha_92.png",
+					"region": {
+						"x": 42,
+						"y": 973,
+						"w": 28,
+						"h": 20
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pokemon-sprites2-alpha_36.png",
+					"region": {
+						"x": 72,
+						"y": 973,
+						"w": 5,
+						"h": 5
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pokemon-sprites2-alpha_53.png",
+					"region": {
+						"x": 1,
+						"y": 992,
+						"w": 27,
+						"h": 21
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pokemon-sprites2-alpha_43.png",
+					"region": {
+						"x": 1,
+						"y": 1015,
+						"w": 15,
+						"h": 20
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pokemon-sprites2-alpha_54.png",
+					"region": {
+						"x": 18,
+						"y": 1015,
+						"w": 15,
+						"h": 19
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pokemon-sprites2-alpha_73.png",
+					"region": {
+						"x": 30,
+						"y": 995,
+						"w": 23,
+						"h": 18
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pokemon-sprites2-alpha_66.png",
+					"region": {
+						"x": 55,
+						"y": 995,
+						"w": 23,
+						"h": 17
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pokemon-sprites2-alpha_72.png",
+					"region": {
+						"x": 55,
+						"y": 1014,
+						"w": 20,
+						"h": 18
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pokemon-sprites2-alpha_79.png",
+					"region": {
+						"x": 35,
+						"y": 1034,
+						"w": 17,
+						"h": 18
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pokemon-sprites2-alpha_90.png",
+					"region": {
+						"x": 35,
+						"y": 1015,
+						"w": 17,
+						"h": 17
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pokemon-sprites2-alpha_97.png",
+					"region": {
+						"x": 54,
+						"y": 1034,
+						"w": 17,
+						"h": 18
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pokemon-sprites2-alpha_@v.png",
+					"region": {
+						"x": 77,
+						"y": 1015,
+						"w": 14,
+						"h": 19
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "1.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:4f8deb31a0e277d35720a137fda9f20a:62e88eef4bbb6b1309a1fcb61eee5b87:8916880c775be0df5cbfe3521cb6394a$"
+	}
+}
