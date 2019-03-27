@@ -1,0 +1,48 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://board/outdoor-export.png" type="Texture" id=1]
+[ext_resource path="res://board/outdoor.png" type="Texture" id=2]
+
+[node name="BoardPath" type="Node" index="0"]
+
+[node name="path" type="Sprite" parent="." index="0"]
+
+position = Vector2( 1344, 768 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 0, 512, 1024, 384 )
+_sections_unfolded = [ "Region" ]
+
+[node name="space" type="Sprite" parent="." index="1"]
+
+position = Vector2( 1344, 448 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 1088, 320, 128, 128 )
+_sections_unfolded = [ "Region" ]
+
+[node name="grass" type="Sprite" parent="." index="2"]
+
+position = Vector2( 192, 128 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 384, 256 )
+_sections_unfolded = [ "Region" ]
+
+[node name="bushes" type="Sprite" parent="." index="3"]
+
+position = Vector2( 256, 768 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 0, 512, 1024, 384 )
+_sections_unfolded = [ "Region" ]
+
+[node name="dirt" type="Sprite" parent="." index="4"]
+
+position = Vector2( 768, 256 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 384, 0, 640, 512 )
+_sections_unfolded = [ "Region" ]
+
+

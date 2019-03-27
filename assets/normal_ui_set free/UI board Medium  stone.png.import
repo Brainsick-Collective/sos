@@ -1,0 +1,29 @@
+[remap]
+
+importer="texture"
+type="StreamTexture"
+path="res://.import/UI board Medium  stone.png-7f29ec9c7dfeab5e569e64937c08452c.stex"
+
+[deps]
+
+source_file="res://assets/normal_ui_set free/UI board Medium  stone.png"
+dest_files=[ "res://.import/UI board Medium  stone.png-7f29ec9c7dfeab5e569e64937c08452c.stex" ]
+
+[params]
+
+compress/mode=0
+compress/lossy_quality=0.7
+compress/hdr_mode=0
+compress/normal_map=0
+flags/repeat=0
+flags/filter=true
+flags/mipmaps=false
+flags/anisotropic=false
+flags/srgb=2
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/HDR_as_SRGB=false
+stream=false
+size_limit=0
+detect_3d=true
+svg/scale=1.0
