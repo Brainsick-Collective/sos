@@ -1,6 +1,7 @@
 extends Node2D
 
-signal moved
+signal turn_finished(last_position)
+signal last_move
 
 export (Texture) var sprite
 export (Resource) var stats
@@ -8,6 +9,7 @@ export (NodePath) var curr_space = null
 export (String) var player_name
 const TIME_PER_SPACE = .1
 onready var camera = $Pivot/Camera2D
+var confirm_move_popup
 var target_space
 var moving = false
 export var moves_left = 0
@@ -15,13 +17,15 @@ signal next_turn
 var spaces_moved
 var board
 var timer
+onready var my_turn = false
 
 var _direction = Vector2()
 
 
 func initialize(game_board):
 	_ready()
-	player_name = randi() % 10
+	confirm_move_popup = game_board.get_node("UI/MoveConfirmPopup")
+	player_name = get_instance_id()
 	#$moves.set_anchor(position - Vector2(32,96))
 	#$moves.set_text(str(moves_left))
 	board = game_board.get_node("GameBoard")
@@ -50,8 +54,8 @@ func _process(delta):
 	#$Tween.start()
 	
 func move_to(target_position):
-	emit_signal("moved", position, target_position)
 	set_process(false)
+	target_position = board.map_to_world(board.world_to_map(target_position))
 	target_position = target_position + board.cell_size / 2
 	# Move the node to the target cell instantly,
 	# and animate the sprite moving from the start to the target cell
@@ -66,15 +70,29 @@ func move_to(target_position):
 	timer.set_wait_time(spaces_delay)
 	timer.set_one_shot(true)
 	timer.start()
-	#yield(timer, "timeout")
-	
-	#yield(anim.play_walk(), "completed")
-#func _process(delta):
-#	# Called every frame. Delta is time since last frame.
-#	# Update game logic here.
-#	pass
+	if !spaces_moved.empty():
+		if target_position == spaces_moved.back():
+			moves_left+=1
+			spaces_moved.pop_back()
+			curr_space = target_position
+			target_space = null
+			return
+	moves_left-=1
+	spaces_moved.push_back(curr_space)
+	curr_space = target_position
+	target_position = null
+
+
 func on_timeout():
-	set_process(true)
+	if moves_left == 0:
+		#todo: add popup for confirmation
+		set_process(false)
+		set_process_input(false)
+		emit_signal("last_move")
+		timer.stop()
+		yield(confirm_move_popup, "completed")
+	else:
+		set_process(true)
 	
 func get_input_direction():
 	return Vector2(
@@ -90,9 +108,32 @@ func get_moves():
 	return moves_left
 func get_name(): 
 	return player_name
+
+func confirm_move(isYes):
+	if my_turn:
+		if isYes:
+			set_process(false)
+			set_process_input(false)
+			timer.stop()
+			my_turn = false
+			emit_signal("turn_finished", camera.to_global(camera.position))
+			confirm_move_popup.disconnect("completed", self, "confirm_move")
+		else:
+			move_to(spaces_moved.back())
+			curr_space = position
+		confirm_move_popup.hide()
 	
-func start_turn():
+func start_turn(last_camera_position):
+	my_turn = true
+	confirm_move_popup.connect("completed", self, "confirm_move")
+	var pos = $Pivot.to_local(last_camera_position)
+	
+	spaces_moved = []
+	camera.position = pos
 	camera._set_current(true)
+	$Tween.interpolate_property($Pivot/Camera2D, "position", camera.position, Vector2(), position.distance_to(camera.position)/ 2000, Tween.TRANS_QUAD, Tween.EASE_IN)
+	$Tween.start()
+	curr_space = position
 	spaces_moved = Array()
 	moves_left = 3
 	set_process(true)

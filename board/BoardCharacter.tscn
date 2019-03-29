@@ -1,9 +1,10 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://board/BoardCharacter.gd" type="Script" id=1]
-[ext_resource path="res://assets/pokemon/pokemon-sprites2-alpha_40.png" type="Texture" id=2]
+[ext_resource path="res://board/Pivot.gd" type="Script" id=2]
+[ext_resource path="res://assets/pokemon/pokemon-sprites2-alpha_40.png" type="Texture" id=3]
 
-[node name="BoardCharacter" type="Node2D"]
+[node name="BoardCharacter" type="Node2D" index="0"]
 
 position = Vector2( 48, 48 )
 scale = Vector2( 1.5, 1.5 )
@@ -26,8 +27,16 @@ playback/speed = 1.0
 [node name="Pivot" type="Position2D" parent="." index="1"]
 
 scale = Vector2( 2.13333, 2.13333 )
+script = ExtResource( 2 )
 
-[node name="Camera2D" type="Camera2D" parent="Pivot" index="0"]
+[node name="Sprite" type="Sprite" parent="Pivot" index="0"]
+
+scale = Vector2( 0.46875, 0.46875 )
+texture = ExtResource( 3 )
+flip_h = true
+_sections_unfolded = [ "Offset", "Region", "Transform" ]
+
+[node name="Camera2D" type="Camera2D" parent="Pivot" index="1"]
 
 scale = Vector2( 1, 1 )
 anchor_mode = 1
@@ -39,8 +48,8 @@ limit_top = -10000000
 limit_right = 10000000
 limit_bottom = 10000000
 limit_smoothed = false
-drag_margin_h_enabled = true
-drag_margin_v_enabled = true
+drag_margin_h_enabled = false
+drag_margin_v_enabled = false
 smoothing_enabled = false
 smoothing_speed = 5.0
 offset_v = 0.0
@@ -51,13 +60,11 @@ drag_margin_right = 0.2
 drag_margin_bottom = 0.2
 editor_draw_screen = true
 editor_draw_limits = false
-editor_draw_drag_margin = false
+editor_draw_drag_margin = true
+_sections_unfolded = [ "Drag Margin", "Editor", "Smoothing" ]
 
-[node name="Sprite" type="Sprite" parent="Pivot" index="1"]
+[node name="CameraOffset" type="Position2D" parent="Pivot" index="2"]
 
-scale = Vector2( 0.46875, 0.46875 )
-texture = ExtResource( 2 )
-flip_h = true
-_sections_unfolded = [ "Offset", "Region", "Transform" ]
+scale = Vector2( 0.468751, 0.468751 )
 
 

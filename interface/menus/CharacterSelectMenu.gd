@@ -29,6 +29,7 @@ func _ready():
 func initialize(game_node):
 	_ready()
 	game = game_node
+	
 
 func _input(event):
 	if event.is_action_pressed("ui_left"):
