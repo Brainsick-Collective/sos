@@ -7,6 +7,10 @@ onready var No = $NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/No
 func _ready():
 	Yes.grab_focus()
 	
+func show():
+	.show()
+	Yes.grab_focus()
+	
 
 func _on_Yes_pressed():
 	emit_signal("completed", true)

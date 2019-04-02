@@ -11,12 +11,13 @@ const TIME_PER_SPACE = .1
 onready var camera = $Pivot/Camera2D
 var confirm_move_popup
 var target_space
-var moving = false
 export var moves_left = 0
 signal next_turn
 var spaces_moved
 var board
+var dice_roll_popup
 var timer
+var ui_up = false
 onready var my_turn = false
 
 var _direction = Vector2()
@@ -25,13 +26,15 @@ var _direction = Vector2()
 func initialize(game_board):
 	_ready()
 	confirm_move_popup = game_board.get_node("UI/MoveConfirmPopup")
+	
+	dice_roll_popup = game_board.get_node("UI/DiceRollPopup")
 	player_name = get_instance_id()
 	#$moves.set_anchor(position - Vector2(32,96))
 	#$moves.set_text(str(moves_left))
 	board = game_board.get_node("GameBoard")
 	timer = Timer.new()
 	add_child(timer)
-	timer.connect("timeout", self, "on_timeout")
+	timer.connect("timeout", self, "check_moves")
 	# Called when the node is added to the scene for the first time.
 	# Initialization here
 	set_process(false)
@@ -83,8 +86,8 @@ func move_to(target_position):
 	target_position = null
 
 
-func on_timeout():
-	if moves_left == 0:
+func check_moves():
+	if moves_left <= 0:
 		#todo: add popup for confirmation
 		set_process(false)
 		set_process_input(false)
@@ -131,11 +134,14 @@ func start_turn(last_camera_position):
 	spaces_moved = []
 	camera.position = pos
 	camera._set_current(true)
-	$Tween.interpolate_property($Pivot/Camera2D, "position", camera.position, Vector2(), position.distance_to(camera.position)/ 2000, Tween.TRANS_QUAD, Tween.EASE_IN)
+	$Tween.interpolate_property($Pivot/Camera2D, "position", camera.position, Vector2(), .5, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	$Tween.start()
+	yield($Tween, "tween_completed")
+	dice_roll_popup.initialize()
+	moves_left = yield(dice_roll_popup, "completed")
+	check_moves()
 	curr_space = position
 	spaces_moved = Array()
-	moves_left = 3
 	set_process(true)
 	set_process_input(true)
 	#$moves.show()

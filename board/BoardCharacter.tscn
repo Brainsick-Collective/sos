@@ -4,7 +4,7 @@
 [ext_resource path="res://board/Pivot.gd" type="Script" id=2]
 [ext_resource path="res://assets/pokemon/pokemon-sprites2-alpha_40.png" type="Texture" id=3]
 
-[node name="BoardCharacter" type="Node2D" index="0"]
+[node name="BoardCharacter" type="Node2D"]
 
 position = Vector2( 48, 48 )
 scale = Vector2( 1.5, 1.5 )

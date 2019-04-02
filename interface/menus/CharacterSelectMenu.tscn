@@ -8,7 +8,7 @@
 [ext_resource path="res://assets/pokemon.sprites/pokemon-sprites2-alpha_39.tres" type="Texture" id=6]
 [ext_resource path="res://assets/ui/Interface_21.png" type="Texture" id=7]
 
-[node name="CharacterSelectMenu" type="Control"]
+[node name="CharacterSelectMenu" type="Control" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -172,9 +172,9 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 48.0
+margin_top = 92.0
 margin_right = 1024.0
-margin_bottom = 137.0
+margin_bottom = 93.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
@@ -195,9 +195,9 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 187.0
+margin_top = 143.0
 margin_right = 1024.0
-margin_bottom = 251.0
+margin_bottom = 207.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
@@ -218,9 +218,9 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 301.0
+margin_top = 257.0
 margin_right = 1024.0
-margin_bottom = 401.0
+margin_bottom = 357.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 1
@@ -303,9 +303,9 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 412.0
-margin_top = 451.0
+margin_top = 407.0
 margin_right = 612.0
-margin_bottom = 551.0
+margin_bottom = 507.0
 rect_min_size = Vector2( 200, 100 )
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false

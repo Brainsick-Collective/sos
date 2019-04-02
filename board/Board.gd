@@ -5,14 +5,20 @@ extends Node2D
 # var b = "textvar"
 onready var START
 onready var Characters = $GameBoard/Characters
+onready var BoardCharacter = preload("res://board/BoardCharacter.tscn")
 onready var Board = $GameBoard
 onready var BoardPath = $GameBoard/Path
 onready var moves_label = $UI/GUI/Counter/MarginContainer/VBoxContainer/MovesLeft
 onready var name_label = $UI/GUI/NinePatchRect/PlayerName
+onready var DiceRoll = $UI/DiceRollPopup
 var num_players = 3
 var current_player
 var turn_ind
 
+func _ready():
+	var dummy = BoardCharacter.instance()
+	current_player = dummy
+	
 func initialize(characters):
 	_ready()
 	START = $GameBoard/Start.get_position()

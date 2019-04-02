@@ -1,0 +1,11 @@
+[gd_scene format=2]
+
+[node name="Combatant" type="Position2D"]
+
+[node name="Skin" type="Position2D" parent="." index="0"]
+
+[node name="Actions" type="Node" parent="." index="1"]
+
+[node name="TargetAnchor" type="Position2D" parent="." index="2"]
+
+
