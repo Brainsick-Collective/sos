@@ -4,6 +4,7 @@ signal completed(turn_size)
 var num = 0
 var countdown = 0
 const COUNTDOWN_SIZE = 4
+onready var game_vars = get_node("/root/GameVariables")
 onready var DiceNum = $NinePatchRect/MarginContainer/VBoxContainer/DiceNum
 
 func initialize():

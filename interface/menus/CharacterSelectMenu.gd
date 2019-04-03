@@ -5,11 +5,14 @@ extends "res://interface/Menu.gd"
 # var b = "textvar"
 onready var Board = preload("res://board/Board.tscn")
 onready var Character = preload("res://board/BoardCharacter.tscn")
+onready var Player = preload("res://game/players/Player.tscn")
 onready var left = $Column/Row/Left
 onready var right = $Column/Row/Right
 onready var character = $Column/Row/Character
 onready var Sprites = preload("res://assets/pokemon.tscn")
 onready var num_players_label = $Column0/Row/Container/Label
+var Players
+
 var num_players
 var sprites
 var game
@@ -29,6 +32,7 @@ func _ready():
 func initialize(game_node):
 	_ready()
 	game = game_node
+	Players = game_node.get_node("Players")
 	
 
 func _input(event):
@@ -55,10 +59,14 @@ func _on_StartButton_pressed():
 	var board_character = Character.instance()
 	board_character.set_sprite(character.texture)
 	characters.append(board_character)
+	var player = Player.instance()
+	player.initialize(curr_player, board_character)
+	Players.add_child(player)
 	if curr_player == num_players:
 		var board = Board.instance()
 		game.add_child(board)
-		board.initialize(characters)
+		board.initialize(characters, game)
+		game.set_controls()
 		queue_free()
 	else:
 		curr_player+=1

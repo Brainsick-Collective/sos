@@ -13,6 +13,8 @@ sprite = null
 stats = null
 curr_space = null
 player_name = null
+player_id = null
+controls = null
 moves_left = 0
 
 [node name="Tween" type="Tween" parent="." index="0"]
@@ -38,7 +40,6 @@ _sections_unfolded = [ "Offset", "Region", "Transform" ]
 
 [node name="Camera2D" type="Camera2D" parent="Pivot" index="1"]
 
-scale = Vector2( 1, 1 )
 anchor_mode = 1
 rotating = false
 current = true

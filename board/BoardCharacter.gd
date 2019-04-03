@@ -7,6 +7,8 @@ export (Texture) var sprite
 export (Resource) var stats
 export (NodePath) var curr_space = null
 export (String) var player_name
+export (String) var player_id
+export (Dictionary) var controls
 const TIME_PER_SPACE = .1
 onready var camera = $Pivot/Camera2D
 var confirm_move_popup
@@ -51,7 +53,7 @@ func _process(delta):
 	_direction = get_input_direction()
 	if _direction != Vector2():
 		var next_space = board.request_move(self, _direction)
-		if next_space:
+		if next_space :
 			move_to(next_space)
 		_direction = Vector2()
 	#$Tween.start()
@@ -88,12 +90,15 @@ func move_to(target_position):
 
 func check_moves():
 	if moves_left <= 0:
-		#todo: add popup for confirmation
+		timer.stop()
 		set_process(false)
 		set_process_input(false)
-		emit_signal("last_move")
-		timer.stop()
-		yield(confirm_move_popup, "completed")
+		if !spaces_moved.empty():
+			emit_signal("last_move")
+			yield(confirm_move_popup, "completed")
+		else:
+			emit_signal("turn_finished", camera.to_global(camera.position))
+			confirm_move_popup.disconnect("completed", self, "confirm_move")
 	else:
 		set_process(true)
 	
@@ -139,11 +144,9 @@ func start_turn(last_camera_position):
 	yield($Tween, "tween_completed")
 	dice_roll_popup.initialize()
 	moves_left = yield(dice_roll_popup, "completed")
+	set_process_input(true)
+	set_process(true)
 	check_moves()
 	curr_space = position
 	spaces_moved = Array()
-	set_process(true)
-	set_process_input(true)
-	#$moves.show()
-
 	

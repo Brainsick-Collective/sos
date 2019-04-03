@@ -11,8 +11,12 @@ config_version=3
 [application]
 
 config/name="New Game Project"
-run/main_scene="res://Game.tscn"
+run/main_scene="res://game/Game.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+GameVariables="*res://game/GameVariables.gd"
 
 [editor_plugins]
 
