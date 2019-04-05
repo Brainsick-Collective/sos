@@ -34,7 +34,6 @@ func initialize(characters, game):
 		character.connect("last_move", self, "show_confirm_popup")
 	num_players = Characters.get_child_count()
 	turn_ind = Characters.get_child_count() - 1
-	print(num_players)
 	
 	play_turn(Characters.get_child(0), START)
 	Board.initialize()

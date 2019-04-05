@@ -6,6 +6,7 @@ extends "res://interface/Menu.gd"
 onready var Board = preload("res://board/Board.tscn")
 onready var Character = preload("res://board/BoardCharacter.tscn")
 onready var Player = preload("res://game/players/Player.tscn")
+onready var Combatant = preload("res://combat/combatants/Combatant.tscn")
 onready var left = $Column/Row/Left
 onready var right = $Column/Row/Right
 onready var character = $Column/Row/Character
@@ -60,7 +61,9 @@ func _on_StartButton_pressed():
 	board_character.set_sprite(character.texture)
 	characters.append(board_character)
 	var player = Player.instance()
-	player.initialize(curr_player, board_character)
+	var combatant = Combatant.instance()
+	combatant.initialize(character)
+	player.initialize(curr_player, board_character, combatant)
 	Players.add_child(player)
 	if curr_player == num_players:
 		var board = Board.instance()

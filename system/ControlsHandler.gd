@@ -21,6 +21,9 @@ export var controls_set =[
 func initialize(players):
 	clear_controls()
 	set_controls(0)
+	for player_ind in players.get_child_count():
+		var new_controls = get_controls(player_ind)
+		set_new_controls(new_controls)
 
 func add_action(name):
     InputMap.add_action(name)
@@ -35,12 +38,16 @@ func add_action_key(name, key):
 func get_controls(id):
 	var controls = {}
 	for key in controls_set[id]:
-		controls[key] = key + String(id)
+		controls[key + String(id)] = controls_set[id][key]
 	return controls
 	
 func set_controls(id):
 	for key in controls_set[id]:
 			add_action_key(key, controls_set[id][key])
+			
+func set_new_controls(controls):
+	for key in controls.keys():
+		add_action_key(key, controls[key])
 
 func clear_controls():
 	for action in InputMap.get_action_list("ui_accept"):
