@@ -1,21 +1,16 @@
 extends Node2D
 
 var game_variables
-var controls_1
-var controls_2
 var fighter1
 var fighter2
-var has_chosen1
-var has_chosen2
-const controls =[
-	"ui_accept",
-	"ui_cancel",
+var choice1
+var choice2
+const choices =[
 	"ui_down",
 	"ui_left",
 	"ui_right",
 	"ui_up"
 ]
-
 func _ready():
 	pass
 	
@@ -31,11 +26,18 @@ func initialize(fighter1, fighter2):
 	var sprite2 = Sprite.new()
 	sprite2.texture = fighter2.get_board_character().get_node("Pivot/Sprite").texture
 	$"2".add_child(sprite2)
-	$UI/CombatInterface1.initialize(game_variables.get_controls(fighter1.get_id()))
-	$UI/CombatInterface2.initialize(game_variables.get_controls(fighter2.get_id()))
+	#TODO: set stats from stat resource
+
+	$UI/CombatInterface.initialize(fighter1, fighter2)
 	
+func _process(delta):
+	if choice1 and choice2:
+		$Choices.text += "\n" + choice1 + "\n" + choice2
+		set_process(false)
 func _input(event):
-	for key in controls:
-		if event.is_action_pressed(key + String(fighter1.get_id())):
-			print(key + "fighter 1")
+	for key in choices:
+		if !choice1 and event.is_action_pressed(key + String(fighter1.get_id())):
+			choice1 = key
+		elif !choice2 and event.is_action_pressed(key + String(fighter2.get_id())):
+			choice2 = key
 #	if event.is_action_pressed(

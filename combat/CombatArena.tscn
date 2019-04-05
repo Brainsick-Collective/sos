@@ -38,6 +38,7 @@ transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 
 [node name="GUI" type="Control" parent="UI" index="0"]
 
+editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 1.0
@@ -52,7 +53,6 @@ _sections_unfolded = [ "Anchor", "Margin", "Rect" ]
 
 [node name="ActorPanel1" type="NinePatchRect" parent="UI/GUI" index="0"]
 
-editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -152,7 +152,7 @@ min_value = 0.0
 max_value = 100.0
 step = 1.0
 page = 0.0
-value = 40.0
+value = 100.0
 exp_edit = false
 rounded = false
 texture_under = ExtResource( 5 )
@@ -166,7 +166,6 @@ _sections_unfolded = [ "Rect", "Textures" ]
 
 [node name="ActorPanel2" type="NinePatchRect" parent="UI/GUI" index="1"]
 
-editor/display_folded = true
 anchor_left = 1.0
 anchor_top = 0.0
 anchor_right = 1.0
@@ -266,8 +265,8 @@ min_value = 0.0
 max_value = 100.0
 step = 1.0
 page = 0.0
-value = 40.0
-exp_edit = false
+value = 100.0
+exp_edit = true
 rounded = false
 texture_under = ExtResource( 5 )
 texture_over = null
@@ -278,17 +277,31 @@ radial_center_offset = Vector2( 0, 0 )
 nine_patch_stretch = false
 _sections_unfolded = [ "Rect", "Textures" ]
 
-[node name="CombatInterface1" parent="UI" index="1" instance=ExtResource( 7 )]
-
-[node name="CombatInterface2" parent="UI" index="2" instance=ExtResource( 7 )]
-
-anchor_left = 1.0
-anchor_right = 1.0
-margin_left = -304.0
-margin_right = 0.0
+[node name="CombatInterface" parent="UI" index="1" instance=ExtResource( 7 )]
 
 [node name="TurnQueue" type="YSort" parent="." index="4"]
 
 sort_enabled = true
+
+[node name="Choices" type="Label" parent="." index="5"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 480.0
+margin_top = 224.0
+margin_right = 544.0
+margin_bottom = 288.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+text = "choices:"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
 
 

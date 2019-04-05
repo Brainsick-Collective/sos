@@ -1,0 +1,29 @@
+[gd_resource type="Theme" load_steps=8 format=2]
+
+[ext_resource path="res://combat/interface/theme/styleboxes/button_disabled.tres" type="StyleBox" id=1]
+[ext_resource path="res://combat/interface/theme/styleboxes/button_focus.tres" type="StyleBox" id=2]
+[ext_resource path="res://combat/interface/theme/styleboxes/button_hover.tres" type="StyleBox" id=3]
+[ext_resource path="res://combat/interface/theme/styleboxes/button_normal.tres" type="StyleBox" id=4]
+[ext_resource path="res://combat/interface/theme/styleboxes/button_pressed.tres" type="StyleBox" id=5]
+[ext_resource path="res://combat/interface/theme/styleboxes/panel.tres" type="StyleBox" id=6]
+[ext_resource path="res://interface/theme/fonts/source_code_pro_26.tres" type="DynamicFont" id=7]
+
+[resource]
+
+default_font = ExtResource( 7 )
+Button/colors/font_color = Color( 0.878431, 0.878431, 0.878431, 1 )
+Button/colors/font_color_disabled = Color( 0.9, 0.9, 0.9, 0.2 )
+Button/colors/font_color_hover = Color( 0.941176, 0.941176, 0.941176, 1 )
+Button/colors/font_color_pressed = Color( 1, 1, 1, 1 )
+Button/constants/hseparation = 2
+Button/fonts/font = null
+Button/styles/disabled = ExtResource( 1 )
+Button/styles/focus = ExtResource( 2 )
+Button/styles/hover = ExtResource( 3 )
+Button/styles/normal = ExtResource( 4 )
+Button/styles/pressed = ExtResource( 5 )
+Panel/styles/panel = ExtResource( 6 )
+Panel/styles/panelf = null
+Panel/styles/panelnc = null
+_sections_unfolded = [ "Button", "Button/colors", "Button/constants", "Button/styles", "Panel", "Panel/styles" ]
+
