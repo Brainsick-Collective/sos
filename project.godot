@@ -6,21 +6,81 @@
 ;   [section] ; section goes between []
 ;   param=value ; assign values to parameters
 
-config_version=3
+config_version=4
+
+_global_script_classes=[ {
+"base": "CombatAction",
+"class": "AttackAction",
+"language": "GDScript",
+"path": "res://combat/Actions/AttackAction.gd"
+}, {
+"base": "Node",
+"class": "CombatAction",
+"language": "GDScript",
+"path": "res://combat/Actions/CombatAction.gd"
+}, {
+"base": "Resource",
+"class": "CombatMove",
+"language": "GDScript",
+"path": "res://combat/Actions/moves/CombatMove.gd"
+}, {
+"base": "Position2D",
+"class": "Combatant",
+"language": "GDScript",
+"path": "res://combat/combatants/Combatant.gd"
+}, {
+"base": "CombatAction",
+"class": "EffectAction",
+"language": "GDScript",
+"path": "res://combat/Actions/EffectAction.gd"
+}, {
+"base": "Reference",
+"class": "Hit",
+"language": "GDScript",
+"path": "res://combat/Hit.gd"
+}, {
+"base": "CombatAction",
+"class": "OffensiveMagicAction",
+"language": "GDScript",
+"path": "res://combat/Actions/OffensiveMagicAction.gd"
+}, {
+"base": "CombatAction",
+"class": "SpecialAttackAction",
+"language": "GDScript",
+"path": "res://combat/Actions/SpecialAttackAction.gd"
+}, {
+"base": "Resource",
+"class": "StartingStats",
+"language": "GDScript",
+"path": "res://game/players/jobs/StartingStats.gd"
+}, {
+"base": "Resource",
+"class": "Stats",
+"language": "GDScript",
+"path": "res://game/players/stats/Stats.gd"
+} ]
+_global_script_class_icons={
+"AttackAction": "",
+"CombatAction": "",
+"CombatMove": "",
+"Combatant": "",
+"EffectAction": "",
+"Hit": "",
+"OffensiveMagicAction": "",
+"SpecialAttackAction": "",
+"StartingStats": "",
+"Stats": ""
+}
 
 [application]
 
-config/name="New Game Project"
+config/name="Doka 2"
 run/main_scene="res://game/Game.tscn"
 config/icon="res://icon.png"
 
 [autoload]
 
 GameVariables="*res://game/GameVariables.gd"
-
-[editor_plugins]
-
-enabled=PoolStringArray( "ch.fischspiele.tilesethelper", "vnen.tiled_importer" )
 
 [rendering]
 

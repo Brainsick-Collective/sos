@@ -13,10 +13,10 @@ func request_move(pawn, direction):
 	
 func find_space(tile, direction):
 	var value = $Spaces.get_cellv(tile)
-	if $Spaces.get_cellv(tile) == SPACE:
+	if $Spaces.get_cellv(tile) == CELL_TYPES.SPACE:
 		return tile
 	value = $Path.get_cellv(tile)
-	if $Path.get_cellv(tile) == PATH:
+	if $Path.get_cellv(tile) == CELL_TYPES.PATH:
 		return find_space(tile + direction, direction)
 	return null
 	

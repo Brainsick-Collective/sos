@@ -5,6 +5,9 @@ extends Control
 
 var moves1
 var moves2 
+var fighter1
+var fighter2
+var isFighterOneFirst
 
 onready var default_moves = {
 	"offensive" :
@@ -18,6 +21,8 @@ onready var default_moves = {
 		"parry",
 		"defend"]
 }
+
+enum move_types { empty = -1, normal, special, magic, effect }
 onready var move_map = {
 	"ui_up"    : 0,
 	"ui_down"  : 1,
@@ -32,22 +37,22 @@ func initialize(player1, player2):
 	_ready()
 	#moves1 = player1.get_moves()
 	#moves2 = player2.get_moves()
-	moves1 = default_moves
-	moves2 = default_moves
+	fighter1 = player1
+	fighter2 = player2
 	$TurnOrderPopup.show()
-	$TurnOrderPopup.connect("chosen", self, "combat_start")
-	
-func combat_start(choice):
-	if choice:
-		$Label.text = "you start!"
-		map_options($Options1, default_moves["offensive"])
-		map_options($Options2, default_moves["defensive"])
-		
-	else:
-		$Label.text = "opponent starts!"
-		map_options($Options1, default_moves["defensive"])
-		map_options($Options2, default_moves["offensive"])
+	$TurnOrderPopup.decide_turns(fighter1.stats.speed, fighter2.stats.speed)
+	isFighterOneFirst = yield($TurnOrderPopup, "chosen")
+	do_combat_phase(isFighterOneFirst)
 
+func do_combat_phase(choice):
+	if choice:
+		$Label.text = "your Turn!"
+		map_options($Options1, fighter1.moves["offense"])
+		map_options($Options2, fighter2.moves["defense"])
+	else:
+		$Label.text = "opponents Turn!"
+		map_options($Options2, fighter2.moves["offense"])
+		map_options($Options1, fighter1.moves["defense"])
 func map_options(Option, moves):
-	for child in Option.get_children():
-		child.get_node("Label").text = moves[child.get_index()]
+	for move in moves:
+		Option.get_child(moves[move].type).get_node("Label").text = moves[move].move_name

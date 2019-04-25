@@ -1,0 +1,14 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://game/players/jobs/StartingStats.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+job_name = "job"
+max_health = 30
+max_mana = 15
+speed = 9
+strength = 8
+defense = 4
+magic = 5
+

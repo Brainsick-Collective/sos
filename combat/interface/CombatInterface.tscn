@@ -4,76 +4,69 @@
 [ext_resource path="res://interface/theme/default.theme" type="Theme" id=2]
 [ext_resource path="res://combat/interface/TurnOrderPopup.tscn" type="PackedScene" id=3]
 
-[node name="CombatInterface" type="Control" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
+[node name="CombatInterface" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
 script = ExtResource( 1 )
 
-[node name="Options1" type="Control" parent="." index="0"]
-
-anchor_left = 0.0
+[node name="Options1" type="Control" parent="."]
 anchor_top = 0.5
-anchor_right = 0.0
 anchor_bottom = 0.5
 margin_top = -48.0
 margin_right = 384.0
 margin_bottom = 48.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
 
-[node name="Magic" type="Panel" parent="Options1" index="0"]
+[node name="Attack" type="Panel" parent="Options1"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_top = -13.0
+margin_right = 128.0
+margin_bottom = 17.0
+rect_min_size = Vector2( 100, 30 )
+theme = ExtResource( 2 )
 
+[node name="Label" type="Label" parent="Options1/Attack"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+text = "Attack"
+align = 1
+valign = 1
+
+[node name="Strike" type="Panel" parent="Options1"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -128.0
+margin_top = -16.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 100, 30 )
+theme = ExtResource( 2 )
+
+[node name="Label" type="Label" parent="Options1/Strike"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+text = "Strike"
+align = 1
+valign = 1
+
+[node name="Magic" type="Panel" parent="Options1"]
 anchor_left = 0.5
-anchor_top = 0.0
 anchor_right = 0.5
-anchor_bottom = 0.0
 margin_left = -64.0
 margin_right = 64.0
 margin_bottom = 30.0
 rect_min_size = Vector2( 100, 30 )
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
 theme = ExtResource( 2 )
-_sections_unfolded = [ "Margin", "Rect" ]
 
-[node name="Label" type="Label" parent="Options1/Magic" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
+[node name="Label" type="Label" parent="Options1/Magic"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 4
 text = "Of. Magic"
 align = 1
 valign = 1
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 
-[node name="Ability" type="Panel" parent="Options1" index="1"]
-
+[node name="Ability" type="Panel" parent="Options1"]
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
@@ -83,112 +76,16 @@ margin_top = -32.0
 margin_right = 64.0
 margin_bottom = -2.0
 rect_min_size = Vector2( 100, 30 )
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
 theme = ExtResource( 2 )
-_sections_unfolded = [ "Rect" ]
 
-[node name="Label" type="Label" parent="Options1/Ability" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
+[node name="Label" type="Label" parent="Options1/Ability"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 4
 text = "Ability"
 align = 1
 valign = 1
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 
-[node name="Strike" type="Panel" parent="Options1" index="2"]
-
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-margin_left = -128.0
-margin_top = -16.0
-margin_bottom = 14.0
-rect_min_size = Vector2( 100, 30 )
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-theme = ExtResource( 2 )
-_sections_unfolded = [ "Rect" ]
-
-[node name="Label" type="Label" parent="Options1/Strike" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 4
-text = "Strike"
-align = 1
-valign = 1
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-
-[node name="Attack" type="Panel" parent="Options1" index="3"]
-
-anchor_left = 0.0
-anchor_top = 0.5
-anchor_right = 0.0
-anchor_bottom = 0.5
-margin_top = -13.0
-margin_right = 128.0
-margin_bottom = 17.0
-rect_min_size = Vector2( 100, 30 )
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-theme = ExtResource( 2 )
-_sections_unfolded = [ "Rect" ]
-
-[node name="Label" type="Label" parent="Options1/Attack" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 4
-text = "Attack"
-align = 1
-valign = 1
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-
-[node name="Options2" type="Control" parent="." index="1"]
-
+[node name="Options2" type="Control" parent="."]
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
@@ -196,53 +93,58 @@ anchor_bottom = 0.5
 margin_left = -384.0
 margin_top = -48.0
 margin_bottom = 48.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
 
-[node name="Magic" type="Panel" parent="Options2" index="0"]
+[node name="Attack" type="Panel" parent="Options2"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_top = -13.0
+margin_right = 128.0
+margin_bottom = 17.0
+rect_min_size = Vector2( 100, 30 )
+theme = ExtResource( 2 )
 
+[node name="Label" type="Label" parent="Options2/Attack"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+text = "Attack"
+align = 1
+valign = 1
+
+[node name="Strike" type="Panel" parent="Options2"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -128.0
+margin_top = -16.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 100, 30 )
+theme = ExtResource( 2 )
+
+[node name="Label" type="Label" parent="Options2/Strike"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+text = "Strike"
+align = 1
+valign = 1
+
+[node name="Magic" type="Panel" parent="Options2"]
 anchor_left = 0.5
-anchor_top = 0.0
 anchor_right = 0.5
-anchor_bottom = 0.0
 margin_left = -64.0
 margin_right = 64.0
 margin_bottom = 30.0
 rect_min_size = Vector2( 100, 30 )
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
 theme = ExtResource( 2 )
-_sections_unfolded = [ "Margin", "Rect" ]
 
-[node name="Label" type="Label" parent="Options2/Magic" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
+[node name="Label" type="Label" parent="Options2/Magic"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 4
 text = "Of. Magic"
 align = 1
 valign = 1
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 
-[node name="Ability" type="Panel" parent="Options2" index="1"]
-
+[node name="Ability" type="Panel" parent="Options2"]
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
@@ -252,132 +154,27 @@ margin_top = -32.0
 margin_right = 64.0
 margin_bottom = -2.0
 rect_min_size = Vector2( 100, 30 )
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
 theme = ExtResource( 2 )
-_sections_unfolded = [ "Rect" ]
 
-[node name="Label" type="Label" parent="Options2/Ability" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
+[node name="Label" type="Label" parent="Options2/Ability"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 4
 text = "Ability"
 align = 1
 valign = 1
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 
-[node name="Strike" type="Panel" parent="Options2" index="2"]
-
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-margin_left = -128.0
-margin_top = -16.0
-margin_bottom = 14.0
-rect_min_size = Vector2( 100, 30 )
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-theme = ExtResource( 2 )
-_sections_unfolded = [ "Rect" ]
-
-[node name="Label" type="Label" parent="Options2/Strike" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 4
-text = "Strike"
-align = 1
-valign = 1
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-
-[node name="Attack" type="Panel" parent="Options2" index="3"]
-
-anchor_left = 0.0
-anchor_top = 0.5
-anchor_right = 0.0
-anchor_bottom = 0.5
-margin_top = -13.0
-margin_right = 128.0
-margin_bottom = 17.0
-rect_min_size = Vector2( 100, 30 )
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-theme = ExtResource( 2 )
-_sections_unfolded = [ "Rect" ]
-
-[node name="Label" type="Label" parent="Options2/Attack" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 4
-text = "Attack"
-align = 1
-valign = 1
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-
-[node name="TurnOrderPopup" parent="." index="2" instance=ExtResource( 3 )]
-
+[node name="TurnOrderPopup" parent="." instance=ExtResource( 3 )]
 visible = false
 
-[node name="Label" type="Label" parent="." index="3"]
-
+[node name="Label" type="Label" parent="."]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -20.0
-margin_top = -7.0
-margin_right = 20.0
-margin_bottom = 7.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 4
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-
+margin_left = -96.0
+margin_top = -29.5
+margin_right = 96.0
+margin_bottom = 29.5
+align = 1
+valign = 1
 

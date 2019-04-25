@@ -1,0 +1,14 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://combat/Actions/moves/CombatMove.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+move_name = "Strike"
+type = 1
+phase = 0
+description = "Launch an all out attack, but leave yourself open to retaliation"
+mana_cost = null
+base_damage = 20
+success_chance = 0.85
+

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://combat/Actions/moves/CombatMove.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+move_name = "Ward"
+type = 2
+phase = 1
+description = "Creates a protective wall, blocking some incoming damage"
+mana_cost = 5
+base_damage = 0
+success_chance = 0.85
+

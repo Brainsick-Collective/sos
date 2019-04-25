@@ -4,13 +4,11 @@
 [ext_resource path="res://system/ControlsHandler.tscn" type="PackedScene" id=2]
 
 [node name="Game" type="Node"]
-
 script = ExtResource( 1 )
 
-[node name="Players" type="Node" parent="." index="0"]
+[node name="Players" type="Node" parent="."]
 
-[node name="ControlsHandler" parent="." index="1" instance=ExtResource( 2 )]
-
+[node name="ControlsHandler" parent="." instance=ExtResource( 2 )]
 controls_set = [ {
 "ui_accept": 69,
 "ui_cancel": 16777217,
@@ -26,5 +24,4 @@ controls_set = [ {
 "ui_right": 16777233,
 "ui_up": 16777232
 } ]
-
 

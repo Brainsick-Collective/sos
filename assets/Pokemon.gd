@@ -4,6 +4,11 @@ extends Node
 # var a = 2
 # var b = "textvar"
 var index
+var chika = preload("res://game/players/stats/chika.tres")
+var cynd = preload("res://game/players/stats/cynd.tres")
+var todo = preload("res://game/players/stats/todo.tres")
+
+var pokemon_stats = [chika, cynd, todo]
 func initialize():
 	# Called when the node is added to the scene for the first time.
 	# Initialization here
@@ -13,7 +18,13 @@ func get_first():
 	index = 0
 	return get_child(0);
 	
-
+func get_index():
+	return index
+func get_stats(character_index) -> Resource:
+	var stats = pokemon_stats[character_index]
+	stats = stats.copy()
+	return stats
+	
 func next_sprite():
 	index = abs((index + 1) % get_child_count())
 	return get_child(index).get_texture()

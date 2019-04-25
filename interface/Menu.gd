@@ -3,9 +3,6 @@ extends Control
 signal open()
 signal closed()
 
-func initialize(args=[]):
-	return
-
 func open():
 	emit_signal("open")
 	show()

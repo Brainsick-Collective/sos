@@ -24,7 +24,7 @@ func initialize(game_node):
 
 func _menu_selected(Menu):
 	var menu = Menu.instance()
-	menu.initialize(game)
 	game.add_child(menu)
+	menu.initialize(game)
 	queue_free()
 	pass # replace with function body

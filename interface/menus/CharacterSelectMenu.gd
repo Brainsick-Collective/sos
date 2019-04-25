@@ -7,11 +7,12 @@ onready var Board = preload("res://board/Board.tscn")
 onready var Character = preload("res://board/BoardCharacter.tscn")
 onready var Player = preload("res://game/players/Player.tscn")
 onready var Combatant = preload("res://combat/combatants/Combatant.tscn")
+onready var Pokemon = preload("res://assets/pokemon.tscn")
 onready var left = $Column/Row/Left
 onready var right = $Column/Row/Right
 onready var character = $Column/Row/Character
-onready var Sprites = preload("res://assets/pokemon.tscn")
 onready var num_players_label = $Column0/Row/Container/Label
+onready var game_variables = get_node("/root/GameVariables")
 var Players
 
 var num_players
@@ -25,7 +26,7 @@ signal enter_board(board_node)
 
 
 func _ready():
-	sprites = Sprites.instance()
+	sprites = Pokemon.instance()
 	character.set_texture(sprites.get_first().get_texture())
 	num_players = 1
 	curr_player = 1
@@ -62,14 +63,20 @@ func _on_StartButton_pressed():
 	characters.append(board_character)
 	var player = Player.instance()
 	var combatant = Combatant.instance()
-	combatant.initialize(character)
-	player.initialize(curr_player, board_character, combatant)
+	var stats
+	stats = sprites.get_stats(sprites.get_index())
+	player.initialize(curr_player, board_character, combatant, stats)
+	combatant.initialize(character, player)
+	player.player_name = "Player " + String(curr_player)
 	Players.add_child(player)
 	if curr_player == num_players:
 		var board = Board.instance()
 		game.add_child(board)
 		board.initialize(characters, game)
+		for character in characters:
+			character.initialize(board, player)
 		game.set_controls()
+		board.start_game()
 		queue_free()
 	else:
 		curr_player+=1

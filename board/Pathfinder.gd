@@ -17,7 +17,7 @@ func initialize(grid):
 	_path_tiles = []
 	_map_size = grid.get_used_rect().size
 	
-	var path_cells = grid.get_node("Path").get_used_cells_by_id(PATH)
+	var path_cells = grid.get_node("Path").get_used_cells_by_id(CELL_TYPES.PATH)
 	for cell in path_cells:
 		_path_tiles.append(cell)
 	# Find all walkable cells and store them in an array

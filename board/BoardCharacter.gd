@@ -1,20 +1,19 @@
 extends Node2D
 
-signal turn_finished(last_position)
+signal turn_finished
 signal last_move
 
-export (Texture) var sprite
 export (Resource) var stats
 export (NodePath) var curr_space = null
 export (String) var player_name
 export (String) var player_id
+var player
 export (Dictionary) var controls
 const TIME_PER_SPACE = .1
 onready var camera = $Pivot/Camera2D
 var confirm_move_popup
 var target_space
 export var moves_left = 0
-signal next_turn
 var spaces_moved
 var board
 var dice_roll_popup
@@ -25,10 +24,10 @@ onready var my_turn = false
 var _direction = Vector2()
 
 
-func initialize(game_board):
+func initialize(game_board, player):
 	_ready()
 	confirm_move_popup = game_board.get_node("UI/MoveConfirmPopup")
-	
+	self.player = player
 	dice_roll_popup = game_board.get_node("UI/DiceRollPopup")
 	player_name = get_instance_id()
 	#$moves.set_anchor(position - Vector2(32,96))
@@ -64,6 +63,8 @@ func move_to(target_position):
 	target_position = target_position + board.cell_size / 2
 	# Move the node to the target cell instantly,
 	# and animate the sprite moving from the start to the target cell
+	
+	#use this for sprite facing direction
 	var move_direction = (target_position - position).normalized()
 	var old_pos = position
 	position = target_position
@@ -97,7 +98,7 @@ func check_moves():
 			emit_signal("last_move")
 			yield(confirm_move_popup, "completed")
 		else:
-			emit_signal("turn_finished", camera.to_global(camera.position))
+			emit_signal("turn_finished")
 			confirm_move_popup.disconnect("completed", self, "confirm_move")
 	else:
 		set_process(true)
@@ -124,7 +125,7 @@ func confirm_move(isYes):
 			set_process_input(false)
 			timer.stop()
 			my_turn = false
-			emit_signal("turn_finished", camera.to_global(camera.position))
+			emit_signal("turn_finished")
 			confirm_move_popup.disconnect("completed", self, "confirm_move")
 		else:
 			move_to(spaces_moved.back())
@@ -142,6 +143,9 @@ func start_turn(last_camera_position):
 	$Tween.interpolate_property($Pivot/Camera2D, "position", camera.position, Vector2(), .5, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	$Tween.start()
 	yield($Tween, "tween_completed")
+	if player.in_battle:
+		emit_signal("turn_finished")
+		return
 	dice_roll_popup.initialize()
 	moves_left = yield(dice_roll_popup, "completed")
 	set_process_input(true)
@@ -149,4 +153,6 @@ func start_turn(last_camera_position):
 	check_moves()
 	curr_space = position
 	spaces_moved = Array()
-	
+
+func get_camera_position():
+	return camera.to_global(camera.position)

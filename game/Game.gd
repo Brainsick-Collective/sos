@@ -16,10 +16,15 @@ func set_controls():
 		player.controls = $ControlsHandler.get_controls(player.get_id())
 	
 func enter_encounter(player, encounter):
+	print("fight between " + String(player) + " " + String(encounter))
+	board = get_node("Board")
 	remove_child(get_node("Board"))
 	var combat = CombatArena.instance()
-	print($Players.get_child(player))
 	add_child(combat)
-	combat.initialize($Players.get_child(player), $Players.get_child(encounter))
-	#$ControlsHandler.
+	combat.initialize($Players.get_child(player).combatant, $Players.get_child(encounter).combatant)
+	combat.connect("combat_finished", self, "on_combat_over")
+	combat.connect("round_finished", self, "on_combat_over")
 	
+func on_combat_over():
+	add_child(board)
+	board.next_turn()

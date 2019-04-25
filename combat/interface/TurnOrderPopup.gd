@@ -5,10 +5,15 @@ var left
 onready var LeftOption = $Panel/MarginContainer/HBoxContainer/Left
 onready var RightOption = $Panel/MarginContainer/HBoxContainer/Right
 signal chosen(choice)
-func decide_turns():
-	var option = randi() % 2
-	right = (option == 1)
-	left = !right
+func decide_turns(left_speed, right_speed):
+	randomize()
+	var total = left_speed + right_speed
+	print("turn order upper-bound and roll:")
+	print(left_speed)
+	var roll = randi() % total
+	print(roll)
+	left = roll < left_speed
+	right = !left
 	
 
 #left
@@ -23,12 +28,12 @@ func _on_Button_pressed(choice):
 		RightOption.get_node("Button").hide()
 		RightOption.get_node("Label").text = "First"
 		LeftOption.get_node("Label").text = "Last"
-		$Timer.set_wait_time(3)
-		$Timer.start()
-		yield($Timer, "timeout")
-		if choice == "left":
-			emit_signal("chosen", left)
-		else:
-			emit_signal("chosen", right)
-		hide()
+	$Timer.set_wait_time(2)
+	$Timer.start()
+	yield($Timer, "timeout")
+	if choice == "left":
+		emit_signal("chosen", left)
+	elif choice == "right":
+		emit_signal("chosen", right)
+	hide()
 		
