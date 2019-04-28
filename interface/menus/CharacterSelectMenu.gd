@@ -59,11 +59,12 @@ func _process(delta):
 
 func _on_StartButton_pressed():
 	var board_character = Character.instance()
-	board_character.set_sprite(character.texture)
-	characters.append(board_character)
 	var player = Player.instance()
 	var combatant = Combatant.instance()
 	var stats
+	
+	board_character.set_sprite(character.texture)
+	characters.append(board_character)
 	stats = sprites.get_stats(sprites.get_index())
 	player.initialize(curr_player, board_character, combatant, stats)
 	combatant.initialize(character, player)
@@ -74,9 +75,14 @@ func _on_StartButton_pressed():
 		game.add_child(board)
 		board.initialize(characters, game)
 		for character in characters:
-			character.initialize(board, player)
+			character.initialize(board, get_player(character))
 		game.set_controls()
 		board.start_game()
 		queue_free()
 	else:
 		curr_player+=1
+	
+func get_player(character):
+	for player in Players.get_children():
+		if player.board_character == character:
+			return player

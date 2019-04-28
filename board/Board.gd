@@ -36,29 +36,29 @@ func start_game():
 	play_turn(Characters.get_child(0), START)
 
 func _process(delta):
-	moves_label.text =String( current_player.get_moves())
+	moves_label.text = String( current_player.get_moves())
 	
 func play_turn(board_character, last_camera_position):
 	current_player = board_character
 	print("player" + String(current_player.player_id))
-	board_character.start_turn(last_camera_position)
+	moves_label.text = String(board_character.get_moves())
+	name_label.text =String(board_character.get_name())
 	set_process(true)
 	set_process_input(true)
-	name_label.text =String(board_character.get_name())
-	moves_label.text = String(board_character.get_moves())
-	yield(current_player, "turn_finished")
+	board_character.start_turn(last_camera_position)
+	yield(board_character, "turn_finished")
+	check_encounter()
+
+	
+func check_encounter():
 	var camera_pos = current_player.get_camera_position()
 	var encounter = get_encounter(camera_pos)
 	#if($GameBoard/Spaces.get_cellv($GameBoard/Spaces.world_to_map(camera_pos)) != -1):
-	if encounter != null:
-		print("encounter found")
-		set_process(false)
-		set_process_input(false)
-		Game.enter_encounter(current_player.player_id, encounter)
-	else:
-		next_turn()
+	Game.enter_encounter(current_player.player_id, encounter)
+
 func next_turn():
 	var last_camera_position = current_player.get_camera_position()
+	print("next turn starting, camera was last at: " + String(last_camera_position))
 	var new_ind = (current_player.get_index() + 1) % num_players
 	controls_handler.clear_controls()
 	controls_handler.set_controls(new_ind)
@@ -72,8 +72,19 @@ func show_confirm_popup():
 
 func get_encounter(camera_pos):
 	#TODO: change to handle real encounters
+	if current_player.death_penalty > 0:
+		return
 	for character in Characters.get_children():
 		print("position of player " + String(character.get_index()) + " " + String(character.position))
-		if character.position == camera_pos and character != current_player:
+		print(String(character.player.stats.health))
+		if character.position == camera_pos and character.player.stats.health != 0 and character != current_player:
 			print("encounter found against " + String(character.player_id))
 			return character.player_id
+
+func death_respawn(player):
+	var character = player.board_character
+	if character.player == player:
+		character.death_penalty = 3
+		character.position = START
+		print("player health on respawn: " + String(player.stats.health))
+

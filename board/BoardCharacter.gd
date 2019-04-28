@@ -18,6 +18,7 @@ var spaces_moved
 var board
 var dice_roll_popup
 var timer
+var death_penalty = 0
 var ui_up = false
 onready var my_turn = false
 
@@ -29,7 +30,7 @@ func initialize(game_board, player):
 	confirm_move_popup = game_board.get_node("UI/MoveConfirmPopup")
 	self.player = player
 	dice_roll_popup = game_board.get_node("UI/DiceRollPopup")
-	player_name = get_instance_id()
+	player_name = player.player_name
 	#$moves.set_anchor(position - Vector2(32,96))
 	#$moves.set_text(str(moves_left))
 	board = game_board.get_node("GameBoard")
@@ -133,11 +134,7 @@ func confirm_move(isYes):
 		confirm_move_popup.hide()
 	
 func start_turn(last_camera_position):
-	my_turn = true
-	confirm_move_popup.connect("completed", self, "confirm_move")
 	var pos = $Pivot.to_local(last_camera_position)
-	
-	spaces_moved = []
 	camera.position = pos
 	camera._set_current(true)
 	$Tween.interpolate_property($Pivot/Camera2D, "position", camera.position, Vector2(), .5, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
@@ -146,8 +143,20 @@ func start_turn(last_camera_position):
 	if player.in_battle:
 		emit_signal("turn_finished")
 		return
+	if death_penalty > 0:
+		death_penalty = max(0, death_penalty - 1)
+		if death_penalty == 0:
+			player.reset_stats()
+			start_turn(pos)
+			return
+		emit_signal("turn_finished")
+		return
+	my_turn = true
+	confirm_move_popup.connect("completed", self, "confirm_move")
+	spaces_moved = []
 	dice_roll_popup.initialize()
 	moves_left = yield(dice_roll_popup, "completed")
+	moves_left = 1
 	set_process_input(true)
 	set_process(true)
 	check_moves()

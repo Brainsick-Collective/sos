@@ -60,4 +60,6 @@ func take_damage(hit):
 
 func on_death():
 	player.stats.health = 0
+	print("player health")
+	print(String(player.stats.health))
 	emit_signal("killed", player)

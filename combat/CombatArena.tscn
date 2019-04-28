@@ -143,10 +143,17 @@ text = "choices:"
 align = 1
 
 [node name="C1Label" type="Label" parent="UI/GUI"]
-margin_left = 67.0
-margin_top = 193.0
-margin_right = 346.0
-margin_bottom = 241.0
+margin_left = 190.0
+margin_top = 160.0
+margin_right = 469.0
+margin_bottom = 208.0
+align = 2
+
+[node name="C2Label" type="Label" parent="UI/GUI"]
+margin_left = 560.0
+margin_top = 160.0
+margin_right = 839.0
+margin_bottom = 208.0
 
 [node name="CombatInterface" parent="UI" instance=ExtResource( 7 )]
 margin_left = -0.424744
@@ -155,4 +162,6 @@ margin_right = -0.424744
 margin_bottom = 0.424683
 
 [node name="TurnQueue" type="YSort" parent="."]
+
+[node name="Timer" type="Timer" parent="."]
 

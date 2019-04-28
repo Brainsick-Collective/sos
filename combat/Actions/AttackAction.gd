@@ -11,7 +11,7 @@ func execute(target, reaction):
 		hit.damage *= 1.6
 	if (reaction.type == move_types.magic):
 		hit.damage *= 1.4
-		hit.damage /= reaction.modifier
+		hit.damage *= reaction.modifier
 	if (reaction.type == move_types.effect):
 		hit = null
 	return hit

@@ -7,8 +7,8 @@ script = ExtResource( 1 )
 move_name = "Give Up"
 type = 3
 phase = 1
+modifier = null
 description = "Concede to your opponent, lose the battle, but protect your life"
-mana_cost = 0
 base_damage = 0
 success_chance = 1.0
 

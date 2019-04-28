@@ -7,7 +7,9 @@ export (String) var player_name
 export (NodePath) var combatant
 export (Resource) var stats
 export (Resource) var equipment
+export (Resource) var inventory
 export (bool) var in_battle
+
 
 func initialize( new_id, pawn, battler, starting_stats):
 	board_character = pawn
@@ -31,3 +33,12 @@ func get_combatant():
 func get_stats_string():
 	var string = "Magic: " + String(stats.magic) + "\n" + "Strength: " + String(stats.strength) + "\n" + "Speed: " + String(stats.speed) + "\n" + "Defense: " + String(stats.defense)
 	return string
+
+func reset_stats():
+	stats.reset()
+	combatant.stats = stats.duplicate()
+	combatant.stats.reset()
+	combatant.stats.connect("health_depleted", combatant, "on_death")
+	print("reseting stats")
+	print(String(stats.health))
+	print(String(combatant.stats.health))

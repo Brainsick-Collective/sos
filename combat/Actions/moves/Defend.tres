@@ -7,8 +7,8 @@ script = ExtResource( 1 )
 move_name = "Defend"
 type = 0
 phase = 1
+modifier = null
 description = "defend with your shield and armor"
-mana_cost = null
 base_damage = null
 success_chance = 0.95
 
