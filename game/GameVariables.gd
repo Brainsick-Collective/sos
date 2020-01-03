@@ -12,49 +12,49 @@ var ward_res = load("res://combat/Actions/moves/Ward.tres")
 
 export var controls_set =[
 {
-		"ui_left" : KEY_A,
-		"ui_right" : KEY_D,
-		"ui_up" : KEY_W,
-		"ui_down" : KEY_S,
-		"ui_accept" : KEY_E,
-		"ui_cancel" : KEY_ESCAPE
-	},
-	{
-		"ui_left" : KEY_LEFT,
-		"ui_right" : KEY_RIGHT,
-		"ui_up" : KEY_UP,
-		"ui_down" : KEY_DOWN,
-		"ui_accept" : KEY_ENTER,
-		"ui_cancel" : KEY_DELETE
-	}
+        "ui_left" : KEY_A,
+        "ui_right" : KEY_D,
+        "ui_up" : KEY_W,
+        "ui_down" : KEY_S,
+        "ui_accept" : KEY_E,
+        "ui_cancel" : KEY_ESCAPE
+    },
+    {
+        "ui_left" : KEY_LEFT,
+        "ui_right" : KEY_RIGHT,
+        "ui_up" : KEY_UP,
+        "ui_down" : KEY_DOWN,
+        "ui_accept" : KEY_ENTER,
+        "ui_cancel" : KEY_DELETE
+    }
 ]
 
 func set_current_player(id):
-	current_player = id
-	
+    current_player = id
+    
 func get_current_player():
-	return current_player
+    return current_player
 
 func get_controls(id):
-	return controls_set[id]
-	
+    return controls_set[id]
+    
 func set_default_moves(combatant):
-	var defaults = {}
-	var offense = {}
-	var defense = {}
-	offense["normal"] = attack_res
-	offense["magic"] = zap_res
-	offense["special"] = strike_res
-	offense["effect"] = rally_res
-	defense["normal"] = defend_res
-	defense["magic"] = ward_res
-	defense["special"] = parry_res
-	defense["effect"] = giveup_res
-	defaults["offense"] = offense
-	defaults["defense"] = defense
-	combatant.set_moves_from_dict(defaults)
-	
-	
+    var defaults = {}
+    var offense = {}
+    var defense = {}
+    offense["normal"] = attack_res
+    offense["magic"] = zap_res
+    offense["special"] = strike_res
+    offense["effect"] = rally_res
+    defense["normal"] = defend_res
+    defense["magic"] = ward_res
+    defense["special"] = parry_res
+    defense["effect"] = giveup_res
+    defaults["offense"] = offense
+    defaults["defense"] = defense
+    combatant.set_moves_from_dict(defaults)
+    
+    
 #		var attack = CombatAction.new()
 #	attack.move = attack_res
 #	var defend = CombatAction.new()

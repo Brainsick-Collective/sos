@@ -14,10 +14,20 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://combat/Actions/AttackAction.gd"
 }, {
+"base": "Node2D",
+"class": "BoardCharacter",
+"language": "GDScript",
+"path": "res://board/BoardCharacter.gd"
+}, {
 "base": "Node",
 "class": "CombatAction",
 "language": "GDScript",
 "path": "res://combat/Actions/CombatAction.gd"
+}, {
+"base": "Node2D",
+"class": "CombatArena",
+"language": "GDScript",
+"path": "res://combat/CombatArena.gd"
 }, {
 "base": "Resource",
 "class": "CombatMove",
@@ -44,11 +54,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://game/players/inventory/items/Item.gd"
 }, {
-"base": "Node",
-"class": "ItemDatabase",
-"language": "GDScript",
-"path": "res://game/players/inventory/ItemDatabase.gd"
-}, {
 "base": "CombatAction",
 "class": "OffensiveMagicAction",
 "language": "GDScript",
@@ -71,13 +76,14 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "AttackAction": "",
+"BoardCharacter": "",
 "CombatAction": "",
+"CombatArena": "",
 "CombatMove": "",
 "Combatant": "",
 "EffectAction": "",
 "Hit": "",
 "Item": "",
-"ItemDatabase": "",
 "OffensiveMagicAction": "",
 "SpecialAttackAction": "",
 "StartingStats": "",
@@ -93,10 +99,22 @@ config/icon="res://icon.png"
 [autoload]
 
 GameVariables="*res://game/GameVariables.gd"
+ItemDatabase="*res://game/players/inventory/ItemDatabase.tscn"
+
+[input]
+
+ui_accept={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777221,"unicode":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777222,"unicode":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":32,"unicode":0,"echo":false,"script":null)
+, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":0,"pressure":0.0,"pressed":false,"script":null)
+ ]
+}
 
 [rendering]
 
-environment/default_environment="res://default_env.tres"
+quality/driver/driver_name="GLES2"
 
 [tiled_importer]
 

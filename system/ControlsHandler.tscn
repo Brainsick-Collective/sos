@@ -3,7 +3,6 @@
 [ext_resource path="res://system/ControlsHandler.gd" type="Script" id=1]
 
 [node name="ControlsHandler" type="Node"]
-
 script = ExtResource( 1 )
 controls_set = [ {
 "ui_accept": 69,
@@ -20,5 +19,3 @@ controls_set = [ {
 "ui_right": 16777233,
 "ui_up": 16777232
 } ]
-
-

@@ -68,4 +68,3 @@ margin_bottom = 450.0
 rect_min_size = Vector2( 300, 50 )
 size_flags_horizontal = 4
 text = "Quit"
-

@@ -164,4 +164,3 @@ margin_bottom = 0.424683
 [node name="TurnQueue" type="YSort" parent="."]
 
 [node name="Timer" type="Timer" parent="."]
-

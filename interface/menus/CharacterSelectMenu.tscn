@@ -121,5 +121,4 @@ margin_bottom = 507.0
 rect_min_size = Vector2( 200, 100 )
 size_flags_horizontal = 4
 text = "Start"
-
 [connection signal="pressed" from="Column/StartButton" to="." method="_on_StartButton_pressed"]

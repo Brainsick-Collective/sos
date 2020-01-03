@@ -1,7 +1,5 @@
 extends Node
 
-class_name ItemDatabase
-
 func get_item(reference):
 	for item in get_children():
 		if reference.name == item.name:

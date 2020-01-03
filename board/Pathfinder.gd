@@ -6,9 +6,7 @@ Finds the path between two points using AStar, in grid coordinates
 
 var astar = AStar.new()
 
-var _obstacles 
 var _map_size
-var _spaces
 var _path_tiles
 
 enum CELL_TYPES {PATH, SPACE, GRASS, BUSH, DIRT}

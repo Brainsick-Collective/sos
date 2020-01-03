@@ -12,4 +12,3 @@ script = ExtResource( 1 )
 [node name="OffenseMoves" type="Node" parent="."]
 
 [node name="DefenseMoves" type="Node" parent="."]
-
