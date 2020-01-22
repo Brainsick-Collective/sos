@@ -7,8 +7,7 @@ script = ExtResource( 1 )
 move_name = "Parry"
 type = 1
 phase = 1
+modifier = null
 description = "Leave your defenses down and prepare a counter attack"
-mana_cost = null
 base_damage = 15
 success_chance = 0.95
-

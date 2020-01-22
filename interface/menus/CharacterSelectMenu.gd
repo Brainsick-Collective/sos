@@ -77,7 +77,7 @@ func _on_StartButton_pressed():
         board.initialize(characters, game)
         for character in characters:
             character.initialize(board, get_player(character), board.START)
-        game.set_controls()
+        game.initialize_game(board)
         board.start_game()
         queue_free()
     else:

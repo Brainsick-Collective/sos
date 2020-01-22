@@ -9,8 +9,10 @@ onready var BoardCharacter = preload("res://board/BoardCharacter.tscn")
 onready var Board = $GameBoard
 onready var moves_label = $UI/GUI/Counter/MarginContainer/VBoxContainer/MovesLeft
 onready var name_label = $UI/GUI/NinePatchRect/PlayerName
+onready var Notification = preload("res://interface/UI/notification.tscn")
+signal turn_finished(player)
 var controls_handler
-var Game
+var game
 var num_players = 3
 var current_player
 var turn_ind
@@ -20,7 +22,8 @@ func _ready():
     
 func initialize(characters, game):
     _ready()
-    Game = game
+    self.game = game
+    game.board = self
     controls_handler = game.get_node("ControlsHandler")
     START = $GameBoard/Start.get_position()
     for character in characters:
@@ -32,23 +35,26 @@ func initialize(characters, game):
     Board.initialize()
     
 func start_game():
+    var note = Notification.instance()
+    note.just_text("First Turn!")
+    game.add_note_to_q(note)
     play_turn(Characters.get_child(0), START)
 
+# warning-ignore:unused_argument
 func _process(delta):
     moves_label.text = String( current_player.get_moves())
     
 func play_turn(board_character, last_camera_position):
     current_player = board_character
     print("player" + String(current_player.player_id))
-    print(board_character.death_penalty)
+    print("penalty " + String(board_character.death_penalty))
     moves_label.text = String(board_character.get_moves())
     name_label.text =String(board_character.get_name())
     set_process(true)
     set_process_input(true)
     board_character.start_turn(last_camera_position)
     yield(board_character, "turn_finished")
-    Game.enter_space_scene(current_player)
-    print("after enter space scene")
+    emit_signal("turn_finished", current_player)
 
 
 func next_turn():

@@ -101,6 +101,10 @@ config/icon="res://icon.png"
 GameVariables="*res://game/GameVariables.gd"
 ItemDatabase="*res://game/players/inventory/ItemDatabase.tscn"
 
+[display]
+
+window/dpi/allow_hidpi=true
+
 [input]
 
 ui_accept={

@@ -11,4 +11,3 @@ modifier = null
 description = "Concede to your opponent, lose the battle, but protect your life"
 base_damage = 0
 success_chance = 1.0
-

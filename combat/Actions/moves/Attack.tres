@@ -7,8 +7,7 @@ script = ExtResource( 1 )
 move_name = "Attack"
 type = 0
 phase = 0
+modifier = null
 description = "Attack with your weapon"
-mana_cost = null
 base_damage = 10
 success_chance = 0.95
-

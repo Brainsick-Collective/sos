@@ -7,8 +7,7 @@ script = ExtResource( 1 )
 move_name = "Rally"
 type = 3
 phase = 0
+modifier = null
 description = "Give out a battle cry and raise your stats!"
-mana_cost = 5
 base_damage = 0
 success_chance = 1.0
-
