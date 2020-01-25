@@ -7,4 +7,3 @@
 script = ExtResource( 1 )
 
 [node name="Inventory" parent="." instance=ExtResource( 2 )]
-

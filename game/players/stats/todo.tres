@@ -10,3 +10,6 @@ strength = 8
 defense = 2
 speed = 3
 magic = 3
+xp = 0
+kill_xp = 0
+level = 1

@@ -28,25 +28,24 @@ func get_num_spaces(start, end):
     
 func get_space_scene(player_pawn):
     #print("player position for encounter: %d") % player.position
+    if player_pawn.player.in_battle:
+        return player_pawn.player.battle
     var pos = $Spaces.world_to_map(player_pawn.position)
     print("player position id: " + String($Spaces.get_cellv(pos)))
-    if $Spaces.get_cellv(pos) == space_types.WILD:
+    if $Spaces.get_cellv(pos) == space_types.WILD and  !player_pawn.is_dead:
         print("battle space")
         for character in $Characters.get_children():
             if character.position == player_pawn.position and character != player_pawn and !character.is_dead:
                 var combat = CombatArena.instance()
                 combat.set_fighters(player_pawn.get_fighter(), character.get_fighter())
                 return combat
-        return get_random_encounter(player_pawn)
+        return get_random_encounter(player_pawn, pos)
     else: 
         return null
         
-func get_random_encounter(player_pawn):
-    return null
+func get_random_encounter(player_pawn, pos):
     var combat = CombatArena.instance()
-    var monster = BoardCharacter.instance()
-    
-    #todo
-    
-    combat.initialize()
-    return 
+    var monster = MonsterFactory.create_mob(pos)
+    print(monster.is_mob())
+    combat.set_fighters(player_pawn.get_fighter(), monster)
+    return combat

@@ -51,6 +51,7 @@ func initialize():
     #var sprite2 = Sprite.new()
     #sprite2.texture = fighter2.get_board_character().get_node("Pivot/Sprite").texture
     $"2".add_child(fighter2)
+    fighter2.flip_sprite()
     #----
     $UI/GUI/ActorPanel1/Margins/VBoxContainer/TextureProgress.max_value = fighter1.stats.max_health
     $UI/GUI/ActorPanel2/Margins/VBoxContainer/TextureProgress.max_value = fighter2.stats.max_health
@@ -63,12 +64,23 @@ func initialize():
     $UI/CombatInterface/TurnOrderPopup.connect("chosen", self, "on_choice")
     $UI/GUI/C1Label.text = fighter1.get_stats_string()
     $UI/GUI/C2Label.text = fighter2.get_stats_string()
+    print(fighter1.is_mob())
+    print(fighter2.is_mob())
+    
     
 func set_fighters(fighter1, fighter2):
     self.fighter1 = fighter1
     self.fighter2 = fighter2
 func _process(delta):
     process_gui_values()
+    check_ready()
+    
+    
+func check_ready():
+    if fighter2.is_mob() and fighter1chose:
+        choice2 = move_types.normal
+        fighter2chose = true
+        print("mob chose")
     if fighter1chose and fighter2chose and !is_over:
         set_process_input(false)
         set_process(false)
@@ -78,8 +90,6 @@ func _process(delta):
             do_phase(fighter1, fighter2, fighter1.get_move(choice1, true), fighter2.get_move(choice2, false))
         else:
             do_phase(fighter2, fighter1, fighter2.get_move(choice2, true), fighter1.get_move(choice1, false))
-
-    
     
 
 func do_phase(attacker, defender, attacker_move, defender_move):
@@ -103,7 +113,6 @@ func do_phase(attacker, defender, attacker_move, defender_move):
             isfighter1First = !isfighter1First
             $UI/CombatInterface.do_combat_phase(isfighter1First)
         else:
-            $UI/CombatInterface.queue_free()
             $Timer.set_wait_time(2)
             $Timer.start()
             yield($Timer, "timeout")
@@ -113,11 +122,13 @@ func do_phase(attacker, defender, attacker_move, defender_move):
     set_process(true)
 
 func _input(event):
+    if(fighter1.get_id() == -1):
+        print("WHYYYYY?" + fighter1.player.player_name)
     for key in choices:
         if !fighter1chose and event.is_action_pressed(key + String(fighter1.get_id())):
             choice1 = choice_map[key]
             fighter1chose = true
-        elif !fighter2chose and event.is_action_pressed(key + String(fighter2.get_id())):
+        elif !fighter2chose and !fighter2.is_mob() and event.is_action_pressed(key + String(fighter2.get_id())):
             choice2 = choice_map[key]
             fighter2chose = true
 #	if event.is_action_pressed(
@@ -141,7 +152,6 @@ func on_won_battle(killed):
     var kill_desc = killed.player_name + " has been killed!"
     print(kill_desc)
     process_gui_values()
-    $UI/CombatInterface.queue_free()
     $Timer.set_wait_time(2)
     $Timer.start()
     yield($Timer, "timeout")
@@ -168,8 +178,14 @@ func on_give_up(retiree):
     emit_signal("completed", notifications)
 
 func dealloc(is_finished):
-    $"1".remove_child(fighter1)
-    $"2".remove_child(fighter2)
     fighter1.player.in_battle = !is_finished
     fighter2.player.in_battle = !is_finished
-    queue_free() 
+    if !is_finished:
+        fighter1.player.battle = self
+        fighter2.player.battle = self
+    else:
+        $"1".remove_child(fighter1)
+        $"2".remove_child(fighter2)
+        fighter1.player.battle = null
+        fighter2.player.battle = null
+        queue_free() 

@@ -18,12 +18,18 @@ export var controls_set =[
         "ui_cancel" : KEY_DELETE
     }
 ]
+
+var control_lookup_map ={}
+var current_player = 0
+
 func initialize(players):
     clear_controls()
     set_controls(0)
     for player_ind in players.get_child_count():
         var new_controls = get_controls(player_ind)
         set_new_controls(new_controls)
+        for control in new_controls:
+            control_lookup_map[new_controls[control]] = player_ind
 
 func add_action(name):
     InputMap.add_action(name)
@@ -63,3 +69,9 @@ func clear_controls():
     for action in InputMap.get_action_list("ui_cancel"):
         InputMap.action_erase_event("ui_cancel", action)
     
+    
+func which_player(event : InputEvent):
+    return control_lookup_map[event.scancode]
+    
+func is_current_player_action(event : InputEventKey):
+    return which_player(event) == current_player

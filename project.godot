@@ -39,6 +39,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://combat/combatants/Combatant.gd"
 }, {
+"base": "Node",
+"class": "CutsceneParser",
+"language": "GDScript",
+"path": "res://CutsceneParser.gd"
+}, {
 "base": "CombatAction",
 "class": "EffectAction",
 "language": "GDScript",
@@ -81,6 +86,7 @@ _global_script_class_icons={
 "CombatArena": "",
 "CombatMove": "",
 "Combatant": "",
+"CutsceneParser": "",
 "EffectAction": "",
 "Hit": "",
 "Item": "",
@@ -100,10 +106,16 @@ config/icon="res://icon.png"
 
 GameVariables="*res://game/GameVariables.gd"
 ItemDatabase="*res://game/players/inventory/ItemDatabase.tscn"
+ControlsHandler="*res://system/ControlsHandler.gd"
+MonsterFactory="*res://mobs/MonsterFactory.tscn"
 
 [display]
 
 window/dpi/allow_hidpi=true
+
+[editor_plugins]
+
+enabled=PoolStringArray( "SyndiBox" )
 
 [input]
 

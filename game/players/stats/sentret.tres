@@ -1,6 +1,7 @@
-[gd_resource type="Resource" load_steps=2 format=2]
+[gd_resource type="Resource" load_steps=3 format=2]
 
 [ext_resource path="res://game/players/stats/Stats.gd" type="Script" id=1]
+[ext_resource path="res://game/players/stats/new_curvetexture.tres" type="Texture" id=2]
 
 [resource]
 script = ExtResource( 1 )
@@ -10,3 +11,7 @@ strength = 3
 defense = 1
 speed = 5
 magic = 1
+xp = 0
+kill_xp = 15
+level = 1
+level_curve = ExtResource( 2 )

@@ -10,6 +10,7 @@ export (Resource) var equipment
 export (Resource) var inventory
 export (bool) var in_battle
 var is_dead = false
+var battle
 
 
 func initialize( new_id, pawn, battler, starting_stats):
@@ -35,7 +36,7 @@ func get_combatant():
 func get_stats_string():
     var string = "Magic: " + String(stats.magic) + "\n" + "Strength: " + String(stats.strength) + "\n" + "Speed: " + String(stats.speed) + "\n" + "Defense: " + String(stats.defense)
     return string
-
+    
 func reset_stats():
     stats.reset()
     combatant.stats = stats.duplicate()

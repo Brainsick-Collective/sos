@@ -17,7 +17,7 @@ func initialize():
     pass
 func get_first():
     index = 0
-    return get_child(0);
+    return $Portraits.get_child(0);
     
 func get_index():
     return index
@@ -28,11 +28,14 @@ func get_stats(character_index) -> Resource:
     
 func next_sprite():
     index = abs((index + 1) % get_child_count())
-    return get_child(index).get_texture()
+    return $Portraits.get_child(index).get_texture()
     
 func last_sprite():
     index = (index + get_child_count() -1) % get_child_count()
-    return get_child(index).get_texture()
+    return $Portraits.get_child(index).get_texture()
+    
+func get_board_piece():
+    return $BoardPiece.get_child(index).get_texture()
 #func _process(delta):
 #	# Called every frame. Delta is time since last frame.
 #	# Update game logic here.

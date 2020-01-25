@@ -12,7 +12,6 @@ onready var left = $Column/Row/Left
 onready var right = $Column/Row/Right
 onready var character_select_sprite = $Column/Row/Character
 onready var num_players_label = $Column0/Row/Container/Label
-onready var game_variables = get_node("/root/GameVariables")
 var Players
 
 var num_players
@@ -64,7 +63,7 @@ func _on_StartButton_pressed():
     var combatant = Combatant.instance()
     var stats
     
-    board_character.set_sprite(character_select_sprite.texture)
+    board_character.set_sprite(sprites.get_board_piece())
     characters.append(board_character)
     stats = sprites.get_stats(sprites.get_index())
     player.initialize(curr_player, board_character, combatant, stats)

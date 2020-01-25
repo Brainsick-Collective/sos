@@ -1,0 +1,46 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://addons/SyndiBox/syndibox.gd" type="Script" id=1]
+[ext_resource path="res://interface/theme/panel/dialogue_box.tres" type="StyleBox" id=2]
+[ext_resource path="res://interface/UI/DialogueBox.gd" type="Script" id=3]
+
+[sub_resource type="Theme" id=1]
+Panel/styles/panel = ExtResource( 2 )
+
+[node name="DialogueBox" type="Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 0, 100 )
+theme = SubResource( 1 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 15
+custom_constants/margin_top = 15
+custom_constants/margin_left = 15
+custom_constants/margin_bottom = 15
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SyndiBox" type="ReferenceRect" parent="MarginContainer"]
+margin_left = 15.0
+margin_top = 15.0
+margin_right = 1009.0
+margin_bottom = 585.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+DIALOG = "wowowowowow
+"
+AUTO_ADVANCE = true
+FONT = "res://interface/theme/fonts/sc_12.tres"
+[connection signal="strings_finished" from="MarginContainer/SyndiBox" to="." method="_on_SyndiBox_strings_finished"]

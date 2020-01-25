@@ -1,0 +1,51 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://assets/backgrounds/grasslands.png" type="Texture" id=1]
+[ext_resource path="res://interface/UI/DialogueBox.tscn" type="PackedScene" id=2]
+[ext_resource path="res://interface/UI/Cutscene.gd" type="Script" id=3]
+
+[node name="Cutscene" type="Node2D"]
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 4
+
+[node name="bg" type="Sprite" parent="CanvasLayer"]
+visible = false
+position = Vector2( 515.504, 380.918 )
+scale = Vector2( 0.600661, 0.702431 )
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="pivot" type="Position2D" parent="CanvasLayer"]
+position = Vector2( 499.191, 355.633 )
+
+[node name="Sprite" type="Sprite" parent="CanvasLayer/pivot"]
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -213.0
+custom_constants/margin_right = 15
+custom_constants/margin_top = 15
+custom_constants/margin_left = 15
+custom_constants/margin_bottom = 15
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DialogueBox" parent="CanvasLayer/MarginContainer" instance=ExtResource( 2 )]
+visible = false
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 15.0
+margin_top = 15.0
+margin_right = 1009.0
+margin_bottom = 198.0
+[connection signal="string_finished" from="CanvasLayer/MarginContainer/DialogueBox" to="." method="_on_DialogueBox_string_finished"]

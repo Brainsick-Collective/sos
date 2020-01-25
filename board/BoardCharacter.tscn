@@ -22,10 +22,7 @@ flip_h = true
 
 [node name="Camera2D" type="Camera2D" parent="Pivot"]
 current = true
-drag_margin_h_enabled = false
-drag_margin_v_enabled = false
 editor_draw_drag_margin = true
 
 [node name="CameraOffset" type="Position2D" parent="Pivot"]
 scale = Vector2( 0.468751, 0.468751 )
-

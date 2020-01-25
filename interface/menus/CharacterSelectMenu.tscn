@@ -1,12 +1,10 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://interface/menus/CharacterSelectMenu.gd" type="Script" id=1]
 [ext_resource path="res://assets/ui/panel.png" type="Texture" id=2]
 [ext_resource path="res://interface/theme/fonts/num_font.tres" type="DynamicFont" id=3]
 [ext_resource path="res://interface/theme/fonts/Title_font.tres" type="DynamicFont" id=4]
-[ext_resource path="res://assets/ui/Interface_18.png" type="Texture" id=5]
-[ext_resource path="res://assets/pokemon.sprites/pokemon-sprites2-alpha_39.tres" type="Texture" id=6]
-[ext_resource path="res://assets/ui/Interface_21.png" type="Texture" id=7]
+[ext_resource path="res://assets/cutscene_sprites/Speed_Class_F.png" type="Texture" id=6]
 
 [node name="CharacterSelectMenu" type="Control"]
 anchor_right = 1.0
@@ -68,56 +66,55 @@ size_flags_vertical = 4
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_constants/separation = 50
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = -11
 alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Label" type="Label" parent="Column"]
-margin_top = 92.0
 margin_right = 1024.0
-margin_bottom = 93.0
+margin_bottom = 89.0
 custom_fonts/font = ExtResource( 4 )
 text = "Character Select"
 align = 1
 
 [node name="PlayerLabel" type="Label" parent="Column"]
-margin_top = 143.0
+margin_top = 78.0
 margin_right = 1024.0
-margin_bottom = 207.0
+margin_bottom = 142.0
 custom_fonts/font = ExtResource( 3 )
 text = "Player 1"
 align = 1
 
 [node name="Row" type="HBoxContainer" parent="Column"]
-margin_top = 257.0
+margin_top = 131.0
 margin_right = 1024.0
-margin_bottom = 357.0
+margin_bottom = 511.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 60
 alignment = 1
 
-[node name="Left" type="TextureButton" parent="Column/Row"]
-margin_left = 441.0
-margin_right = 458.0
-margin_bottom = 100.0
-texture_normal = ExtResource( 5 )
-
 [node name="Character" type="TextureRect" parent="Column/Row"]
-margin_left = 462.0
-margin_right = 562.0
-margin_bottom = 100.0
+margin_right = 1024.0
+margin_bottom = 380.0
 rect_min_size = Vector2( 100, 100 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
 texture = ExtResource( 6 )
 expand = true
-
-[node name="Right" type="TextureButton" parent="Column/Row"]
-margin_left = 566.0
-margin_right = 583.0
-margin_bottom = 100.0
-texture_normal = ExtResource( 7 )
+stretch_mode = 6
 
 [node name="StartButton" type="Button" parent="Column"]
 margin_left = 412.0
-margin_top = 407.0
+margin_top = 500.0
 margin_right = 612.0
-margin_bottom = 507.0
+margin_bottom = 600.0
+grow_horizontal = 0
+grow_vertical = 0
 rect_min_size = Vector2( 200, 100 )
 size_flags_horizontal = 4
 text = "Start"

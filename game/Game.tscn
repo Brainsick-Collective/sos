@@ -1,26 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=2 format=2]
 
 [ext_resource path="res://game/Game.gd" type="Script" id=1]
-[ext_resource path="res://system/ControlsHandler.tscn" type="PackedScene" id=2]
 
 [node name="Game" type="Node"]
 script = ExtResource( 1 )
 
 [node name="Players" type="Node" parent="."]
-
-[node name="ControlsHandler" parent="." instance=ExtResource( 2 )]
-controls_set = [ {
-"ui_accept": 69,
-"ui_cancel": 16777217,
-"ui_down": 83,
-"ui_left": 65,
-"ui_right": 68,
-"ui_up": 87
-}, {
-"ui_accept": 16777221,
-"ui_cancel": 16777224,
-"ui_down": 16777234,
-"ui_left": 16777231,
-"ui_right": 16777233,
-"ui_up": 16777232
-} ]

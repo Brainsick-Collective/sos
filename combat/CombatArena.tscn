@@ -141,6 +141,9 @@ margin_right = 64.0
 margin_bottom = 64.0
 text = "choices:"
 align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="C1Label" type="Label" parent="UI/GUI"]
 margin_left = 190.0

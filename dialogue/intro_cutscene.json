@@ -1,0 +1,6 @@
+{
+    "sprites" : 
+        ["res://assets/cutscene_sprites/kpop1.png"],
+    "dialogue" :
+        ["res://dialogue/intro.txt"]
+}

@@ -11,7 +11,6 @@ onready var moves_label = $UI/GUI/Counter/MarginContainer/VBoxContainer/MovesLef
 onready var name_label = $UI/GUI/NinePatchRect/PlayerName
 onready var Notification = preload("res://interface/UI/notification.tscn")
 signal turn_finished(player)
-var controls_handler
 var game
 var num_players = 3
 var current_player
@@ -24,7 +23,6 @@ func initialize(characters, game):
     _ready()
     self.game = game
     game.board = self
-    controls_handler = game.get_node("ControlsHandler")
     START = $GameBoard/Start.get_position()
     for character in characters:
         character.set_position(START)
@@ -35,9 +33,8 @@ func initialize(characters, game):
     Board.initialize()
     
 func start_game():
-    var note = Notification.instance()
-    note.just_text("First Turn!")
-    game.add_note_to_q(note)
+    var cutscene = game.load_cutscene("res://dialogue/intro_cutscene.json")
+    yield(cutscene, "tree_exited")
     play_turn(Characters.get_child(0), START)
 
 # warning-ignore:unused_argument
@@ -61,8 +58,9 @@ func next_turn():
     var last_camera_position = current_player.get_camera_position()
     print("next turn starting, camera was last at: " + String(last_camera_position))
     var new_ind = (current_player.get_index() + 1) % num_players
-    controls_handler.clear_controls()
-    controls_handler.set_controls(new_ind)
+    ControlsHandler.clear_controls()
+    ControlsHandler.set_controls(new_ind)
+    ControlsHandler.current_player = new_ind
     play_turn(Characters.get_child(new_ind), last_camera_position)
 #func _process(delta):
 #	# Called every frame. Delta is time since last frame.
@@ -70,18 +68,4 @@ func next_turn():
 #	pass
 func show_confirm_popup():
     $UI/MoveConfirmPopup.show()
-
-func get_encounter(camera_pos):
-    #TODO: change to handle real encounters
-    if current_player.death_penalty > 0:
-        return
-    
-    for character in Characters.get_children():
-        print("position of player " + String(character.get_index()) + " " + String(character.position))
-        print(String(character.player.stats.health))
-        if character.position == camera_pos and character.player.stats.health != 0 and character != current_player:
-            print("encounter found against " + String(character.player_id))
-            return character.player_id
-    
-
 
