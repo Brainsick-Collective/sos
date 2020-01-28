@@ -23,7 +23,7 @@ func get_index():
     return index
 func get_stats(character_index) -> Resource:
     var stats = pokemon_stats[character_index]
-    stats = stats.copy()
+    stats = stats.duplicate()
     return stats
     
 func next_sprite():

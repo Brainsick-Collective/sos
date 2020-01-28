@@ -148,17 +148,26 @@ func on_choice(choice):
 func on_won_battle(killed):
     set_process_input(false)
     is_over = true
-    $UI/GUI/Choices.text = killed.player_name + " has been killed!"
-    var kill_desc = killed.player_name + " has been killed!"
+    $UI/GUI/Choices.text = killed.combatant_name + " has been killed!"
+    var kill_desc = killed.combatant_name + " has been killed!"
     print(kill_desc)
     process_gui_values()
     $Timer.set_wait_time(2)
     $Timer.start()
     yield($Timer, "timeout")
+    $UI/GUI/Choices.text = "awarded " + String(killed.stats.kill_xp) + " xp"
+    var winner = null
+    if fighter1 == killed:
+        winner = fighter2
+    else:
+        winner = fighter1
+    winner.stats.set_xp(winner.stats.get_xp() + killed.stats.kill_xp)
+    print(winner.stats.max_health)
     dealloc(true)
     var note = Notification.instance()
-    note.init(killed, null, killed.player_name + " is dead!")
-    notifications.append(note)
+    if !killed.is_mob():
+        note.init(killed, null, killed.combatant_name + " is dead!")
+        notifications.append(note)
     emit_signal("completed", notifications)
     
 func on_give_up(retiree):

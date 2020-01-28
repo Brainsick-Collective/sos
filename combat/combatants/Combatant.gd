@@ -8,9 +8,10 @@ var player
 export var stats : Resource
 export var moves = {}
 var sprite
-signal killed
+signal killed(player)
 var mob = false
 var battle = null
+var combatant_name : String
 
 func initialize_n():
     var new_sprite = Sprite.new()
@@ -19,6 +20,7 @@ func initialize_n():
     $Skin.add_child(new_sprite)
     sprite = new_sprite
     stats.reset()
+    combatant_name = player.name    
     stats.connect("health_depleted", self, "on_death")
     
 func flip_sprite():
@@ -33,6 +35,7 @@ func initialize(new_sprite, p):
     sprite.texture = new_sprite.texture
     sprite.scale = Vector2(0.322, 0.322)
     $Skin.add_child(sprite)
+    combatant_name = player.name
     self.sprite = sprite
     
 func initialize_mob(mob_stats):
@@ -42,6 +45,7 @@ func initialize_mob(mob_stats):
     print("is mob true? " + String(mob))
     stats.reset()
     stats.connect("health_depleted", self, "on_death")
+    combatant_name = "mob" 
     
 func set_moves_from_dict(moves : Dictionary):
     self.moves = moves
@@ -89,4 +93,4 @@ func on_death():
         player.stats.health = 0
         print("player health")
         print(String(player.stats.health))
-    emit_signal("killed", player)
+    emit_signal("killed", self)

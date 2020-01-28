@@ -38,11 +38,13 @@ func get_stats_string():
     return string
     
 func reset_stats():
+    print("reseting stats")
+    print(String(stats.health))
+    print(String(combatant.stats.health))
+    stats.copy(combatant.stats)
     stats.reset()
-    combatant.stats = stats.duplicate()
     combatant.stats.reset()
     combatant.stats.connect("health_depleted", combatant, "on_death")
-    print("reseting stats")
     print(String(stats.health))
     print(String(combatant.stats.health))
     

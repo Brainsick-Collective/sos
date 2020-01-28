@@ -5,7 +5,6 @@ class_name BoardCharacter
 signal turn_finished
 signal last_move_taken
 
-export (Resource) var stats
 export (NodePath) var curr_space = null
 export (String) var player_name
 export (String) var player_id
@@ -190,7 +189,6 @@ func on_revive():
     
 func check_penalties():
     if death_penalty == 0:
-            print ("player " + player.player_name + "is revived!")
             on_revive()
             return
     else:
