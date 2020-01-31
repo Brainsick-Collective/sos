@@ -35,15 +35,19 @@ onready var move_map = {
 
 func initialize(player1, player2):
     _ready()
-    #moves1 = player1.get_moves()
-    #moves2 = player2.get_moves()
     fighter1 = player1
     fighter2 = player2
+    
+func decide_turns():
+    $Label.text = ""
+    $Label.hide()
+    $Options1.hide()
+    $Options2.hide()
     $TurnOrderPopup.show()
     $TurnOrderPopup.decide_turns(fighter1.stats.speed, fighter2.stats.speed)
     isFighterOneFirst = yield($TurnOrderPopup, "chosen")
     do_combat_phase(isFighterOneFirst)
-
+    
 func do_combat_phase(choice):
     if choice:
         $Label.text = "your Turn!"

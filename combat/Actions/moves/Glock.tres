@@ -4,10 +4,10 @@
 
 [resource]
 script = ExtResource( 1 )
-move_name = "Ward"
-type = 2
-phase = 1
-modifier = 0.8
-description = "Creates a protective wall, blocking some incoming damage"
-base_damage = 0
-success_chance = 0.85
+move_name = "Glock .45"
+type = 1
+phase = 0
+modifier = 1.4
+description = "the poor clam just wants to protect his family"
+base_damage = 10
+success_chance = 0.256

@@ -1,13 +1,12 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://assets/Pokemon.gd" type="Script" id=1]
+[ext_resource path="res://game/StartingClasses.gd" type="Script" id=1]
 [ext_resource path="res://assets/pokemon/pokemon-sprites2-alpha_39.png" type="Texture" id=2]
 [ext_resource path="res://assets/pokemon/pokemon-sprites2-alpha_57.png" type="Texture" id=3]
-[ext_resource path="res://assets/pokemon/pokemon-sprites2-alpha_75.png" type="Texture" id=4]
-[ext_resource path="res://assets/pokemon.sprites/pokemon-sprites2-alpha_98.tres" type="Texture" id=5]
-[ext_resource path="res://assets/cutscene_sprites/Speed_Class_F.png" type="Texture" id=6]
-[ext_resource path="res://assets/cutscene_sprites/mush_wiz1.png" type="Texture" id=7]
-[ext_resource path="res://assets/cutscene_sprites/kpop1.png" type="Texture" id=8]
+[ext_resource path="res://assets/cutscene_sprites/Speed_Class_F.png" type="Texture" id=4]
+[ext_resource path="res://assets/pokemon/pokemon-sprites2-alpha_75.png" type="Texture" id=5]
+[ext_resource path="res://assets/cutscene_sprites/Wizard_f.png" type="Texture" id=6]
+[ext_resource path="res://assets/cutscene_sprites/Strength_Class_F.png" type="Texture" id=7]
 
 [node name="CharacterSprites" type="Node"]
 script = ExtResource( 1 )
@@ -17,21 +16,17 @@ script = ExtResource( 1 )
 [node name="chikorita" type="Sprite" parent="Portraits"]
 position = Vector2( 55.1585, 69.9582 )
 scale = Vector2( 0.118756, 0.118756 )
-texture = ExtResource( 6 )
+texture = ExtResource( 4 )
 
 [node name="cyndaquil" type="Sprite" parent="Portraits"]
 position = Vector2( 199.44, 69.8189 )
 scale = Vector2( 0.103748, 0.103748 )
-texture = ExtResource( 8 )
+texture = ExtResource( 7 )
 
 [node name="totodile" type="Sprite" parent="Portraits"]
 position = Vector2( 321.381, 75.6464 )
 scale = Vector2( 0.131114, 0.131114 )
-texture = ExtResource( 7 )
-
-[node name="sentret" type="Sprite" parent="Portraits"]
-position = Vector2( 435.13, 60.0249 )
-texture = ExtResource( 5 )
+texture = ExtResource( 6 )
 
 [node name="BoardPiece" type="Node" parent="."]
 
@@ -48,8 +43,4 @@ texture = ExtResource( 3 )
 [node name="totodile" type="Sprite" parent="BoardPiece"]
 position = Vector2( 309.066, 243.693 )
 scale = Vector2( 1.87572, 1.87572 )
-texture = ExtResource( 4 )
-
-[node name="sentret" type="Sprite" parent="BoardPiece"]
-position = Vector2( 435.13, 234.486 )
 texture = ExtResource( 5 )

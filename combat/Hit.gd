@@ -12,20 +12,20 @@ var type  setget _set_type, _get_type
 
 
 func _set_damage(dg: int):
-	damage = dg
-	
+    damage = dg
+    
 func _get_damage():
-	return damage
-	
+    return damage
+    
 func _set_target(tar):
-	target = tar
-	
+    target = tar
+    
 func _get_target():
-	return target
+    return target
 func _set_type(new_type):
-	type = new_type
+    type = new_type
 func _get_type():
-	return type
-	
+    return type
+    
 func execute():
-	target.take_damage(self)
+    target.take_damage(self)

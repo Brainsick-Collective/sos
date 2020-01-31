@@ -71,7 +71,9 @@ func clear_controls():
     
     
 func which_player(event : InputEvent):
-    return control_lookup_map[event.scancode]
+    if control_lookup_map.has(event.scancode):
+        return control_lookup_map[event.scancode]  
+    return -1
     
 func is_current_player_action(event : InputEventKey):
     return which_player(event) == current_player

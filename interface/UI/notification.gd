@@ -1,5 +1,7 @@
 extends Popup
 
+class_name Notification
+
 var boardplayer
 var effect
 onready var label = $NinePatchRect/MarginContainer/Label
@@ -33,7 +35,6 @@ func just_text(desc):
     text = desc
 
 func _screen_entered():
-    print("drawing notification")
     label.text = text
     #boardplayer.center_camera()
     #TODO: play effect

@@ -128,10 +128,8 @@ func _enter_tree():
 func _ready(): # Called when ready.
     pass
 func play():
-    print("Auto advance is " + String(AUTO_ADVANCE))
     if !is_visible():
         return
-    print("syndi ready")
     strings = DIALOG.split("\n")
     set_physics_process(true)
     custom.set_script(preload("res://addons/SyndiBox/custom.gd"))

@@ -22,7 +22,6 @@ func play():
     var size=sprite.texture.get_size()
     var scalefactor=sizeto/size
     sprite.scale = Vector2(0.322,0.322)
-    print("about to show")
     dialogue.show()
     dialogue.sb.show()
     dialogue.play_text(sprite_text_map["dialogue"])

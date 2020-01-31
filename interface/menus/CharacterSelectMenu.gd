@@ -6,8 +6,7 @@ extends "res://interface/Menu.gd"
 onready var Board = preload("res://board/Board.tscn")
 onready var Character = preload("res://board/BoardCharacter.tscn")
 onready var Player = preload("res://game/players/Player.tscn")
-onready var Combatant = preload("res://combat/combatants/Combatant.tscn")
-onready var Pokemon = preload("res://assets/pokemon.tscn")
+onready var StartingClasses = preload("res://game/StartingClasses.tscn")
 onready var left = $Column/Row/Left
 onready var right = $Column/Row/Right
 onready var character_select_sprite = $Column/Row/Character
@@ -15,7 +14,7 @@ onready var num_players_label = $Column0/Row/Container/Label
 var Players
 
 var num_players
-var sprites
+var classes
 var game
 var curr_player = 0
 const min_size = 1
@@ -25,8 +24,8 @@ signal enter_board(board_node)
 
 
 func _ready():
-    sprites = Pokemon.instance()
-    character_select_sprite.set_texture(sprites.get_first().get_texture())
+    classes = StartingClasses.instance()
+    character_select_sprite.set_texture(classes.get_first().get_texture())
     num_players = 1
     curr_player = 1
 
@@ -39,13 +38,12 @@ func initialize(game_node):
 func _input(event):
     if event.is_action_pressed("ui_left"):
         if($Column.is_visible_in_tree()):
-            character_select_sprite.set_texture(sprites.last_sprite())
+            character_select_sprite.set_texture(classes.last_sprite())
         else:
             num_players= clamp(num_players-1,min_size, max_size)
     elif event.is_action_pressed("ui_right"):
-        print("pressing right")
         if($Column.is_visible_in_tree()):
-            character_select_sprite.set_texture(sprites.next_sprite())
+            character_select_sprite.set_texture(classes.next_sprite())
         else:
             num_players= clamp(num_players+1,min_size, max_size)
     if event.is_action_pressed("ui_accept"):
@@ -60,13 +58,11 @@ func _process(delta):
 func _on_StartButton_pressed():
     var board_character = Character.instance()
     var player = Player.instance()
-    var combatant = Combatant.instance()
-    var stats
     
-    board_character.set_sprite(sprites.get_board_piece())
+    board_character.set_sprite(classes.get_board_piece())
     characters.append(board_character)
-    stats = sprites.get_stats(sprites.get_index())
-    player.initialize(curr_player, board_character, combatant, stats)
+    var combatant = classes.get_combatant()
+    player.initialize(curr_player, board_character, combatant)
     combatant.initialize(character_select_sprite, player)
     player.player_name = "Player " + String(curr_player)
     Players.add_child(player)

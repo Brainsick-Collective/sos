@@ -28,7 +28,8 @@ func _after_cutscene():
     
 func initialize_game(board):
     self.board = board
-    queue = board.get_node("NotificationQueue")
+    queue = get_node("NotificationQueue")
+    queue.ui_parent = board.get_node("UI")
     set_controls()
     queue.connect("emptied", self, "on_queue_finished")
     board.connect("turn_finished", self, "_on_move_finished")
@@ -38,6 +39,7 @@ func set_controls():
     for player in $Players.get_children():
         player.board_character.player_id = player.get_id()
         player.controls = ControlsHandler.get_controls(player.get_id())
+        player.board_character.controls = ControlsHandler.get_controls(player.get_id())
     
 func enter_space_scene(player_pawn):
     var scene = player_pawn.player.battle
@@ -53,16 +55,17 @@ func enter_space_scene(player_pawn):
         board = get_node("Board")
         if scene != null:
             remove_child(get_node("Board"))
+            scene.initialize()
             add_child(scene)
             scene.connect("completed", self, "add_note_to_q")
-            scene.initialize()
+            
             yield(scene, "completed")
             if scene:
                 remove_child(scene)
             add_child(board)
-            for player in $Players.get_children():
-                if player.stats.health == 0 and player.board_character.death_penalty==0:
-                    player.board_character.on_killed()
+            # for player in $Players.get_children():
+            #     if player.stats.health == 0 and player.board_character.death_penalty==0:
+            #         player.board_character.on_killed(player)
     #TODO: the note q should be at game level?
     print("ended scene, or no scene available")
     #set_process(false)
@@ -73,9 +76,6 @@ func on_queue_finished():
     board.next_turn()
     
 func add_note_to_q(notes):
-    if queue == null:
-        queue = board.get_node("NotificationQueue")
-        queue.connect("emptied", self, "on_queue_finished")
     if typeof(notes) == TYPE_OBJECT:
         queue.add_notif_to_q(notes)
     return

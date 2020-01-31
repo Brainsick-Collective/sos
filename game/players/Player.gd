@@ -13,11 +13,11 @@ var is_dead = false
 var battle
 
 
-func initialize( new_id, pawn, battler, starting_stats):
+func initialize( new_id, pawn, battler):
     board_character = pawn
     id = new_id - 1
     combatant = battler
-    stats = starting_stats.duplicate()
+    stats = combatant.stats
     stats.reset()
     combatant.connect("killed", pawn, "on_killed")
     

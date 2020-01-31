@@ -14,3 +14,10 @@ export var icon : Texture = load("res://icon.png")
 
 export var base_damage : int
 export(float, 0.0, 1.0) var success_chance : float
+
+
+func do_self_effect():
+    pass
+
+func do_enemy_effect(enemy):
+    pass

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://board/Board.gd" type="Script" id=1]
 [ext_resource path="res://board/outdoor.tres" type="TileSet" id=2]
@@ -10,7 +10,6 @@
 [ext_resource path="res://interface/GUI/GUI.tscn" type="PackedScene" id=8]
 [ext_resource path="res://interface/UI/DiceRollPopup.tscn" type="PackedScene" id=9]
 [ext_resource path="res://interface/UI/MoveConfirmPopup.tscn" type="PackedScene" id=10]
-[ext_resource path="res://board/NotificationQueue.tscn" type="PackedScene" id=11]
 
 [node name="Board" type="Node2D"]
 script = ExtResource( 1 )
@@ -38,7 +37,7 @@ __meta__ = {
 tile_set = ExtResource( 4 )
 cell_size = Vector2( 128, 128 )
 format = 1
-tile_data = PoolIntArray( 196611, 2, 0, 196616, 2, 0, 196623, 3, 0, 327683, 3, 0, 327685, 2, 0, 458767, 2, 0, 458772, 1, 0, 524291, 2, 0, 524293, 2, 0, 524295, 1, 0, 524297, 3, 0, 524300, 1, 0, 524308, 2, 0, 524311, 0, 0, 655367, 2, 0, 655368, 0, 0, 655369, 2, 0, 655372, 2, 0, 655378, 2, 0, 655383, 2, 0, 786435, 2, 0, 786438, 3, 0, 786442, 2, 0, 786450, 1, 0 )
+tile_data = PoolIntArray( 196611, 2, 0, 196616, 2, 0, 196623, 3, 0, 327683, 3, 0, 327685, 2, 0, 458767, 2, 0, 458772, 1, 0, 524291, 2, 0, 524293, 2, 0, 524295, 1, 0, 524297, 3, 0, 524300, 1, 0, 524308, 2, 0, 524311, 3, 0, 655367, 2, 0, 655368, 0, 0, 655369, 2, 0, 655372, 2, 0, 655378, 2, 0, 655383, 2, 0, 786435, 2, 0, 786438, 3, 0, 786442, 2, 0, 786450, 1, 0 )
 
 [node name="Start" type="Node2D" parent="GameBoard"]
 position = Vector2( 448, 448 )
@@ -77,6 +76,3 @@ margin_left = -88.0
 margin_top = -32.0
 margin_right = 88.0
 margin_bottom = 32.0
-
-[node name="NotificationQueue" parent="." instance=ExtResource( 11 )]
-ui_parent_path = NodePath("../UI")

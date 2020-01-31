@@ -21,7 +21,6 @@ func play_queue() -> void:
     for note in queue:
         ui_parent.add_child(note)
         note.popup()
-        print("popup'd'")
         yield(note, "popup_hide")
         note.queue_free()
     queue.clear()

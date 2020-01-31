@@ -39,13 +39,15 @@ func get_space_scene(player_pawn):
                 var combat = CombatArena.instance()
                 combat.set_fighters(player_pawn.get_fighter(), character.get_fighter())
                 return combat
-        return get_random_encounter(player_pawn, pos)
+        return get_random_encounter(player_pawn, space_types.WILD)
+    elif $Spaces.get_cellv(pos) == space_types.SHOP and !player_pawn.is_dead:
+        return get_random_encounter(player_pawn, space_types.SHOP)
     else: 
         return null
         
-func get_random_encounter(player_pawn, pos):
+func get_random_encounter(player_pawn, space_type):
     var combat = CombatArena.instance()
-    var monster = MonsterFactory.create_mob(pos)
+    var monster = MonsterFactory.create_mob(space_type)
     print(monster.is_mob())
     combat.set_fighters(player_pawn.get_fighter(), monster)
     return combat

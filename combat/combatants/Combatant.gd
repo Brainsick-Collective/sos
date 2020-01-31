@@ -7,11 +7,13 @@ enum move_types { empty = -1, normal, special, magic, effect }
 var player
 export var stats : Resource
 export var moves = {}
+export var job : Resource
 var sprite
 signal killed(player)
 var mob = false
 var battle = null
 var combatant_name : String
+onready var tween = $Tween
 
 func initialize_n():
     var new_sprite = Sprite.new()
@@ -19,17 +21,20 @@ func initialize_n():
     new_sprite.scale = Vector2(0.322, 0.322)
     $Skin.add_child(new_sprite)
     sprite = new_sprite
+    stats = stats.duplicate()
     stats.reset()
     combatant_name = player.name    
     stats.connect("health_depleted", self, "on_death")
+    stats.connect("leveled_up", self, "_on_level_up")
     
 func flip_sprite():
-    sprite.set_flip_h(true)
+    sprite.set_flip_h(!sprite.is_flipped_h())
 
 func initialize(new_sprite, p):
     var sprite = Sprite.new()
     player = p
-    stats = player.stats.duplicate()
+    stats = stats.duplicate()
+    stats.player_id = player.id
     stats.reset()
     stats.connect("health_depleted", self, "on_death")
     sprite.texture = new_sprite.texture
@@ -37,16 +42,21 @@ func initialize(new_sprite, p):
     $Skin.add_child(sprite)
     combatant_name = player.name
     self.sprite = sprite
+    set_moves_from_job()
+    stats.connect("leveled_up", self, "_on_level_up")
     
-func initialize_mob(mob_stats):
+func initialize_mob():
     self.sprite = $Skin/Sprite
-    stats = mob_stats
     mob = true
-    print("is mob true? " + String(mob))
+    stats = stats.duplicate()
     stats.reset()
     stats.connect("health_depleted", self, "on_death")
     combatant_name = "mob" 
+    set_moves_from_job()
     
+func set_moves_from_job():
+    set_moves_from_dict(job.get_moves_dict())
+
 func set_moves_from_dict(moves : Dictionary):
     self.moves = moves
     var attack = AttackAction.new()
@@ -84,13 +94,13 @@ func get_id():
 
 func take_damage(hit):
     stats.take_damage(hit)
-    
+
 func is_mob():
     return mob
 
 func on_death():
     if !player == MonsterFactory.GM:
         player.stats.health = 0
-        print("player health")
-        print(String(player.stats.health))
+#        print("player health")
+#        print(String(player.stats.health))
     emit_signal("killed", self)

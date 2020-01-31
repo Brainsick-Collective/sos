@@ -2,7 +2,6 @@ extends Node2D
 
 class_name CombatArena
 
-var game_variables
 var fighter1
 var fighter2
 var choice1
@@ -11,12 +10,14 @@ var fighter1chose
 var fighter2chose
 var isfighter1First
 var round_num
-var is_over = false
+var is_round_over = false
+var is_battle_over = false
 var notifications = []
+var note_q
+var tween_to_reverse
 enum move_types { empty = -1, normal, special, magic, effect }
 onready var Notification = preload("res://interface/UI/notification.tscn")
 
-signal combat_finished
 signal completed (notifications)
 
 const choices =[
@@ -34,39 +35,32 @@ func _ready():
     pass
     
 func initialize():
-    _ready()
-    game_variables = get_node("/root/GameVariables")
+    _ready() 
     fighter1.connect("killed", self, "on_won_battle")
     fighter2.connect("killed", self, "on_won_battle")
-    game_variables.set_default_moves(fighter1)
-    game_variables.set_default_moves(fighter2)
+    fighter1.stats.connect("leveled_up", self, "play_notification")
+    fighter2.stats.connect("leveled_up", self, "play_notification")
     fighter1chose = false
     fighter2chose = false
     round_num = 0
-    #temp code, change to combatant
-    #var sprite = Sprite.new()
-    #sprite.texture = fighter1.get_board_character().get_node("Pivot/Sprite").texture
-    #sprite.set_flip_h(true)
     $"1".add_child(fighter1)
-    #var sprite2 = Sprite.new()
-    #sprite2.texture = fighter2.get_board_character().get_node("Pivot/Sprite").texture
     $"2".add_child(fighter2)
     fighter2.flip_sprite()
-    #----
-    $UI/GUI/ActorPanel1/Margins/VBoxContainer/TextureProgress.max_value = fighter1.stats.max_health
-    $UI/GUI/ActorPanel2/Margins/VBoxContainer/TextureProgress.max_value = fighter2.stats.max_health
-    $UI/GUI/ActorPanel1/Margins/VBoxContainer/Name.text = fighter1.player.player_name
-    $UI/GUI/ActorPanel2/Margins/VBoxContainer/Name.text = fighter2.player.player_name
-    process_gui_values()
-    #TODO: set stats from stat resource
-    set_process_input(false)
     $UI/CombatInterface.initialize(fighter1, fighter2)
     $UI/CombatInterface/TurnOrderPopup.connect("chosen", self, "on_choice")
+    stage_ui()
+    set_process_input(false)    
+    
+func stage_ui():
+    $UI/GUI/ActorPanel1/Margins/VBoxContainer/HBoxContainer/TextureProgress.max_value = fighter1.stats.max_health
+    $UI/GUI/ActorPanel2/Margins/VBoxContainer/HBoxContainer/TextureProgress.max_value = fighter2.stats.max_health
+    $UI/GUI/ActorPanel1/Margins/VBoxContainer/Name.text = fighter1.player.player_name
+    $UI/GUI/ActorPanel2/Margins/VBoxContainer/Name.text = fighter2.player.player_name
+    $UI/GUI/ActorPanel1/Margins/VBoxContainer/HBoxContainer/LVL.text = "LVL " + String(fighter1.stats.level)
+    $UI/GUI/ActorPanel2/Margins/VBoxContainer/HBoxContainer/LVL.text = "LVL " + String(fighter2.stats.level)
     $UI/GUI/C1Label.text = fighter1.get_stats_string()
     $UI/GUI/C2Label.text = fighter2.get_stats_string()
-    print(fighter1.is_mob())
-    print(fighter2.is_mob())
-    
+    process_gui_values()
     
 func set_fighters(fighter1, fighter2):
     self.fighter1 = fighter1
@@ -77,13 +71,13 @@ func _process(delta):
     
     
 func check_ready():
+    if is_battle_over:
+        return
     if fighter2.is_mob() and fighter1chose:
         choice2 = move_types.normal
         fighter2chose = true
-        print("mob chose")
-    if fighter1chose and fighter2chose and !is_over:
+    if fighter1chose and fighter2chose:
         set_process_input(false)
-        set_process(false)
         print("players have chosen their moves")
         $UI/GUI/Choices.text = "Choices:\n" + fighter1.get_move(choice1, true).move.move_name + "\n" + fighter2.get_move(choice2,false).move_name
         if isfighter1First:
@@ -96,34 +90,37 @@ func do_phase(attacker, defender, attacker_move, defender_move):
     var hit = attacker_move.execute(defender,defender_move)
     round_num += 1
         #add that defender_move  animation still plays
-    print("doing move calculations...")
-    print(attacker_move.move.move_name)
-    print(defender_move.move_name)
     fighter1chose = false
     fighter2chose = false
+    # TODO change this to be from a gave_up signal
     if defender_move.type == move_types.effect:
         on_give_up(defender.player)
         return
     if hit:
+        #TODO externalize this to the combatant, who will get details from the action
+        var curr_pos = attacker.get_parent().position
+        attacker.tween.interpolate_property(attacker.get_parent(), "position",
+            attacker.get_parent().position, defender.get_parent().position, 
+            0.5 , Tween.TRANS_LINEAR, Tween.EASE_IN) 
+        attacker.tween.start()
+        yield(attacker.tween, "tween_completed")
+        attacker.tween.interpolate_property(attacker.get_parent(), "position",
+            defender.get_parent().position, curr_pos, 
+            1.0 , Tween.TRANS_LINEAR, Tween.EASE_IN)
+        attacker.tween.start()
         hit.execute()
-        print("executing hit")
+#        attacker.tween.connect("tween_completed", self, "reverse_tween")
+#        tween_to_reverse = attacker.tween
     process_gui_values()
-    if !is_over:
-        if round_num % 2 == 1:
-            isfighter1First = !isfighter1First
-            $UI/CombatInterface.do_combat_phase(isfighter1First)
-        else:
-            $Timer.set_wait_time(2)
-            $Timer.start()
-            yield($Timer, "timeout")
-            dealloc(false)
-            emit_signal("completed")
-    set_process_input(true)
-    set_process(true)
+    if round_num % 2 == 1:
+        isfighter1First = !isfighter1First
+        $UI/CombatInterface.do_combat_phase(isfighter1First)
+        set_process_input(true)
+    else:
+        $Timer.set_wait_time(2)
+        $Timer.start()
 
 func _input(event):
-    if(fighter1.get_id() == -1):
-        print("WHYYYYY?" + fighter1.player.player_name)
     for key in choices:
         if !fighter1chose and event.is_action_pressed(key + String(fighter1.get_id())):
             choice1 = choice_map[key]
@@ -131,13 +128,12 @@ func _input(event):
         elif !fighter2chose and !fighter2.is_mob() and event.is_action_pressed(key + String(fighter2.get_id())):
             choice2 = choice_map[key]
             fighter2chose = true
-#	if event.is_action_pressed(
 
 func process_gui_values():
-    $UI/GUI/ActorPanel1/Margins/VBoxContainer/TextureProgress.value = fighter1.stats.health
-    $UI/GUI/ActorPanel2/Margins/VBoxContainer/TextureProgress.value = fighter2.stats.health
-    $UI/GUI/ActorPanel1/Margins/VBoxContainer/TextureProgress/Label.text = String(fighter1.stats.health)
-    $UI/GUI/ActorPanel2/Margins/VBoxContainer/TextureProgress/Label.text = String(fighter2.stats.health)
+    $UI/GUI/ActorPanel1/Margins/VBoxContainer/HBoxContainer/TextureProgress.value = fighter1.stats.health
+    $UI/GUI/ActorPanel2/Margins/VBoxContainer/HBoxContainer/TextureProgress.value = fighter2.stats.health
+    $UI/GUI/ActorPanel1/Margins/VBoxContainer/HBoxContainer/TextureProgress/Label.text = String(fighter1.stats.health)
+    $UI/GUI/ActorPanel2/Margins/VBoxContainer/HBoxContainer/TextureProgress/Label.text = String(fighter2.stats.health)
     $UI/GUI/C1Label.text = fighter1.get_stats_string()
     $UI/GUI/C2Label.text = fighter2.get_stats_string()
     
@@ -147,14 +143,14 @@ func on_choice(choice):
     
 func on_won_battle(killed):
     set_process_input(false)
-    is_over = true
+    is_battle_over = true
     $UI/GUI/Choices.text = killed.combatant_name + " has been killed!"
     var kill_desc = killed.combatant_name + " has been killed!"
     print(kill_desc)
     process_gui_values()
     $Timer.set_wait_time(2)
     $Timer.start()
-    yield($Timer, "timeout")
+    
     $UI/GUI/Choices.text = "awarded " + String(killed.stats.kill_xp) + " xp"
     var winner = null
     if fighter1 == killed:
@@ -162,34 +158,38 @@ func on_won_battle(killed):
     else:
         winner = fighter1
     winner.stats.set_xp(winner.stats.get_xp() + killed.stats.kill_xp)
-    print(winner.stats.max_health)
-    dealloc(true)
     var note = Notification.instance()
     if !killed.is_mob():
-        note.init(killed, null, killed.combatant_name + " is dead!")
+        note.init(killed.player, null, killed.combatant_name + " is dead!")
         notifications.append(note)
-    emit_signal("completed", notifications)
-    
+
+func reverse_tween():
+    var pos = null
+    if tween_to_reverse.get_parent().get_parent() == get_node("1"):
+        pos = $"1".position
+    else:
+        pos = $"2".position
+    tween_to_reverse.interpolate
 func on_give_up(retiree):
     set_process_input(false)
-    is_over = true
+    is_battle_over = true
     $UI/GUI/Choices.text = retiree.player_name + " has given up!"
     print(retiree.player_name + " has given up!")
     process_gui_values()
     $UI/CombatInterface.queue_free()
     $Timer.set_wait_time(2)
     $Timer.start()
-    yield($Timer, "timeout")
-    dealloc(true)
     var note = Notification.instance()
     note.init(retiree, null, retiree.player_name + " is in timeout!")
-    notifications.append(note)
-    emit_signal("completed", notifications)
+    notifications.append(note) 
 
-func dealloc(is_finished):
-    fighter1.player.in_battle = !is_finished
-    fighter2.player.in_battle = !is_finished
-    if !is_finished:
+
+func dealloc():
+    fighter1.player.in_battle = !is_battle_over
+    fighter2.player.in_battle = !is_battle_over
+    fighter2.flip_sprite()
+    $Timer.stop()
+    if !is_battle_over:
         fighter1.player.battle = self
         fighter2.player.battle = self
     else:
@@ -198,3 +198,19 @@ func dealloc(is_finished):
         fighter1.player.battle = null
         fighter2.player.battle = null
         queue_free() 
+
+
+func _on_Timer_timeout():
+    emit_signal("completed", notifications)
+    dealloc()
+
+func play_notification(note):
+    $UI/GUI/NoteContainer.add_child(note)
+    note.show()
+    $Timer.stop()
+    yield(note, "tree_exited")
+    $Timer.start()
+    
+func _on_CombatArena_tree_entered():
+    set_process_input(true)
+    $UI/CombatInterface.decide_turns()

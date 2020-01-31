@@ -18,24 +18,24 @@ export(String) var description : String = "Base combat action"
 
 
 func initialize(battler) -> void:
-	move = move.duplicate()
-	type = move.type
-	actor = battler
-	initialized = true
+    move = move.duplicate()
+    type = move.type
+    actor = battler
+    initialized = true
 
 func execute(target, reaction):
-	assert(initialized)
-	print("%s missing overwrite of the execute method" % name)
-	return false
+    assert(initialized)
+    print("%s missing overwrite of the execute method" % name)
+    return false
 
 func return_to_start_position():
-	yield(actor.skin.return_to_start(), "completed")
+    yield(actor.skin.return_to_start(), "completed")
 
 func can_use() -> bool:
-	return true
+    return true
 
 func get_type():
-	return move.type
+    return move.type
 
 func get_name():
-	return move.move_name
+    return move.move_name

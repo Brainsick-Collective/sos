@@ -1,0 +1,23 @@
+[gd_resource type="Resource" load_steps=10 format=2]
+
+[ext_resource path="res://combat/Actions/moves/Glock.tres" type="Resource" id=1]
+[ext_resource path="res://combat/Actions/moves/Rally.tres" type="Resource" id=2]
+[ext_resource path="res://combat/Actions/moves/Squirt.tres" type="Resource" id=3]
+[ext_resource path="res://combat/Actions/moves/ClamStrike.tres" type="Resource" id=4]
+[ext_resource path="res://combat/Actions/moves/Defend.tres" type="Resource" id=5]
+[ext_resource path="res://combat/Actions/moves/GiveUp.tres" type="Resource" id=6]
+[ext_resource path="res://combat/Actions/moves/Ward.tres" type="Resource" id=7]
+[ext_resource path="res://game/players/jobs/Job.gd" type="Script" id=8]
+[ext_resource path="res://combat/Actions/moves/Parry.tres" type="Resource" id=9]
+
+[resource]
+script = ExtResource( 8 )
+job_name = "Clam"
+off_normal = ExtResource( 4 )
+off_special = ExtResource( 1 )
+off_effect = ExtResource( 2 )
+off_magic = ExtResource( 3 )
+def_normal = ExtResource( 5 )
+def_special = ExtResource( 9 )
+def_effect = ExtResource( 6 )
+def_magic = ExtResource( 7 )

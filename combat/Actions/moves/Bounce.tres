@@ -4,10 +4,10 @@
 
 [resource]
 script = ExtResource( 1 )
-move_name = "Ward"
+move_name = "Bounce"
 type = 2
 phase = 1
-modifier = 0.8
+modifier = 0.9
 description = "Creates a protective wall, blocking some incoming damage"
 base_damage = 0
 success_chance = 0.85

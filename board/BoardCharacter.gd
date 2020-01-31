@@ -111,8 +111,8 @@ func check_moves():
     
 func get_input_direction():
     return Vector2(
-        int(Input.is_action_pressed("ui_right")) - int(Input.is_action_pressed("ui_left")),
-        int(Input.is_action_pressed("ui_down")) - int(Input.is_action_pressed("ui_up"))
+        int(Input.is_action_pressed("ui_right" + String(player_id))) - int(Input.is_action_pressed("ui_left" + String(player_id))),
+        int(Input.is_action_pressed("ui_down" + String(player_id))) - int(Input.is_action_pressed("ui_up" + String(player_id)))
     )
 
 func update_look_direction(direction):
@@ -177,11 +177,11 @@ func start_turn(last_camera_position):
 func get_camera_position():
     return camera.to_global(camera.position)
     
-func on_killed():
+func on_killed(p):
     death_penalty = 3
     is_dead = true
     position = last_heal_space
-    ("player health on death: " + String(player.stats.health))
+    ("player health on death: " + String(p.stats.health))
 
 func on_revive():
     is_dead = false

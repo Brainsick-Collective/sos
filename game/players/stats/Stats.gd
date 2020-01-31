@@ -1,13 +1,11 @@
 
 extends Resource
 
-class_name Stats
-
 signal health_changed(new_health, old_health)
 signal health_depleted()
 signal mana_changed(new_mana, old_mana)
 signal mana_depleted()
-signal level_up(new_stats)
+signal leveled_up(note)
 
 var modifiers = {}
 var MAX_LEVEL = 100
@@ -32,7 +30,9 @@ export var speed_curve : Curve
 var experience_curve = [ 0, 5, 15, 50, 120, 200, 325, 500, 800, 1250 ]
 var required_experience : int
 var _interpolated_level
-    
+var player_id : int
+
+var level_up_note = preload("res://interface/UI/LevelUpNote.tscn")
 func reset():
     health = self.max_health
     mana = self.max_mana
@@ -109,9 +109,16 @@ func set_xp(value : int):
         l += 1
     if l > level:
         print("level up!")
+        var note = level_up_note.instance()
+        note.initialize(player_id)
+        note.set_old_stats(self)
         level = l
         _interpolated_level =  float(level) / float(self.MAX_LEVEL)
         level_up()
+        note.set_new_stats(self)
+        note.play_text()
+        print(get_signal_connection_list("leveled_up"))
+        emit_signal("leveled_up", note)
 
 func add_modifier(id : int, modifier):
     modifiers[id] = modifier

@@ -1,0 +1,15 @@
+** Dokapon Clone TODO list
+*** DONE fix PvP fights
+    CLOSED: [2020-01-29 Wed 20:03]
+*** DONE add custom moves sets per fighter
+    CLOSED: [2020-01-30 Thu 14:53]
+*** TODO use accuracy testing
+*** TODO use notification queue in battles
+*** DONE add tween animations to battles
+    CLOSED: [2020-01-31 Fri 12:45]
+*** TODO add system for battle abilities and effects
+*** DONE fix battles, sometimes in_battle flag gets confused
+    CLOSED: [2020-01-29 Wed 21:36]
+*** DONE why aren't sprites working for pvp?
+    CLOSED: [2020-01-31 Fri 11:05]
+*** TODO add system for calculating move combination results

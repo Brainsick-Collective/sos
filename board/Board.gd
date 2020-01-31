@@ -43,7 +43,7 @@ func _process(delta):
     
 func play_turn(board_character, last_camera_position):
     current_player = board_character
-    print("player" + String(current_player.player_id))
+    print("player " + String(current_player.player_id))
     print("penalty " + String(board_character.death_penalty))
     moves_label.text = String(board_character.get_moves())
     name_label.text =String(board_character.get_name())
@@ -56,16 +56,13 @@ func play_turn(board_character, last_camera_position):
 
 func next_turn():
     var last_camera_position = current_player.get_camera_position()
-    print("next turn starting, camera was last at: " + String(last_camera_position))
+#    print("next turn starting, camera was last at: " + String(last_camera_position))
     var new_ind = (current_player.get_index() + 1) % num_players
     ControlsHandler.clear_controls()
     ControlsHandler.set_controls(new_ind)
     ControlsHandler.current_player = new_ind
     play_turn(Characters.get_child(new_ind), last_camera_position)
-#func _process(delta):
-#	# Called every frame. Delta is time since last frame.
-#	# Update game logic here.
-#	pass
+
 func show_confirm_popup():
     $UI/MoveConfirmPopup.show()
 
