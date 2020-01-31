@@ -14,4 +14,4 @@ like I said, i haven't worked this out yet, want to make a bigger doc describing
 
 ## License
 
-[MIT License](LICENSE). Copyright (c) 2018 Austin Pejovich
+[MIT License](LICENSE). Copyright (c) 2020 Austin Pejovich
