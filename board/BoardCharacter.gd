@@ -167,7 +167,7 @@ func start_turn(last_camera_position):
     spaces_moved = []
     dice_roll_popup.initialize()
     moves_left = yield(dice_roll_popup, "completed")
-    moves_left = 1
+#    moves_left = 1
     set_process_input(true)
     set_process(true)
     check_moves()

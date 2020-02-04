@@ -36,6 +36,7 @@ __meta__ = {
 [node name="ActorPanel1" type="NinePatchRect" parent="UI/GUI"]
 margin_right = 480.0
 margin_bottom = 160.0
+theme = ExtResource( 8 )
 texture = ExtResource( 3 )
 patch_margin_left = 64
 patch_margin_top = 64
@@ -89,7 +90,7 @@ theme = ExtResource( 8 )
 text = "LVL 1"
 
 [node name="TextureProgress" type="TextureProgress" parent="UI/GUI/ActorPanel1/Margins/VBoxContainer/HBoxContainer"]
-margin_left = 59.0
+margin_left = 71.0
 margin_right = 453.0
 margin_bottom = 53.0
 size_flags_horizontal = 3

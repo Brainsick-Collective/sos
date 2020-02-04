@@ -8,9 +8,11 @@
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Options1" type="Control" parent="."]
-visible = false
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_top = -96.0
@@ -86,7 +88,6 @@ align = 1
 valign = 1
 
 [node name="Options2" type="Control" parent="."]
-visible = false
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0

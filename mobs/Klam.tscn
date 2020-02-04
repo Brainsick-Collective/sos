@@ -13,3 +13,4 @@ job = ExtResource( 4 )
 position = Vector2( -0.494019, 0.625328 )
 scale = Vector2( 0.427141, 0.427141 )
 texture = ExtResource( 2 )
+flip_h = true

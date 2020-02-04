@@ -1,6 +1,8 @@
 
 extends Resource
 
+class_name Stats
+
 signal health_changed(new_health, old_health)
 signal health_depleted()
 signal mana_changed(new_mana, old_mana)
