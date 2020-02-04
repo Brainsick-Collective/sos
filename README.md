@@ -1,32 +1,17 @@
-# TexturePacker Importer
+# Untitled Dokapon Kingdom Clone (iteration 2)
 
-This is a plugin for [Godot Engine](https://godotengine.org) to import
-`TileSet`s and `AtlasTexture`s from the [TexturePacker](https://www.codeandweb.com/texturepacker)
+Really there is no iteration 1 but i moved to the beta version of godot 3 very early so wanted to keep a separate repo in case anything was super messed up.
 
-**Note: This is compatible only with Godot 3.0 or later.**
+This will eventually be a GDD but for now its just empty
+
+## Gameplay
+
+This is currently designed to provide a demo, but most of the pieces and scenes are drag and dropable, given the global nodes are present. As it exists right now, the demo has one mob monster and one boss that spawns on a red tile near the bottom left of the map, you can have up to 4 players and whoever kills the boss first wins! leveling up system is in place to direct the character's stats, and player names are defaulted to their player id (+1). have fun and thanks for checking it out!
 
 
-## Installation
-
-Simply download it from [Godot Asset Library](https://godotengine.org/asset-library/asset/169)
-
-Alternatively, download or clone this repository and copy the contents of the
-`addons` folder to your own project's `addons` folder.
-
-Important: Enable the plugin on the Project Settings.
-
-## Features
-
-* Import sprite sheets as AtlasTextures
-* Import sprite sheets as TileSets
-* Supports trimmed sprites (margin)
-* Supports MultiPack
-
-## Usage (once the plugin is enabled)
-
-1. Save your sprite sheets / tile maps in your project folder
-2. Watch Godot import it automatically.
+## Tools and codebase
+like I said, i haven't worked this out yet, want to make a bigger doc describing scene and class behavior, but want to make a shoutout to SyndiBox, which I am using a lightly tweeked version of for my cutscene text display. Thanks! and to anyone curious about my design approach I promise that will be soon to come
 
 ## License
 
-[MIT License](LICENSE). Copyright (c) 2018 Andreas Loew / CodeAndWeb GmbH
+[MIT License](LICENSE). Copyright (c) 2020 Austin Pejovich
