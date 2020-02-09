@@ -10,7 +10,7 @@ stats = ExtResource( 3 )
 job = ExtResource( 4 )
 
 [node name="Sprite" type="Sprite" parent="Skin" index="0"]
-position = Vector2( -0.494019, 0.625328 )
-scale = Vector2( 0.427141, 0.427141 )
+position = Vector2( 48.9121, -65.1661 )
+scale = Vector2( 0.677299, 0.677299 )
 texture = ExtResource( 2 )
 flip_h = true

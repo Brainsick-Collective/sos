@@ -1,0 +1,48 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://game/players/inventory/InventoryMenuDemo.gd" type="Script" id=1]
+[ext_resource path="res://game/players/inventory/Inventory.tscn" type="PackedScene" id=2]
+[ext_resource path="res://game/players/inventory/items/usable/scroll_fireball/FireballScroll.tscn" type="PackedScene" id=3]
+[ext_resource path="res://game/players/inventory/items/usable/potions/restore_health/MinorHealthPotion.tscn" type="PackedScene" id=4]
+[ext_resource path="res://game/players/inventory/items/usable/potions/restore_health/StrongHealthPotion.tscn" type="PackedScene" id=5]
+[ext_resource path="res://game/players/inventory/items/equipment/sword/Sword.tscn" type="PackedScene" id=6]
+[ext_resource path="res://game/players/Player.tscn" type="PackedScene" id=7]
+[ext_resource path="res://interface/theme/default.theme" type="Theme" id=8]
+[ext_resource path="res://game/players/inventory/add_items_menu/AddItemsMenu.tscn" type="PackedScene" id=9]
+[ext_resource path="res://game/players/inventory/ItemsMenu.tscn" type="PackedScene" id=10]
+
+[node name="InventoryDemo" type="Node"]
+script = ExtResource( 1 )
+
+[node name="Inventory" parent="." instance=ExtResource( 2 )]
+
+[node name="FireballScroll" parent="Inventory" instance=ExtResource( 3 )]
+
+[node name="MinorHealthPotion" parent="Inventory" instance=ExtResource( 4 )]
+
+[node name="StrongHealthPotion" parent="Inventory" instance=ExtResource( 5 )]
+
+[node name="Sword" parent="Inventory" instance=ExtResource( 6 )]
+STRENGTH = 0
+
+[node name="Characters" type="Node" parent="."]
+
+[node name="Collin" parent="Characters" instance=ExtResource( 7 )]
+player_name = "Collin"
+
+[node name="Kenta" parent="Characters" instance=ExtResource( 7 )]
+player_name = "Kenta"
+
+[node name="Travis" parent="Characters" instance=ExtResource( 7 )]
+player_name = "Travis"
+
+[node name="Interface" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 8 )
+
+[node name="AddItemsMenu" parent="Interface" instance=ExtResource( 9 )]
+theme = null
+
+[node name="ItemsMenu" parent="Interface" instance=ExtResource( 10 )]
+margin_right = -310.0

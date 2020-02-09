@@ -4,10 +4,14 @@ extends Node
 # var a = 2
 # var b = "textvar"
 var index
-var vape_rider = preload("res://combat/combatants/VapeRider.tscn")
-var eye_witch = preload("res://combat/combatants/EyeWitch.tscn")
-var fist_blade = preload("res://combat/combatants/FistBlade.tscn")
-var starting_class_combatants = [vape_rider, eye_witch, fist_blade]
+var VapeRider = preload("res://combat/combatants/VapeRider.tscn")
+var EyeWitch = preload("res://combat/combatants/EyeWitch.tscn")
+var FistBlade = preload("res://combat/combatants/FistBlade.tscn")
+var starting_class_combatants = [VapeRider, EyeWitch, FistBlade]
+var VapeRiderPawn = preload("res://board/pawns/VapeRiderPawn.tscn")
+var FistBladePawn = preload("res://board/pawns/FistSwordPawn.tscn")
+var EyeWizPawn = preload("res://board/pawns/EyeWizPawn.tscn")
+var starting_class_pawns = [VapeRiderPawn, EyeWizPawn, FistBladePawn]
 var list_size = starting_class_combatants.size()
 func initialize():
     # Called when the node is added to the scene for the first time.
@@ -26,6 +30,10 @@ func get_combatant() -> PackedScene:
     var combatant = starting_class_combatants[index]
     return combatant.instance()
     
+func get_pawn():
+    var pawn = starting_class_pawns[index]
+    return pawn.instance()
+
 func next_sprite():
     index = abs((index + 1) % list_size)
     return $Portraits.get_child(index).get_texture()

@@ -21,6 +21,9 @@ func initialize( new_id, pawn, battler):
     stats.reset()
     combatant.connect("killed", pawn, "on_killed")
     
+func get_inventory():
+    return get_node("Inventory")
+
 func set_controls(controls):
     self.controls = controls
     

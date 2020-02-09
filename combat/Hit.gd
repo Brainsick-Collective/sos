@@ -8,6 +8,7 @@ enum move_types { empty = -1, normal, special, magic, effect }
 var damage = 0 setget _set_damage, _get_damage
 var target setget _set_target, _get_target
 var type  setget _set_type, _get_type
+signal hit_connected(truthy)
 # var effect : StatusEffect = StatusEffect.new()
 
 
@@ -28,4 +29,5 @@ func _get_type():
     return type
     
 func execute():
+    # do rand chance based on accuracy, if success then take damage
     target.take_damage(self)

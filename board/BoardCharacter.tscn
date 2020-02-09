@@ -26,3 +26,7 @@ editor_draw_drag_margin = true
 
 [node name="CameraOffset" type="Position2D" parent="Pivot"]
 scale = Vector2( 0.468751, 0.468751 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Pivot"]
+animation = "down"
+playing = true

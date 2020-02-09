@@ -42,12 +42,19 @@ func get_space_scene(player_pawn):
         return get_random_encounter(player_pawn, space_types.WILD)
     elif $Spaces.get_cellv(pos) == space_types.SHOP and !player_pawn.is_dead:
         return get_random_encounter(player_pawn, space_types.SHOP)
+    elif $Spaces.get_cellv(pos) == space_types.MAGIC:
+        return get_location(player_pawn, space_types.MAGIC)
     else: 
         return null
-        
+
+# send this to the monster factory or to combat arena        
 func get_random_encounter(player_pawn, space_type):
     var combat = CombatArena.instance()
     var monster = MonsterFactory.create_mob(space_type)
     print(monster.is_mob())
     combat.set_fighters(player_pawn.get_fighter(), monster)
     return combat
+
+func get_location(player_pawn, space_type):
+  if space_type == space_types.MAGIC:
+    return ShopFactory.get_shop(player_pawn,space_type)

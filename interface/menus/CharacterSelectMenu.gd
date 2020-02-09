@@ -56,15 +56,14 @@ func _process(delta):
     $Column/PlayerLabel.text = "Player " + String(curr_player)
 
 func _on_StartButton_pressed():
-    var board_character = Character.instance()
     var player = Player.instance()
-    
-    board_character.set_sprite(classes.get_board_piece())
-    characters.append(board_character)
     var combatant = classes.get_combatant()
+    var board_character = classes.get_pawn()
+    characters.append(board_character)
     player.initialize(curr_player, board_character, combatant)
     combatant.initialize(character_select_sprite, player)
     player.player_name = "Player " + String(curr_player)
+    
     Players.add_child(player)
     if curr_player == num_players:
         var board = Board.instance()

@@ -1,0 +1,70 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://interface/theme/default.theme" type="Theme" id=1]
+[ext_resource path="res://game/players/inventory/ItemsMenu.gd" type="Script" id=2]
+[ext_resource path="res://game/players/inventory/ItemButton.tscn" type="PackedScene" id=3]
+[ext_resource path="res://game/players/inventory/ItemGrid.gd" type="Script" id=4]
+[ext_resource path="res://game/players/inventory/user_select/UserSelectMenu.tscn" type="PackedScene" id=5]
+
+[node name="ItemsMenu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 1 )
+script = ExtResource( 2 )
+ItemButton = ExtResource( 3 )
+
+[node name="Column" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/separation = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ItemsList" type="Panel" parent="Column"]
+margin_right = 1024.0
+margin_bottom = 500.0
+size_flags_vertical = 3
+
+[node name="Margin" type="MarginContainer" parent="Column/ItemsList"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Grid" type="GridContainer" parent="Column/ItemsList/Margin"]
+margin_left = 16.0
+margin_top = 16.0
+margin_right = 1008.0
+margin_bottom = 484.0
+size_flags_horizontal = 3
+custom_constants/vseparation = 16
+custom_constants/hseparation = 16
+columns = 2
+script = ExtResource( 4 )
+
+[node name="DescriptionPanel" type="Panel" parent="Column"]
+margin_top = 500.0
+margin_right = 1024.0
+margin_bottom = 600.0
+rect_min_size = Vector2( 0, 100 )
+
+[node name="Margin" type="MarginContainer" parent="Column/DescriptionPanel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Column/DescriptionPanel/Margin"]
+margin_left = 16.0
+margin_top = 25.0
+margin_right = 1008.0
+margin_bottom = 74.0
+text = "Item descripton here.
+"
+autowrap = true
+
+[node name="UserSelectMenu" parent="." instance=ExtResource( 5 )]
+visible = false

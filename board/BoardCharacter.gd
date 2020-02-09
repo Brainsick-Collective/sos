@@ -26,15 +26,16 @@ var ui_up = false
 onready var my_turn = false
 export (Vector2) var last_heal_space 
 var _direction = Vector2()
+var direction_names = { Vector2(-1,0) : "left", Vector2(1,0) : "right", Vector2(0,-1) : "up", Vector2(0,1) : "down" }
 onready var Notification = preload("res://interface/UI/notification.tscn")
 
 
 func initialize(game_board, player, start):
     _ready()
     last_heal_space = start
-    confirm_move_popup = game_board.get_node("UI/MoveConfirmPopup")
+    confirm_move_popup = game_board.get_node("UI/GUI/MoveConfirmPopup")
     self.player = player
-    dice_roll_popup = game_board.get_node("UI/DiceRollPopup")
+    dice_roll_popup = game_board.get_node("UI/GUI/DiceRollPopup")
     player_name = player.player_name
     #$moves.set_anchor(position - Vector2(32,96))
     #$moves.set_text(str(moves_left))
@@ -54,9 +55,14 @@ func set_position(new_pos):
 func set_sprite(new_sprite):
     $Pivot/Sprite.texture = new_sprite
     
+func _input(event):
+    if event is InputEventKey:
+        #this change might have made pausemode on board redundant
+        _direction = get_input_direction(event)
+        
 func _process(delta):
-    _direction = get_input_direction()
     if _direction != Vector2():
+        $Pivot/AnimatedSprite.play(direction_names[_direction])
         var next_space = board.request_move(self, _direction)
         if next_space :
             move_to(next_space)
@@ -95,6 +101,7 @@ func move_to(target_position):
 
 func get_fighter():
     return player.combatant
+
 func check_moves():
     if moves_left <= 0:
         timer.stop()
@@ -102,17 +109,19 @@ func check_moves():
         set_process_input(false)
         if !spaces_moved.empty():
             emit_signal("last_move_taken")
-            yield(confirm_move_popup, "completed")
+            # this is fucked, in terms of OOD, but I don't want to deal
+            # with it right now
+            var yes = yield(confirm_move_popup, "completed")
         else:
             emit_signal("turn_finished")
             confirm_move_popup.disconnect("completed", self, "confirm_move")
     else:
         set_process(true)
     
-func get_input_direction():
+func get_input_direction(event):
     return Vector2(
-        int(Input.is_action_pressed("ui_right" + String(player_id))) - int(Input.is_action_pressed("ui_left" + String(player_id))),
-        int(Input.is_action_pressed("ui_down" + String(player_id))) - int(Input.is_action_pressed("ui_up" + String(player_id)))
+        int(event.is_action_pressed("ui_right" + String(player_id))) - int(event.is_action_pressed("ui_left" + String(player_id))),
+        int(event.is_action_pressed("ui_down" + String(player_id))) - int(event.is_action_pressed("ui_up" + String(player_id)))
     )
 
 func update_look_direction(direction):
@@ -136,6 +145,9 @@ func confirm_move(isYes):
         else:
             move_to(spaces_moved.back())
             curr_space = position
+            set_process_input(true)
+            set_process(true)
+            
         confirm_move_popup.hide()
     
 func center_camera():
@@ -165,7 +177,7 @@ func start_turn(last_camera_position):
     my_turn = true
     confirm_move_popup.connect("completed", self, "confirm_move")
     spaces_moved = []
-    dice_roll_popup.initialize()
+    
     moves_left = yield(dice_roll_popup, "completed")
 #    moves_left = 1
     set_process_input(true)

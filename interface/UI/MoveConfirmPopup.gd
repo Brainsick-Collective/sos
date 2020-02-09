@@ -2,7 +2,7 @@ extends Popup
 
 signal completed(isYes)
 onready var Yes = $NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/Yes
-onready var No = $NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/No
+onready var No  = $NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/No
 
 func _ready():
     Yes.grab_focus()

@@ -120,10 +120,7 @@ GameVariables="*res://game/GameVariables.gd"
 ItemDatabase="*res://game/players/inventory/ItemDatabase.tscn"
 ControlsHandler="*res://system/ControlsHandler.gd"
 MonsterFactory="*res://mobs/MonsterFactory.tscn"
-
-[display]
-
-window/dpi/allow_hidpi=true
+ShopFactory="*res://game/ShopFactory.tscn"
 
 [editor_plugins]
 

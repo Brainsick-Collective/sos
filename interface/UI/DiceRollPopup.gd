@@ -25,7 +25,7 @@ func _process(delta):
     if countdown == 0:
         countdown = COUNTDOWN_SIZE
         num += 1
-        num = num % 6
+        num = (num % 7) + 1
         DiceNum.text = String(num)
     
 
@@ -33,5 +33,7 @@ func _process(delta):
 
 func _on_Button_pressed():
     set_process(false)
+    # TODO POLISH have a gradual slow down of the number
+    # as a roulette effect
     emit_signal("completed", num)
     hide()

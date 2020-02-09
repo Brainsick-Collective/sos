@@ -1,0 +1,27 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://actors/body.png" type="Texture" id=1]
+
+[node name="ActorButton" type="Button"]
+margin_top = 310.0
+margin_right = 420.0
+margin_bottom = 410.0
+rect_min_size = Vector2( 300, 100 )
+size_flags_horizontal = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Name" type="Label" parent="."]
+anchor_bottom = 1.0
+margin_left = 90.0
+margin_right = 290.0
+rect_min_size = Vector2( 200, 0 )
+text = "Actor"
+valign = 1
+
+[node name="Icon" type="TextureRect" parent="."]
+anchor_bottom = 1.0
+margin_right = 90.0
+texture = ExtResource( 1 )
+stretch_mode = 4

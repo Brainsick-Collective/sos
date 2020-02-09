@@ -13,3 +13,8 @@
 *** DONE why aren't sprites working for pvp?
     CLOSED: [2020-01-31 Fri 11:05]
 *** TODO add system for calculating move combination results
+*** TODO Item system
+*** TODO equipment system
+*** DONE item stores
+    CLOSED: [2020-02-08 Sat 14:53]
+*** TODO inventory menu on player turn

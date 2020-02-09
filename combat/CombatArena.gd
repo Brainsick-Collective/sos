@@ -48,6 +48,8 @@ func initialize():
     fighter2.flip_sprite()
     $UI/CombatInterface.initialize(fighter1, fighter2)
     $UI/CombatInterface/TurnOrderPopup.connect("chosen", self, "on_choice")
+    
+    $UI/CombatInterface.decide_turns()
     stage_ui()
     set_process_input(false)    
     
@@ -97,7 +99,8 @@ func do_phase(attacker, defender, attacker_move, defender_move):
         on_give_up(defender.player)
         return
     if hit:
-        #TODO externalize this to the combatant, who will get details from the action
+        # TODO externalize this to the combatant, with a "target" 2d pos
+        # who will get details from the action
         var curr_pos = attacker.get_parent().position
         attacker.tween.interpolate_property(attacker.get_parent(), "position",
             attacker.get_parent().position, defender.get_parent().position, 
@@ -108,6 +111,7 @@ func do_phase(attacker, defender, attacker_move, defender_move):
             defender.get_parent().position, curr_pos, 
             1.0 , Tween.TRANS_LINEAR, Tween.EASE_IN)
         attacker.tween.start()
+        yield(attacker.tween, "tween_completed")
         hit.execute()
 #        attacker.tween.connect("tween_completed", self, "reverse_tween")
 #        tween_to_reverse = attacker.tween
@@ -213,4 +217,3 @@ func play_notification(note):
     
 func _on_CombatArena_tree_entered():
     set_process_input(true)
-    $UI/CombatInterface.decide_turns()
