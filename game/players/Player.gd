@@ -6,9 +6,10 @@ export (int) var id
 export (String) var player_name
 export (NodePath) var combatant
 export (Resource) var stats
-export (Resource) var equipment
-export (Resource) var inventory
+var inventory
+var equipment
 export (bool) var in_battle
+var cash := 0
 var is_dead = false
 var battle
 
@@ -20,6 +21,8 @@ func initialize( new_id, pawn, battler):
     stats = combatant.stats
     stats.reset()
     combatant.connect("killed", pawn, "on_killed")
+    cash = 100
+    inventory = $Inventory
     
 func get_inventory():
     return get_node("Inventory")

@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://interface/menus/Grid.gd" type="Script" id=1]
 [ext_resource path="res://interface/menus/InventoryMenu.gd" type="Script" id=2]
+[ext_resource path="res://interface/theme/fonts/roll_font.tres" type="DynamicFont" id=3]
+[ext_resource path="res://game/players/inventory/ItemButton.tscn" type="PackedScene" id=4]
 
 [node name="InventoryMenu" type="Control"]
 pause_mode = 2
@@ -11,6 +13,7 @@ script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+ItemButton = ExtResource( 4 )
 
 [node name="Panel" type="Panel" parent="."]
 anchor_right = 1.0
@@ -30,7 +33,18 @@ margin_top = 16.0
 margin_right = 1008.0
 margin_bottom = 584.0
 
+[node name="Label" type="Label" parent="Panel/Margin/VBoxContainer"]
+margin_right = 992.0
+margin_bottom = 105.0
+custom_fonts/font = ExtResource( 3 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "cash amount
+"
+align = 1
+valign = 1
+
 [node name="Grid" type="GridContainer" parent="Panel/Margin/VBoxContainer"]
+margin_top = 109.0
 margin_right = 992.0
 margin_bottom = 464.0
 size_flags_vertical = 3

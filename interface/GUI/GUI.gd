@@ -35,9 +35,12 @@ func _on_InventoryButton_pressed():
     inventory_menu.set_inventory(current_player.get_inventory())
     $Container.add_child(inventory_menu)
     inventory_menu.initialize()
+    $ActionMenu.hide()
     get_tree().paused = true
     yield(inventory_menu, "completed")
     get_tree().paused = false
+    $ActionMenu.show()
+    $ActionMenu/MarginContainer/VBoxContainer/InventoryButton.grab_focus()
 
 
 func _on_ViewBoardButton_pressed():

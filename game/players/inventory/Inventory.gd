@@ -55,4 +55,5 @@ func _instance_item_from_db(reference):
     return item
 
 func _on_Item_depleted(item):
+    #unused, wonder what it was supposed to do?
     emit_signal("item_removed", item)

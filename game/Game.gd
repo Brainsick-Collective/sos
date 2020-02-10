@@ -56,7 +56,10 @@ func enter_space_scene(player_pawn):
         if scene != null:
             remove_child(get_node("Board"))
             add_child(scene)
-            scene.initialize()
+            if scene is Control:
+                scene.initialize(player_pawn.player)
+            else:
+                scene.initialize()
             scene.connect("completed", self, "add_note_to_q")
             
             yield(scene, "completed")

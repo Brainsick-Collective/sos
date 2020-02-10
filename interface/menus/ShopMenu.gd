@@ -7,6 +7,8 @@ signal item_use_requested(item, actor)
 signal completed
 export(PackedScene) var ItemButton
 var inventory
+signal item_bought(item)
+var player
 
 onready var _item_grid = $Row/Column/ItemList/Margin/Grid
 onready var _description_label = $Row/Column/Description/Margin/Label
@@ -14,8 +16,8 @@ onready var _description_label = $Row/Column/Description/Margin/Label
 func set_inventory(inv):
     inventory = inv
     
-func initialize():
-    _ready()
+func initialize(p):
+    player = p
     for item in inventory.get_items():
         var item_button = create_item_button(item)
         item_button.connect("focus_entered", self, "_on_ItemButton_focus_entered")
@@ -23,8 +25,8 @@ func initialize():
 
     _item_grid.initialize()
 
-    inventory.connect("item_added", self, "create_item_button")
-    connect("item_use_requested", inventory, "use")
+    connect("item_bought" , inventory, "trash")
+    connect("item_bought" , player.inventory, "add")
 
 func create_item_button(item):
     var item_button = ItemButton.instance()
@@ -38,6 +40,8 @@ func _on_ItemButton_focus_entered():
 func _on_ItemButton_pressed(item):
     var button = get_focus_owner()
     button.grab_focus()
+    if player.cash >= item.price:
+        emit_signal("item_bought", item)
     ##DO SOMETHING
 
 

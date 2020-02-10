@@ -10,12 +10,16 @@ var inventory
 
 onready var _item_grid = $Panel/Margin/VBoxContainer/Grid
 onready var _description_label = $Panel/Margin/VBoxContainer/DescriptionPanel/Label
-
+onready var _cash_label = $Panel/Margin/VBoxContainer/Label
+var player
 func set_inventory(inv):
     inventory = inv
     
 func initialize():
     _ready()
+    #this is sus
+    player = inventory.get_parent()
+    
     for item in inventory.get_items():
         var item_button = create_item_button(item)
         item_button.connect("focus_entered", self, "_on_ItemButton_focus_entered")
@@ -25,6 +29,7 @@ func initialize():
 
     inventory.connect("item_added", self, "create_item_button")
     connect("item_use_requested", inventory, "use")
+    _cash_label.text = String(player.cash) + " G"
 
 func create_item_button(item):
     var item_button = ItemButton.instance()
@@ -39,9 +44,9 @@ func _on_ItemButton_pressed(item):
     var button = get_focus_owner()
     button.grab_focus()
     ##DO SOMETHING
-
-
-func _on_Button_pressed():
-    emit_signal("completed")
-    queue_free()
-
+    
+func _input(event):
+    if event is InputEventKey and ControlsHandler.is_current_player_action(event):
+        if event.is_action_pressed("ui_cancel" + String(player.id)):
+                emit_signal("completed")
+                queue_free()

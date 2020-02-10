@@ -230,6 +230,9 @@ margin_left = -458.5
 margin_top = -246.0
 margin_right = 458.5
 margin_bottom = 246.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="pressed" from="ActionMenu/MarginContainer/VBoxContainer/RollButton" to="." method="_on_RollButton_pressed"]
 [connection signal="pressed" from="ActionMenu/MarginContainer/VBoxContainer/InventoryButton" to="." method="_on_InventoryButton_pressed"]
 [connection signal="pressed" from="ActionMenu/MarginContainer/VBoxContainer/ViewBoardButton" to="." method="_on_ViewBoardButton_pressed"]

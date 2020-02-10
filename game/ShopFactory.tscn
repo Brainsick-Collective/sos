@@ -12,3 +12,4 @@ script = ExtResource( 1 )
 [node name="HealthPotion" parent="Inventory" instance=ExtResource( 3 )]
 display_name = "Health Potion"
 description = "a potion.... \"it's for your healh!\""
+amount = 5

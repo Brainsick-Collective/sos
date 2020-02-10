@@ -6,7 +6,7 @@ func initialize(item):
     $Name.text = item.display_name
     $Amount.text = str(item.amount)
     $Icon.texture = item.icon
-    
+    $Cost.text = String(item.price) + " G"
     description = item.description
     
     disabled = not item.usable

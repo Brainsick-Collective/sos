@@ -15,7 +15,7 @@ export var controls_set =[
         "ui_up" : KEY_UP,
         "ui_down" : KEY_DOWN,
         "ui_accept" : KEY_ENTER,
-        "ui_cancel" : KEY_DELETE
+        "ui_cancel" : KEY_BACKSPACE
     }
 ]
 

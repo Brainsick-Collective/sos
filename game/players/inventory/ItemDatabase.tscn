@@ -11,7 +11,7 @@ script = ExtResource( 1 )
 
 [node name="Sword" parent="." instance=ExtResource( 2 )]
 
-[node name="MinorHealthPotion" parent="." instance=ExtResource( 3 )]
+[node name="HealthPotion" parent="." instance=ExtResource( 3 )]
 
 [node name="StrongHealthPotion" parent="." instance=ExtResource( 4 )]
 

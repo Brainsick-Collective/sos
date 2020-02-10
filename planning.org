@@ -18,3 +18,7 @@
 *** DONE item stores
     CLOSED: [2020-02-08 Sat 14:53]
 *** TODO inventory menu on player turn
+*** TODO rework gui element handling from boardcharacter to board / gui
+*** TODO reword inventory / inventory menu to better use polymorphism / inheritence
+**** have two seperate buttons one for shop one for inventory
+
