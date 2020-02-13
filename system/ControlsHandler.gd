@@ -77,3 +77,11 @@ func which_player(event : InputEvent):
     
 func is_current_player_action(event : InputEventKey):
     return which_player(event) == current_player
+
+func is_action_pressed_by_players(event : InputEventKey, action : String, players: Array):
+    for player in players:
+        if player.id == -1:
+            continue
+        if event.is_action_pressed("ui_cancel" + String(player.id)):
+            return true
+    return false

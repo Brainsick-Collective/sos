@@ -9,7 +9,7 @@ var choice2
 var fighter1chose
 var fighter2chose
 var isfighter1First
-var round_num
+var round_num = 0
 var is_round_over = false
 var is_battle_over = false
 var notifications = []
@@ -42,10 +42,10 @@ func initialize():
     fighter2.stats.connect("leveled_up", self, "play_notification")
     fighter1chose = false
     fighter2chose = false
-    round_num = 0
     $"1".add_child(fighter1)
     $"2".add_child(fighter2)
     fighter2.flip_sprite()
+    $MatchupInterface.initialize(fighter1, fighter2)
     $UI/CombatInterface.initialize(fighter1, fighter2)
     $UI/CombatInterface/TurnOrderPopup.connect("chosen", self, "on_choice")
     
@@ -60,8 +60,6 @@ func stage_ui():
     $UI/GUI/ActorPanel2/Margins/VBoxContainer/Name.text = fighter2.player.player_name
     $UI/GUI/ActorPanel1/Margins/VBoxContainer/HBoxContainer/LVL.text = "LVL " + String(fighter1.stats.level)
     $UI/GUI/ActorPanel2/Margins/VBoxContainer/HBoxContainer/LVL.text = "LVL " + String(fighter2.stats.level)
-    $UI/GUI/C1Label.text = fighter1.get_stats_string()
-    $UI/GUI/C2Label.text = fighter2.get_stats_string()
     process_gui_values()
     
 func set_fighters(fighter1, fighter2):
@@ -81,7 +79,6 @@ func check_ready():
     if fighter1chose and fighter2chose:
         set_process_input(false)
         print("players have chosen their moves")
-        $UI/GUI/Choices.text = "Choices:\n" + fighter1.get_move(choice1, true).move.move_name + "\n" + fighter2.get_move(choice2,false).move_name
         if isfighter1First:
             do_phase(fighter1, fighter2, fighter1.get_move(choice1, true), fighter2.get_move(choice2, false))
         else:
@@ -111,8 +108,9 @@ func do_phase(attacker, defender, attacker_move, defender_move):
             defender.get_parent().position, curr_pos, 
             1.0 , Tween.TRANS_LINEAR, Tween.EASE_IN)
         attacker.tween.start()
-        yield(attacker.tween, "tween_completed")
         hit.execute()
+        yield(attacker.tween, "tween_completed")
+       
 #        attacker.tween.connect("tween_completed", self, "reverse_tween")
 #        tween_to_reverse = attacker.tween
     process_gui_values()
@@ -120,6 +118,7 @@ func do_phase(attacker, defender, attacker_move, defender_move):
         isfighter1First = !isfighter1First
         $UI/CombatInterface.do_combat_phase(isfighter1First)
         set_process_input(true)
+        $MatchupInterface.set_predictions(defender)
     else:
         $Timer.set_wait_time(2)
         $Timer.start()
@@ -138,24 +137,28 @@ func process_gui_values():
     $UI/GUI/ActorPanel2/Margins/VBoxContainer/HBoxContainer/TextureProgress.value = fighter2.stats.health
     $UI/GUI/ActorPanel1/Margins/VBoxContainer/HBoxContainer/TextureProgress/Label.text = String(fighter1.stats.health)
     $UI/GUI/ActorPanel2/Margins/VBoxContainer/HBoxContainer/TextureProgress/Label.text = String(fighter2.stats.health)
-    $UI/GUI/C1Label.text = fighter1.get_stats_string()
-    $UI/GUI/C2Label.text = fighter2.get_stats_string()
-    
+
 func on_choice(choice):
     isfighter1First = choice
+    var attacker
+    if isfighter1First:
+        attacker = fighter1
+    else:
+        attacker = fighter2
+    $MatchupInterface.set_predictions(attacker)
     set_process_input(true)
     
 func on_won_battle(killed):
     set_process_input(false)
     is_battle_over = true
-    $UI/GUI/Choices.text = killed.combatant_name + " has been killed!"
+#    $UI/GUI/Choices.text = killed.combatant_name + " has been killed!"
     var kill_desc = killed.combatant_name + " has been killed!"
     print(kill_desc)
     process_gui_values()
     $Timer.set_wait_time(2)
     $Timer.start()
     
-    $UI/GUI/Choices.text = "awarded " + String(killed.stats.kill_xp) + " xp"
+#    $UI/GUI/Choices.text = "awarded " + String(killed.stats.kill_xp) + " xp"
     var winner = null
     if fighter1 == killed:
         winner = fighter2
@@ -177,7 +180,7 @@ func reverse_tween():
 func on_give_up(retiree):
     set_process_input(false)
     is_battle_over = true
-    $UI/GUI/Choices.text = retiree.player_name + " has given up!"
+#    $UI/GUI/Choices.text = retiree.player_name + " has given up!"
     print(retiree.player_name + " has given up!")
     process_gui_values()
     $UI/CombatInterface.queue_free()
@@ -191,12 +194,13 @@ func on_give_up(retiree):
 func dealloc():
     fighter1.player.in_battle = !is_battle_over
     fighter2.player.in_battle = !is_battle_over
-    fighter2.flip_sprite()
     $Timer.stop()
     if !is_battle_over:
         fighter1.player.battle = self
         fighter2.player.battle = self
+        
     else:
+        fighter2.flip_sprite()
         $"1".remove_child(fighter1)
         $"2".remove_child(fighter2)
         fighter1.player.battle = null
@@ -209,7 +213,8 @@ func _on_Timer_timeout():
     dealloc()
 
 func play_notification(note):
-    $UI/GUI/NoteContainer.add_child(note)
+    $UI/NoteContainer.show()
+    $UI/NoteContainer.add_child(note)
     note.show()
     $Timer.stop()
     yield(note, "tree_exited")
@@ -217,3 +222,5 @@ func play_notification(note):
     
 func _on_CombatArena_tree_entered():
     set_process_input(true)
+    if round_num > 0:
+        $UI/CombatInterface.decide_turns()

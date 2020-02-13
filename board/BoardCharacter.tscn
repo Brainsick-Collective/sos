@@ -1,8 +1,7 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://board/BoardCharacter.gd" type="Script" id=1]
 [ext_resource path="res://board/Pivot.gd" type="Script" id=2]
-[ext_resource path="res://assets/pokemon/pokemon-sprites2-alpha_40.png" type="Texture" id=3]
 
 [node name="BoardCharacter" type="Node2D"]
 position = Vector2( 48, 48 )
@@ -15,11 +14,6 @@ script = ExtResource( 1 )
 scale = Vector2( 2.13333, 2.13333 )
 script = ExtResource( 2 )
 
-[node name="Sprite" type="Sprite" parent="Pivot"]
-scale = Vector2( 0.46875, 0.46875 )
-texture = ExtResource( 3 )
-flip_h = true
-
 [node name="Camera2D" type="Camera2D" parent="Pivot"]
 current = true
 editor_draw_drag_margin = true
@@ -28,5 +22,4 @@ editor_draw_drag_margin = true
 scale = Vector2( 0.468751, 0.468751 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Pivot"]
-animation = "down"
 playing = true

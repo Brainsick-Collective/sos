@@ -51,9 +51,6 @@ func initialize(game_board, player, start):
 
 func set_position(new_pos):
     position = new_pos
-
-func set_sprite(new_sprite):
-    $Pivot/Sprite.texture = new_sprite
     
 func _input(event):
     if event is InputEventKey:
@@ -123,10 +120,6 @@ func get_input_direction(event):
         int(event.is_action_pressed("ui_right" + String(player_id))) - int(event.is_action_pressed("ui_left" + String(player_id))),
         int(event.is_action_pressed("ui_down" + String(player_id))) - int(event.is_action_pressed("ui_up" + String(player_id)))
     )
-
-func update_look_direction(direction):
-#	$Pivot/Sprite.rotation = direction.angle()
-    pass
         
 func get_moves():
     return moves_left
@@ -201,11 +194,12 @@ func on_revive():
     
 func check_penalties():
     if death_penalty == 0:
-            on_revive()
             return
     else:
         death_penalty = max(0, death_penalty - 1)
+        if death_penalty == 0:
+            on_revive()
+            return
         var note = Notification.instance()
         note.init(player, null, player.player_name + " is in timeout!")
         game.add_note_to_q(note) 
-    return

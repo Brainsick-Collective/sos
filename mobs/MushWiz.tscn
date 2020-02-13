@@ -8,6 +8,8 @@
 [node name="MushWiz" instance=ExtResource( 1 )]
 stats = ExtResource( 2 )
 job = ExtResource( 3 )
+off_priority = "magic"
+def_priority = "magic"
 
 [node name="Sprite" type="Sprite" parent="Skin" index="0"]
 position = Vector2( 0.80954, -1.07923 )

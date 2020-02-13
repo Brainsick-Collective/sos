@@ -7,5 +7,5 @@
 
 [node name="AnimatedSprite" parent="Pivot" index="3"]
 frames = ExtResource( 1 )
-animation = "right"
-playing = true
+animation = "down"
+frame = 3

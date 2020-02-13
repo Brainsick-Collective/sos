@@ -4,6 +4,6 @@
 [ext_resource path="res://game/players/jobs/FistBlade.tres" type="Resource" id=2]
 [ext_resource path="res://game/players/stats/cynd.tres" type="Resource" id=3]
 
-[node name="Combatant" instance=ExtResource( 1 )]
+[node name="FistBlade" instance=ExtResource( 1 )]
 stats = ExtResource( 3 )
 job = ExtResource( 2 )

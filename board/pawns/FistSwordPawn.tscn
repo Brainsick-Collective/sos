@@ -92,3 +92,5 @@ animations = [ {
 position = Vector2( 0.254278, -0.113091 )
 scale = Vector2( 0.583445, 0.583445 )
 frames = SubResource( 13 )
+animation = "down"
+frame = 1
