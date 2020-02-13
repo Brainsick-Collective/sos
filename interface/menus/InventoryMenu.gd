@@ -41,6 +41,7 @@ func _on_ItemButton_focus_entered():
     _description_label.text = get_focus_owner().description
 
 func _on_ItemButton_pressed(item):
+    item.use(player)
     var button = get_focus_owner()
     button.grab_focus()
     ##DO SOMETHING

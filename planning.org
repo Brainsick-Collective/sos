@@ -13,6 +13,8 @@
 *** TODO Localization for MonsterFactory and ShopFactory
 *** TODO fix syndibox auto advance feature
 *** TODO fix bug where click too quickly on load and dice roll doesn't work
+*** TODO something is broken with inventory menu
+*** TODO focus and clickability needs to be given some TLC
 *** DONE fix PvP fights
     CLOSED: [2020-01-29 Wed 20:03]
 *** DONE add custom moves sets per fighter

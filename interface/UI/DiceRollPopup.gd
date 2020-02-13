@@ -10,7 +10,7 @@ onready var DiceNum = $NinePatchRect/MarginContainer/VBoxContainer/DiceNum
 func initialize():
     _ready()
     show()
-    num = randi() % 6
+    num = randi() % 7 + 1
     roll_dice()
     countdown = COUNTDOWN_SIZE
     $NinePatchRect/MarginContainer/VBoxContainer/Button.grab_focus()
@@ -25,7 +25,7 @@ func _process(delta):
     if countdown == 0:
         countdown = COUNTDOWN_SIZE
         num += 1
-        num = (num % 7) + 1
+        num = (num % 7)
         DiceNum.text = String(num)
     
 

@@ -88,16 +88,3 @@ margin_left = -88.0
 margin_top = -32.0
 margin_right = 88.0
 margin_bottom = 32.0
-
-[node name="MenuCenter" type="MarginContainer" parent="UI"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -448.5
-margin_top = -244.5
-margin_right = 448.5
-margin_bottom = 244.5
-__meta__ = {
-"_edit_use_anchors_": false
-}

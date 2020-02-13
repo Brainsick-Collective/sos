@@ -194,6 +194,8 @@ func on_give_up(retiree):
 func dealloc():
     fighter1.player.in_battle = !is_battle_over
     fighter2.player.in_battle = !is_battle_over
+    fighter1.sync_stats()
+    fighter2.sync_stats()
     $Timer.stop()
     if !is_battle_over:
         fighter1.player.battle = self

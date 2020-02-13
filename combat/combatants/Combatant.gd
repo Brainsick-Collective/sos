@@ -97,7 +97,9 @@ func take_damage(hit):
 
 func is_mob():
     return mob
-
+func sync_stats():
+    player.stats = stats
+    
 func on_death():
     if !player == MonsterFactory.GM:
         player.stats.health = 0
