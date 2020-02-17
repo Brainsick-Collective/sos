@@ -8,7 +8,7 @@ onready var Board = $GameBoard
 onready var moves_label = $UI/GUI/Counter/MarginContainer/VBoxContainer/MovesLeft
 onready var name_label = $UI/GUI/NinePatchRect/PlayerName
 onready var GUI = $UI/GUI
-onready var Notification = preload("res://interface/UI/notification.tscn")
+onready var BoardNotification = preload("res://interface/UI/BoardNotification.tscn")
 signal turn_finished(player)
 var game
 var num_players
@@ -42,15 +42,20 @@ func start_game():
 
 # warning-ignore:unused_argument
 func _process(delta):
-    moves_label.text = String( current_player.get_moves())
+    moves_label.text = String(current_player.get_moves())
     
 func play_turn(board_character, last_camera_position):
     current_player = board_character
     GUI.change_player(board_character.player)
     set_process(true)
     set_process_input(true)
+    board_character.connect("turn_finished", self, "on_board_character_moves_finished")
     board_character.start_turn(last_camera_position)
-    yield(board_character, "turn_finished")
+    print (board_character.player_name + "turn started")
+    
+func on_board_character_moves_finished():
+    # TODO change this to do scene finding here rather than at game
+    print("board character turn finished")
     emit_signal("turn_finished", current_player)
 
 
@@ -62,13 +67,27 @@ func next_turn():
     ControlsHandler.current_player = new_ind
     play_turn(Characters.get_child(new_ind), last_camera_position)
 
+func view_board():
+    current_player.set_process_input(false)
+    $BoardViewer.position = current_player.position
+    $BoardViewer.show()
+    $BoardViewer.set_process_input(true)
+    $BoardViewer.set_physics_process(true)
+    $BoardViewer/Camera2D.make_current()
+    
+func return_to_player(last_camera_position):
+    $BoardViewer.hide()
+    $BoardViewer.set_process_input(false)
+    $BoardViewer.set_physics_process(false)
+    current_player.center_camera(last_camera_position)
+    current_player.set_process_input(true)
+    GUI.show_action_menu()
+    
 func enter_shop(player_pawn, location):
     var shop = ShopFactory.get_shop(player_pawn, location)
     get_tree().paused = true
     yield(shop, "tree_exited")
     get_tree().paused = false
-    
-    
     
 func show_confirm_popup():
     $UI/GUI/MoveConfirmPopup.show()

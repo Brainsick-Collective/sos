@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/cutscene_sprites/Glitch_background.png" type="Texture" id=1]
+[ext_resource path="res://interface/UI/Cutscene.tscn" type="PackedScene" id=2]
+
+[node name="MushWizDefeatedCutscene" instance=ExtResource( 2 )]
+dialog_file = "res://dialogue/mushwiz_defeated.json"
+
+[node name="bg" parent="CanvasLayer" index="0"]
+visible = true
+position = Vector2( 516.67, 282.222 )
+scale = Vector2( 0.532203, 0.622374 )
+texture = ExtResource( 1 )

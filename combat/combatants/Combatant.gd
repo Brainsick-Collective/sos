@@ -5,14 +5,14 @@ class_name Combatant
 enum move_types { empty = -1, normal, special, magic, effect }
 
 var player
-export var stats : Resource
+export(Resource) var stats
 export var moves = {}
-export var job : Resource
+export(Resource) var job
 var sprite
-signal killed(player)
+signal killed(player, reward)
 var mob = false
 var battle = null
-var combatant_name : String
+var actor_name : String
 onready var tween = $Tween
 
 func initialize_n():
@@ -23,7 +23,7 @@ func initialize_n():
     sprite = new_sprite
     stats = stats.duplicate()
     stats.reset()
-    combatant_name = player.name    
+    actor_name = player.player_name   
     stats.connect("health_depleted", self, "on_death")
     stats.connect("leveled_up", self, "_on_level_up")
     
@@ -40,7 +40,7 @@ func initialize(new_sprite, p):
     sprite.texture = new_sprite.texture
     sprite.scale = Vector2(0.322, 0.322)
     $Skin.add_child(sprite)
-    combatant_name = player.name
+    actor_name = player.player_name
     self.sprite = sprite
     set_moves_from_job()
     stats.connect("leveled_up", self, "_on_level_up")
@@ -51,7 +51,7 @@ func initialize_mob():
     stats = stats.duplicate()
     stats.reset()
     stats.connect("health_depleted", self, "on_death")
-    combatant_name = "mob" 
+    actor_name = name
     set_moves_from_job()
     
 func set_moves_from_job():
@@ -97,12 +97,17 @@ func take_damage(hit):
 
 func is_mob():
     return mob
+
+func get_sprite():
+    return sprite.get_texture()
+    
 func sync_stats():
     player.stats = stats
     
 func on_death():
+    var reward = null
     if !player == MonsterFactory.GM:
         player.stats.health = 0
-#        print("player health")
-#        print(String(player.stats.health))
-    emit_signal("killed", self)
+    else:
+        reward = $Rewards.give_rewards()
+    emit_signal("killed", self, reward)

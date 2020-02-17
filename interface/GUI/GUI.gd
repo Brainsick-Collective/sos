@@ -10,32 +10,30 @@ onready var health_label = $ActorPanel1/Margins/VBoxContainer/HBoxContainer/Text
 
 onready var InventoryMenu = preload("res://interface/menus/InventoryMenu.tscn")
 
-func _ready():
-    pass
-
 func initialize(board):
     self.board = board
     
+func show_action_menu():
+    $ActionMenu.show()
+    $MapPreviewGUI.hide()
+    focus_roll_button()
+    
 func change_player(player):
     current_player = player
+    $ActorPanel.set_actor(player)
     $ActionMenu.show()
     $ActionMenu/MarginContainer/VBoxContainer/RollButton.grab_focus()
     $ActionMenu/MarginContainer/VBoxContainer/RollButton.grab_click_focus()
+    $Counter.hide()
     
-    
-func _process(delta):
-    if(current_player):
-        moves_label.text = String(current_player.board_character.get_moves())
-        name_label.text =String(current_player.board_character.get_name())
-        level_label.text = String(current_player.stats.level)
-        health_bar.max_value = current_player.stats.max_health
-        health_bar.value = current_player.stats.health
-        health_label.text = String(current_player.stats.health)
+func focus_roll_button():
+    $ActionMenu/MarginContainer/VBoxContainer/RollButton.grab_click_focus()
+    $ActionMenu/MarginContainer/VBoxContainer/RollButton.grab_focus()
+        
 func _on_RollButton_pressed():
     $DiceRollPopup.initialize()
+    $DiceRollPopup.connect("completed", self, "show_moves")
     $ActionMenu.hide()
-    #board roll
-    pass # Replace with function body.
 
 func _on_InventoryButton_pressed():
     var inventory_menu = InventoryMenu.instance()
@@ -51,10 +49,32 @@ func _on_InventoryButton_pressed():
 
 
 func _on_ViewBoardButton_pressed():
-    #board view mode activate
-    pass # Replace with function body.
+    board.view_board()
+    $ActionMenu.hide()
 
 
 func _on_PlayerInfoButton_pressed():
     #show player stats and board character
+    pass # Replace with function body.
+
+
+
+func show_moves(num):
+    $Counter.show()
+    
+func set_preview_actor(actors):
+    $MapPreviewGUI.show()
+    $MapPreviewGUI.set_actor(actors[0])
+
+func clear_preview():
+    $MapPreviewGUI.clear_actor()
+    $MapPreviewGUI.hide()
+
+func _on_ActionMenu_visibility_changed():
+    if $ActionMenu.is_visible():
+        $Counter.hide()
+    pass # Replace with function body.
+
+
+func _on_BoardViewer_actor_found(actor):
     pass # Replace with function body.

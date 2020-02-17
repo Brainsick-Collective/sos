@@ -37,15 +37,11 @@ func initialize(game_board, player, start):
     self.player = player
     dice_roll_popup = game_board.get_node("UI/GUI/DiceRollPopup")
     player_name = player.player_name
-    #$moves.set_anchor(position - Vector2(32,96))
-    #$moves.set_text(str(moves_left))
     board = game_board.get_node("GameBoard")
     game = get_node("/root/Game")
     timer = Timer.new()
     add_child(timer)
     timer.connect("timeout", self, "check_moves")
-    # Called when the node is added to the scene for the first time.
-    # Initialization here
     set_process(false)
     set_process_input(false)
 
@@ -143,9 +139,9 @@ func confirm_move(isYes):
             
         confirm_move_popup.hide()
     
-func center_camera():
+func center_camera(last_camera_position  = camera.position):
     ("centering camera")
-    var pos = $Pivot.to_local(camera.position)
+    var pos = $Pivot.to_local(last_camera_position)
     camera.position = pos
     camera._set_current(true)
     $Tween.interpolate_property($Pivot/Camera2D, "position", camera.position, Vector2(), .5, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
@@ -153,18 +149,15 @@ func center_camera():
     yield($Tween, "tween_completed")
 
 func start_turn(last_camera_position):
-    var pos = $Pivot.to_local(last_camera_position)
-    camera.position = pos
-    camera._set_current(true)
-    $Tween.interpolate_property($Pivot/Camera2D, "position", camera.position, Vector2(), .5, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-    $Tween.start()
-    yield($Tween, "tween_completed")
+    center_camera(last_camera_position)
     #TODO: use a state machine for player conditions, i.e. in battle, dead, penalty
     if player.in_battle:
+        print("in battle turn")
         emit_signal("turn_finished")
         return
     check_penalties()
     if is_dead:
+        print("dead turn")
         emit_signal("turn_finished")
         return
     my_turn = true
@@ -179,19 +172,12 @@ func start_turn(last_camera_position):
     curr_space = position
     spaces_moved = Array()
 
-func get_camera_position():
-    return camera.to_global(camera.position)
-    
-func on_killed(p):
+func on_killed(p, reward):
     death_penalty = 3
     is_dead = true
     position = last_heal_space
-    ("player health on death: " + String(p.stats.health))
+    ("player health on death: " + String(player.stats.health))
 
-func on_revive():
-    is_dead = false
-    player.reset_stats()
-    
 func check_penalties():
     if death_penalty == 0:
             return
@@ -201,5 +187,14 @@ func check_penalties():
             on_revive()
             return
         var note = Notification.instance()
-        note.init(player, null, player.player_name + " is in timeout!")
-        game.add_note_to_q(note) 
+        note.initialize(self, null, player_name + " is in timeout!")
+        game.add_note_to_q(note)
+
+func get_camera_position():
+    return camera.to_global(camera.position)
+    
+func on_revive():
+    is_dead = false
+    player.reset_stats()
+    
+

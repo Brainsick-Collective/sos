@@ -87,10 +87,10 @@ animations = [ {
 } ]
 
 [node name="BoardCharacter" instance=ExtResource( 2 )]
+scale = Vector2( 1.5, 1.5 )
 
-[node name="AnimatedSprite" parent="Pivot" index="3"]
+[node name="AnimatedSprite" parent="Pivot" index="2"]
 position = Vector2( 0.254278, -0.113091 )
 scale = Vector2( 0.583445, 0.583445 )
 frames = SubResource( 13 )
 animation = "down"
-frame = 1

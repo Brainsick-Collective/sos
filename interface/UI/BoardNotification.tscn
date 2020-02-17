@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://interface/UI/notification.tscn" type="PackedScene" id=1]
+[ext_resource path="res://BoardNotification.gd" type="Script" id=2]
+
+[node name="BoardNotification" instance=ExtResource( 1 )]
+script = ExtResource( 2 )

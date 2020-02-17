@@ -15,6 +15,13 @@
 *** TODO fix bug where click too quickly on load and dice roll doesn't work
 *** TODO something is broken with inventory menu
 *** TODO focus and clickability needs to be given some TLC
+*** TODO look into making an online multiplayer demo
+*** TODO bug with shops and yellow space
+*** TODO whole system for playing turns needs an overhaul. 
+    should not be a string of functions calling functions calling each other, but instead
+    using signals and triggers to catch user input or state conditions. so that frames can
+    happen when they need to, and only do the more procedural style when the things __need__
+    to happen exactly between frames.
 *** DONE fix PvP fights
     CLOSED: [2020-01-29 Wed 20:03]
 *** DONE add custom moves sets per fighter

@@ -1,13 +1,14 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://interface/theme/fonts/source_code_pro_26.tres" type="DynamicFont" id=1]
 [ext_resource path="res://interface/theme/default.theme" type="Theme" id=2]
 [ext_resource path="res://assets/ui/panel.png" type="Texture" id=3]
-[ext_resource path="res://combat/interface/bar/life_bar/fill.png" type="Texture" id=4]
-[ext_resource path="res://combat/interface/bar/life_bar/bg.png" type="Texture" id=5]
+[ext_resource path="res://interface/GUI/HealthBar.tscn" type="PackedScene" id=4]
+[ext_resource path="res://combat/interface/ActorPanel.gd" type="Script" id=5]
+[ext_resource path="res://combat/interface/StatsRow.gd" type="Script" id=6]
 
 [node name="ActorPanel1" type="NinePatchRect"]
-margin_right = 395.0
+margin_right = 403.0
 margin_bottom = 128.0
 theme = ExtResource( 2 )
 texture = ExtResource( 3 )
@@ -15,6 +16,7 @@ patch_margin_left = 64
 patch_margin_top = 64
 patch_margin_right = 64
 patch_margin_bottom = 64
+script = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -22,11 +24,12 @@ __meta__ = {
 [node name="Margins" type="MarginContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_bottom = -6.0
+margin_right = 2.0
+margin_bottom = -9.0
 custom_constants/margin_right = 11
 custom_constants/margin_top = 16
 custom_constants/margin_left = 16
-custom_constants/margin_bottom = 21
+custom_constants/margin_bottom = 16
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -34,12 +37,12 @@ __meta__ = {
 [node name="VBoxContainer" type="VBoxContainer" parent="Margins"]
 margin_left = 16.0
 margin_top = 16.0
-margin_right = 384.0
-margin_bottom = 101.0
+margin_right = 394.0
+margin_bottom = 140.0
 custom_constants/separation = 16
 
 [node name="Name" type="Label" parent="Margins/VBoxContainer"]
-margin_right = 368.0
+margin_right = 378.0
 margin_bottom = 34.0
 size_flags_vertical = 5
 custom_fonts/font = ExtResource( 1 )
@@ -47,37 +50,81 @@ text = "Player 1"
 align = 1
 valign = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Margins/VBoxContainer"]
+[node name="HealthRow" type="HBoxContainer" parent="Margins/VBoxContainer"]
 margin_top = 50.0
-margin_right = 368.0
-margin_bottom = 85.0
+margin_right = 378.0
+margin_bottom = 73.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="LVL" type="Label" parent="Margins/VBoxContainer/HBoxContainer"]
-margin_top = 6.0
+[node name="LVL" type="Label" parent="Margins/VBoxContainer/HealthRow"]
 margin_right = 55.0
-margin_bottom = 29.0
+margin_bottom = 23.0
 theme = ExtResource( 2 )
 text = "LVL 1"
 
-[node name="TextureProgress" type="TextureProgress" parent="Margins/VBoxContainer/HBoxContainer"]
-margin_left = 71.0
-margin_right = 368.0
+[node name="HealthBar" parent="Margins/VBoxContainer/HealthRow" instance=ExtResource( 4 )]
+margin_right = 378.0
+margin_bottom = 23.0
+
+[node name="StatsRow" type="HBoxContainer" parent="Margins/VBoxContainer"]
+margin_top = 89.0
+margin_right = 378.0
+margin_bottom = 124.0
+theme = ExtResource( 2 )
+script = ExtResource( 6 )
+
+[node name="ATK" type="PanelContainer" parent="Margins/VBoxContainer/StatsRow"]
+margin_right = 82.0
 margin_bottom = 35.0
 size_flags_horizontal = 3
-size_flags_vertical = 3
-value = 100.0
-texture_under = ExtResource( 5 )
-texture_progress = ExtResource( 4 )
-fill_mode = 1
-nine_patch_stretch = true
 
-[node name="Label" type="Label" parent="Margins/VBoxContainer/HBoxContainer/TextureProgress"]
-anchor_right = 1.0
-anchor_bottom = 1.0
+[node name="Label" type="Label" parent="Margins/VBoxContainer/StatsRow/ATK"]
+margin_left = 2.0
+margin_top = 6.0
+margin_right = 80.0
+margin_bottom = 29.0
+text = "ATK 5"
 align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
+
+[node name="DEF" type="PanelContainer" parent="Margins/VBoxContainer/StatsRow"]
+margin_left = 98.0
+margin_right = 180.0
+margin_bottom = 35.0
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="Margins/VBoxContainer/StatsRow/DEF"]
+margin_left = 2.0
+margin_top = 6.0
+margin_right = 80.0
+margin_bottom = 29.0
+text = "Def 5"
+align = 1
+
+[node name="SPD" type="PanelContainer" parent="Margins/VBoxContainer/StatsRow"]
+margin_left = 196.0
+margin_right = 278.0
+margin_bottom = 35.0
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="Margins/VBoxContainer/StatsRow/SPD"]
+margin_left = 2.0
+margin_top = 6.0
+margin_right = 80.0
+margin_bottom = 29.0
+text = "SPD 5"
+align = 1
+
+[node name="MG" type="PanelContainer" parent="Margins/VBoxContainer/StatsRow"]
+margin_left = 294.0
+margin_right = 378.0
+margin_bottom = 35.0
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="Margins/VBoxContainer/StatsRow/MG"]
+margin_left = 2.0
+margin_top = 6.0
+margin_right = 82.0
+margin_bottom = 29.0
+text = "MG 1"
+align = 1

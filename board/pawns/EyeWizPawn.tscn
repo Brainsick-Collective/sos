@@ -4,7 +4,10 @@
 [ext_resource path="res://board/pawns/Priest.tres" type="SpriteFrames" id=2]
 
 [node name="EyeWizPawn" instance=ExtResource( 1 )]
+scale = Vector2( 1.5, 1.5 )
 
-[node name="AnimatedSprite" parent="Pivot" index="3"]
+[node name="AnimatedSprite" parent="Pivot" index="2"]
+scale = Vector2( 0.5, 0.5 )
 frames = ExtResource( 2 )
 animation = "down"
+frame = 3

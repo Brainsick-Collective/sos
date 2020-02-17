@@ -32,6 +32,7 @@ func _on_Button_pressed(choice):
         emit_signal("chosen", left)
     elif choice == "right":
         emit_signal("chosen", right)
+    print(get_signal_connection_list("hide"))
     hide()
         
 func reset():

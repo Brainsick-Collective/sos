@@ -1,0 +1,6 @@
+{
+    "sprites" : 
+        ["res://assets/cutscene_sprites/mush_wiz1.png"],
+    "dialogue" :
+        ["res://dialogue/mushwiz_defeated.txt"]
+}

@@ -7,7 +7,7 @@ var moves1
 var moves2 
 var fighter1
 var fighter2
-var isFighterOneFirst
+var is_fighter1_first
 
 onready var default_moves = {
     "offensive" :
@@ -47,11 +47,13 @@ func decide_turns():
     $Options2.hide()
     $TurnOrderPopup.reset()
     $TurnOrderPopup.decide_turns(fighter1.stats.speed, fighter2.stats.speed)
-    get_tree().paused = true
-    isFighterOneFirst = yield($TurnOrderPopup, "chosen")
-    get_tree().paused = false
-    do_combat_phase(isFighterOneFirst)
+    $TurnOrderPopup.connect("chosen", self, "_on_turns_chosen")
     
+    
+func _on_turns_chosen(is_fighter1_first):
+    self.is_fighter1_first = is_fighter1_first
+    do_combat_phase(is_fighter1_first)
+
 func do_combat_phase(choice):
     if choice:
         $Label.text = "your Turn!"

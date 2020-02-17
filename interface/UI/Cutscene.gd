@@ -4,19 +4,19 @@ onready var parser = CutsceneParser.new()
 onready var dialogue = $CanvasLayer/MarginContainer/DialogueBox
 onready var sprite = $CanvasLayer/pivot/Sprite
 var sprite_text_map
-
-func _ready():
-    pass
+export(String, FILE) var dialog_file
+    
     
 func _init():
     _ready()
-    
 #TODO: create a sprite "theater" system that can work in parallel with the dialogue system
 #sprite_text_map should look like {"sprites": [], "dialogue" []}
 func load_dialogue(filename):
     sprite_text_map = parser.parse(filename)
     
 func play():
+    if not sprite_text_map:
+        load_dialogue(dialog_file)
     sprite.texture = load(sprite_text_map["sprites"][0])
     var sizeto=Vector2(70,100)
     var size=sprite.texture.get_size()

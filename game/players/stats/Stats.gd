@@ -1,4 +1,3 @@
-
 extends Resource
 
 class_name Stats
@@ -13,28 +12,29 @@ var modifiers = {}
 var MAX_LEVEL = 100
 var health : int
 var mana : int setget set_mana
-export var max_health : int = 1 setget set_max_health, _get_max_health
-export var max_mana : int = 0 setget set_max_mana, _get_max_mana
-export var strength : int = 1 setget set_strength,_get_strength
-export var defense : int = 1 setget set_defense,_get_defense
-export var speed : int = 1 setget set_speed,_get_speed
-export var magic : int = 0 setget ,_get_magic
-export var xp : int = 0 setget set_xp, get_xp
-export var kill_xp: int = 0
+export(int) var max_health = 1 setget set_max_health, _get_max_health
+export(int) var max_mana = 0 setget set_max_mana, _get_max_mana
+export(int) var strength = 1 setget set_strength,_get_strength
+export(int) var defense = 1 setget set_defense,_get_defense
+export(int) var speed = 1 setget set_speed,_get_speed
+export(int) var magic = 0 setget ,_get_magic
+export(int) var xp = 0 setget set_xp, get_xp
+export(int) var kill_xp = 0
 
 var is_alive : bool setget ,_is_alive
-export var level : int = 1
-export var max_health_curve : Curve
-export var max_mana_curve : Curve
-export var strength_curve : Curve
-export var defense_curve : Curve
-export var speed_curve : Curve
+export(int) var level = 1
+export(Curve) var max_health_curve
+export(Curve) var max_mana_curve
+export(Curve) var strength_curve
+export(Curve) var defense_curve
+export(Curve) var speed_curve
 var experience_curve = [ 0, 5, 15, 50, 120, 200, 325, 500, 800, 1250 ]
 var required_experience : int
 var _interpolated_level
 var player_id : int
 
 var level_up_note = preload("res://interface/UI/LevelUpNote.tscn")
+
 func reset():
     health = self.max_health
     mana = self.max_mana
@@ -67,6 +67,8 @@ func level_up():
     set_strength(int(strength_curve.interpolate_baked(_interpolated_level)))
     set_defense(int(defense_curve.interpolate_baked(_interpolated_level)))
     set_speed(int(speed_curve.interpolate_baked(_interpolated_level)))
+    kill_xp = int(experience_curve[level] / 2)
+    reset()
     
 func heal(amount : int):
     var old_health = health

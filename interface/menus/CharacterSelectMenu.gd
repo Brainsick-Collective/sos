@@ -33,6 +33,7 @@ func initialize(game_node):
     _ready()
     game = game_node
     Players = game_node.get_node("Players")
+    $Column/PlayerLabel.text = "Player " + String(curr_player)
     
 
 func _input(event):
@@ -53,18 +54,19 @@ func _input(event):
 
 func _process(delta):
     num_players_label.text = String(num_players)
-    $Column/PlayerLabel.text = "Player " + String(curr_player)
 
 func _on_StartButton_pressed():
     var player = Player.instance()
+    player.player_name = $Column/PlayerLabel.text
     var combatant = classes.get_combatant()
     var board_character = classes.get_pawn()
     characters.append(board_character)
     player.initialize(curr_player, board_character, combatant)
     combatant.initialize(character_select_sprite, player)
-    player.player_name = "Player " + String(curr_player)
+    
     
     Players.add_child(player)
+    
     if curr_player == num_players:
         var board = Board.instance()
         game.add_child(board)
@@ -76,6 +78,7 @@ func _on_StartButton_pressed():
         queue_free()
     else:
         curr_player+=1
+        $Column/PlayerLabel.text = "Player " + String(curr_player)
     
 func get_player(character):
     for player in Players.get_children():

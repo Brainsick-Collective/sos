@@ -1,6 +1,6 @@
 [gd_resource type="Resource" load_steps=10 format=2]
 
-[ext_resource path="res://combat/Actions/moves/Zap.tres" type="Resource" id=1]
+[ext_resource path="res://combat/Actions/moves/Fireball.tres" type="Resource" id=1]
 [ext_resource path="res://combat/Actions/moves/Rally.tres" type="Resource" id=2]
 [ext_resource path="res://combat/Actions/moves/Strike.tres" type="Resource" id=3]
 [ext_resource path="res://combat/Actions/moves/Attack.tres" type="Resource" id=4]

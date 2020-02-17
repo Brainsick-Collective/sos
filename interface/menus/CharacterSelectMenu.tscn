@@ -10,6 +10,9 @@
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Column0" type="VBoxContainer" parent="."]
 anchor_right = 1.0
@@ -81,16 +84,17 @@ custom_fonts/font = ExtResource( 4 )
 text = "Character Select"
 align = 1
 
-[node name="PlayerLabel" type="Label" parent="Column"]
+[node name="PlayerLabel" type="LineEdit" parent="Column"]
 margin_top = 78.0
 margin_right = 1024.0
-margin_bottom = 142.0
+margin_bottom = 152.0
 custom_fonts/font = ExtResource( 3 )
 text = "Player 1"
 align = 1
+max_length = 16
 
 [node name="Row" type="HBoxContainer" parent="Column"]
-margin_top = 131.0
+margin_top = 141.0
 margin_right = 1024.0
 margin_bottom = 511.0
 size_flags_horizontal = 3
@@ -100,7 +104,7 @@ alignment = 1
 
 [node name="Character" type="TextureRect" parent="Column/Row"]
 margin_right = 1024.0
-margin_bottom = 380.0
+margin_bottom = 370.0
 rect_min_size = Vector2( 100, 100 )
 size_flags_horizontal = 3
 size_flags_vertical = 3

@@ -46,6 +46,6 @@ func _on_ItemButton_pressed(item):
 
 
 func _on_Button_pressed():
-    emit_signal("completed")
     queue_free()
+    emit_signal("completed")
 
