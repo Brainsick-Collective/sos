@@ -19,7 +19,6 @@ func _ready():
     current_player = dummy
     
 func initialize(characters, game):
-    _ready()
     self.game = game
     game.board = self
     num_players = characters.size()

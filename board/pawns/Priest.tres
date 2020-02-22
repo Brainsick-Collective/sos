@@ -86,13 +86,8 @@ animations = [ {
 }, {
 "frames": [  ],
 "loop": true,
-"name": "left_idle",
-"speed": 5.0
-}, {
-"frames": [  ],
-"loop": true,
-"name": "right_idle",
-"speed": 5.0
+"name": "down_idle",
+"speed": 2.0
 }, {
 "frames": [  ],
 "loop": true,
@@ -101,6 +96,11 @@ animations = [ {
 }, {
 "frames": [  ],
 "loop": true,
-"name": "down_idle",
-"speed": 2.0
+"name": "left_idle",
+"speed": 5.0
+}, {
+"frames": [  ],
+"loop": true,
+"name": "right_idle",
+"speed": 5.0
 } ]

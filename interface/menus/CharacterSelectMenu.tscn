@@ -20,27 +20,27 @@ anchor_bottom = 1.0
 alignment = 1
 
 [node name="Row" type="HBoxContainer" parent="Column0"]
-margin_right = 1024.0
-margin_bottom = 600.0
+margin_right = 1920.0
+margin_bottom = 1080.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 40
 alignment = 1
 
 [node name="Left" type="Button" parent="Column0/Row"]
-margin_left = 272.0
-margin_top = 270.0
-margin_right = 372.0
-margin_bottom = 330.0
+margin_left = 720.0
+margin_top = 510.0
+margin_right = 820.0
+margin_bottom = 570.0
 rect_min_size = Vector2( 100, 60 )
 size_flags_horizontal = 9
 size_flags_vertical = 4
 
 [node name="Container" type="NinePatchRect" parent="Column0/Row"]
-margin_left = 412.0
-margin_top = 230.0
-margin_right = 612.0
-margin_bottom = 370.0
+margin_left = 860.0
+margin_top = 470.0
+margin_right = 1060.0
+margin_bottom = 610.0
 rect_min_size = Vector2( 200, 140 )
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -57,10 +57,10 @@ valign = 1
 [node name="Node2D" type="Node2D" parent="Column0/Row"]
 
 [node name="Right" type="Button" parent="Column0/Row"]
-margin_left = 652.0
-margin_top = 270.0
-margin_right = 752.0
-margin_bottom = 330.0
+margin_left = 1100.0
+margin_top = 510.0
+margin_right = 1200.0
+margin_bottom = 570.0
 rect_min_size = Vector2( 100, 60 )
 size_flags_horizontal = 9
 size_flags_vertical = 4
@@ -78,16 +78,19 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="Column"]
-margin_right = 1024.0
+margin_right = 1920.0
 margin_bottom = 89.0
 custom_fonts/font = ExtResource( 4 )
 text = "Character Select"
 align = 1
 
 [node name="PlayerLabel" type="LineEdit" parent="Column"]
+margin_left = 775.0
 margin_top = 78.0
-margin_right = 1024.0
+margin_right = 1145.0
 margin_bottom = 152.0
+focus_next = NodePath("../StartButton")
+size_flags_horizontal = 4
 custom_fonts/font = ExtResource( 3 )
 text = "Player 1"
 align = 1
@@ -95,28 +98,29 @@ max_length = 16
 
 [node name="Row" type="HBoxContainer" parent="Column"]
 margin_top = 141.0
-margin_right = 1024.0
-margin_bottom = 511.0
+margin_right = 1920.0
+margin_bottom = 991.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 60
 alignment = 1
 
 [node name="Character" type="TextureRect" parent="Column/Row"]
-margin_right = 1024.0
-margin_bottom = 370.0
-rect_min_size = Vector2( 100, 100 )
-size_flags_horizontal = 3
-size_flags_vertical = 3
+margin_left = 860.0
+margin_top = 325.0
+margin_right = 1060.0
+margin_bottom = 525.0
+rect_min_size = Vector2( 200, 200 )
+size_flags_vertical = 4
 texture = ExtResource( 6 )
 expand = true
 stretch_mode = 6
 
 [node name="StartButton" type="Button" parent="Column"]
-margin_left = 412.0
-margin_top = 500.0
-margin_right = 612.0
-margin_bottom = 600.0
+margin_left = 860.0
+margin_top = 980.0
+margin_right = 1060.0
+margin_bottom = 1080.0
 grow_horizontal = 0
 grow_vertical = 0
 rect_min_size = Vector2( 200, 100 )

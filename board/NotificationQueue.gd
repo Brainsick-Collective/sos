@@ -2,7 +2,7 @@ extends Node
 
 export var ui_parent_path : NodePath
 onready var queue = []
-onready var ui_parent = get_node(ui_parent_path)
+var ui_parent
 onready var Notification = preload("res://interface/UI/notification.tscn")
 signal emptied
 var center_target

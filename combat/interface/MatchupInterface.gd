@@ -5,6 +5,7 @@ var fighter2
 enum move_types { empty = -1, normal, special, magic, effect }
 onready var MatchupOption = preload("res://combat/interface/MatchupOption.tscn")
 var matchup_visible = false
+var matchups
 
 func initialize(f1, f2):
     fighter1 = f1
@@ -29,6 +30,8 @@ func set_predictions(attacker):
             option.initialize(attacker, attack, defender, defense)
             $PredictionsPanel/Margin/Column.add_child(option)
     
+func get_matchups():
+    return matchups
 
 
 func _unhandled_input(event):

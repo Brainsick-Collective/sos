@@ -32,11 +32,8 @@ const choice_map = {"ui_left" : move_types.normal,
                     "ui_right" : move_types.special,
                     "ui_up" : move_types.magic,
                     "ui_down" : move_types.effect}
-func _ready():
-    pass
     
 func initialize():
-    _ready() 
     fighter1.connect("killed", self, "on_won_battle")
     fighter2.connect("killed", self, "on_won_battle")
     fighter1.stats.connect("leveled_up", self, "play_notification")

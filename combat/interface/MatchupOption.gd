@@ -5,11 +5,7 @@ onready var BadTex = load("res://assets/ui/Interface_16.png")
 onready var LeftArrow = load("res://assets/ui/left.png")
 onready var RightArrow = load("res://assets/ui/right.png")
 
-func _ready():
-    pass
-
 func initialize(attacker, attack, defender, defend):
-    _ready()
     $Row/AttackerMove.text = attack.move.move_name
     $Row/DefenderMove.text = defend.move_name
     var hit = attack.execute(defender, defend)
@@ -17,3 +13,4 @@ func initialize(attacker, attack, defender, defend):
         $Row/ResultIcon.texture = BadTex
     else:
         $Row/ResultIcon.texture = GoodTex
+    return hit

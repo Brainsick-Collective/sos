@@ -16,7 +16,6 @@ func set_inventory(inv):
     inventory = inv
     
 func initialize():
-    _ready()
     #this is sus
     player = inventory.get_parent()
     

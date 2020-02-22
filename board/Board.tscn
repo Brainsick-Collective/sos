@@ -78,7 +78,6 @@ script = ExtResource( 14 )
 
 [node name="Anim" type="AnimatedSprite" parent="BoardViewer"]
 frames = SubResource( 1 )
-frame = 1
 playing = true
 
 [node name="Camera2D" type="Camera2D" parent="BoardViewer"]
@@ -90,6 +89,8 @@ polygon = PoolVector2Array( -66.7205, -62.2228, -65.7499, 62.0161, 73.0482, 62.0
 
 [node name="GUI" parent="UI" instance=ExtResource( 8 )]
 visible = false
+anchor_left = 0.000873677
+anchor_right = 1.00087
 margin_top = 0.0
 margin_bottom = 0.0
 
@@ -97,23 +98,24 @@ margin_bottom = 0.0
 "takes_input",
 ] instance=ExtResource( 9 )]
 visible = false
-anchor_left = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.0
-margin_left = -128.0
-margin_top = 160.0
-margin_right = 122.0
-margin_bottom = 307.0
+anchor_left = 0.436
+anchor_top = 0.236
+anchor_right = 0.566
+anchor_bottom = 0.373
+margin_left = -0.832581
+margin_top = 0.465317
+margin_right = -0.432617
+margin_bottom = -0.49469
 
 [node name="MoveConfirmPopup" parent="UI" instance=ExtResource( 10 )]
 pause_mode = 2
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -88.0
-margin_top = -32.0
-margin_right = 88.0
-margin_bottom = 32.0
+anchor_left = 0.454
+anchor_top = 0.47
+anchor_right = 0.546
+anchor_bottom = 0.53
+margin_left = 0.319946
+margin_top = 0.399963
+margin_right = -0.320068
+margin_bottom = -0.400024
 [connection signal="actor_found" from="BoardViewer" to="UI/GUI" method="set_preview_actor"]
 [connection signal="actor_left" from="BoardViewer" to="UI/GUI" method="clear_preview"]

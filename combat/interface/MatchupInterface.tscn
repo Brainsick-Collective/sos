@@ -16,7 +16,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.5 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( 135.5, 60 ), Vector2( 135.5, 690 ) ]
+"values": [ Vector2( 538.5, 300 ), Vector2( 538.5, 1200 ) ]
 }
 
 [sub_resource type="Animation" id=2]
@@ -31,7 +31,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.5 ),
 "transitions": PoolRealArray( 1, 0.659755 ),
 "update": 0,
-"values": [ Vector2( 135.5, 690 ), Vector2( 135.5, 60 ) ]
+"values": [ Vector2( 538.5, 1200 ), Vector2( 538.5, 300 ) ]
 }
 
 [node name="MatchupInterface" type="CanvasLayer"]
@@ -43,10 +43,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -368.05
-margin_top = 337.443
-margin_right = 384.95
-margin_bottom = 817.443
+margin_left = -437.392
+margin_top = 705.587
+margin_right = 315.608
+margin_bottom = 1185.59
 theme = ExtResource( 1 )
 __meta__ = {
 "_edit_group_": true,
@@ -72,7 +72,7 @@ __meta__ = {
 margin_left = 32.0
 margin_top = 32.0
 margin_right = 721.0
-margin_bottom = 448.0
+margin_bottom = 447.0
 custom_constants/separation = 8
 
 [node name="Labels" type="MarginContainer" parent="PredictionsPanel/Margin/Column"]

@@ -7,21 +7,28 @@
 **** have two seperate buttons one for shop one for inventory
 *** TODO sound effects
 *** TODO work with doof for better GUI
-*** TODO Cutscene for game end
 *** TODO Add better Level up interface
 *** TODO System for saving game
 *** TODO Localization for MonsterFactory and ShopFactory
 *** TODO fix syndibox auto advance feature
 *** TODO fix bug where click too quickly on load and dice roll doesn't work
-*** TODO something is broken with inventory menu
 *** TODO focus and clickability needs to be given some TLC
+*** TODO better character select screen
 *** TODO look into making an online multiplayer demo
 *** TODO bug with shops and yellow space
+*** TODO mob AI behaviour
+*** TODO tool tips
 *** TODO whole system for playing turns needs an overhaul. 
     should not be a string of functions calling functions calling each other, but instead
     using signals and triggers to catch user input or state conditions. so that frames can
     happen when they need to, and only do the more procedural style when the things __need__
     to happen exactly between frames.
+*** DONE Cutscene for game end
+    CLOSED: [2020-02-17 Mon 17:18]
+*** DONE something is broken with inventory menu
+    CLOSED: [2020-02-17 Mon 17:17]
+*** DONE board viewer
+    CLOSED: [2020-02-17 Mon 17:18]
 *** DONE fix PvP fights
     CLOSED: [2020-01-29 Wed 20:03]
 *** DONE add custom moves sets per fighter

@@ -21,7 +21,7 @@ func load_cutscene(cutscene_file):
 
 func play_cutscene(cutscene):
     cutscene.connect("tree_exited", self, "_after_cutscene", [cutscene])
-    add_child(cutscene)
+    $UI.add_child(cutscene)
     cutscene.play()
     get_tree().paused = true
     return cutscene

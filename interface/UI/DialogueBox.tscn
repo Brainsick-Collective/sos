@@ -31,8 +31,8 @@ __meta__ = {
 [node name="SyndiBox" type="ReferenceRect" parent="MarginContainer"]
 margin_left = 15.0
 margin_top = 15.0
-margin_right = 1009.0
-margin_bottom = 585.0
+margin_right = 1905.0
+margin_bottom = 1065.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource( 1 )
@@ -42,5 +42,12 @@ __meta__ = {
 DIALOG = "wowowowowow
 "
 AUTO_ADVANCE = true
+PAUSE_BETWEEN_SETS = 2.0
 FONT = "res://interface/theme/fonts/sc_12.tres"
+ALTFONTS = [  ]
+PADDING = 3
+TEXT_VOICE = ""
+COLOR = Color( 1, 1, 1, 1 )
+TEXT_SPEED = 0.03
+INSTANT_PRINT = false
 [connection signal="strings_finished" from="MarginContainer/SyndiBox" to="." method="_on_SyndiBox_strings_finished"]

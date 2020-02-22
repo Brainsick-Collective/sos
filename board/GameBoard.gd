@@ -48,7 +48,7 @@ func get_space_scene(player_pawn):
 func find_combatants_for_space(position):
     var combatants = []
     var pos = $Spaces.world_to_map(position)
-    if $Spaces.get_cellv(pos) in [space_types.WILD, space_types.MAGIC]:
+    if $Spaces.get_cellv(pos) in [space_types.WILD, space_types.SHOP]:
         for character in $Characters.get_children():
             if ($Spaces.world_to_map(character.position) == pos 
             and character != get_parent().current_player 

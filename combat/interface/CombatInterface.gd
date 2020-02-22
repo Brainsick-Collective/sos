@@ -34,7 +34,6 @@ onready var move_map = {
 # each of the 4 options is of type Action, and the action itself will have a function for activating it based on the other player's stats
 
 func initialize(player1, player2):
-    _ready()
     fighter1 = player1
     fighter2 = player2
     

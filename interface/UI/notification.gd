@@ -11,13 +11,11 @@ onready var timer = $Timer
 
 signal completed
 
-func _ready():
-    pass
 func _process(delta): 
     #TODO: if click_through, add a subtle graphic effect
     pass
+
 func initialize(target, newEffect, desc):
-    _init()
     set_exclusive(true)
     effect = newEffect
     text = desc

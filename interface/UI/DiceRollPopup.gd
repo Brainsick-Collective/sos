@@ -8,7 +8,6 @@ onready var game_vars = get_node("/root/GameVariables")
 onready var DiceNum = $NinePatchRect/MarginContainer/VBoxContainer/DiceNum
 
 func initialize():
-    _ready()
     show()
     set_process(true)
     num = randi() % 7 + 1
@@ -24,7 +23,7 @@ func _process(delta):
         DiceNum.text = String(num)
     
 func _input(event):
-    if is_visible() and ControlsHandler.is_action_pressed_by_players(event, "ui_cancel", [ControlsHandler.current_player]):
+    if is_visible() and event is InputEventKey and ControlsHandler.is_action_pressed_by_players(event, "ui_cancel", [ControlsHandler.current_player]):
         get_parent().show_action_menu()
         hide()
     

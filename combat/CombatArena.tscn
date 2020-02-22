@@ -9,18 +9,29 @@
 [node name="CombatArena" type="Node2D"]
 script = ExtResource( 1 )
 
-[node name="grasslands" type="Sprite" parent="."]
-position = Vector2( 512, 300 )
-scale = Vector2( 0.534585, 0.555596 )
-texture = ExtResource( 2 )
-
 [node name="1" type="Position2D" parent="."]
-position = Vector2( 250, 380 )
+position = Vector2( 457.191, 652.094 )
+z_index = 1
 
 [node name="2" type="Position2D" parent="."]
-position = Vector2( 750, 380 )
+position = Vector2( 1478.91, 647.101 )
+z_index = 1
+
+[node name="Background" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="grasslands" type="TextureRect" parent="Background"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 2 )
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
 
 [node name="UI" type="CanvasLayer" parent="."]
+layer = 0
 
 [node name="GUI" type="Control" parent="UI"]
 anchor_right = 1.0
@@ -31,18 +42,29 @@ __meta__ = {
 }
 
 [node name="ActorPanel1" parent="UI/GUI" instance=ExtResource( 3 )]
+margin_left = 111.133
+margin_top = 88.8043
+margin_right = 514.133
+margin_bottom = 216.804
 
 [node name="ActorPanel2" parent="UI/GUI" instance=ExtResource( 3 )]
-anchor_left = 1.0
+anchor_left = 0.794
 anchor_right = 1.0
-margin_left = -395.0
-margin_right = 0.0
+anchor_bottom = 0.119
+margin_left = -84.3536
+margin_top = 92.3622
+margin_right = -84.8735
+margin_bottom = 91.8421
 
 [node name="CombatInterface" parent="UI" instance=ExtResource( 7 )]
-margin_left = -0.424744
-margin_top = 0.424713
-margin_right = -0.424744
-margin_bottom = 0.424683
+anchor_left = 0.500855
+anchor_top = 0.5
+anchor_right = 0.500855
+anchor_bottom = 0.5
+margin_left = -705.5
+margin_top = -351.5
+margin_right = 705.5
+margin_bottom = 351.5
 
 [node name="NoteContainer" type="Container" parent="UI"]
 visible = false

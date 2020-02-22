@@ -31,7 +31,6 @@ onready var Notification = preload("res://interface/UI/notification.tscn")
 
 
 func initialize(game_board, player, start):
-    _ready()
     last_heal_space = start
     confirm_move_popup = game_board.get_node("UI/GUI/MoveConfirmPopup")
     self.player = player
