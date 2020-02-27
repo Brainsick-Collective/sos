@@ -14,11 +14,11 @@ func request_move(pawn, direction):
         return map_to_world(cell_target)
     
 func find_space(tile, direction):
-    var value = $Spaces.get_cellv(tile)
-    if $Spaces.get_cellv(tile) != space_types.empty:
+    var space = $Spaces.get_cellv(tile)
+    if space != space_types.empty:
         return tile
-    value = $Path.get_cellv(tile)
-    if $Path.get_cellv(tile) == CELL_TYPES.PATH:
+    space = $Path.get_cellv(tile)
+    if space == CELL_TYPES.PATH:
         return find_space(tile + direction, direction)
     return null
     

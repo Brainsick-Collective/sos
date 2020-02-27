@@ -15,6 +15,7 @@ func _ready():
 
 func _physics_process(delta):
     direction = ControlsHandler.get_current_player_direction()
+# warning-ignore:return_value_discarded
     move_and_collide(direction.normalized() * speed)
     actors = get_node("../GameBoard").find_combatants_for_space(position)
     if actors:

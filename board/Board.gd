@@ -18,8 +18,8 @@ func _ready():
     var dummy = BoardCharacter.instance()
     current_player = dummy
     
-func initialize(characters, game):
-    self.game = game
+func initialize(characters, _game):
+    game = _game
     game.board = self
     num_players = characters.size()
     START = $GameBoard/Start.get_position()

@@ -3,7 +3,6 @@ extends Control
 
 ## TODO make a class for inventory and extend it for player and shop
 
-signal item_use_requested(item, actor)
 signal completed
 export(PackedScene) var ItemButton
 var inventory

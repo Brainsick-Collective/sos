@@ -13,5 +13,6 @@ func initialize(target, newEffect, desc):
         board_character = target.board_character
     elif target is BoardCharacter:
         target = board_character
+# warning-ignore:return_value_discarded
     connect("about_to_show", self, "_screen_entered")
     

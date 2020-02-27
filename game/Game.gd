@@ -15,27 +15,24 @@ func _ready():
     
     
 func load_cutscene(cutscene_file):
-    var cutscene = Cutscene.instance()
-    cutscene.load_dialogue(cutscene_file)
-    return play_cutscene(cutscene)
+    var new_cutscene = Cutscene.instance()
+    new_cutscene.load_dialogue(cutscene_file)
+    return play_cutscene(new_cutscene)
 
-func play_cutscene(cutscene):
-    cutscene.connect("tree_exited", self, "_after_cutscene", [cutscene])
-    $UI.add_child(cutscene)
-    cutscene.play()
+func play_cutscene(new_cutscene):
+    new_cutscene.connect("tree_exited", self, "_after_cutscene", [new_cutscene])
+    $UI.add_child(new_cutscene)
+    new_cutscene.play()
     get_tree().paused = true
-    return cutscene
+    return new_cutscene
     
-func load_board(board):
-    pass
-    
-func _after_cutscene(cutscene):
-    cutscene.queue_free()
+func _after_cutscene(curr_cutscene):
+    curr_cutscene.queue_free()
     get_tree().paused = false
     pass
     
-func initialize_game(board):
-    self.board = board
+func initialize_game(new_board):
+    board = new_board
     queue = $NotificationQueue
     board.connect("tree_entered", queue, "change_ui_node", [board.get_node("UI")])
     queue.ui_parent = board.get_node("UI")
@@ -86,8 +83,8 @@ func on_queue_finished():
     set_process(true)
     board.next_turn()
     
-func queue_cutscene(cutscene):
-    self.cutscene = cutscene
+func queue_cutscene(new_cutscene):
+    cutscene = new_cutscene
     
 func add_note_to_q(notes):
     if typeof(notes) == TYPE_ARRAY:

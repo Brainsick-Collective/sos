@@ -56,7 +56,7 @@ func get_required_experience():
 func take_damage(hit): # Hit
     var old_health = health
     health -= hit.damage
-    health = max(0, health)
+    health = max(0.0, health)
     emit_signal("health_changed", health, old_health)
     if health == 0:
         emit_signal("health_depleted")
@@ -77,7 +77,7 @@ func heal(amount : int):
 
 func set_mana(value : int):
     var old_mana = mana
-    mana = max(0, value)
+    mana = max(0.0, value)
     emit_signal("mana_changed", mana, old_mana)
     if mana == 0:
         emit_signal("mana_depleted")

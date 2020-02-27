@@ -46,11 +46,12 @@ func decide_turns():
     $Options2.hide()
     $TurnOrderPopup.reset()
     $TurnOrderPopup.decide_turns(fighter1.stats.speed, fighter2.stats.speed)
+# warning-ignore:return_value_discarded
     $TurnOrderPopup.connect("chosen", self, "_on_turns_chosen")
     
     
-func _on_turns_chosen(is_fighter1_first):
-    self.is_fighter1_first = is_fighter1_first
+func _on_turns_chosen(fighter1_first):
+    is_fighter1_first = fighter1_first
     do_combat_phase(is_fighter1_first)
 
 func do_combat_phase(choice):
@@ -66,7 +67,7 @@ func map_options(Option, moves):
     for move in moves:
         Option.get_child(moves[move].type).get_node("Label").text = moves[move].move_name
 
-func _process(delta):
+func _process(_delta):
     $Stats/Row/Fighter1Stats/Attack/Label.text = String(fighter1.stats.strength)
     $Stats/Row/Fighter1Stats/Defense/Label.text = String(fighter1.stats.defense)
     $Stats/Row/Fighter1Stats/Speed/Label.text = String(fighter1.stats.speed)
@@ -77,7 +78,7 @@ func _process(delta):
     $Stats/Row/Fighter2Stats/Speed/Label.text = String(fighter2.stats.speed)
     $Stats/Row/Fighter2Stats/Magic/Label.text = String(fighter2.stats.magic)
     
-func _on_TurnOrderPopup_chosen(choice):
+func _on_TurnOrderPopup_chosen(_choice):
     $Options1.show()
     $Options2.show()
     pass # Replace with function body.

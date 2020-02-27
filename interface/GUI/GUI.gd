@@ -10,8 +10,8 @@ onready var health_label = $ActorPanel1/Margins/VBoxContainer/HBoxContainer/Text
 
 onready var InventoryMenu = preload("res://interface/menus/InventoryMenu.tscn")
 
-func initialize(board):
-    self.board = board
+func initialize(new_board):
+    board = new_board
     
 func show_action_menu():
     $ActionMenu.show()
@@ -32,6 +32,7 @@ func focus_roll_button():
         
 func _on_RollButton_pressed():
     $DiceRollPopup.initialize()
+# warning-ignore:return_value_discarded
     $DiceRollPopup.connect("completed", self, "show_moves")
     $ActionMenu.hide()
 
@@ -59,7 +60,7 @@ func _on_PlayerInfoButton_pressed():
 
 
 
-func show_moves(num):
+func show_moves(_num):
     $Counter.show()
     
 func set_preview_actor(actors):
@@ -73,8 +74,4 @@ func clear_preview():
 func _on_ActionMenu_visibility_changed():
     if $ActionMenu.is_visible():
         $Counter.hide()
-    pass # Replace with function body.
-
-
-func _on_BoardViewer_actor_found(actor):
     pass # Replace with function body.

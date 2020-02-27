@@ -7,7 +7,7 @@ func _ready():
 func initialize(stats):
     self.stats = stats
     
-func _process(delta):
+func _process(_delta):
     if stats:
         $ATK/Label.text = "ATK " + String(stats.strength)
         $DEF/Label.text = "DEF " + String(stats.defense)

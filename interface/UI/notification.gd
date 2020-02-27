@@ -9,16 +9,18 @@ onready var label = $NinePatchRect/MarginContainer/Label
 onready var click_through = false
 onready var timer = $Timer
 
+# warning-ignore:unused_signal
 signal completed
 
-func _process(delta): 
+func _process(_delta): 
     #TODO: if click_through, add a subtle graphic effect
     pass
 
-func initialize(target, newEffect, desc):
+func initialize(_target, newEffect, desc):
     set_exclusive(true)
     effect = newEffect
     text = desc
+# warning-ignore:return_value_discarded
     connect("about_to_show", self, "_screen_entered")
     
 func _input(event):

@@ -9,7 +9,7 @@ func set_combatant(c):
     max_value = combatant.stats.max_health
     value = combatant.stats.health
     
-func _process(delta):
+func _process(_delta):
     if combatant:
         max_value = combatant.stats.max_health
         value = combatant.stats.health

@@ -6,9 +6,10 @@ enum move_types { empty = -1, normal, special, magic, effect }
 
 var player
 export(Resource) var stats
+export (String, MULTILINE) var description
 export var moves = {}
 export(Resource) var job
-var sprite
+onready var sprite = $Skin/Sprite
 signal killed(player, reward)
 var mob = false
 var battle = null
@@ -30,23 +31,19 @@ func initialize_n():
 func flip_sprite():
     sprite.set_flip_h(!sprite.is_flipped_h())
 
-func initialize(new_sprite, p):
-    var sprite = Sprite.new()
+func initialize(p):
+    sprite = $Skin/Sprite
     player = p
     stats = stats.duplicate()
     stats.player_id = player.id
     stats.reset()
     stats.connect("health_depleted", self, "on_death")
-    sprite.texture = new_sprite.texture
     sprite.scale = Vector2(0.322, 0.322)
-    $Skin.add_child(sprite)
     actor_name = player.player_name
-    self.sprite = sprite
     set_moves_from_job()
     stats.connect("leveled_up", self, "_on_level_up")
     
 func initialize_mob():
-    self.sprite = $Skin/Sprite
     mob = true
     stats = stats.duplicate()
     stats.reset()
@@ -99,7 +96,7 @@ func is_mob():
     return mob
 
 func get_sprite():
-    return sprite.get_texture()
+    return $Skin/Sprite.get_texture()
     
 func sync_stats():
     player.stats = stats

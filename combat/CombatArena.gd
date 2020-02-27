@@ -47,16 +47,18 @@ func initialize():
     fighter2.flip_sprite()
     $MatchupInterface.initialize(fighter1, fighter2)
     $UI/CombatInterface.initialize(fighter1, fighter2)
+# warning-ignore:return_value_discarded
     $UI/CombatInterface/TurnOrderPopup.connect("hide", self, "on_turnorder_popup_hide")
+# warning-ignore:return_value_discarded
     $UI/CombatInterface/TurnOrderPopup.connect("chosen", self, "on_choice")
     $UI/CombatInterface.decide_turns()
     set_process_input(false)
     
-func set_fighters(fighter1, fighter2):
-    self.fighter1 = fighter1
-    self.fighter2 = fighter2
+func set_fighters(f1, f2):
+    fighter1 = f1
+    fighter2 = f2
 
-func _process(delta):
+func _process(_delta):
     check_ready()
     
     

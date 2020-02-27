@@ -1,9 +1,16 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://combat/combatants/Combatant.tscn" type="PackedScene" id=1]
 [ext_resource path="res://game/players/jobs/FistBlade.tres" type="Resource" id=2]
 [ext_resource path="res://game/players/stats/cynd.tres" type="Resource" id=3]
+[ext_resource path="res://assets/cutscene_sprites/Strength_Class_F.png" type="Texture" id=4]
 
 [node name="FistBlade" instance=ExtResource( 1 )]
 stats = ExtResource( 3 )
+description = "A brutish fighter with a tenacity for heavy weapons and  armor. Their weapon of choice is called a Fist, and though it looks more like a mace, it is actually made of infinitely small trianglular collision shapes such that they can slice through flesh like the fist in made of air, leaving their victim to crumble into pieces"
 job = ExtResource( 2 )
+
+[node name="Sprite" parent="Skin" index="0"]
+position = Vector2( 3.05176e-05, 4.57764e-05 )
+scale = Vector2( 0.657919, 0.657919 )
+texture = ExtResource( 4 )

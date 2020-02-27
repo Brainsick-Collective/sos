@@ -30,10 +30,10 @@ var direction_names = { Vector2(-1,0) : "left", Vector2(1,0) : "right", Vector2(
 onready var Notification = preload("res://interface/UI/notification.tscn")
 
 
-func initialize(game_board, player, start):
+func initialize(game_board, _player, start):
     last_heal_space = start
     confirm_move_popup = game_board.get_node("UI/GUI/MoveConfirmPopup")
-    self.player = player
+    player = _player
     dice_roll_popup = game_board.get_node("UI/GUI/DiceRollPopup")
     player_name = player.player_name
     board = game_board.get_node("GameBoard")
@@ -52,7 +52,7 @@ func _input(event):
         #this change might have made pausemode on board redundant
         _direction = get_input_direction(event)
         
-func _process(delta):
+func _process(_delta):
     if _direction != Vector2():
         $Pivot/AnimatedSprite.play(direction_names[_direction])
         var next_space = board.request_move(self, _direction)
@@ -67,8 +67,6 @@ func move_to(target_position):
     # Move the node to the target cell instantly,
     # and animate the sprite moving from the start to the target cell
     
-    #use this for sprite facing direction
-    var move_direction = (target_position - position).normalized()
     var old_pos = position
     position = target_position
     $Pivot.position = to_local(old_pos)
@@ -103,7 +101,7 @@ func check_moves():
             emit_signal("last_move_taken")
             # this is fucked, in terms of OOD, but I don't want to deal
             # with it right now
-            var yes = yield(confirm_move_popup, "completed")
+            var _yes = yield(confirm_move_popup, "completed")
         else:
             emit_signal("turn_finished")
             confirm_move_popup.disconnect("completed", self, "confirm_move")
@@ -171,11 +169,10 @@ func start_turn(last_camera_position):
     curr_space = position
     spaces_moved = Array()
 
-func on_killed(p, reward):
+func on_killed(_p, _reward):
     death_penalty = 3
     is_dead = true
     position = last_heal_space
-    ("player health on death: " + String(player.stats.health))
 
 func check_penalties():
     if death_penalty == 0:

@@ -3,8 +3,6 @@ extends Control
 
 ## TODO make a class for inventory and extend it for player and shop
 
-signal item_use_requested(item, actor)
-signal completed
 export(PackedScene) var ItemButton
 var inventory
 signal item_bought(item)
@@ -25,7 +23,9 @@ func initialize(p):
 
     _item_grid.initialize()
 
+# warning-ignore:return_value_discarded
     connect("item_bought" , inventory, "trash")
+# warning-ignore:return_value_discarded
     connect("item_bought" , player.inventory, "add")
 
 func create_item_button(item):

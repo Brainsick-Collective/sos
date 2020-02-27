@@ -105,6 +105,7 @@ onready var text_pause : bool = false # Whether or not to pause the printing
 onready var text_hide : bool = false # Whether or not to hide the printing
 onready var hide_timer # fuck
 onready var custom = Node.new() # Filler for loading custom.gd script
+onready var hold = false
 ################################ SIGNALS ################################
 signal strings_finished
 
@@ -127,6 +128,10 @@ func _enter_tree():
 
 func _ready(): # Called when ready.
     pass
+func play_and_hold():
+    hold = true
+    play()
+    
 func play():
     if !is_visible():
         return
@@ -792,8 +797,10 @@ func _input(event): # Called on input
             # ...then if there are no more strings in the dialog...
             if cur_set >= strings.size() - 1:
                 # Hide the textbox.
-                emit_signal("strings_finished")
-                hide()
+                
+                if hold == false:
+                    emit_signal("strings_finished")
+                    hide()
             # ...then if there are more strings in the dialog...
             else:
                 # For every character that has been printed...
