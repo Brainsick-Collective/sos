@@ -23,5 +23,5 @@ func _physics_process(delta):
     if actors.empty():
         emit_signal("actor_left")
 func _input(event):
-    if ControlsHandler.is_action_pressed_by_players(event, "ui_cancel", [get_parent().current_player.player]):
+    if event is InputEventKey and ControlsHandler.is_action_pressed_by_players(event, "ui_cancel", [get_parent().current_player.player]):
         get_parent().return_to_player(to_global(camera.position))

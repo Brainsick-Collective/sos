@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://combat/CombatArena.gd" type="Script" id=1]
 [ext_resource path="res://assets/backgrounds/grasslands.png" type="Texture" id=2]
 [ext_resource path="res://combat/interface/ActorPanel.tscn" type="PackedScene" id=3]
+[ext_resource path="res://interface/UI/Combatant1Panel.tscn" type="PackedScene" id=4]
+[ext_resource path="res://interface/UI/Combatant2Panel.tscn" type="PackedScene" id=5]
 [ext_resource path="res://combat/interface/CombatInterface.tscn" type="PackedScene" id=7]
 [ext_resource path="res://combat/interface/MatchupInterface.tscn" type="PackedScene" id=9]
 
@@ -41,13 +43,27 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Combatant1Panel" parent="UI/GUI" instance=ExtResource( 4 )]
+margin_left = 8.74646
+margin_top = 9.96442
+margin_right = -932.254
+margin_bottom = -758.036
+
 [node name="ActorPanel1" parent="UI/GUI" instance=ExtResource( 3 )]
+visible = false
 margin_left = 111.133
 margin_top = 88.8043
 margin_right = 514.133
 margin_bottom = 216.804
 
+[node name="Combatant2Panel" parent="UI/GUI" instance=ExtResource( 5 )]
+margin_left = 944.788
+margin_top = -23.9075
+margin_right = 25.7885
+margin_bottom = -783.908
+
 [node name="ActorPanel2" parent="UI/GUI" instance=ExtResource( 3 )]
+visible = false
 anchor_left = 0.794
 anchor_right = 1.0
 anchor_bottom = 0.119
@@ -57,14 +73,8 @@ margin_right = -84.8735
 margin_bottom = 91.8421
 
 [node name="CombatInterface" parent="UI" instance=ExtResource( 7 )]
-anchor_left = 0.500855
-anchor_top = 0.5
-anchor_right = 0.500855
-anchor_bottom = 0.5
-margin_left = -705.5
-margin_top = -351.5
-margin_right = 705.5
-margin_bottom = 351.5
+margin_left = 0.0
+margin_right = 0.0
 
 [node name="NoteContainer" type="Container" parent="UI"]
 visible = false

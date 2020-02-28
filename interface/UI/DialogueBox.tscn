@@ -40,6 +40,5 @@ __meta__ = {
 }
 DIALOG = "wowowowowow
 "
-AUTO_ADVANCE = true
 FONT = "res://interface/theme/fonts/sc_12.tres"
 [connection signal="strings_finished" from="MarginContainer/SyndiBox" to="." method="_on_SyndiBox_strings_finished"]

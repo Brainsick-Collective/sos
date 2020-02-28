@@ -1,12 +1,10 @@
 """
 #########################################################################
 ################### SyndiBox Text Engine for Godot ######################
-########################### Version 1.0.0 ###############################
+########################### Version 1.5.0 ###############################
 #########################################################################
-
 'A text engine with everything you want and need will cost
  you two years time and 20 gallons of tears.' ~ Sudo
-
  -----------------------------------------------------------------------
 |																		|
 |	Quick Navigation (Ctrl+F and paste):								|
@@ -18,14 +16,12 @@
 |		3. Credits					# I love these people				|
 |																		|
  -----------------------------------------------------------------------
-
 This is the script used for the SyndiBox text engine.
 Scrapped from a previously created text engine I made
 called the 'MaloBox' text engine, part of the 'MaloSuite'
 GameMaker toolset, and adapted for use in Godot Engine.
 No current plans for release, but I do hope to release it
 at some point. Maybe after Polterheist! is released itself.
-
 This text engine allows for custom features, such as:
     + Loading custom dialog from a separate GDScript
     + Setting character presets which can be accessed
@@ -39,7 +35,6 @@ This text engine allows for custom features, such as:
       (in progress)
     + Dynamic switching of properties for characters
       already set (to-do)
-
 #########################################################################
 #########################################################################
 """
@@ -54,22 +49,31 @@ tool
 extends ReferenceRect
 
 # Exported
-export(String, MULTILINE) var DIALOG # Exported dialog
-export(bool) var AUTO_ADVANCE = false # Exported auto-advance setting
-export(float) var PAUSE_BETWEEN_SETS = 2.0
-export(String, FILE, "*.fnt, *.tres") var FONT # Exported font
-export(Array, String, FILE, "*.fnt, *.tres") var ALTFONTS # Alternate fonts, [%0] to [%9]
+export(String, MULTILINE) var DIALOG # Dialog
+export(String) var CHARACTER_NAME # Character name
+export(String, FILE, "*.png, *.jpg") var CHARACTER_PROFILE # Character profile
+export(bool) var AUTO_ADVANCE = false # Auto-advance setting
+export(String, FILE, "*.fnt, *.tres") var FONT # Default font
+export(Array, String, FILE, "*.fnt, *.tres") var ALTERNATE_FONTS # Alternate fonts, [%0] to [%9]
 export(int) var PADDING = 3 # Pixel padding between lines of text
-export(String, FILE) var TEXT_VOICE # Exported voice
-export(Color, RGB) var COLOR = Color("#FFFFFF") #Exported color
-export(float) var TEXT_SPEED = 0.03 # Exported speed
-export(bool) var INSTANT_PRINT = false # Exported instant print
+export(String, FILE, "*.ogg, *.wav, *.mp3") var TEXT_VOICE # Default voice
+export(bool) var PLAY_VOICE_ONCE = false # Voice one-shot setting
+export(Color, RGB) var COLOR = Color("#FFFFFF") # Default color
+export(float) var TEXT_SPEED = 0.03 # Default speed
+export(bool) var PAUSE_AT_PUNCTUATION = false # Default period pause type
+export(float) var PUNCTUATION_PAUSE_LENGTH = 0.0 # Default length of period pauses
+export(bool) var INSTANT_PRINT = false # Default instant print
+export(String, FILE, "*.gd") var CUSTOM_EFFECTS # Custom effects script
 
 # Internal
 onready var strings : PoolStringArray # String array containing our dialog
-onready var def_font : DynamicFont # Default font
+onready var def_font : Font # Default font
+onready var def_profile : StreamTexture # Default profile
+onready var profile : Sprite # Profile as sprite node
+onready var prof_label : Label # Profile label for character
+onready var x_offset : int # Dialog X-axis offset
 onready var alt_fonts : Array # Other fonts
-onready var font : DynamicFont # Font applied to current character
+onready var font : Font # Font applied to current character
 onready var def_color : Color # Default color
 onready var color : Color # Color applied to current character
 onready var def_speed : float # Default speed
@@ -101,14 +105,14 @@ onready var step_pause : int = 0 # Current step in pause state
 onready var emph : String # Substring to match for tag checking
 onready var escape : bool = false # Escape for effect tags (DEPRECATED)
 onready var def_print : bool # Whether default printing is instant or turncated
+onready var def_period : bool # Whether default period is paused or unpaused
 onready var text_pause : bool = false # Whether or not to pause the printing
 onready var text_hide : bool = false # Whether or not to hide the printing
 onready var hide_timer # fuck
-onready var custom = Node.new() # Filler for loading custom.gd script
+onready var custom = Node.new() # Filler for custom effect script
 onready var hold = false
-################################ SIGNALS ################################
-signal strings_finished
 
+signal strings_finished
 ################################## END ##################################
 
 ##################
@@ -123,32 +127,43 @@ signal strings_finished
 
 ################################# BEGIN #################################
 func _enter_tree():
-    strings = DIALOG.split("\n")
+    pass
 
 
 func _ready(): # Called when ready.
     pass
+
 func play_and_hold():
     hold = true
     play()
     
 func play():
-    if !is_visible():
-        return
     strings = DIALOG.split("\n")
     set_physics_process(true)
-    custom.set_script(preload("res://addons/SyndiBox/custom.gd"))
+    # Grab custom effects script.
+    if !CUSTOM_EFFECTS:
+        CUSTOM_EFFECTS = "res://addons/SyndiBox/custom.gd"
+    custom.set_script(load(CUSTOM_EFFECTS))
     add_child(custom)
+    # Create profile if available.
+    profile = Sprite.new()
+    profile.set_centered(false)
+    profile.set_offset(Vector2(0,rect_size.y))
+    profile.set("position",profile.position + Vector2(-(margin_left / 2) + 5,-rect_size.y + (margin_bottom / 2) + 5))
+    add_child(profile)
+    prof_label = Label.new()
+    prof_label.set("rect_position",prof_label.rect_position + Vector2(16,-38))
+    add_child(prof_label)
     # Set these variables to their appropriate exports.
     cur_string = strings[cur_set]
     snd_stream = load(TEXT_VOICE)
     if !FONT:
-        FONT = Label.new().get_font("")
+        FONT = load("res://addons/SyndiBox/Assets/TextDefault.tres")
     if FONT is String:
         def_font = load(FONT)
     else:
         def_font = FONT
-    for f in ALTFONTS:
+    for f in ALTERNATE_FONTS:
         alt_fonts.push_back(load(f))
     font = def_font
     def_color = COLOR
@@ -157,22 +172,19 @@ func play():
     speed = def_speed
     cur_speed = speed
     def_print = INSTANT_PRINT
-
+    def_period = PAUSE_AT_PUNCTUATION
     # Make a timer and set wait period to character's dialog speed.
     timer = Timer.new()
-    timer.set_physics_process(true)
     timer.set_wait_time(speed)
     add_child(timer)
     
     # Make an audio stream player and set stream to character's dialog voice.
     voice = AudioStreamPlayer.new()
-    voice.set_physics_process(true)
     voice.set_stream(snd_stream)
     voice.volume_db = -6
     add_child(voice)
     
     tween = Tween.new()
-    tween.set_physics_process(true)
     tween_trans = tween.TRANS_LINEAR
     tween_ease = tween.EASE_IN_OUT
     add_child(tween)
@@ -279,7 +291,6 @@ Ctrl+F for:
     - font_check(): Using Alt Fonts
     - speed_check(): Speed Effects
     - pos_check(): Position Effects
-
 Each match statement works like this:
  -------------------------------------------------------------------------------
 |																				|
@@ -317,7 +328,6 @@ Each match statement works like this:
 |	return string																|
 |																				|
  -------------------------------------------------------------------------------
-
 You can add as many cases to match as you'd like. Follow this pattern if
 you'd like to make your own custom check as well. If you do make your own
 custom check, you must add your check within the emph_check() function to
@@ -334,11 +344,9 @@ execute along with the defaults:
 |		custom_check()						|
 |											|
  -------------------------------------------
-
 Finally, make a function for setting your values to the correct character
 properties in the list of set functions (can't help you there), and call
 that function in the print_dialog() function.
-
 (Yes, this is a lot of work just to see fun little squigglies on a
 screen. I suffered, and if you don't like what I made for you, you'll
 suffer, too.)
@@ -350,7 +358,8 @@ func speaker_check(string):
         "[_:]": # Default
             if !escape:
                 string.erase(step,4)
-                string = string.insert(step,char(8203))
+                string = string.insert(step,char(8203) + "[:2][^r]")
+                saved_length += font.get_string_size(cur_length).x
                 if FONT is String:
                     def_font = load(FONT)
                 else:
@@ -361,7 +370,34 @@ func speaker_check(string):
                 color = def_color
                 speed = def_speed
                 INSTANT_PRINT = def_print
-                saved_length = font.get_string_size(cur_length).x
+                cur_length = ""
+        "[_!]": # Default Interject
+            if !escape:
+                for i in cur_char:
+                    var wr = weakref(cur_char[i])
+                    if !wr.get_ref():
+                        continue
+                    else:
+                        cur_char[i].free()
+                        if cur_tween.has(i):
+                            cur_tween[i].free()
+                cur_char = {}
+                cur_tween = {}
+                cur_length = ""
+                str_line = 0
+                string.erase(step,4)
+                string = string.insert(step,char(8203) + "[^r]")
+                saved_length += font.get_string_size(cur_length).x
+                if FONT is String:
+                    def_font = load(FONT)
+                else:
+                    def_font = FONT
+                def_color = COLOR
+                def_speed = TEXT_SPEED
+                font = def_font
+                color = def_color
+                speed = def_speed
+                INSTANT_PRINT = def_print
                 cur_length = ""
     return string
 
@@ -549,27 +585,27 @@ func color_check(string):
 func speed_check(string):
     match emph:
         "[*1]": # Fastest
-            if !escape:
+            if !escape && !INSTANT_PRINT:
                 string.erase(step,4)
                 string = string.insert(step,char(8203))
                 speed = 0.01
         "[*2]": # Fast
-            if !escape:
+            if !escape && !INSTANT_PRINT:
                 string.erase(step,4)
                 string = string.insert(step,char(8203))
                 speed = 0.03
         "[*3]": # Normal
-            if !escape:
+            if !escape && !INSTANT_PRINT:
                 string.erase(step,4)
                 string = string.insert(step,char(8203))
                 speed = 0.05
         "[*4]": # Slow
-            if !escape:
+            if !escape && !INSTANT_PRINT:
                 string.erase(step,4)
                 string = string.insert(step,char(8203))
                 speed = 0.1
         "[*5]": # Slowest
-            if !escape:
+            if !escape && !INSTANT_PRINT:
                 string.erase(step,4)
                 string = string.insert(step,char(8203))
                 speed = 0.2
@@ -701,14 +737,39 @@ func emph_check(string): # Called before printing each step
 I'd preface what you're about to see, but...it's just drawing some text
 characters. If it was interesting, I'd be streaming it on Picarto and
 flipping out over how it's 'oRiGiNaL cHaRaCtEr Do NoT sTeAl'
-
 Comments are ahead to explain everything. Proceed with caution.
 """
 
 ################################# BEGIN #################################
 func print_dialog(string): # Called on draw
+    string = string.insert(string.length()," ")
     # If there are characters left to print...
     while step <= string.length() - 1 && visible:
+        # Set up profile
+        if !text_hide:
+            if CHARACTER_PROFILE is String:
+                def_profile = load(CHARACTER_PROFILE)
+            else:
+                def_profile = CHARACTER_PROFILE
+            if CHARACTER_PROFILE != null:
+                x_offset = 48
+            else:
+                x_offset = 0
+            prof_label.add_font_override("font",def_font)
+            prof_label.add_color_override("font_color",def_color)
+            prof_label.set_text(CHARACTER_NAME)
+            profile.set_texture(def_profile)
+        else:
+            prof_label.set_text("")
+            profile.set_texture(null)
+        # Check for punctuation and whether to pause on it.
+        if PAUSE_AT_PUNCTUATION:
+            if (
+                string.substr(step - 1,2) == ". " ||
+                string.substr(step - 1,2) == "! " ||
+                string.substr(step - 1,2) == "?"
+            ):
+                yield(get_tree().create_timer(PUNCTUATION_PAUSE_LENGTH),"timeout")
         # Start the timer.
         if !Engine.editor_hint:
             timer.start()
@@ -726,17 +787,24 @@ func print_dialog(string): # Called on draw
         var strSize = font.get_string_size(cur_length)
         var full_length : int = saved_length + strSize.x
         maxLineHeight = max(maxLineHeight, heightTrack + strSize.y)
-        # If the string won't fit, break it into lines.
-        if full_length > rect_size.x:
+        # If the string won't fit, transpose it.
+        if strSize.x + font.get_string_size(cur_string.substr(step,cur_string.find(" ",step) - step)).x > rect_size.x - x_offset:
             cur_length = ""
             saved_length = 0
             heightTrack = maxLineHeight + PADDING
-            str_line = str_line + 1
+            str_line += 1
             full_length = saved_length + font.get_string_size(cur_length).x
+            cur_string.erase(cur_string.find(" ",step),1)
+        if heightTrack > rect_size.y:
+            for i in cur_char:
+                cur_char[i].rect_position.y -= font.get_string_size(cur_length).y + PADDING
+                if cur_char[i].rect_position.y < 0:
+                    cur_char[i].hide()
+            heightTrack -= font.get_string_size(cur_length).y + PADDING
         # Create a new label for the character in the current step.
         cur_char[step] = Label.new()
         # Set the character position.
-        cur_char[step].set_position(Vector2(full_length, heightTrack))
+        cur_char[step].set_position(Vector2(full_length + x_offset, heightTrack))
         # Set any variables for special effect markers found.
         # (Put your tag setter function here)
         if font:
@@ -747,6 +815,8 @@ func print_dialog(string): # Called on draw
             set_speed(speed)
         if tween_set:
             set_pos(tween_start,tween_end)
+        if snd_stream:
+            voice.set_stream(snd_stream)
         # Set the character text.
         cur_char[step].set_text(string[step])
         # Record the character length to the string length
@@ -760,8 +830,11 @@ func print_dialog(string): # Called on draw
             string.substr(step,1) != char(8203) &&
             !INSTANT_PRINT
         ):
-            voice.play()
+            if snd_stream:
+                voice.play()
             yield(timer,"timeout")
+            if PLAY_VOICE_ONCE:
+                snd_stream = null
         cur_string = string
         step += 1
 
@@ -784,41 +857,37 @@ func edit_dialog(): # This is probably indefinitely broken.
 func _input(event): # Called on input
     # If accept button is pressed for manual advancement...
     if (
-        !Engine.editor_hint && event is InputEventKey && ControlsHandler.which_player(event) == 0 &&
+        event is InputEventKey &&
+        !Engine.editor_hint && ControlsHandler.is_action_pressed_by_current_player(event, "ui_accept") &&
+        !AUTO_ADVANCE &&
         visible
     ):
         # ...and there are more characters to print...
         if step < cur_string.length() - 1:
             # ...print all characters instantly.
-            # (broken)
+            PAUSE_AT_PUNCTUATION = false
             INSTANT_PRINT = true
         # ...and there are no more characters to print...
         else:
             # ...then if there are no more strings in the dialog...
             if cur_set >= strings.size() - 1:
                 # Hide the textbox.
-                
-                if hold == false:
+                if not hold:
                     emit_signal("strings_finished")
                     hide()
             # ...then if there are more strings in the dialog...
             else:
                 # For every character that has been printed...
                 for i in cur_char:
-                    # Get a weak reference.
-                    var wr = weakref(cur_char[i])
-                    # If there is no character in reference...
-                    if !wr.get_ref():
-                        # Carry on.
-                        pass
-                    # If there is a character in reference...
-                    else:
-                        # Remove that character.
+                    # Remove all existent characters.
+                    if cur_char.has(i):
                         cur_char[i].free()
+                        # Remove existent tweens for existent characters.
                         if cur_tween.has(i):
                             cur_tween[i].free()
                 # Ready the dialog variables for the next string.
                 cur_speed = speed
+                PAUSE_AT_PUNCTUATION = def_period
                 INSTANT_PRINT = def_print
                 cur_char = {}
                 cur_tween = {}
@@ -840,28 +909,21 @@ func _physics_process(delta): # Called every step
     if (
         !Engine.editor_hint &&
         AUTO_ADVANCE &&
-        step_pause >= 180 &&
+        step_pause >= 120 &&
         visible
     ):
         # If there are no more strings in the dialog...
         if cur_set >= strings.size() - 1:
             # Hide the textbox.
-            emit_signal("strings_finished")
             hide()
         # If there are strings in the dialog...
         else:
             # For every character that has been printed...
             for i in cur_char:
-                # Get a weak reference.
-                var wr = weakref(cur_char[i])
-                # If there is no character in reference...
-                if !wr.get_ref():
-                    # Carry on.
-                    continue
-                # If there is a character in reference...
-                else:
-                    # Remove that character.
+                # Remove all existent characters.
+                if cur_char.has(i):
                     cur_char[i].free()
+                    # Remove existent tweens for existent characters.
                     if cur_tween.has(i):
                         cur_tween[i].free()
             # Ready the dialog variables for the next string.
@@ -899,7 +961,6 @@ func _exit_tree():
 """
 You made it to the end and you're still concious after probably bashing
 your head in multiple times! Very impressive.
-
 I'd like to personally thank a few people that have helped in the
 process of me tailoring this code, whether tremendous, insignificant,
 or even unknown.
@@ -920,7 +981,6 @@ or even unknown.
 |		YOU - This is who it was made for, after all.					|
 |																		|
  -----------------------------------------------------------------------
-
 enjoy your fun wigglies
 ~ Sudo
         oOOo <- (it my pawb beans)

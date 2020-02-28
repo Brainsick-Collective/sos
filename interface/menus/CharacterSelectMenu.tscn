@@ -1,13 +1,14 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://interface/menus/CharacterSelectMenu.gd" type="Script" id=1]
 [ext_resource path="res://interface/GUI/CharacterCartridge.tscn" type="PackedScene" id=2]
 [ext_resource path="res://interface/theme/fonts/num_font.tres" type="DynamicFont" id=3]
-[ext_resource path="res://interface/theme/fonts/vt323/VT323-Regular.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://interface/theme/fonts/white-rabbit/whitrabt.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://interface/theme/panel/terminal_panel.tres" type="StyleBox" id=5]
 [ext_resource path="res://assets/cutscene_sprites/Speed_Class_F.png" type="Texture" id=6]
 [ext_resource path="res://assets/backgrounds/terminal.png" type="Texture" id=7]
 [ext_resource path="res://interface/theme/fonts/CharacterCartridge.tres" type="DynamicFont" id=8]
+[ext_resource path="res://interface/theme/default.theme" type="Theme" id=9]
 
 [sub_resource type="DynamicFont" id=1]
 size = 86
@@ -17,6 +18,7 @@ font_data = ExtResource( 4 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 1
+theme = ExtResource( 9 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -56,7 +58,7 @@ __meta__ = {
 
 [node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
 margin_right = 455.0
-margin_bottom = 87.0
+margin_bottom = 67.0
 custom_styles/panel = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": true
@@ -64,14 +66,14 @@ __meta__ = {
 
 [node name="Label" type="Label" parent="VBoxContainer/PanelContainer"]
 margin_right = 455.0
-margin_bottom = 87.0
+margin_bottom = 67.0
 custom_fonts/font = SubResource( 1 )
 text = "VapeRider"
 align = 1
 valign = 1
 
 [node name="DescriptionPanel" type="Panel" parent="VBoxContainer"]
-margin_top = 103.0
+margin_top = 83.0
 margin_right = 455.0
 margin_bottom = 427.0
 size_flags_vertical = 3
@@ -87,6 +89,7 @@ margin_bottom = -8.0
 custom_fonts/font = ExtResource( 8 )
 text = "here is the description for the character, I wonder if it will autowreap correctly"
 autowrap = true
+uppercase = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -118,12 +121,11 @@ __meta__ = {
 }
 
 [node name="PlayerLabel" type="LineEdit" parent="Column"]
-margin_left = 190.0
-margin_right = 560.0
-margin_bottom = 74.0
+margin_right = 751.0
+margin_bottom = 56.0
 focus_next = NodePath("../StartButton")
 mouse_filter = 1
-size_flags_horizontal = 4
+size_flags_horizontal = 7
 size_flags_vertical = 2
 custom_fonts/font = ExtResource( 3 )
 text = "Player 1"
@@ -173,9 +175,9 @@ __meta__ = {
 [node name="CharacterCartridge" parent="Carts" instance=ExtResource( 2 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 236.0
+margin_top = 224.0
 margin_right = 200.0
-margin_bottom = 436.0
+margin_bottom = 424.0
 
 [node name="CharacterCartridge2" parent="Carts" instance=ExtResource( 2 )]
 anchor_right = 0.0
@@ -187,7 +189,7 @@ margin_bottom = 640.0
 [node name="CharacterCartridge3" parent="Carts" instance=ExtResource( 2 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 644.0
+margin_top = 656.0
 margin_right = 200.0
-margin_bottom = 844.0
+margin_bottom = 856.0
 [connection signal="pressed" from="Column/StartButton" to="." method="_on_StartButton_pressed"]

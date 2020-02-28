@@ -27,7 +27,7 @@ func play():
     dialogue.sb.show()
     dialogue.play_text(sprite_text_map["dialogue"])
 
-func _on_DialogueBox_string_finished():
+func _on_DialogueBox_strings_finished():
     #TODO animate
     queue_free()
     pass # Replace with function body.

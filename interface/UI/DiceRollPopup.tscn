@@ -5,26 +5,26 @@
 [ext_resource path="res://interface/theme/default.theme" type="Theme" id=3]
 [ext_resource path="res://interface/theme/fonts/roll_font.tres" type="DynamicFont" id=4]
 
-[node name="DiceRollPopup" type="Control"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_right = -774.0
-margin_bottom = -453.0
+[node name="DiceRollPopup" type="NinePatchRect"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -142.5
+margin_top = -110.0
+margin_right = 142.5
+margin_bottom = 110.0
+texture = ExtResource( 2 )
+patch_margin_left = 64
+patch_margin_top = 64
+patch_margin_right = 64
+patch_margin_bottom = 64
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="NinePatchRect" type="NinePatchRect" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
-texture = ExtResource( 2 )
-patch_margin_left = 20
-patch_margin_top = 40
-patch_margin_right = 20
-patch_margin_bottom = 40
-
-[node name="MarginContainer" type="MarginContainer" parent="NinePatchRect"]
+[node name="MarginContainer" type="MarginContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 custom_constants/margin_right = 16
@@ -32,31 +32,31 @@ custom_constants/margin_top = 16
 custom_constants/margin_left = 16
 custom_constants/margin_bottom = 32
 
-[node name="VBoxContainer" type="VBoxContainer" parent="NinePatchRect/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 margin_left = 16.0
 margin_top = 16.0
-margin_right = 234.0
-margin_bottom = 115.0
+margin_right = 269.0
+margin_bottom = 188.0
 theme = ExtResource( 3 )
 custom_constants/separation = 20
 
-[node name="DiceNum" type="Label" parent="NinePatchRect/MarginContainer/VBoxContainer"]
-margin_right = 218.0
-margin_bottom = 51.0
+[node name="DiceNum" type="Label" parent="MarginContainer/VBoxContainer"]
+margin_right = 253.0
+margin_bottom = 76.0
 size_flags_vertical = 3
 custom_fonts/font = ExtResource( 4 )
 text = "0"
 align = 1
 valign = 1
 
-[node name="Button" type="Button" parent="NinePatchRect/MarginContainer/VBoxContainer"]
-margin_left = 59.0
-margin_top = 71.0
-margin_right = 159.0
-margin_bottom = 99.0
+[node name="Button" type="Button" parent="MarginContainer/VBoxContainer"]
+margin_left = 76.0
+margin_top = 96.0
+margin_right = 176.0
+margin_bottom = 172.0
 rect_min_size = Vector2( 100, 0 )
 size_flags_horizontal = 4
 size_flags_vertical = 3
 theme = ExtResource( 3 )
 text = "Roll"
-[connection signal="pressed" from="NinePatchRect/MarginContainer/VBoxContainer/Button" to="." method="_on_Button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Button" to="." method="_on_Button_pressed"]
