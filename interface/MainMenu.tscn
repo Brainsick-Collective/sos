@@ -1,70 +1,444 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=77 format=2]
 
 [ext_resource path="res://interface/theme/default.theme" type="Theme" id=1]
 [ext_resource path="res://interface/MainMenu.gd" type="Script" id=2]
-[ext_resource path="res://interface/theme/fonts/Title_font.tres" type="DynamicFont" id=3]
+[ext_resource path="res://assets/backgrounds/terminal.png" type="Texture" id=3]
+[ext_resource path="res://assets/backgrounds/main_menu.png" type="Texture" id=4]
+[ext_resource path="res://interface/theme/fonts/bitwise-font/Bitwise-m19x.ttf" type="DynamicFontData" id=5]
+[ext_resource path="res://assets/ui/right.png" type="Texture" id=6]
+[ext_resource path="res://assets/ui/right_pressed.png" type="Texture" id=7]
+[ext_resource path="res://assets/ui/left.png" type="Texture" id=8]
+[ext_resource path="res://assets/ui/left_pressed.png" type="Texture" id=9]
+[ext_resource path="res://addons/SyndiBox/syndibox.gd" type="Script" id=10]
+[ext_resource path="res://assets/animated_sprites/controller_sprites/Controller 2/Controller 10003.png" type="Texture" id=11]
+[ext_resource path="res://assets/animated_sprites/controller_sprites/Controller 1/Controller 10005.png" type="Texture" id=12]
+[ext_resource path="res://assets/animated_sprites/controller_sprites/Controller 1/Controller 10014.png" type="Texture" id=13]
+[ext_resource path="res://assets/animated_sprites/controller_sprites/Controller 1/Controller 10008.png" type="Texture" id=14]
+[ext_resource path="res://assets/animated_sprites/controller_sprites/Controller 1/Controller 10009.png" type="Texture" id=15]
+[ext_resource path="res://assets/animated_sprites/controller_sprites/Controller 1/Controller 10003.png" type="Texture" id=16]
+[ext_resource path="res://assets/animated_sprites/controller_sprites/Controller 1/Controller 10010.png" type="Texture" id=17]
+[ext_resource path="res://assets/animated_sprites/controller_sprites/Controller 1/Controller 10002.png" type="Texture" id=18]
+[ext_resource path="res://assets/animated_sprites/controller_sprites/Controller 1/Controller 10001.png" type="Texture" id=19]
+[ext_resource path="res://assets/animated_sprites/controller_sprites/Controller 1/Controller 10004.png" type="Texture" id=20]
+[ext_resource path="res://assets/animated_sprites/controller_sprites/Controller 1/Controller 10006.png" type="Texture" id=21]
+[ext_resource path="res://assets/animated_sprites/controller_sprites/Controller 1/Controller 10007.png" type="Texture" id=22]
+[ext_resource path="res://assets/animated_sprites/controller_sprites/Controller 1/Controller 10012.png" type="Texture" id=23]
+[ext_resource path="res://assets/animated_sprites/controller_sprites/Controller 1/Controller 10013.png" type="Texture" id=24]
+[ext_resource path="res://assets/animated_sprites/controller_sprites/Controller 1/Controller 10015.png" type="Texture" id=25]
+[ext_resource path="res://assets/animated_sprites/controller_sprites/Controller 1/Controller 10011.png" type="Texture" id=26]
+[ext_resource path="res://assets/animated_sprites/controller_sprites/Controller 2/Controller 10001.png" type="Texture" id=27]
+[ext_resource path="res://assets/animated_sprites/controller_sprites/Controller 2/Controller 10006.png" type="Texture" id=28]
+[ext_resource path="res://assets/animated_sprites/controller_sprites/Controller 2/Controller 10004.png" type="Texture" id=29]
+[ext_resource path="res://assets/animated_sprites/controller_sprites/Controller 2/Controller 10008.png" type="Texture" id=30]
+[ext_resource path="res://assets/animated_sprites/controller_sprites/Controller 2/Controller 10005.png" type="Texture" id=31]
+[ext_resource path="res://assets/animated_sprites/controller_sprites/Controller 2/Controller 10007.png" type="Texture" id=32]
+[ext_resource path="res://assets/animated_sprites/controller_sprites/Controller 2/Controller 10012.png" type="Texture" id=33]
+[ext_resource path="res://assets/animated_sprites/controller_sprites/Controller 2/Controller 10009.png" type="Texture" id=34]
+[ext_resource path="res://assets/animated_sprites/controller_sprites/Controller 2/Controller 10013.png" type="Texture" id=35]
+[ext_resource path="res://assets/animated_sprites/controller_sprites/Controller 2/Controller 10014.png" type="Texture" id=36]
+[ext_resource path="res://assets/animated_sprites/controller_sprites/Controller 2/Controller 10015.png" type="Texture" id=37]
+[ext_resource path="res://assets/animated_sprites/controller_sprites/Controller 2/Controller 10002.png" type="Texture" id=38]
+[ext_resource path="res://assets/animated_sprites/controller_sprites/Controller 2/Controller 10010.png" type="Texture" id=39]
+[ext_resource path="res://assets/animated_sprites/controller_sprites/Controller 2/Controller 10011.png" type="Texture" id=40]
+[ext_resource path="res://assets/animated_sprites/controller_sprites/Controller 4/Controller 30004.png" type="Texture" id=41]
+[ext_resource path="res://assets/animated_sprites/controller_sprites/Controller 4/Controller 30011.png" type="Texture" id=42]
+[ext_resource path="res://assets/animated_sprites/controller_sprites/Controller 4/Controller 30005.png" type="Texture" id=43]
+[ext_resource path="res://assets/animated_sprites/controller_sprites/Controller 4/Controller 30010.png" type="Texture" id=44]
+[ext_resource path="res://assets/animated_sprites/controller_sprites/Controller 3/Controller 30004.png" type="Texture" id=45]
+[ext_resource path="res://assets/animated_sprites/controller_sprites/Controller 3/Controller 30000.png" type="Texture" id=46]
+[ext_resource path="res://assets/animated_sprites/controller_sprites/Controller 4/Controller 30000.png" type="Texture" id=47]
+[ext_resource path="res://assets/animated_sprites/controller_sprites/Controller 4/Controller 30001.png" type="Texture" id=48]
+[ext_resource path="res://assets/animated_sprites/controller_sprites/Controller 4/Controller 30007.png" type="Texture" id=49]
+[ext_resource path="res://assets/animated_sprites/controller_sprites/Controller 3/Controller 30001.png" type="Texture" id=50]
+[ext_resource path="res://assets/animated_sprites/controller_sprites/Controller 3/Controller 30002.png" type="Texture" id=51]
+[ext_resource path="res://assets/animated_sprites/controller_sprites/Controller 4/Controller 30013.png" type="Texture" id=52]
+[ext_resource path="res://assets/animated_sprites/controller_sprites/Controller 3/Controller 30007.png" type="Texture" id=53]
+[ext_resource path="res://assets/animated_sprites/controller_sprites/Controller 3/Controller 30003.png" type="Texture" id=54]
+[ext_resource path="res://assets/animated_sprites/controller_sprites/Controller 3/Controller 30006.png" type="Texture" id=55]
+[ext_resource path="res://assets/animated_sprites/controller_sprites/Controller 4/Controller 30009.png" type="Texture" id=56]
+[ext_resource path="res://assets/animated_sprites/controller_sprites/Controller 4/Controller 30012.png" type="Texture" id=57]
+[ext_resource path="res://assets/animated_sprites/controller_sprites/Controller 3/Controller 30011.png" type="Texture" id=58]
+[ext_resource path="res://assets/animated_sprites/controller_sprites/Controller 4/Controller 30006.png" type="Texture" id=59]
+[ext_resource path="res://assets/animated_sprites/controller_sprites/Controller 4/Controller 30008.png" type="Texture" id=60]
+[ext_resource path="res://assets/animated_sprites/controller_sprites/Controller 4/Controller 30003.png" type="Texture" id=61]
+[ext_resource path="res://assets/animated_sprites/controller_sprites/Controller 4/Controller 30002.png" type="Texture" id=62]
+[ext_resource path="res://assets/animated_sprites/controller_sprites/Controller 3/Controller 30005.png" type="Texture" id=63]
+[ext_resource path="res://assets/animated_sprites/controller_sprites/Controller 3/Controller 30008.png" type="Texture" id=64]
+[ext_resource path="res://assets/animated_sprites/controller_sprites/Controller 3/Controller 30009.png" type="Texture" id=65]
+[ext_resource path="res://assets/animated_sprites/controller_sprites/Controller 3/Controller 30010.png" type="Texture" id=66]
+[ext_resource path="res://assets/animated_sprites/controller_sprites/Controller 3/Controller 30012.png" type="Texture" id=67]
+[ext_resource path="res://assets/animated_sprites/controller_sprites/Controller 3/Controller 30013.png" type="Texture" id=68]
+[ext_resource path="res://interface/Controller.gd" type="Script" id=69]
+
+[sub_resource type="Animation" id=1]
+tracks/0/type = "value"
+tracks/0/path = NodePath("Console:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 840, 432 ), Vector2( 700, 300 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Console:rect_size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 240, 120 ), Vector2( 500, 250 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Column2/TitleMargins/Title:rect_position")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 16, 231 ), Vector2( 16, -300 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "ZoomFull"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Console:rect_size")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 240, 120 ), Vector2( 2000, 1200 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Console:rect_position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 840, 432 ), Vector2( -50, -50 ) ]
+}
+
+[sub_resource type="SpriteFrames" id=3]
+animations = [ {
+"frames": [ ExtResource( 25 ) ],
+"loop": true,
+"name": "empty",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 19 ), ExtResource( 18 ) ],
+"loop": true,
+"name": "idle",
+"speed": 2.0
+}, {
+"frames": [ ExtResource( 19 ), ExtResource( 18 ), ExtResource( 16 ), ExtResource( 20 ), ExtResource( 12 ), ExtResource( 21 ), ExtResource( 22 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 17 ), ExtResource( 26 ), ExtResource( 23 ), ExtResource( 24 ), ExtResource( 13 ), ExtResource( 25 ) ],
+"loop": false,
+"name": "in",
+"speed": 24.0
+}, {
+"frames": [ ExtResource( 25 ), ExtResource( 13 ), ExtResource( 24 ), ExtResource( 23 ), ExtResource( 26 ), ExtResource( 17 ), ExtResource( 15 ), ExtResource( 14 ), ExtResource( 22 ), ExtResource( 21 ), ExtResource( 12 ), ExtResource( 20 ), ExtResource( 16 ), ExtResource( 18 ), ExtResource( 19 ) ],
+"loop": false,
+"name": "out",
+"speed": 24.0
+} ]
+
+[sub_resource type="SpriteFrames" id=4]
+animations = [ {
+"frames": [ ExtResource( 37 ) ],
+"loop": false,
+"name": "empty",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 27 ), ExtResource( 38 ) ],
+"loop": true,
+"name": "idle",
+"speed": 2.0
+}, {
+"frames": [ ExtResource( 27 ), ExtResource( 38 ), ExtResource( 11 ), ExtResource( 29 ), ExtResource( 31 ), ExtResource( 28 ), ExtResource( 32 ), ExtResource( 30 ), ExtResource( 34 ), ExtResource( 39 ), ExtResource( 40 ), ExtResource( 33 ), ExtResource( 35 ), ExtResource( 36 ), ExtResource( 37 ) ],
+"loop": false,
+"name": "in",
+"speed": 24.0
+}, {
+"frames": [ ExtResource( 37 ), ExtResource( 36 ), ExtResource( 35 ), ExtResource( 33 ), ExtResource( 40 ), ExtResource( 39 ), ExtResource( 34 ), ExtResource( 30 ), ExtResource( 32 ), ExtResource( 28 ), ExtResource( 31 ), ExtResource( 29 ), ExtResource( 11 ), ExtResource( 38 ), ExtResource( 27 ) ],
+"loop": false,
+"name": "out",
+"speed": 24.0
+} ]
+
+[sub_resource type="SpriteFrames" id=5]
+animations = [ {
+"frames": [ ExtResource( 68 ) ],
+"loop": false,
+"name": "empty",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 46 ), ExtResource( 50 ) ],
+"loop": true,
+"name": "idle",
+"speed": 2.0
+}, {
+"frames": [ ExtResource( 46 ), ExtResource( 50 ), ExtResource( 51 ), ExtResource( 54 ), ExtResource( 45 ), ExtResource( 63 ), ExtResource( 55 ), ExtResource( 53 ), ExtResource( 64 ), ExtResource( 65 ), ExtResource( 66 ), ExtResource( 58 ), ExtResource( 67 ), ExtResource( 68 ) ],
+"loop": false,
+"name": "in",
+"speed": 24.0
+}, {
+"frames": [ ExtResource( 68 ), ExtResource( 67 ), ExtResource( 58 ), ExtResource( 66 ), ExtResource( 65 ), ExtResource( 64 ), ExtResource( 53 ), ExtResource( 55 ), ExtResource( 63 ), ExtResource( 45 ), ExtResource( 54 ), ExtResource( 51 ), ExtResource( 50 ), ExtResource( 46 ) ],
+"loop": false,
+"name": "out",
+"speed": 24.0
+} ]
+
+[sub_resource type="SpriteFrames" id=6]
+animations = [ {
+"frames": [ ExtResource( 52 ) ],
+"loop": true,
+"name": "empty",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 47 ), ExtResource( 48 ) ],
+"loop": true,
+"name": "idle",
+"speed": 2.0
+}, {
+"frames": [ ExtResource( 47 ), ExtResource( 48 ), ExtResource( 62 ), ExtResource( 61 ), ExtResource( 41 ), ExtResource( 43 ), ExtResource( 59 ), ExtResource( 49 ), ExtResource( 60 ), ExtResource( 56 ), ExtResource( 44 ), ExtResource( 42 ), ExtResource( 57 ), ExtResource( 52 ) ],
+"loop": false,
+"name": "in",
+"speed": 24.0
+}, {
+"frames": [ ExtResource( 52 ), ExtResource( 57 ), ExtResource( 42 ), ExtResource( 44 ), ExtResource( 56 ), ExtResource( 60 ), ExtResource( 49 ), ExtResource( 59 ), ExtResource( 43 ), ExtResource( 41 ), ExtResource( 61 ), ExtResource( 62 ), ExtResource( 48 ), ExtResource( 47 ) ],
+"loop": false,
+"name": "out",
+"speed": 24.0
+} ]
+
+[sub_resource type="DynamicFont" id=7]
+size = 128
+font_data = ExtResource( 5 )
 
 [node name="MainMenu" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 1
 theme = ExtResource( 1 )
 script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="MenuMargins" type="MarginContainer" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/TerminalZoom = SubResource( 1 )
+anims/ZoomFull = SubResource( 2 )
+
+[node name="bg" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="Background" type="TextureRect" parent="bg"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_constants/margin_right = 100
-custom_constants/margin_top = 50
-custom_constants/margin_left = 100
-custom_constants/margin_bottom = 100
+texture = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="Column" type="VBoxContainer" parent="MenuMargins"]
-margin_left = 100.0
-margin_top = 50.0
-margin_right = 924.0
-margin_bottom = 500.0
+[node name="Console" type="TextureRect" parent="."]
+margin_left = 840.0
+margin_top = 432.0
+margin_right = 1080.0
+margin_bottom = 552.0
+texture = ExtResource( 3 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="TitleMargins" type="MarginContainer" parent="MenuMargins/Column"]
-margin_right = 824.0
-margin_bottom = 252.0
-size_flags_horizontal = 3
+[node name="MarginContainer" type="MarginContainer" parent="Console"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 1
+custom_constants/margin_right = 32
+custom_constants/margin_top = 32
+custom_constants/margin_left = 32
+custom_constants/margin_bottom = 32
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Terminal" type="ReferenceRect" parent="Console/MarginContainer"]
+margin_left = 32.0
+margin_top = 32.0
+margin_right = 208.0
+margin_bottom = 88.0
+script = ExtResource( 10 )
+FONT = "res://interface/theme/fonts/CharacterCartridge.tres"
+
+[node name="Controllers" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="Controller1" type="AnimatedSprite" parent="Controllers"]
+position = Vector2( 917.648, 552 )
+frames = SubResource( 3 )
+animation = "empty"
+script = ExtResource( 69 )
+
+[node name="Controller2" type="AnimatedSprite" parent="Controllers"]
+position = Vector2( 991.504, 552 )
+frames = SubResource( 4 )
+animation = "empty"
+playing = true
+script = ExtResource( 69 )
+
+[node name="Controller3" type="AnimatedSprite" parent="Controllers"]
+position = Vector2( 920.703, 552 )
+frames = SubResource( 5 )
+animation = "empty"
+playing = true
+script = ExtResource( 69 )
+
+[node name="Controller4" type="AnimatedSprite" parent="Controllers"]
+position = Vector2( 993.312, 552 )
+frames = SubResource( 6 )
+animation = "empty"
+playing = true
+script = ExtResource( 69 )
+
+[node name="Column" type="VBoxContainer" parent="."]
+visible = false
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -416.0
+margin_bottom = -50.0
+size_flags_horizontal = 0
 size_flags_vertical = 3
+custom_constants/separation = 26
+alignment = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="Title" type="Label" parent="MenuMargins/Column/TitleMargins"]
+[node name="Row" type="HBoxContainer" parent="Column"]
+margin_left = 594.0
+margin_top = 266.0
+margin_right = 1325.0
+margin_bottom = 366.0
+size_flags_horizontal = 4
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Left" type="TextureButton" parent="Column/Row"]
+margin_right = 100.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 100, 100 )
+mouse_filter = 1
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture_normal = ExtResource( 8 )
+texture_pressed = ExtResource( 9 )
+expand = true
+stretch_mode = 5
+
+[node name="ConfirmButton" type="Button" parent="Column/Row"]
+margin_left = 116.0
+margin_right = 615.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 499, 100 )
+mouse_filter = 1
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Confirm"
+
+[node name="Right" type="TextureButton" parent="Column/Row"]
+margin_left = 631.0
+margin_right = 731.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 100, 100 )
+mouse_filter = 1
+size_flags_horizontal = 4
+size_flags_vertical = 0
+texture_normal = ExtResource( 6 )
+texture_pressed = ExtResource( 7 )
+expand = true
+stretch_mode = 5
+
+[node name="Column2" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_bottom = -50.0
+custom_constants/separation = 258
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TitleMargins" type="MarginContainer" parent="Column2"]
+margin_right = 1920.0
+margin_bottom = 590.0
+mouse_filter = 1
+size_flags_horizontal = 7
+size_flags_vertical = 7
+
+[node name="Title" type="Label" parent="Column2/TitleMargins"]
 margin_left = 16.0
-margin_top = 16.0
-margin_right = 808.0
-margin_bottom = 236.0
+margin_top = 231.0
+margin_right = 1904.0
+margin_bottom = 359.0
+mouse_filter = 1
 size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_fonts/font = ExtResource( 3 )
-text = "Dokapon Clone I"
+custom_fonts/font = SubResource( 7 )
+custom_colors/font_color = Color( 0.27451, 0.882353, 0.470588, 1 )
+text = "Save Our System"
 align = 1
 valign = 1
 
-[node name="StartButton" type="Button" parent="MenuMargins/Column"]
-margin_left = 262.0
-margin_top = 268.0
-margin_right = 562.0
-margin_bottom = 318.0
+[node name="VBoxContainer" type="VBoxContainer" parent="Column2"]
+margin_top = 848.0
+margin_right = 1920.0
+margin_bottom = 1030.0
+
+[node name="StartButton" type="Button" parent="Column2/VBoxContainer"]
+margin_left = 810.0
+margin_right = 1110.0
+margin_bottom = 50.0
 rect_min_size = Vector2( 300, 50 )
+mouse_filter = 1
 size_flags_horizontal = 4
 text = "Start New Game"
 
-[node name="SettingsButton" type="Button" parent="MenuMargins/Column"]
-margin_left = 262.0
-margin_top = 334.0
-margin_right = 562.0
-margin_bottom = 384.0
+[node name="SettingsButton" type="Button" parent="Column2/VBoxContainer"]
+margin_left = 810.0
+margin_top = 66.0
+margin_right = 1110.0
+margin_bottom = 116.0
 rect_min_size = Vector2( 300, 50 )
+mouse_filter = 1
 size_flags_horizontal = 4
 text = "Settings"
 
-[node name="QuitButton" type="Button" parent="MenuMargins/Column"]
-margin_left = 262.0
-margin_top = 400.0
-margin_right = 562.0
-margin_bottom = 450.0
+[node name="QuitButton" type="Button" parent="Column2/VBoxContainer"]
+margin_left = 810.0
+margin_top = 132.0
+margin_right = 1110.0
+margin_bottom = 182.0
 rect_min_size = Vector2( 300, 50 )
+mouse_filter = 1
 size_flags_horizontal = 4
 text = "Quit"
+[connection signal="pressed" from="Column/Row/ConfirmButton" to="." method="_on_confirm_pressed"]

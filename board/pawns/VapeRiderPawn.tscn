@@ -4,8 +4,10 @@
 [ext_resource path="res://board/BoardCharacter.tscn" type="PackedScene" id=2]
 
 [node name="BoardCharacter" instance=ExtResource( 2 )]
+scale = Vector2( 1, 1 )
 
-[node name="AnimatedSprite" parent="Pivot" index="3"]
+[node name="AnimatedSprite" parent="Pivot" index="2"]
+position = Vector2( -0.27833, -0.53405 )
 frames = ExtResource( 1 )
-animation = "right"
-playing = true
+animation = "down"
+frame = 1

@@ -20,7 +20,6 @@ var distance # Distance when zooming in or out. (float)
 var mode     # Currently active mode. (int)
 
 func initialize(player):
-	_ready()
 	mode = MODE_PLAYER
 	target = player
 	position = player.position

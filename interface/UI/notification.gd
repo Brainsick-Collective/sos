@@ -2,41 +2,36 @@ extends Popup
 
 class_name Notification
 
-var boardplayer
 var effect
-onready var label = $NinePatchRect/MarginContainer/Label
 var text
+
+onready var label = $NinePatchRect/MarginContainer/Label
 onready var click_through = false
 onready var timer = $Timer
 
+# warning-ignore:unused_signal
 signal completed
 
-func _ready():
-    pass
-func _process(delta): 
+func _process(_delta): 
     #TODO: if click_through, add a subtle graphic effect
     pass
-func init(player, newEffect, desc):
-    _init()
+
+func initialize(_target, newEffect, desc):
     set_exclusive(true)
-    boardplayer = player.board_character
     effect = newEffect
     text = desc
+# warning-ignore:return_value_discarded
     connect("about_to_show", self, "_screen_entered")
     
 func _input(event):
-    if (event.is_pressed() and  event is InputEventKey 
-        and ControlsHandler.is_current_player_action(event) and click_through):
-    
+    if (event.is_pressed() 
+    and  event is InputEventKey 
+    and ControlsHandler.is_current_player_action(event) 
+    and click_through):
         hide()
-        
-func just_text(desc):
-    _init()
-    text = desc
 
 func _screen_entered():
     label.text = text
-    #boardplayer.center_camera()
     #TODO: play effect
     timer.start()
 

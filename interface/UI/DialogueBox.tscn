@@ -1,11 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://addons/SyndiBox/syndibox.gd" type="Script" id=1]
-[ext_resource path="res://interface/theme/panel/dialogue_box.tres" type="StyleBox" id=2]
 [ext_resource path="res://interface/UI/DialogueBox.gd" type="Script" id=3]
 
 [sub_resource type="Theme" id=1]
-Panel/styles/panel = ExtResource( 2 )
+Panel/styles/panel = null
 
 [node name="DialogueBox" type="Panel"]
 anchor_right = 1.0
@@ -31,8 +30,8 @@ __meta__ = {
 [node name="SyndiBox" type="ReferenceRect" parent="MarginContainer"]
 margin_left = 15.0
 margin_top = 15.0
-margin_right = 1009.0
-margin_bottom = 585.0
+margin_right = 1905.0
+margin_bottom = 1065.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource( 1 )

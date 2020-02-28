@@ -30,37 +30,29 @@ var direction_names = { Vector2(-1,0) : "left", Vector2(1,0) : "right", Vector2(
 onready var Notification = preload("res://interface/UI/notification.tscn")
 
 
-func initialize(game_board, player, start):
-    _ready()
+func initialize(game_board, _player, start):
     last_heal_space = start
     confirm_move_popup = game_board.get_node("UI/GUI/MoveConfirmPopup")
-    self.player = player
+    player = _player
     dice_roll_popup = game_board.get_node("UI/GUI/DiceRollPopup")
     player_name = player.player_name
-    #$moves.set_anchor(position - Vector2(32,96))
-    #$moves.set_text(str(moves_left))
     board = game_board.get_node("GameBoard")
     game = get_node("/root/Game")
     timer = Timer.new()
     add_child(timer)
     timer.connect("timeout", self, "check_moves")
-    # Called when the node is added to the scene for the first time.
-    # Initialization here
     set_process(false)
     set_process_input(false)
 
 func set_position(new_pos):
     position = new_pos
-
-func set_sprite(new_sprite):
-    $Pivot/Sprite.texture = new_sprite
     
 func _input(event):
     if event is InputEventKey:
         #this change might have made pausemode on board redundant
         _direction = get_input_direction(event)
         
-func _process(delta):
+func _process(_delta):
     if _direction != Vector2():
         $Pivot/AnimatedSprite.play(direction_names[_direction])
         var next_space = board.request_move(self, _direction)
@@ -75,8 +67,6 @@ func move_to(target_position):
     # Move the node to the target cell instantly,
     # and animate the sprite moving from the start to the target cell
     
-    #use this for sprite facing direction
-    var move_direction = (target_position - position).normalized()
     var old_pos = position
     position = target_position
     $Pivot.position = to_local(old_pos)
@@ -111,7 +101,7 @@ func check_moves():
             emit_signal("last_move_taken")
             # this is fucked, in terms of OOD, but I don't want to deal
             # with it right now
-            var yes = yield(confirm_move_popup, "completed")
+            var _yes = yield(confirm_move_popup, "completed")
         else:
             emit_signal("turn_finished")
             confirm_move_popup.disconnect("completed", self, "confirm_move")
@@ -123,10 +113,6 @@ func get_input_direction(event):
         int(event.is_action_pressed("ui_right" + String(player_id))) - int(event.is_action_pressed("ui_left" + String(player_id))),
         int(event.is_action_pressed("ui_down" + String(player_id))) - int(event.is_action_pressed("ui_up" + String(player_id)))
     )
-
-func update_look_direction(direction):
-#	$Pivot/Sprite.rotation = direction.angle()
-    pass
         
 func get_moves():
     return moves_left
@@ -150,9 +136,9 @@ func confirm_move(isYes):
             
         confirm_move_popup.hide()
     
-func center_camera():
+func center_camera(last_camera_position  = camera.position):
     ("centering camera")
-    var pos = $Pivot.to_local(camera.position)
+    var pos = $Pivot.to_local(last_camera_position)
     camera.position = pos
     camera._set_current(true)
     $Tween.interpolate_property($Pivot/Camera2D, "position", camera.position, Vector2(), .5, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
@@ -160,18 +146,15 @@ func center_camera():
     yield($Tween, "tween_completed")
 
 func start_turn(last_camera_position):
-    var pos = $Pivot.to_local(last_camera_position)
-    camera.position = pos
-    camera._set_current(true)
-    $Tween.interpolate_property($Pivot/Camera2D, "position", camera.position, Vector2(), .5, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-    $Tween.start()
-    yield($Tween, "tween_completed")
+    center_camera(last_camera_position)
     #TODO: use a state machine for player conditions, i.e. in battle, dead, penalty
     if player.in_battle:
+        print("in battle turn")
         emit_signal("turn_finished")
         return
     check_penalties()
     if is_dead:
+        print("dead turn")
         emit_signal("turn_finished")
         return
     my_turn = true
@@ -186,26 +169,28 @@ func start_turn(last_camera_position):
     curr_space = position
     spaces_moved = Array()
 
-func get_camera_position():
-    return camera.to_global(camera.position)
-    
-func on_killed(p):
+func on_killed(_p, _reward):
     death_penalty = 3
     is_dead = true
     position = last_heal_space
-    ("player health on death: " + String(p.stats.health))
 
+func check_penalties():
+    if death_penalty == 0:
+            return
+    else:
+        death_penalty = max(0, death_penalty - 1)
+        if death_penalty == 0:
+            on_revive()
+            return
+        var note = Notification.instance()
+        note.initialize(self, null, player_name + " is in timeout!")
+        game.add_note_to_q(note)
+
+func get_camera_position():
+    return camera.to_global(camera.position)
+    
 func on_revive():
     is_dead = false
     player.reset_stats()
     
-func check_penalties():
-    if death_penalty == 0:
-            on_revive()
-            return
-    else:
-        death_penalty = max(0, death_penalty - 1)
-        var note = Notification.instance()
-        note.init(player, null, player.player_name + " is in timeout!")
-        game.add_note_to_q(note) 
-    return
+

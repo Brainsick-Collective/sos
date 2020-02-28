@@ -19,6 +19,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://board/BoardCharacter.gd"
 }, {
+"base": "Notification",
+"class": "BoardNotification",
+"language": "GDScript",
+"path": "res://BoardNotification.gd"
+}, {
 "base": "Node",
 "class": "CombatAction",
 "language": "GDScript",
@@ -38,6 +43,11 @@ _global_script_classes=[ {
 "class": "Combatant",
 "language": "GDScript",
 "path": "res://combat/combatants/Combatant.gd"
+}, {
+"base": "Control",
+"class": "Cutscene",
+"language": "GDScript",
+"path": "res://interface/UI/Cutscene.gd"
 }, {
 "base": "Node",
 "class": "CutsceneParser",
@@ -79,6 +89,26 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://combat/Actions/OffensiveMagicAction.gd"
 }, {
+"base": "Node",
+"class": "Player",
+"language": "GDScript",
+"path": "res://game/players/Player.gd"
+}, {
+"base": "Task",
+"class": "RandomSelector",
+"language": "GDScript",
+"path": "res://mobs/ai/RandomSelector.gd"
+}, {
+"base": "Node2D",
+"class": "RectExtents",
+"language": "GDScript",
+"path": "res://utils/RectExtents.gd"
+}, {
+"base": "Node",
+"class": "Rewards",
+"language": "GDScript",
+"path": "res://combat/combatants/Rewards.gd"
+}, {
 "base": "CombatAction",
 "class": "SpecialAttackAction",
 "language": "GDScript",
@@ -88,14 +118,21 @@ _global_script_classes=[ {
 "class": "Stats",
 "language": "GDScript",
 "path": "res://game/players/stats/Stats.gd"
+}, {
+"base": "Node",
+"class": "Task",
+"language": "GDScript",
+"path": "res://mobs/ai/Task.gd"
 } ]
 _global_script_class_icons={
 "AttackAction": "",
 "BoardCharacter": "",
+"BoardNotification": "",
 "CombatAction": "",
 "CombatArena": "",
 "CombatMove": "",
 "Combatant": "",
+"Cutscene": "",
 "CutsceneParser": "",
 "EffectAction": "",
 "Hit": "",
@@ -104,8 +141,13 @@ _global_script_class_icons={
 "Mob": "",
 "Notification": "",
 "OffensiveMagicAction": "",
+"Player": "",
+"RandomSelector": "",
+"RectExtents": "",
+"Rewards": "",
 "SpecialAttackAction": "",
-"Stats": ""
+"Stats": "",
+"Task": ""
 }
 
 [application]
@@ -122,6 +164,14 @@ ControlsHandler="*res://system/ControlsHandler.gd"
 MonsterFactory="*res://mobs/MonsterFactory.tscn"
 ShopFactory="*res://game/ShopFactory.tscn"
 
+[display]
+
+window/size/width=1920
+window/size/height=1080
+window/dpi/allow_hidpi=true
+window/stretch/mode="2d"
+window/stretch/aspect="keep"
+
 [editor_plugins]
 
 enabled=PoolStringArray( "SyndiBox" )
@@ -136,10 +186,6 @@ ui_accept={
 , Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":0,"pressure":0.0,"pressed":false,"script":null)
  ]
 }
-
-[rendering]
-
-quality/driver/driver_name="GLES2"
 
 [tiled_importer]
 

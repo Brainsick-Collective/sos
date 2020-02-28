@@ -32,11 +32,14 @@ func _on_Button_pressed(choice):
         emit_signal("chosen", left)
     elif choice == "right":
         emit_signal("chosen", right)
-    reset()
+    print(get_signal_connection_list("hide"))
     hide()
         
 func reset():
+    show()
     LeftOption.get_node("Button").show()
     RightOption.get_node("Button").show()
+    LeftOption.grab_click_focus()
+    LeftOption.grab_focus()
     RightOption.get_node("Label").text = "" 
     LeftOption.get_node("Label").text =  ""

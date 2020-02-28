@@ -1,17 +1,13 @@
 extends "res://interface/Menu.gd"
 
-# class member variables go here, for example:
-# var a = 2
-# var b = "textvar"
 onready var Board = preload("res://board/Board.tscn")
 onready var Character = preload("res://board/BoardCharacter.tscn")
 onready var Player = preload("res://game/players/Player.tscn")
 onready var StartingClasses = preload("res://game/StartingClasses.tscn")
-onready var left = $Column/Row/Left
-onready var right = $Column/Row/Right
+
 onready var character_select_sprite = $Column/Row/Character
-onready var num_players_label = $Column0/Row/Container/Label
 var Players
+var current_class
 
 var num_players
 var classes
@@ -20,51 +16,54 @@ var curr_player = 0
 const min_size = 1
 const max_size = 4
 onready var characters = []
-signal enter_board(board_node)
-
 
 func _ready():
     classes = StartingClasses.instance()
     character_select_sprite.set_texture(classes.get_first().get_texture())
     num_players = 1
     curr_player = 1
-
-func initialize(game_node):
-    _ready()
+    $Carts/CharacterCartridge.set_text("Vape Rider")
+    $Carts/CharacterCartridge2.set_text("Eye Witch")
+    $Carts/CharacterCartridge3.set_text("Fist Blade")
+    for i in range($Carts.get_child_count()):
+        var cart = $Carts.get_child(i)
+        cart.connect("entered", self, "_on_cartridge_hovered", [cart])
+        cart.connect("exited", self, "_on_cartridge_left", [cart])
+        cart.connect("pressed", self, "_on_cart_selected", [i])
+        
+func initialize(game_node, num):
     game = game_node
+    num_players = num
     Players = game_node.get_node("Players")
-    
-
-func _input(event):
-    if event.is_action_pressed("ui_left"):
-        if($Column.is_visible_in_tree()):
-            character_select_sprite.set_texture(classes.last_sprite())
-        else:
-            num_players= clamp(num_players-1,min_size, max_size)
-    elif event.is_action_pressed("ui_right"):
-        if($Column.is_visible_in_tree()):
-            character_select_sprite.set_texture(classes.next_sprite())
-        else:
-            num_players= clamp(num_players+1,min_size, max_size)
-    if event.is_action_pressed("ui_accept"):
-        $Column.show()
-        $Column0.hide()
-
-
-func _process(delta):
-    num_players_label.text = String(num_players)
     $Column/PlayerLabel.text = "Player " + String(curr_player)
+    current_class = classes.get_combatant()
+    
+func _on_cartridge_hovered(cart):
+    if $Tween.is_active():
+        return
+    $Tween.interpolate_property(cart, "rect_position", cart.rect_position, cart.rect_position + Vector2(50,0), 0.1, Tween.TRANS_LINEAR)
+    $Tween.start()
+    print("hovered " + cart.name)
+    yield($Tween, "tween_completed")
+    
+func _on_cartridge_left(cart):
+    if $Tween.is_active():
+        return
+    print("left " + cart.name)
+    $Tween.interpolate_property(cart, "rect_position", cart.rect_position, cart.rect_position - Vector2(50,0), 0.1, Tween.TRANS_LINEAR)
+    $Tween.start()
+    yield($Tween, "tween_completed")
 
 func _on_StartButton_pressed():
     var player = Player.instance()
+    player.player_name = $Column/PlayerLabel.text
     var combatant = classes.get_combatant()
     var board_character = classes.get_pawn()
     characters.append(board_character)
     player.initialize(curr_player, board_character, combatant)
-    combatant.initialize(character_select_sprite, player)
-    player.player_name = "Player " + String(curr_player)
-    
+    combatant.initialize(player) 
     Players.add_child(player)
+    
     if curr_player == num_players:
         var board = Board.instance()
         game.add_child(board)
@@ -76,8 +75,17 @@ func _on_StartButton_pressed():
         queue_free()
     else:
         curr_player+=1
+        $Column/PlayerLabel.text = "Player " + String(curr_player)
+    
+func _on_cart_selected(index):
+    current_class = classes.get_class_by_index(index)
+    character_select_sprite.texture = current_class.get_sprite()
     
 func get_player(character):
     for player in Players.get_children():
         if player.board_character == character:
             return player
+
+func _process(_delta):
+    $VBoxContainer/DescriptionPanel/Label.text = current_class.description
+    

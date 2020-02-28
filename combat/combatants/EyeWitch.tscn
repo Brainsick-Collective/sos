@@ -1,9 +1,16 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://combat/combatants/Combatant.tscn" type="PackedScene" id=1]
 [ext_resource path="res://game/players/jobs/EyeWitch.tres" type="Resource" id=2]
 [ext_resource path="res://game/players/stats/todo.tres" type="Resource" id=3]
+[ext_resource path="res://assets/cutscene_sprites/Wizard_f.png" type="Texture" id=4]
 
 [node name="Combatant" instance=ExtResource( 1 )]
 stats = ExtResource( 3 )
+description = "The eye witches are members of an ancient brood of sorceresses who harness magic from the fabric of the universe itself, the eyes that are manifest on their totems are said to be the eyes of beings from microscopic worlds"
 job = ExtResource( 2 )
+
+[node name="Sprite" parent="Skin" index="0"]
+position = Vector2( 7.62939e-06, -3.8147e-06 )
+scale = Vector2( 0.156506, 0.156506 )
+texture = ExtResource( 4 )

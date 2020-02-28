@@ -1,10 +1,7 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://game/StartingClasses.gd" type="Script" id=1]
-[ext_resource path="res://assets/pokemon/pokemon-sprites2-alpha_39.png" type="Texture" id=2]
-[ext_resource path="res://assets/pokemon/pokemon-sprites2-alpha_57.png" type="Texture" id=3]
 [ext_resource path="res://assets/cutscene_sprites/Speed_Class_F.png" type="Texture" id=4]
-[ext_resource path="res://assets/pokemon/pokemon-sprites2-alpha_75.png" type="Texture" id=5]
 [ext_resource path="res://assets/cutscene_sprites/Wizard_f.png" type="Texture" id=6]
 [ext_resource path="res://assets/cutscene_sprites/Strength_Class_F.png" type="Texture" id=7]
 
@@ -27,20 +24,3 @@ texture = ExtResource( 7 )
 position = Vector2( 321.381, 75.6464 )
 scale = Vector2( 0.131114, 0.131114 )
 texture = ExtResource( 6 )
-
-[node name="BoardPiece" type="Node" parent="."]
-
-[node name="chikorita" type="Sprite" parent="BoardPiece"]
-position = Vector2( 54.3263, 241.341 )
-scale = Vector2( 1.61651, 1.61651 )
-texture = ExtResource( 2 )
-
-[node name="cyndaquil" type="Sprite" parent="BoardPiece"]
-position = Vector2( 164.548, 239.386 )
-scale = Vector2( 1.99835, 1.99835 )
-texture = ExtResource( 3 )
-
-[node name="totodile" type="Sprite" parent="BoardPiece"]
-position = Vector2( 309.066, 243.693 )
-scale = Vector2( 1.87572, 1.87572 )
-texture = ExtResource( 5 )

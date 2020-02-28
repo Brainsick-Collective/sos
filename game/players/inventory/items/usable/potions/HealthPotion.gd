@@ -3,8 +3,5 @@ extends Item
 export(int) var HEAL_AMOUNT = 20
 
 func _apply_effect(user):
-	if not user.has_node("Health"):
-		return
-
-	user.get_node("Health").heal(HEAL_AMOUNT)
-	user.get_node("AnimationPlayer").play("heal")
+  user.stats.health = min(user.stats.health + HEAL_AMOUNT, user.stats.max_health)
+  # TODO play heal animation?

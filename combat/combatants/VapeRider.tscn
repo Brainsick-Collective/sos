@@ -1,9 +1,16 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://combat/combatants/Combatant.tscn" type="PackedScene" id=1]
 [ext_resource path="res://game/players/jobs/VapeRider.tres" type="Resource" id=2]
 [ext_resource path="res://game/players/stats/chika.tres" type="Resource" id=3]
+[ext_resource path="res://assets/cutscene_sprites/Speed_Class_F.png" type="Texture" id=4]
 
 [node name="VapeRider" instance=ExtResource( 1 )]
 stats = ExtResource( 3 )
+description = "A class that utilizes speed and agility,, one hand has a data extender attached to it, allowing the forearm to  reach out to 100 units away."
 job = ExtResource( 2 )
+
+[node name="Sprite" parent="Skin" index="0"]
+position = Vector2( 7.62939e-06, 3.05176e-05 )
+scale = Vector2( 0.111406, 0.134281 )
+texture = ExtResource( 4 )

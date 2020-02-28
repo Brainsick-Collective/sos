@@ -1,32 +1,46 @@
 extends Node
 
+class_name Player
+
+signal killed
+
 export (NodePath) var board_character
 export (Dictionary) var controls = {}
 export (int) var id
 export (String) var player_name
 export (NodePath) var combatant
 export (Resource) var stats
+
+
 var inventory
 var equipment
+var actor_name
 export (bool) var in_battle
 var cash := 0
 var is_dead = false
-var battle
+var battle : Node
+var death_penalty := 0
+var last_heal_space 
 
 
 func initialize( new_id, pawn, battler):
+    actor_name = player_name
     board_character = pawn
     id = new_id - 1
     combatant = battler
     stats = combatant.stats
     stats.reset()
-    combatant.connect("killed", pawn, "on_killed")
+    combatant.connect("killed", board_character, "on_killed")
     cash = 100
     inventory = $Inventory
     
 func get_inventory():
-    return get_node("Inventory")
+    return $Inventory
 
+func receive_item(item):
+    if item:
+        $Inventory.add(item)
+    
 func set_controls(controls):
     self.controls = controls
     
@@ -54,6 +68,7 @@ func reset_stats():
     print(String(stats.health))
     print(String(combatant.stats.health))
     
+
 func on_death():
     pass
     

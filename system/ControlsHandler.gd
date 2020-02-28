@@ -77,3 +77,48 @@ func which_player(event : InputEvent):
     
 func is_current_player_action(event : InputEventKey):
     return which_player(event) == current_player
+
+func get_current_player_direction():
+    var move_direction = Vector2(0,0)
+
+    var dpad_left = process_input_for_players("ui_left", [current_player])
+    var dpad_right = process_input_for_players("ui_right", [current_player])
+    var dpad_up  = process_input_for_players("ui_up", [current_player])
+    var dpad_down = process_input_for_players("ui_down", [current_player])
+
+    if dpad_left:
+        move_direction += Vector2(-1,0)
+    if dpad_right:
+        move_direction += Vector2(1,0)
+    if dpad_up:
+        move_direction += Vector2(0,-1)
+    if dpad_down:
+        move_direction += Vector2(0,1)
+        
+    return move_direction
+
+func is_action_pressed_by_players(event : InputEventKey, action : String, players: Array):
+    for player in players:
+        var id = -1
+        if player is int:
+            id = player
+        else:
+            id = player.id
+        if id == -1:
+            continue
+        if event.is_action_pressed(action + String(id)):
+            return true
+    return false
+    
+func process_input_for_players(action : String, players : Array):
+    for player in players:
+        var id = -1
+        if player is int:
+            id = player
+        else:
+            id = player.id
+        if id == -1:
+            continue
+        if Input.is_action_pressed(action + String(id)):
+            return true
+    return false

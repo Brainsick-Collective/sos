@@ -1,0 +1,253 @@
+[gd_scene format=2]
+
+[node name="Stats" type="MarginContainer"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -147.0
+margin_top = -239.0
+margin_right = 146.0
+margin_bottom = -40.0
+custom_constants/margin_right = 8
+custom_constants/margin_top = 8
+custom_constants/margin_left = 8
+custom_constants/margin_bottom = 8
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Row" type="HBoxContainer" parent="."]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 285.0
+margin_bottom = 191.0
+alignment = 1
+
+[node name="Fighter1Stats" type="VBoxContainer" parent="Row"]
+margin_left = 70.0
+margin_right = 102.0
+margin_bottom = 183.0
+custom_constants/separation = 8
+alignment = 1
+
+[node name="Speed" type="PanelContainer" parent="Row/Fighter1Stats"]
+margin_top = 23.0
+margin_right = 32.0
+margin_bottom = 51.0
+rect_min_size = Vector2( 32, 16 )
+
+[node name="Label" type="Label" parent="Row/Fighter1Stats/Speed"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 25.0
+margin_bottom = 21.0
+text = "0"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Attack" type="PanelContainer" parent="Row/Fighter1Stats"]
+margin_top = 59.0
+margin_right = 32.0
+margin_bottom = 87.0
+rect_min_size = Vector2( 32, 16 )
+
+[node name="Label" type="Label" parent="Row/Fighter1Stats/Attack"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 25.0
+margin_bottom = 21.0
+text = "0"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Defense" type="PanelContainer" parent="Row/Fighter1Stats"]
+margin_top = 95.0
+margin_right = 32.0
+margin_bottom = 123.0
+rect_min_size = Vector2( 32, 16 )
+
+[node name="Label" type="Label" parent="Row/Fighter1Stats/Defense"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 25.0
+margin_bottom = 21.0
+text = "0"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Magic" type="PanelContainer" parent="Row/Fighter1Stats"]
+margin_top = 131.0
+margin_right = 32.0
+margin_bottom = 159.0
+rect_min_size = Vector2( 32, 16 )
+
+[node name="Label" type="Label" parent="Row/Fighter1Stats/Magic"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 25.0
+margin_bottom = 21.0
+text = "0"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StatsLabels" type="VBoxContainer" parent="Row"]
+margin_left = 106.0
+margin_right = 170.0
+margin_bottom = 183.0
+alignment = 1
+
+[node name="Speed" type="Panel" parent="Row/StatsLabels"]
+margin_top = 21.0
+margin_right = 64.0
+margin_bottom = 53.0
+rect_min_size = Vector2( 64, 32 )
+
+[node name="Label" type="Label" parent="Row/StatsLabels/Speed"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+text = "SPEED"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Attack" type="Panel" parent="Row/StatsLabels"]
+margin_top = 57.0
+margin_right = 64.0
+margin_bottom = 89.0
+rect_min_size = Vector2( 64, 32 )
+
+[node name="Label" type="Label" parent="Row/StatsLabels/Attack"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+text = "ATTACK"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Defense" type="Panel" parent="Row/StatsLabels"]
+margin_top = 93.0
+margin_right = 64.0
+margin_bottom = 125.0
+rect_min_size = Vector2( 64, 32 )
+
+[node name="Label" type="Label" parent="Row/StatsLabels/Defense"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+text = "DEFENSE"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Magic" type="Panel" parent="Row/StatsLabels"]
+margin_top = 129.0
+margin_right = 64.0
+margin_bottom = 161.0
+rect_min_size = Vector2( 64, 32 )
+
+[node name="Label" type="Label" parent="Row/StatsLabels/Magic"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+text = "MAGIC"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Fighter2Stats" type="VBoxContainer" parent="Row"]
+margin_left = 174.0
+margin_right = 206.0
+margin_bottom = 183.0
+custom_constants/separation = 8
+alignment = 1
+
+[node name="Speed" type="PanelContainer" parent="Row/Fighter2Stats"]
+margin_top = 23.0
+margin_right = 32.0
+margin_bottom = 51.0
+rect_min_size = Vector2( 32, 16 )
+
+[node name="Label" type="Label" parent="Row/Fighter2Stats/Speed"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 25.0
+margin_bottom = 21.0
+text = "0"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Attack" type="PanelContainer" parent="Row/Fighter2Stats"]
+margin_top = 59.0
+margin_right = 32.0
+margin_bottom = 87.0
+rect_min_size = Vector2( 32, 16 )
+
+[node name="Label" type="Label" parent="Row/Fighter2Stats/Attack"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 25.0
+margin_bottom = 21.0
+text = "0"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Defense" type="PanelContainer" parent="Row/Fighter2Stats"]
+margin_top = 95.0
+margin_right = 32.0
+margin_bottom = 123.0
+rect_min_size = Vector2( 32, 16 )
+
+[node name="Label" type="Label" parent="Row/Fighter2Stats/Defense"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 25.0
+margin_bottom = 21.0
+text = "0"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Magic" type="PanelContainer" parent="Row/Fighter2Stats"]
+margin_top = 131.0
+margin_right = 32.0
+margin_bottom = 159.0
+rect_min_size = Vector2( 32, 16 )
+
+[node name="Label" type="Label" parent="Row/Fighter2Stats/Magic"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 25.0
+margin_bottom = 21.0
+text = "0"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}

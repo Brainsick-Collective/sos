@@ -34,6 +34,11 @@ func get_pawn():
     var pawn = starting_class_pawns[index]
     return pawn.instance()
 
+func get_class_by_index(ind):
+    index = ind
+    return get_combatant()
+    return $Portraits.get_child(index).get_texture()
+
 func next_sprite():
     index = abs((index + 1) % list_size)
     return $Portraits.get_child(index).get_texture()

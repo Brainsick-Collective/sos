@@ -5,11 +5,13 @@ class_name Item
 signal amount_changed(amount)
 signal depleted()
 
+enum target_types { SELF, ENEMY, ALLY }
+
 export(Texture) var icon
 export(String) var display_name = ""
 export(String) var description = ""
 export(int) var price = 100
-
+export(target_types) var target_type
 export(int) var amount = 1 setget set_amount
 
 export(bool) var unique = false

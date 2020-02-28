@@ -1,13 +1,12 @@
 extends "res://interface/Menu.gd"
 
-# class member variables go here, for example:
-# var a = 2
-# var b = "textvar"
-var CharacterSelectMenu
 var game
-func open():
-    pass
-    
+var CharacterSelectMenu = preload("res://interface/menus/CharacterSelectMenu.tscn")
+onready var num_players = 1
+const min_size = 1
+const max_size = 4
+onready var terminal = $Console/MarginContainer/Terminal
+
 func close():
     get_tree().quit()
     
@@ -15,16 +14,64 @@ func close():
 
 func initialize(game_node):
     game = game_node
-    CharacterSelectMenu = preload("res://interface/menus/CharacterSelectMenu.tscn")
-    $MenuMargins/Column/QuitButton.connect("pressed", self, "close")
-    $MenuMargins/Column/StartButton.connect("pressed",self,"_menu_selected",[CharacterSelectMenu])
+    
+# warning-ignore:return_value_discarded
+    $Column2/VBoxContainer/QuitButton.connect("pressed", self, "close")
+# warning-ignore:return_value_discarded
+    $Column2/VBoxContainer/StartButton.connect("pressed",self,"_menu_selected")
+    $Column2/VBoxContainer/StartButton.grab_focus()
+    $Column2/VBoxContainer/StartButton.grab_click_focus()
 
 
 
-
-func _menu_selected(Menu):
-    var menu = Menu.instance()
+func _menu_selected():
+    $Column2/VBoxContainer.hide()
+    $AnimationPlayer.play("TerminalZoom")
+    yield($AnimationPlayer, "animation_finished")
+    $Controllers/Controller1.show()
+    $Controllers/Controller1.play("out")
+    $Column2.hide()
+    terminal.DIALOG = "How many players?"
+    terminal.play_and_hold()
+    $Column/Row/ConfirmButton.grab_focus()
+    $Column.show()
+    
+func _on_confirm_pressed():
+    var menu = CharacterSelectMenu.instance()
+    #
     game.add_child(menu)
-    menu.initialize(game)
+    menu.initialize(game, num_players)
     queue_free()
     pass # replace with function body
+
+func _input(event):
+    if $Column.is_visible():
+        if event.is_action_pressed("ui_left"):
+            _on_left_pressed()
+        elif event.is_action_pressed("ui_right"):
+            _on_right_pressed()
+        
+# warning-ignore:unsused_argument
+func _process(delta):
+    pass
+#    for i in range(num_players):
+#        $Controllers.get_child(i).show()
+#    for i in range(num_players, max_size):
+#        $Controllers.get_child(i).hide()
+
+func _on_left_pressed():
+    if num_players == min_size:
+        return
+    
+    num_players = clamp(num_players-1, min_size, max_size)
+    
+    $Controllers.get_child(num_players).play("in")
+    
+    
+func _on_right_pressed():
+    if num_players == max_size:
+        return
+    
+    num_players = clamp(num_players+1, min_size, max_size)
+    
+    $Controllers.get_child(num_players-1).play("out")

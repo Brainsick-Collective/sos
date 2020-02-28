@@ -79,10 +79,10 @@ animations = [ {
 "name": "up",
 "speed": 4.0
 }, {
-"frames": [  ],
+"frames": [ SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 11 ) ],
 "loop": true,
-"name": "right_idle",
-"speed": 5.0
+"name": "down",
+"speed": 4.0
 }, {
 "frames": [  ],
 "loop": true,
@@ -91,16 +91,16 @@ animations = [ {
 }, {
 "frames": [  ],
 "loop": true,
+"name": "down_idle",
+"speed": 2.0
+}, {
+"frames": [  ],
+"loop": true,
 "name": "up_idle",
 "speed": 5.0
 }, {
 "frames": [  ],
 "loop": true,
-"name": "down_idle",
-"speed": 2.0
-}, {
-"frames": [ SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 11 ) ],
-"loop": true,
-"name": "down",
-"speed": 4.0
+"name": "right_idle",
+"speed": 5.0
 } ]

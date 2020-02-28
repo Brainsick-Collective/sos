@@ -3,7 +3,6 @@ extends Control
 
 ## TODO make a class for inventory and extend it for player and shop
 
-signal item_use_requested(item, actor)
 signal completed
 export(PackedScene) var ItemButton
 var inventory
@@ -16,7 +15,6 @@ func set_inventory(inv):
     inventory = inv
     
 func initialize():
-    _ready()
     #this is sus
     player = inventory.get_parent()
     
@@ -41,6 +39,7 @@ func _on_ItemButton_focus_entered():
     _description_label.text = get_focus_owner().description
 
 func _on_ItemButton_pressed(item):
+    item.use(player)
     var button = get_focus_owner()
     button.grab_focus()
     ##DO SOMETHING
