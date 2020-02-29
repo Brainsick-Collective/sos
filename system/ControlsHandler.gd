@@ -101,6 +101,8 @@ func is_action_pressed_by_current_player(event : InputEventKey, action : String)
     return is_action_pressed_by_players(event,action, [current_player])
 
 func is_action_pressed_by_players(event : InputEventKey, action : String, players: Array):
+    if not event is InputEventKey:
+        return
     for player in players:
         var id = -1
         if player is int:

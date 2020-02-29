@@ -5,12 +5,17 @@ var left
 onready var LeftOption = $Panel/MarginContainer/HBoxContainer/Left
 onready var RightOption = $Panel/MarginContainer/HBoxContainer/Right
 signal chosen(choice)
+
+func _ready():
+    $Panel/MarginContainer/HBoxContainer/Left/Button.grab_focus()
+
 func decide_turns(left_speed, right_speed):
     randomize()
     var total = left_speed + right_speed
     var roll = randi() % total
     left = roll < left_speed
     right = !left
+    $Panel/MarginContainer/HBoxContainer/Left/Button.grab_focus()
     
 
 #left

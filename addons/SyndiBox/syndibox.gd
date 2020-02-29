@@ -133,10 +133,36 @@ func _enter_tree():
 func _ready(): # Called when ready.
     pass
 
+func reset():
+    # For every character that has been printed...
+    for i in cur_char:
+        # Remove all existent characters.
+        if cur_char.has(i):
+            cur_char[i].free()
+            # Remove existent tweens for existent characters.
+            if cur_tween.has(i):
+                cur_tween[i].free()
+    cur_speed = speed
+    cur_char = {}
+    cur_tween = {}
+    cur_length = ""
+    str_line = 0
+    step = 0
+    heightTrack = 0
+    maxLineHeight = 0
+    step_pause = 0
+    escape = false
+    
 func play_and_hold():
+    reset()
     hold = true
     play()
-    
+func set_and_play(new_text):
+    reset()
+    DIALOG = new_text
+    hold = true
+    play()
+
 func play():
     strings = DIALOG.split("\n")
     set_physics_process(true)
@@ -872,8 +898,8 @@ func _input(event): # Called on input
             # ...then if there are no more strings in the dialog...
             if cur_set >= strings.size() - 1:
                 # Hide the textbox.
+                emit_signal("strings_finished")
                 if not hold:
-                    emit_signal("strings_finished")
                     hide()
             # ...then if there are more strings in the dialog...
             else:
@@ -918,26 +944,10 @@ func _physics_process(delta): # Called every step
             hide()
         # If there are strings in the dialog...
         else:
-            # For every character that has been printed...
-            for i in cur_char:
-                # Remove all existent characters.
-                if cur_char.has(i):
-                    cur_char[i].free()
-                    # Remove existent tweens for existent characters.
-                    if cur_tween.has(i):
-                        cur_tween[i].free()
+            
             # Ready the dialog variables for the next string.
-            cur_speed = speed
-            cur_char = {}
-            cur_tween = {}
-            cur_length = ""
-            str_line = 0
+            reset()
             cur_set += 1
-            step = 0
-            heightTrack = 0
-            maxLineHeight = 0
-            step_pause = 0
-            escape = false
             # Set our current string to the next string in the set.
             cur_string = strings[cur_set]
             # Call our print_dialog function.

@@ -37,6 +37,7 @@ func initialize(game_node, num):
     Players = game_node.get_node("Players")
     $Column/PlayerLabel.text = "Player " + String(curr_player)
     current_class = classes.get_combatant()
+    $Column/StartButton.grab_focus()
     
 func _on_cartridge_hovered(cart):
     if $Tween.is_active():

@@ -16,6 +16,11 @@ margin_right = 292.0
 margin_bottom = 164.5
 theme = ExtResource( 1 )
 script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Timer" type="Timer" parent="."]
 
 [node name="Panel" type="Panel" parent="."]
 anchor_right = 1.0
@@ -44,13 +49,6 @@ margin_right = 240.0
 margin_bottom = 269.0
 size_flags_horizontal = 3
 
-[node name="Button" type="Button" parent="Panel/MarginContainer/HBoxContainer/Left"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="Label" type="Label" parent="Panel/MarginContainer/HBoxContainer/Left"]
 anchor_top = 0.5
 anchor_right = 1.0
@@ -66,15 +64,18 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Button" type="Button" parent="Panel/MarginContainer/HBoxContainer/Left"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Right" type="Control" parent="Panel/MarginContainer/HBoxContainer"]
 margin_left = 244.0
 margin_right = 484.0
 margin_bottom = 269.0
 size_flags_horizontal = 3
-
-[node name="Button" type="Button" parent="Panel/MarginContainer/HBoxContainer/Right"]
-anchor_right = 1.0
-anchor_bottom = 1.0
 
 [node name="Label" type="Label" parent="Panel/MarginContainer/HBoxContainer/Right"]
 anchor_top = 0.5
@@ -85,7 +86,12 @@ margin_bottom = 11.5
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 align = 1
 valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Button" type="Button" parent="Panel/MarginContainer/HBoxContainer/Right"]
+anchor_right = 1.0
+anchor_bottom = 1.0
 [connection signal="pressed" from="Panel/MarginContainer/HBoxContainer/Left/Button" to="." method="_on_Button_pressed" binds= [ "left" ]]
 [connection signal="pressed" from="Panel/MarginContainer/HBoxContainer/Right/Button" to="." method="_on_Button_pressed" binds= [ "right" ]]

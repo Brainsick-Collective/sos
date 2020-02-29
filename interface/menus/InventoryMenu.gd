@@ -7,9 +7,9 @@ signal completed
 export(PackedScene) var ItemButton
 var inventory
 
-onready var _item_grid = $Panel/Margin/VBoxContainer/Grid
-onready var _description_label = $Panel/Margin/VBoxContainer/DescriptionPanel/Label
-onready var _cash_label = $Panel/Margin/VBoxContainer/Label
+onready var _item_grid = $Margin/VBoxContainer/Grid
+onready var _description_label = $Margin/VBoxContainer/DescriptionPanel/Label
+onready var _cash_label = $Margin/VBoxContainer/Label
 var player
 func set_inventory(inv):
     inventory = inv

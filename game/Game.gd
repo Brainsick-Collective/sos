@@ -10,8 +10,8 @@ var cutscene = null
 
 func _ready():
     var main_menu = MainMenu.instance()
-    main_menu.initialize(self)
     add_child(main_menu)
+    main_menu.initialize(self)
     
     
 func load_cutscene(cutscene_file):

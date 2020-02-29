@@ -6,10 +6,16 @@ extends Control
 export(PackedScene) var ItemButton
 var inventory
 signal item_bought(item)
+signal completed
 var player
+var curr_item
+var last_button
 
-onready var _item_grid = $Row/Column/ItemList/Margin/Grid
-onready var _description_label = $Row/Column/Description/Margin/Label
+enum {EXIT, BUY, SELL}
+var current_action
+
+onready var _item_grid = $Column/Row/ItemList/Margin/Grid
+onready var _description_label = $Column/Description/Margin/Label
 
 func set_inventory(inv):
     inventory = inv
@@ -35,17 +41,58 @@ func create_item_button(item):
     return item_button
 
 func _on_ItemButton_focus_entered():
-    _description_label.text = get_focus_owner().description
+    _description_label.DIALOG = get_focus_owner().description
+    _description_label.play_and_hold()
 
 func _on_ItemButton_pressed(item):
-    var button = get_focus_owner()
-    button.grab_focus()
-    if player.cash >= item.price:
-        emit_signal("item_bought", item)
+    curr_item = item
+    last_button = get_focus_owner()
+    current_action = BUY
+    _show_confirm()
+    
+func _buy_item():
+    if player.cash >= curr_item.price:
+        emit_signal("item_bought", curr_item)
     ##DO SOMETHING
 
 
-func _on_Button_pressed():
-    queue_free()
-    emit_signal("completed")
+func _show_confirm():
+    $ConfirmPopup.show()
+    $ConfirmPopup/VBoxContainer/yes.grab_focus()
+    match current_action:
+        EXIT:
+            _description_label.set_and_play("are you done shopping?")
+        BUY:
+            _description_label.set_and_play("So you want to buy a " + curr_item.name + "?")
+    
 
+func _input(event):
+    if ControlsHandler.is_action_pressed_by_current_player(event, "ui_cancel"):
+        current_action = EXIT
+        _show_confirm()
+        
+
+func _do_action():
+    match current_action:
+        EXIT:
+            queue_free()
+            emit_signal("completed")
+        BUY:
+            _buy_item()
+            $ConfirmPopup.hide()
+            _focus_last()
+        
+
+func _on_yes_pressed():
+    _do_action()
+
+
+func _on_no_pressed():
+    $ConfirmPopup.hide()
+    _focus_last()
+    
+func _focus_last():
+    if last_button:
+        last_button.grab_focus()
+    elif _item_grid.has_child():
+        _item_grid.get_child(0).grab_focus()
