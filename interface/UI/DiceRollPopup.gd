@@ -1,18 +1,18 @@
-extends Control
+extends NinePatchRect
 
 signal completed(turn_size)
 var num = 0
 var countdown = 0
 const COUNTDOWN_SIZE = 4
 onready var game_vars = get_node("/root/GameVariables")
-onready var DiceNum = $NinePatchRect/MarginContainer/VBoxContainer/DiceNum
+onready var DiceNum = $MarginContainer/VBoxContainer/DiceNum
 
 func initialize():
     show()
     set_process(true)
     num = randi() % 7 + 1
     countdown = COUNTDOWN_SIZE
-    $NinePatchRect/MarginContainer/VBoxContainer/Button.grab_focus()
+    $MarginContainer/VBoxContainer/Button.grab_focus()
     
 func _process(delta):
     countdown -= 1

@@ -1,0 +1,57 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://assets/ui/redbar_health_empty.png" type="Texture" id=1]
+[ext_resource path="res://assets/ui/redbar_health_full.png" type="Texture" id=2]
+[ext_resource path="res://interface/UI/combat_ui_theme.tres" type="Theme" id=3]
+[ext_resource path="res://interface/GUI/HealthBar.gd" type="Script" id=5]
+[ext_resource path="res://interface/UI/level_font.tres" type="DynamicFont" id=6]
+
+[node name="Combatant2Panel" type="TextureProgress"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 916.888
+margin_top = 2.0
+margin_right = -2.11194
+margin_bottom = -758.0
+theme = ExtResource( 3 )
+max_value = 120.0
+value = 65.0
+texture_under = ExtResource( 1 )
+texture_progress = ExtResource( 2 )
+fill_mode = 1
+script = ExtResource( 5 )
+
+[node name="Name" type="Label" parent="."]
+margin_left = 408.77
+margin_top = 53.6362
+margin_right = 781.77
+margin_bottom = 142.636
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Player 2"
+align = 1
+valign = 1
+
+[node name="Level" type="Label" parent="."]
+margin_left = 837.743
+margin_top = 151.0
+margin_right = 924.743
+margin_bottom = 243.0
+custom_fonts/font = ExtResource( 6 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "4"
+align = 1
+valign = 1
+clip_text = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HealthLabel" type="Label" parent="."]
+margin_left = 97.0
+margin_top = 172.0
+margin_right = 781.0
+margin_bottom = 236.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "20/20"
+align = 1
+valign = 1

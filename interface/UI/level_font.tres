@@ -3,6 +3,5 @@
 [ext_resource path="res://interface/theme/fonts/white-rabbit/whitrabt.ttf" type="DynamicFontData" id=1]
 
 [resource]
-size = 26
-use_filter = true
+size = 64
 font_data = ExtResource( 1 )

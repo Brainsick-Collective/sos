@@ -41,8 +41,8 @@ func initialize():
     fighter1chose = false
     fighter2chose = false
     $"1".add_child(fighter1)
-    $UI/GUI/ActorPanel1.set_actor(fighter1)
-    $UI/GUI/ActorPanel2.set_actor(fighter2)
+    $UI/GUI/Combatant1Panel.set_actor(fighter1)
+    $UI/GUI/Combatant2Panel.set_actor(fighter2)
     $"2".add_child(fighter2)
     fighter2.flip_sprite()
     $MatchupInterface.initialize(fighter1, fighter2)
@@ -189,8 +189,8 @@ func switch_fighters(fighter):
         fighter2 = fighter1
         fighter1 = fighter
         fighter2.flip_sprite()
-        $UI/GUI/ActorPanel1.set_actor(fighter1)
-        $UI/GUI/ActorPanel2.set_actor(fighter2)
+        $UI/GUI/Combatant1Panel.set_actor(fighter1)
+        $UI/GUI/Combatant2Panel.set_actor(fighter2)
 
 func dealloc():
     fighter1.player.in_battle = !is_battle_over

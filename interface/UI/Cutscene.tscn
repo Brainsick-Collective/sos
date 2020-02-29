@@ -60,4 +60,4 @@ margin_top = 15.0
 margin_right = 1905.0
 margin_bottom = 315.0
 rect_min_size = Vector2( 0, 300 )
-[connection signal="string_finished" from="Margin/DialogueBox" to="." method="_on_DialogueBox_string_finished"]
+[connection signal="strings_finished" from="Margin/DialogueBox" to="." method="_on_DialogueBox_strings_finished"]
