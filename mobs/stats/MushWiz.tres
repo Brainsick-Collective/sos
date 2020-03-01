@@ -9,7 +9,7 @@
 
 [resource]
 script = ExtResource( 3 )
-max_health = 1
+max_health = 80
 max_mana = 10
 strength = 13
 defense = 18

@@ -1,0 +1,159 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://combat/interface/theme/combat_theme.tres" type="Theme" id=1]
+[ext_resource path="res://combat/interface/StatsRow.gd" type="Script" id=2]
+[ext_resource path="res://assets/ui/worldmap_statusbar_att.png" type="Texture" id=3]
+[ext_resource path="res://assets/ui/worldmap_statusbar_mag.png" type="Texture" id=4]
+[ext_resource path="res://assets/ui/worldmap_statusbar_def.png" type="Texture" id=5]
+[ext_resource path="res://assets/ui/worldmap_statusbar_spe.png" type="Texture" id=6]
+
+[node name="StatsRow" type="HBoxContainer"]
+margin_left = 2.0
+margin_top = 220.0
+margin_right = 750.0
+margin_bottom = 360.0
+theme = ExtResource( 1 )
+custom_constants/separation = 0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="ATK" type="TextureRect" parent="."]
+margin_right = 187.0
+margin_bottom = 140.0
+size_flags_horizontal = 3
+texture = ExtResource( 3 )
+expand = true
+stretch_mode = 6
+
+[node name="CenterContainer" type="CenterContainer" parent="ATK"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -83.2094
+margin_top = -3.70941
+margin_right = 106.791
+margin_bottom = 27.2906
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="ATK/CenterContainer"]
+margin_left = 87.0
+margin_top = 5.0
+margin_right = 102.0
+margin_bottom = 26.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "5"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DEF" type="TextureRect" parent="."]
+margin_left = 187.0
+margin_right = 374.0
+margin_bottom = 140.0
+size_flags_horizontal = 3
+texture = ExtResource( 5 )
+expand = true
+stretch_mode = 6
+
+[node name="CenterContainer" type="CenterContainer" parent="DEF"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -12.9257
+margin_top = -5.85126
+margin_right = 27.0743
+margin_bottom = 34.1487
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="DEF/CenterContainer"]
+margin_left = 12.0
+margin_top = 9.0
+margin_right = 27.0
+margin_bottom = 30.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "5"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MG" type="TextureRect" parent="."]
+margin_left = 374.0
+margin_right = 561.0
+margin_bottom = 140.0
+size_flags_horizontal = 3
+texture = ExtResource( 4 )
+expand = true
+stretch_mode = 6
+
+[node name="CenterContainer" type="CenterContainer" parent="MG"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 1.22314
+margin_top = -8.20935
+margin_right = 41.2231
+margin_bottom = 31.7906
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="MG/CenterContainer"]
+margin_left = 12.0
+margin_top = 9.0
+margin_right = 27.0
+margin_bottom = 30.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "1"
+align = 1
+valign = 1
+
+[node name="SPD" type="TextureRect" parent="."]
+margin_left = 561.0
+margin_right = 748.0
+margin_bottom = 140.0
+size_flags_horizontal = 3
+texture = ExtResource( 6 )
+expand = true
+stretch_mode = 6
+
+[node name="CenterContainer" type="CenterContainer" parent="SPD"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -1.13501
+margin_top = -8.20941
+margin_right = 38.865
+margin_bottom = 31.7906
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="SPD/CenterContainer"]
+margin_left = 12.0
+margin_top = 9.0
+margin_right = 27.0
+margin_bottom = 30.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "5"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}

@@ -1,30 +1,28 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://interface/GUI/HealthBar.gd" type="Script" id=1]
 [ext_resource path="res://interface/theme/default.theme" type="Theme" id=2]
 [ext_resource path="res://assets/ui/char_statusbar_full.png" type="Texture" id=3]
+[ext_resource path="res://interface/UI/StatsRow.tscn" type="PackedScene" id=4]
 [ext_resource path="res://combat/interface/ActorPanel.gd" type="Script" id=5]
-[ext_resource path="res://combat/interface/StatsRow.gd" type="Script" id=6]
 [ext_resource path="res://assets/ui/char_statusbar_empty.png" type="Texture" id=7]
 [ext_resource path="res://interface/UI/level_font.tres" type="DynamicFont" id=8]
 [ext_resource path="res://interface/theme/fonts/actor_panel_name_font.tres" type="DynamicFont" id=9]
-[ext_resource path="res://assets/ui/worldmap_statusbar_att.png" type="Texture" id=10]
-[ext_resource path="res://assets/ui/worldmap_statusbar_def.png" type="Texture" id=11]
-[ext_resource path="res://assets/ui/worldmap_statusbar_spe.png" type="Texture" id=12]
-[ext_resource path="res://assets/ui/worldmap_statusbar_mag.png" type="Texture" id=13]
-[ext_resource path="res://interface/UI/combat_ui_theme.tres" type="Theme" id=14]
 
-[node name="ActorPanel1" type="Control"]
-margin_right = 403.0
-margin_bottom = 128.0
+[node name="ActorPanel" type="Control"]
+margin_right = 840.0
+margin_bottom = 364.0
 theme = ExtResource( 2 )
 script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="PlayerStatus" type="TextureProgress" parent="."]
-margin_left = 16.0
-margin_top = 16.0
-margin_right = 824.0
-margin_bottom = 376.0
+margin_left = 7.12225
+margin_top = 5.0524
+margin_right = 807.122
+margin_bottom = 365.052
 value = 40.0
 texture_under = ExtResource( 7 )
 texture_progress = ExtResource( 3 )
@@ -68,87 +66,4 @@ margin_bottom = 205.0
 align = 1
 valign = 1
 
-[node name="StatsRow" type="HBoxContainer" parent="."]
-margin_left = 35.0531
-margin_top = 230.067
-margin_right = 843.053
-margin_bottom = 370.068
-theme = ExtResource( 14 )
-script = ExtResource( 6 )
-__meta__ = {
-"_edit_group_": true,
-"_edit_use_anchors_": false
-}
-
-[node name="ATK" type="TextureRect" parent="StatsRow"]
-margin_right = 180.0
-margin_bottom = 140.0
-size_flags_horizontal = 3
-texture = ExtResource( 10 )
-
-[node name="Label" type="Label" parent="StatsRow/ATK"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 40.0
-margin_top = 43.0
-margin_right = -16.0
-margin_bottom = -17.0
-text = "5"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="DEF" type="TextureRect" parent="StatsRow"]
-margin_left = 196.0
-margin_right = 376.0
-margin_bottom = 140.0
-size_flags_horizontal = 3
-texture = ExtResource( 11 )
-
-[node name="Label" type="Label" parent="StatsRow/DEF"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 41.0
-margin_top = 43.0
-margin_right = -17.0
-margin_bottom = -15.0
-text = "5"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="MG" type="TextureRect" parent="StatsRow"]
-margin_left = 392.0
-margin_right = 592.0
-margin_bottom = 140.0
-size_flags_horizontal = 3
-texture = ExtResource( 13 )
-
-[node name="Label" type="Label" parent="StatsRow/MG"]
-margin_left = 66.0
-margin_top = 44.0
-margin_right = 183.0
-margin_bottom = 127.0
-text = "1"
-align = 1
-valign = 1
-
-[node name="SPD" type="TextureRect" parent="StatsRow"]
-margin_left = 608.0
-margin_right = 808.0
-margin_bottom = 140.0
-size_flags_horizontal = 3
-texture = ExtResource( 12 )
-
-[node name="Label" type="Label" parent="StatsRow/SPD"]
-margin_left = 67.0
-margin_top = 43.0
-margin_right = 182.0
-margin_bottom = 126.0
-text = "5"
-align = 1
-valign = 1
+[node name="StatsRow" parent="." instance=ExtResource( 4 )]

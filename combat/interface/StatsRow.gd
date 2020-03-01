@@ -9,7 +9,7 @@ func initialize(stats):
     
 func _process(_delta):
     if stats:
-        $ATK/Label.text =   String(stats.strength)
-        $DEF/Label.text =   String(stats.defense)
-        $SPD/Label.text =   String(stats.speed)
-        $MG/Label.text  =   String(stats.magic)
+        $ATK/CenterContainer/Label.text =   String(stats.strength)
+        $DEF/CenterContainer/Label.text =   String(stats.defense)
+        $SPD/CenterContainer/Label.text =   String(stats.speed)
+        $MG/CenterContainer/Label.text  =   String(stats.magic)

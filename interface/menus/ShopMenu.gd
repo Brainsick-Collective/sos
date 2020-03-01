@@ -94,5 +94,5 @@ func _on_no_pressed():
 func _focus_last():
     if last_button:
         last_button.grab_focus()
-    elif _item_grid.has_child():
+    elif _item_grid.has_child(0):
         _item_grid.get_child(0).grab_focus()

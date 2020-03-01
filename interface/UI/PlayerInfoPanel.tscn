@@ -1,17 +1,48 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://assets/ui/panel.png" type="Texture" id=1]
 [ext_resource path="res://interface/UI/ui_theme.tres" type="Theme" id=2]
 [ext_resource path="res://assets/cutscene_sprites/Strength_Class_F.png" type="Texture" id=3]
-[ext_resource path="res://combat/interface/ActorPanel.tscn" type="PackedScene" id=4]
+[ext_resource path="res://interface/UI/CondensedPlayerPanel.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/ui/left.png" type="Texture" id=5]
+[ext_resource path="res://assets/ui/right.png" type="Texture" id=6]
+[ext_resource path="res://assets/ui/right_pressed.png" type="Texture" id=7]
+[ext_resource path="res://assets/ui/left_pressed.png" type="Texture" id=8]
 
-[node name="PlayerInfoPanel" type="NinePatchRect"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 488.428
-margin_top = 220.67
-margin_right = -598.572
-margin_bottom = -328.33
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.376471, 0.490196, 0.545098, 1 )
+
+[node name="PlayerInfoPanel" type="HBoxContainer"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -633.5
+margin_top = -256.0
+margin_right = 633.5
+margin_bottom = 256.0
+custom_constants/separation = 60
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Left" type="TextureButton" parent="."]
+margin_top = 128.0
+margin_right = 256.0
+margin_bottom = 384.0
+size_flags_vertical = 4
+texture_normal = ExtResource( 5 )
+texture_pressed = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlayerInfoPanel" type="NinePatchRect" parent="."]
+margin_left = 316.0
+margin_right = 951.0
+margin_bottom = 512.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 theme = ExtResource( 2 )
 texture = ExtResource( 1 )
 patch_margin_left = 256
@@ -22,100 +53,92 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TabContainer" type="TabContainer" parent="."]
+[node name="TabContainer" type="TabContainer" parent="PlayerInfoPanel"]
 anchor_right = 1.0
-margin_bottom = 56.0
+anchor_bottom = 1.0
+margin_left = 16.0
+margin_top = 16.0
+margin_right = -16.0
+margin_bottom = -32.0
+custom_styles/panel = SubResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Summary" type="Tabs" parent="TabContainer"]
+[node name="Summary" type="Tabs" parent="PlayerInfoPanel/TabContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 4.0
-margin_top = 39.0
-margin_right = -4.0
-margin_bottom = -4.0
+margin_top = 31.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Equipment" type="Tabs" parent="TabContainer"]
-visible = false
+[node name="VBoxContainer" type="VBoxContainer" parent="PlayerInfoPanel/TabContainer/Summary"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 4.0
-margin_top = 52.0
-margin_right = -4.0
-margin_bottom = -4.0
-
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 32.0
-margin_top = 32.0
-margin_right = -32.0
-margin_bottom = -48.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
-margin_right = 768.0
-margin_bottom = 323.0
+[node name="HBoxContainer" type="HBoxContainer" parent="PlayerInfoPanel/TabContainer/Summary/VBoxContainer"]
+margin_right = 603.0
+margin_bottom = 305.0
 size_flags_vertical = 3
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer"]
-margin_right = 380.0
-margin_bottom = 323.0
+[node name="TextureRect" type="TextureRect" parent="PlayerInfoPanel/TabContainer/Summary/VBoxContainer/HBoxContainer"]
+margin_right = 299.0
+margin_bottom = 305.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 texture = ExtResource( 3 )
 expand = true
 stretch_mode = 6
 
-[node name="ActorPanel1" parent="VBoxContainer/HBoxContainer" instance=ExtResource( 4 )]
-margin_left = 384.0
-margin_top = 97.0
-margin_right = 764.0
-margin_bottom = 225.0
+[node name="VBoxContainer" type="VBoxContainer" parent="PlayerInfoPanel/TabContainer/Summary/VBoxContainer/HBoxContainer"]
+margin_left = 303.0
+margin_right = 603.0
+margin_bottom = 305.0
 size_flags_horizontal = 3
-size_flags_vertical = 4
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
-margin_left = 768.0
-margin_right = 768.0
-margin_bottom = 323.0
+[node name="CondensedPlayerPanel" parent="PlayerInfoPanel/TabContainer/Summary/VBoxContainer/HBoxContainer/VBoxContainer" instance=ExtResource( 4 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 77.0
+margin_right = 300.0
+margin_bottom = 227.0
+rect_min_size = Vector2( 0, 150 )
+size_flags_horizontal = 3
+size_flags_vertical = 6
 
-[node name="grid" type="GridContainer" parent="VBoxContainer"]
-margin_top = 327.0
-margin_right = 768.0
-margin_bottom = 451.0
+[node name="grid" type="GridContainer" parent="PlayerInfoPanel/TabContainer/Summary/VBoxContainer"]
+margin_top = 309.0
+margin_right = 603.0
+margin_bottom = 433.0
 columns = 2
 
-[node name="Label" type="Label" parent="VBoxContainer/grid"]
-margin_right = 382.0
+[node name="Label" type="Label" parent="PlayerInfoPanel/TabContainer/Summary/VBoxContainer/grid"]
+margin_right = 299.0
 margin_bottom = 21.0
 size_flags_horizontal = 3
 text = "EXP"
 
-[node name="Label2" type="Label" parent="VBoxContainer/grid"]
-margin_left = 386.0
-margin_right = 768.0
+[node name="Label2" type="Label" parent="PlayerInfoPanel/TabContainer/Summary/VBoxContainer/grid"]
+margin_left = 303.0
+margin_right = 602.0
 margin_bottom = 21.0
 size_flags_horizontal = 3
 text = "NEXT"
 
-[node name="Panel" type="PanelContainer" parent="VBoxContainer/grid"]
+[node name="Panel" type="PanelContainer" parent="PlayerInfoPanel/TabContainer/Summary/VBoxContainer/grid"]
 margin_top = 25.0
-margin_right = 382.0
+margin_right = 299.0
 margin_bottom = 60.0
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="VBoxContainer/grid/Panel"]
+[node name="Label" type="Label" parent="PlayerInfoPanel/TabContainer/Summary/VBoxContainer/grid/Panel"]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 375.0
+margin_right = 292.0
 margin_bottom = 28.0
 size_flags_horizontal = 3
 text = "next"
@@ -123,17 +146,17 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Panel2" type="PanelContainer" parent="VBoxContainer/grid"]
-margin_left = 386.0
+[node name="Panel2" type="PanelContainer" parent="PlayerInfoPanel/TabContainer/Summary/VBoxContainer/grid"]
+margin_left = 303.0
 margin_top = 25.0
-margin_right = 768.0
+margin_right = 602.0
 margin_bottom = 60.0
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="VBoxContainer/grid/Panel2"]
+[node name="Label" type="Label" parent="PlayerInfoPanel/TabContainer/Summary/VBoxContainer/grid/Panel2"]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 375.0
+margin_right = 292.0
 margin_bottom = 28.0
 size_flags_horizontal = 3
 text = "next"
@@ -141,31 +164,31 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label3" type="Label" parent="VBoxContainer/grid"]
+[node name="Label3" type="Label" parent="PlayerInfoPanel/TabContainer/Summary/VBoxContainer/grid"]
 margin_top = 64.0
-margin_right = 382.0
+margin_right = 299.0
 margin_bottom = 85.0
 size_flags_horizontal = 3
 text = "JOB"
 
-[node name="Label4" type="Label" parent="VBoxContainer/grid"]
-margin_left = 386.0
+[node name="Label4" type="Label" parent="PlayerInfoPanel/TabContainer/Summary/VBoxContainer/grid"]
+margin_left = 303.0
 margin_top = 64.0
-margin_right = 768.0
+margin_right = 602.0
 margin_bottom = 85.0
 size_flags_horizontal = 3
 text = "NET WORTH"
 
-[node name="Panel3" type="PanelContainer" parent="VBoxContainer/grid"]
+[node name="Panel3" type="PanelContainer" parent="PlayerInfoPanel/TabContainer/Summary/VBoxContainer/grid"]
 margin_top = 89.0
-margin_right = 382.0
+margin_right = 299.0
 margin_bottom = 124.0
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="VBoxContainer/grid/Panel3"]
+[node name="Label" type="Label" parent="PlayerInfoPanel/TabContainer/Summary/VBoxContainer/grid/Panel3"]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 375.0
+margin_right = 292.0
 margin_bottom = 28.0
 size_flags_horizontal = 3
 text = "next"
@@ -173,20 +196,38 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Panel4" type="PanelContainer" parent="VBoxContainer/grid"]
-margin_left = 386.0
+[node name="Panel4" type="PanelContainer" parent="PlayerInfoPanel/TabContainer/Summary/VBoxContainer/grid"]
+margin_left = 303.0
 margin_top = 89.0
-margin_right = 768.0
+margin_right = 602.0
 margin_bottom = 124.0
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="VBoxContainer/grid/Panel4"]
+[node name="Label" type="Label" parent="PlayerInfoPanel/TabContainer/Summary/VBoxContainer/grid/Panel4"]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 375.0
+margin_right = 292.0
 margin_bottom = 28.0
 size_flags_horizontal = 3
 text = "next"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Equipment" type="Tabs" parent="PlayerInfoPanel/TabContainer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 31.0
+
+[node name="Right" type="TextureButton" parent="."]
+margin_left = 1011.0
+margin_top = 128.0
+margin_right = 1267.0
+margin_bottom = 384.0
+size_flags_vertical = 4
+texture_normal = ExtResource( 6 )
+texture_pressed = ExtResource( 7 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

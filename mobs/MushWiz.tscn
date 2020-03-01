@@ -14,7 +14,7 @@ off_priority = "magic"
 def_priority = "magic"
 defeated_trigger = ExtResource( 5 )
 
-[node name="Sprite" type="Sprite" parent="Skin" index="0"]
+[node name="Sprite" parent="Skin" index="0"]
 position = Vector2( 0.80954, -1.07923 )
 scale = Vector2( 0.215689, 0.215689 )
 texture = ExtResource( 4 )
