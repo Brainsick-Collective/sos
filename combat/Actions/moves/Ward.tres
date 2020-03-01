@@ -1,13 +1,13 @@
 [gd_resource type="Resource" load_steps=2 format=2]
 
-[ext_resource path="res://combat/Actions/moves/CombatMove.gd" type="Script" id=1]
+[ext_resource path="res://combat/Actions/moves/ Ward.gd" type="Script" id=1]
 
 [resource]
 script = ExtResource( 1 )
-move_name = "Ward"
+move_name = "Move"
 type = 2
 phase = 1
-modifier = 0.8
-description = "Creates a protective wall, blocking some incoming damage"
-base_damage = 0
-success_chance = 0.85
+modifier = null
+description = ""
+base_damage = null
+success_chance = 0.0

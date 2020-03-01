@@ -37,7 +37,6 @@ func get_pawn():
 func get_class_by_index(ind):
     index = ind
     return get_combatant()
-    return $Portraits.get_child(index).get_texture()
 
 func next_sprite():
     index = abs((index + 1) % list_size)

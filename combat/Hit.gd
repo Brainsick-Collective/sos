@@ -8,7 +8,7 @@ enum move_types { empty = -1, normal, special, magic, effect }
 var damage = 0 setget _set_damage, _get_damage
 var target setget _set_target, _get_target
 var type  setget _set_type, _get_type
-signal hit_connected(truthy)
+var reverse = false
 # var effect : StatusEffect = StatusEffect.new()
 
 

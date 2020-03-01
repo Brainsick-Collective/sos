@@ -13,7 +13,7 @@ func _ready():
     pass
 
 
-func _physics_process(delta):
+func _physics_process(_delta):
     direction = ControlsHandler.get_current_player_direction()
 # warning-ignore:return_value_discarded
     move_and_collide(direction.normalized() * speed)

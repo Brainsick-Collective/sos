@@ -1,8 +1,7 @@
 extends Node
 
 
-onready var MainMenu = preload("res://interface/MainMenu.tscn")
-onready var CombatArena = preload("res://combat/CombatArena.tscn")
+onready var MainMenu = preload("res://interface/MainMenu.tscn") 
 onready var Cutscene = preload("res://interface/UI/Cutscene.tscn")
 var board
 var queue = null
@@ -28,8 +27,9 @@ func play_cutscene(new_cutscene):
     
 func _after_cutscene(curr_cutscene):
     curr_cutscene.queue_free()
+    cutscene = null
     get_tree().paused = false
-    pass
+    queue.play_queue()
     
 func initialize_game(new_board):
     board = new_board
@@ -50,34 +50,21 @@ func set_controls():
 func enter_space_scene(player_pawn):
     # this whole thing is kinda fucked, could use an overhaul
     var scene = player_pawn.player.battle
-    var new = false
     
-    if !scene:
-        new = true
-        scene = $Board/GameBoard.get_space_scene(player_pawn)
-    else:
-        scene.switch_fighters(player_pawn.player.combatant)
-        
     if scene:
         remove_child(board)
         add_child(scene)
-        if new:
-            add_child(scene)
-            if scene is Control:
-                scene.initialize(player_pawn.player)
-            else:
-                scene.initialize()
-            scene.connect("completed", self, "add_note_to_q")
-        yield(scene, "completed")
-        if scene:
-            remove_child(scene)
-        
-        add_child(board)
-    if cutscene:
-        play_cutscene(cutscene)
-    #TODO: the note q should be at game level?
-    print("ended scene, or no scene available")
-    queue.play_queue()
+        scene.switch_fighters(player_pawn.player.combatant)
+    else:
+        scene = $Board/GameBoard.get_space_scene(player_pawn)
+            
+    if scene:
+        scene.connect("completed", self, "resolve_scene")
+        remove_child(board)
+        add_child(scene)
+        scene.initialize(player_pawn.player)
+    else:
+        resolve_scene(null)
 
 func on_queue_finished():
     set_process(true)
@@ -86,12 +73,22 @@ func on_queue_finished():
 func queue_cutscene(new_cutscene):
     cutscene = new_cutscene
     
-func add_note_to_q(notes):
+func resolve_scene(notes):
     if typeof(notes) == TYPE_ARRAY:
         for note in notes:
             queue.add_notif_to_q(note)
-        return
-    queue.add_notif_to_q(notes)
+    else:
+        queue.add_notif_to_q(notes)
+
+    for child in get_children():
+        if child is CombatArena:
+            remove_child(child)
+    add_child(board)
+    if cutscene:
+        play_cutscene(cutscene)
+    else:
+        queue.play_queue()
+    print("ended scene, or no scene available")
     return
     
 

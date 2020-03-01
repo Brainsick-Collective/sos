@@ -2,12 +2,8 @@ extends Control
 
 var board
 var current_player
-onready var moves_label = $Counter/MarginContainer/VBoxContainer/MovesLeft
-onready var name_label = $ActorPanel1/Margins/VBoxContainer/Name
-onready var health_bar = $ActorPanel1/Margins/VBoxContainer/HBoxContainer/TextureProgress
-onready var level_label = $ActorPanel1/Margins/VBoxContainer/HBoxContainer/LVL
-onready var health_label = $ActorPanel1/Margins/VBoxContainer/HBoxContainer/TextureProgress/Label
 
+onready var moves_left_label = $Counter/MarginContainer/VBoxContainer/MovesLeft
 onready var InventoryMenu = preload("res://interface/menus/InventoryMenu.tscn")
 
 func initialize(new_board):
@@ -41,10 +37,8 @@ func _on_InventoryButton_pressed():
     inventory_menu.set_inventory(current_player.get_inventory())
     add_child(inventory_menu)
     inventory_menu.initialize()
-    $ActionMenu.hide()
-    get_tree().paused = true
-    yield(inventory_menu, "completed")
-    get_tree().paused = false
+    $ActionMenu.hide() 
+    yield(inventory_menu, "tree_exited") 
     $ActionMenu.show()
     $ActionMenu/MarginContainer/VBoxContainer/InventoryButton.grab_focus()
 
@@ -58,8 +52,8 @@ func _on_PlayerInfoButton_pressed():
     #show player stats and board character
     pass # Replace with function body.
 
-
-
+func _process(_delta):
+    moves_left_label.text = String(current_player.board_character.get_moves())
 func show_moves(_num):
     $Counter.show()
     
@@ -70,8 +64,11 @@ func set_preview_actor(actors):
 func clear_preview():
     $MapPreviewGUI.clear_actor()
     $MapPreviewGUI.hide()
+    
+func on_move_confirm_choice(choice):
+    if choice == true:
+        $Counter.hide()
 
 func _on_ActionMenu_visibility_changed():
     if $ActionMenu.is_visible():
         $Counter.hide()
-    pass # Replace with function body.

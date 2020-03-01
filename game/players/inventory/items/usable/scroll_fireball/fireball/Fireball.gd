@@ -7,10 +7,10 @@ var direction = Vector2(1, 0)
 func _physics_process(delta):
     position += direction * SPEED * delta
 
-func _on_body_entered(body):
+func _on_body_entered(_body):
     explode()
 
-func _on_area_entered(area):
+func _on_area_entered(_area):
     explode()
 
 func explode():
@@ -18,6 +18,7 @@ func explode():
     
     var explosion_node = Explosion.instance()
     add_child(explosion_node)
+# warning-ignore:return_value_discarded
     get_tree().create_timer(explosion_node.lifetime * 2.0).connect("timeout", self, "queue_free")
 
 func set_active(value):

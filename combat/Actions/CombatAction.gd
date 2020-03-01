@@ -4,6 +4,10 @@ class_name CombatAction
 
 var initialized = false
 
+const DEF_MOD = 1.2
+const ATK_MOD = 2.8
+const MAG_MOD = 2.8
+const STK_MOD = 4.0 
 
 # Since Actions can be instanced by code (ie skills) these
 # actions doesn't have an owner, that's why we get the owner
@@ -23,7 +27,7 @@ func initialize(battler) -> void:
     actor = battler
     initialized = true
 
-func execute(target, reaction):
+func execute(_target, _reaction):
     assert(initialized)
     print("%s missing overwrite of the execute method" % name)
     return false

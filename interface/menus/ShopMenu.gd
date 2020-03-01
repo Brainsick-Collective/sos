@@ -76,7 +76,7 @@ func _do_action():
     match current_action:
         EXIT:
             queue_free()
-            emit_signal("completed")
+            emit_signal("completed", null)
         BUY:
             _buy_item()
             $ConfirmPopup.hide()

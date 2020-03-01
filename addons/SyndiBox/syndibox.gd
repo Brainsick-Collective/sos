@@ -773,14 +773,14 @@ func print_dialog(string): # Called on draw
     while step <= string.length() - 1 && visible:
         # Set up profile
         if !text_hide:
-            if CHARACTER_PROFILE is String:
-                def_profile = load(CHARACTER_PROFILE)
-            else:
-                def_profile = CHARACTER_PROFILE
-            if CHARACTER_PROFILE != null:
-                x_offset = 48
-            else:
-                x_offset = 0
+#            if CHARACTER_PROFILE is String:
+#                def_profile = load(CHARACTER_PROFILE)
+#            else:
+#                def_profile = CHARACTER_PROFILE
+#            if CHARACTER_PROFILE != null:
+#                x_offset = 48
+#            else:
+            x_offset = 0
             prof_label.add_font_override("font",def_font)
             prof_label.add_color_override("font_color",def_color)
             prof_label.set_text(CHARACTER_NAME)

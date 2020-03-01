@@ -11,9 +11,11 @@ export (phase_type) var phase = phase_type.empty
 export var modifier : float
 export var description : String = ""
 export var icon : Texture = load("res://icon.png")
-
 export var base_damage : int
 export(float, 0.0, 1.0) var success_chance : float
+
+func react(_hit):
+    print("didn't override")
 
 
 func do_self_effect():

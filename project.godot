@@ -59,6 +59,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://combat/Actions/EffectAction.gd"
 }, {
+"base": "Item",
+"class": "Equipment",
+"language": "GDScript",
+"path": "res://game/players/inventory/items/equipment/Equipment.gd"
+}, {
 "base": "Reference",
 "class": "Hit",
 "language": "GDScript",
@@ -135,6 +140,7 @@ _global_script_class_icons={
 "Cutscene": "",
 "CutsceneParser": "",
 "EffectAction": "",
+"Equipment": "",
 "Hit": "",
 "Item": "",
 "Job": "",

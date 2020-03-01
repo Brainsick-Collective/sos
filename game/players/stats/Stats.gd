@@ -56,6 +56,7 @@ func get_required_experience():
 func take_damage(hit): # Hit
     var old_health = health
     health -= hit.damage
+# warning-ignore:narrowing_conversion
     health = max(0.0, health)
     emit_signal("health_changed", health, old_health)
     if health == 0:
@@ -72,11 +73,13 @@ func level_up():
     
 func heal(amount : int):
     var old_health = health
+# warning-ignore:narrowing_conversion
     health = min(health + amount, max_health)
     emit_signal("health_changed", health, old_health)
 
 func set_mana(value : int):
     var old_mana = mana
+# warning-ignore:narrowing_conversion
     mana = max(0.0, value)
     emit_signal("mana_changed", mana, old_mana)
     if mana == 0:

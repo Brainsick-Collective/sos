@@ -15,7 +15,7 @@ const TIME_PER_SPACE = .1
 onready var camera = $Pivot/Camera2D
 var confirm_move_popup
 var target_space
-export var moves_left = 0
+var moves_left = 0
 var spaces_moved
 var board
 var dice_roll_popup
@@ -116,6 +116,7 @@ func get_input_direction(event):
         
 func get_moves():
     return moves_left
+    
 func get_name(): 
     return player_name
 
@@ -127,7 +128,6 @@ func confirm_move(isYes):
             timer.stop()
             my_turn = false
             emit_signal("turn_finished")
-            confirm_move_popup.disconnect("completed", self, "confirm_move")
         else:
             move_to(spaces_moved.back())
             curr_space = position
