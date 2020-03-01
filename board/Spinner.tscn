@@ -1,0 +1,4 @@
+[gd_scene format=2]
+
+[node name="Spinner" type="Node2D"]
+position = Vector2( 894.578, 483.909 )

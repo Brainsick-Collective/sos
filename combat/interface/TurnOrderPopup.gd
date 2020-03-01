@@ -45,6 +45,6 @@ func reset():
     LeftOption.get_node("Button").show()
     RightOption.get_node("Button").show()
     LeftOption.grab_click_focus()
-    LeftOption.grab_focus()
+    $Panel/MarginContainer/HBoxContainer/Left/Button.grab_focus()
     RightOption.get_node("Label").text = "" 
     LeftOption.get_node("Label").text =  ""

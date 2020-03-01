@@ -40,5 +40,5 @@ __meta__ = {
 }
 DIALOG = "wowowowowow
 "
-FONT = "res://interface/theme/fonts/sc_12.tres"
+FONT = "res://interface/theme/fonts/num_font.tres"
 [connection signal="strings_finished" from="MarginContainer/SyndiBox" to="." method="_on_SyndiBox_strings_finished"]

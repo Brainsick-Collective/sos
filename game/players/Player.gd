@@ -2,8 +2,6 @@ extends Node
 
 class_name Player
 
-signal killed
-
 export (NodePath) var board_character
 export (Dictionary) var controls = {}
 export (int) var id
@@ -41,8 +39,8 @@ func receive_item(item):
     if item:
         $Inventory.add(item)
     
-func set_controls(controls):
-    self.controls = controls
+func set_controls(_controls):
+    controls = _controls
     
 func get_id():
     return id

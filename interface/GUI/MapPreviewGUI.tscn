@@ -19,12 +19,12 @@ __meta__ = {
 [node name="Column" type="VBoxContainer" parent="."]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 407.0
-margin_bottom = 451.0
+margin_right = 1301.0
+margin_bottom = 844.0
 custom_constants/separation = 16
 
 [node name="Preview" type="TextureRect" parent="Column"]
-margin_right = 400.0
+margin_right = 1294.0
 margin_bottom = 300.0
 rect_min_size = Vector2( 0, 300 )
 texture = ExtResource( 1 )
@@ -33,6 +33,6 @@ stretch_mode = 6
 
 [node name="ActorPanel" parent="Column" instance=ExtResource( 3 )]
 margin_top = 316.0
-margin_right = 400.0
-margin_bottom = 444.0
+margin_right = 1294.0
+margin_bottom = 316.0
 rect_min_size = Vector2( 400, 0 )

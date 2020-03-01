@@ -2,7 +2,6 @@ extends Combatant
 
 class_name Mob
 
-signal defeated
 export var off_priority : String
 export var def_priority : String
 export var defeated_trigger : PackedScene

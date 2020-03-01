@@ -14,7 +14,7 @@ func initialize():
     countdown = COUNTDOWN_SIZE
     $MarginContainer/VBoxContainer/Button.grab_focus()
     
-func _process(delta):
+func _process(_delta):
     countdown -= 1
     if countdown <= 0:
         countdown = COUNTDOWN_SIZE

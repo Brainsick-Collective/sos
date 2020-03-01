@@ -50,14 +50,6 @@ func _input(event):
             _on_left_pressed()
         elif event.is_action_pressed("ui_right"):
             _on_right_pressed()
-        
-# warning-ignore:unsused_argument
-func _process(delta):
-    pass
-#    for i in range(num_players):
-#        $Controllers.get_child(i).show()
-#    for i in range(num_players, max_size):
-#        $Controllers.get_child(i).hide()
 
 func _on_left_pressed():
     if num_players == min_size:

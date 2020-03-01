@@ -219,3 +219,4 @@ margin_bottom = 114.985
 [connection signal="pressed" from="ActionMenu/MarginContainer/VBoxContainer/InventoryButton" to="." method="_on_InventoryButton_pressed"]
 [connection signal="pressed" from="ActionMenu/MarginContainer/VBoxContainer/ViewBoardButton" to="." method="_on_ViewBoardButton_pressed"]
 [connection signal="pressed" from="ActionMenu/MarginContainer/VBoxContainer/PlayerInfoButton" to="." method="_on_PlayerInfoButton_pressed"]
+[connection signal="popup_hide" from="MoveConfirmPopup" to="." method="on_move_confirm_choice"]

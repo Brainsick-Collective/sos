@@ -5,8 +5,6 @@ onready var START
 onready var Characters = $GameBoard/Characters
 onready var BoardCharacter = preload("res://board/BoardCharacter.tscn")
 onready var Board = $GameBoard
-onready var moves_label = $UI/GUI/Counter/MarginContainer/VBoxContainer/MovesLeft
-onready var name_label = $UI/GUI/NinePatchRect/PlayerName
 onready var GUI = $UI/GUI
 onready var BoardNotification = preload("res://interface/UI/BoardNotification.tscn")
 signal turn_finished(player)
@@ -31,17 +29,15 @@ func initialize(characters, _game):
     turn_ind = Characters.get_child_count() - 1
     Board.initialize()
     GUI.initialize(self)
+    current_player = characters[0]
     
 func start_game():
     GUI.hide()
     var cutscene = game.load_cutscene("res://dialogue/intro_cutscene.json")
     yield(cutscene, "tree_exited")
     GUI.show()
-    play_turn(Characters.get_child(0), START)
+#    play_turn(Characters.get_child(0), START)
 
-# warning-ignore:unused_argument
-func _process(delta):
-    moves_label.text = String(current_player.get_moves())
     
 func play_turn(board_character, last_camera_position):
     current_player = board_character
@@ -83,10 +79,7 @@ func return_to_player(last_camera_position):
     GUI.show_action_menu()
     
 func enter_shop(player_pawn, location):
-    var shop = ShopFactory.get_shop(player_pawn, location)
-    get_tree().paused = true
-    yield(shop, "tree_exited")
-    get_tree().paused = false
+    var _shop = ShopFactory.get_shop(player_pawn, location)
     
 func show_confirm_popup():
     $UI/GUI/MoveConfirmPopup.show()

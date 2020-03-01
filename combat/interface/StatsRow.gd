@@ -4,8 +4,8 @@ var stats
 func _ready():
     pass
 
-func initialize(stats):
-    self.stats = stats
+func initialize(_stats):
+    stats = _stats
     
 func _process(_delta):
     if stats:

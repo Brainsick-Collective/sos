@@ -22,6 +22,8 @@ func change_ui_node(node):
 
 func play_queue() -> void:
     for note in queue:
+        if note == null:
+            continue
         if "target" in note:
             note.target.center_camera()
         ui_parent.add_child(note)

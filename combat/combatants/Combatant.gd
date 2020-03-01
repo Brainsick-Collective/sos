@@ -54,8 +54,8 @@ func initialize_mob():
 func set_moves_from_job():
     set_moves_from_dict(job.get_moves_dict())
 
-func set_moves_from_dict(moves : Dictionary):
-    self.moves = moves
+func set_moves_from_dict(_moves : Dictionary):
+    moves = _moves
     var attack = AttackAction.new()
     attack.move = moves["offense"]["normal"]
     $OffenseMoves.add_child(attack)

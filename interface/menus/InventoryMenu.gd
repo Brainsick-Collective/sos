@@ -3,7 +3,6 @@ extends Control
 
 ## TODO make a class for inventory and extend it for player and shop
 
-signal completed
 export(PackedScene) var ItemButton
 var inventory
 
@@ -26,7 +25,7 @@ func initialize():
     _item_grid.initialize()
 
     inventory.connect("item_added", self, "create_item_button")
-    connect("item_use_requested", inventory, "use")
+
     _cash_label.text = String(player.cash) + " G"
 
 func create_item_button(item):
@@ -47,5 +46,4 @@ func _on_ItemButton_pressed(item):
 func _input(event):
     if event is InputEventKey and ControlsHandler.is_current_player_action(event):
         if event.is_action_pressed("ui_cancel" + String(player.id)):
-                emit_signal("completed")
                 queue_free()

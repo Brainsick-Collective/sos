@@ -1,6 +1,5 @@
 extends PanelContainer
 
-onready var desc_label = $Column/Panel/MarginContainer/Label
 onready var actor_panel = $Column/ActorPanel
 func _ready():
     clear_actor()
