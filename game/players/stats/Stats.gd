@@ -8,18 +8,26 @@ signal mana_changed(new_mana, old_mana)
 signal mana_depleted()
 signal leveled_up(note)
 
-var modifiers = {}
+var modifiers = {
+    "max_health" : 0,
+    "max_mana" : 0,
+    "strength" : 0,
+    "defense" : 0,
+    "magic" : 0,
+    "speed" : 0
+    }
 var MAX_LEVEL = 100
 var health : int
 var mana : int setget set_mana
-export(int) var max_health = 1 setget set_max_health, _get_max_health
+export(int) var max_health = 0 setget set_max_health, _get_max_health
 export(int) var max_mana = 0 setget set_max_mana, _get_max_mana
-export(int) var strength = 1 setget set_strength,_get_strength
-export(int) var defense = 1 setget set_defense,_get_defense
-export(int) var speed = 1 setget set_speed,_get_speed
+export(int) var strength = 0 setget set_strength,_get_strength
+export(int) var defense = 0 setget set_defense,_get_defense
+export(int) var speed = 0 setget set_speed,_get_speed
 export(int) var magic = 0 setget ,_get_magic
 export(int) var xp = 0 setget set_xp, get_xp
 export(int) var kill_xp = 0
+
 
 var is_alive : bool setget ,_is_alive
 export(int) var level = 1
@@ -36,8 +44,9 @@ var player_id : int
 var level_up_note = preload("res://interface/UI/LevelUpNote.tscn")
 
 func reset():
-    health = self.max_health
-    mana = self.max_mana
+    health = _get_max_health()
+    mana = _get_max_mana()
+
     
 func copy(other_stats):
     max_health = other_stats.max_health
@@ -68,13 +77,11 @@ func level_up():
     set_strength(int(strength_curve.interpolate_baked(_interpolated_level)))
     set_defense(int(defense_curve.interpolate_baked(_interpolated_level)))
     set_speed(int(speed_curve.interpolate_baked(_interpolated_level)))
-    kill_xp = int(experience_curve[level] / 2)
-    reset()
-    
+
 func heal(amount : int):
     var old_health = health
 # warning-ignore:narrowing_conversion
-    health = min(health + amount, max_health)
+    health = min(health + amount, _get_max_health())
     emit_signal("health_changed", health, old_health)
 
 func set_mana(value : int):
@@ -84,7 +91,7 @@ func set_mana(value : int):
     emit_signal("mana_changed", mana, old_mana)
     if mana == 0:
         emit_signal("mana_depleted")
-    
+
 func set_max_health(value : int):
     if value == null:
         return
@@ -94,6 +101,7 @@ func set_max_mana(value : int):
     if value == null:
         return
     max_mana = max(0, value)
+    
 func set_speed(value : int):
     if value == null:
         return
@@ -115,48 +123,57 @@ func set_xp(value : int):
     while l + 1 < self.MAX_LEVEL && xp >= experience_curve[l + 1]:
         l += 1
     if l > level:
-        print("level up!")
         var note = level_up_note.instance()
         note.initialize(player_id)
         note.set_old_stats(self)
         level = l
         _interpolated_level =  float(level) / float(self.MAX_LEVEL)
         level_up()
+        kill_xp = int(experience_curve[level] / 2)
+        reset()
         note.set_new_stats(self)
         note.play_text()
-        print(get_signal_connection_list("leveled_up"))
         emit_signal("leveled_up", note)
 
-func add_modifier(id : int, modifier):
-    modifiers[id] = modifier
+func add_to_modifier(id : String, modifier):
+    modifiers[id] += modifier
 
-func remove_modifier(id : int):
-    modifiers.erase(id)
+func add_modifiers(mods : Dictionary):
+    for key in mods.keys():
+        add_to_modifier(key, mods[key])
+
+func remove_modifier(id: String, modifier):
+    modifiers[id] = max(0, modifiers[id] - modifier)
     
 func _is_alive() -> bool:
     return health >= 0
 
 func _get_max_health() -> int:
-    return max_health
+    return max_health + modifiers["max_health"]
 
 func _get_max_mana() -> int:
-    return max_mana
+    return max_mana + modifiers["max_health"]
 
 func _get_strength() -> int:
-    return strength
+    return strength + modifiers["strength"]
     
 func _get_defense() -> int:
-    return defense
+    return defense + modifiers["defense"]
     
 func _get_speed() -> int:
-    return speed
+    return speed + modifiers["speed"]
 
 func _get_level() -> int:
     return level
 
 func _get_magic() -> int:
-    return magic
+    return magic + modifiers["magic"]
     
 func get_xp() -> int:
     return xp
 
+func as_mods():
+    var mods = {}
+    for stat in ["strength", "defense", "magic", "speed", "max_health", "max_mana"]:
+        mods[stat] = get(stat)
+    return mods

@@ -1,8 +1,10 @@
-[gd_resource type="Theme" load_steps=5 format=2]
+[gd_resource type="Theme" load_steps=7 format=2]
 
 [ext_resource path="res://interface/theme/fonts/actor_panel_name_font.tres" type="DynamicFont" id=1]
-[ext_resource path="res://combat/interface/theme/styleboxes/button_focus_spinner.tres" type="StyleBox" id=2]
+[ext_resource path="res://combat/interface/theme/styleboxes/button_pressed.tres" type="StyleBox" id=2]
+[ext_resource path="res://combat/interface/theme/styleboxes/button_hover.tres" type="StyleBox" id=3]
 [ext_resource path="res://combat/interface/theme/styleboxes/button_normal.tres" type="StyleBox" id=4]
+[ext_resource path="res://combat/interface/theme/styleboxes/button_focus.tres" type="StyleBox" id=5]
 [ext_resource path="res://combat/interface/theme/styleboxes/button_disabled.tres" type="StyleBox" id=6]
 
 [resource]
@@ -14,10 +16,10 @@ Button/colors/font_color_pressed = Color( 1, 1, 1, 1 )
 Button/constants/hseparation = 2
 Button/fonts/font = null
 Button/styles/disabled = ExtResource( 6 )
-Button/styles/focus = ExtResource( 2 )
-Button/styles/hover = ExtResource( 4 )
+Button/styles/focus = ExtResource( 5 )
+Button/styles/hover = ExtResource( 3 )
 Button/styles/normal = ExtResource( 4 )
-Button/styles/pressed = ExtResource( 4 )
+Button/styles/pressed = ExtResource( 2 )
 Label/colors/font_color = Color( 0, 0, 0, 1 )
 Label/colors/font_color_shadow = Color( 0, 0, 0, 0 )
 Label/colors/font_outline_modulate = Color( 1, 1, 1, 1 )

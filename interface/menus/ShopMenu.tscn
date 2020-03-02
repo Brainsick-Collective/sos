@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://interface/menus/ShopMenu.gd" type="Script" id=1]
 [ext_resource path="res://game/players/inventory/ItemButton.tscn" type="PackedScene" id=2]
@@ -11,12 +11,13 @@
 [ext_resource path="res://interface/UI/hover_outline_styleboxflat.tres" type="StyleBox" id=9]
 [ext_resource path="res://interface/UI/presssed_outline_stylebox.tres" type="StyleBox" id=10]
 [ext_resource path="res://interface/UI/focus_outline_stylebox.tres" type="StyleBox" id=11]
+[ext_resource path="res://interface/theme/fonts/actor_panel_name_font.tres" type="DynamicFont" id=12]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
 [sub_resource type="StyleBoxEmpty" id=2]
 
-[sub_resource type="StyleBoxEmpty" id=4]
+[sub_resource type="StyleBoxEmpty" id=3]
 
 [node name="ShopMenu" type="Control"]
 pause_mode = 2
@@ -52,6 +53,37 @@ stretch_mode = 6
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Panel" type="NinePatchRect" parent="."]
+margin_left = 1389.11
+margin_top = 43.7184
+margin_right = 1851.11
+margin_bottom = 169.718
+texture = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 16.0
+margin_top = 16.0
+margin_right = -16.0
+margin_bottom = -24.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="cash" type="Label" parent="Panel/HBoxContainer"]
+margin_top = 27.0
+margin_right = 430.0
+margin_bottom = 58.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 12 )
+text = "100 g"
+align = 1
+valign = 1
 
 [node name="Column" type="VBoxContainer" parent="."]
 anchor_right = 1.0
@@ -137,7 +169,21 @@ margin_top = 32.0
 margin_right = 1824.0
 margin_bottom = 348.0
 script = ExtResource( 8 )
+DIALOG = ""
+CHARACTER_NAME = ""
+CHARACTER_PROFILE = ""
+AUTO_ADVANCE = false
 FONT = "res://interface/UI/base_font.tres"
+ALTERNATE_FONTS = [  ]
+PADDING = 3
+TEXT_VOICE = ""
+PLAY_VOICE_ONCE = false
+COLOR = Color( 1, 1, 1, 1 )
+TEXT_SPEED = 0.03
+PAUSE_AT_PUNCTUATION = false
+PUNCTUATION_PAUSE_LENGTH = 0.0
+INSTANT_PRINT = false
+CUSTOM_EFFECTS = ""
 
 [node name="ConfirmPopup" type="NinePatchRect" parent="."]
 visible = false
@@ -188,7 +234,7 @@ size_flags_vertical = 3
 custom_styles/hover = ExtResource( 9 )
 custom_styles/pressed = ExtResource( 10 )
 custom_styles/focus = ExtResource( 11 )
-custom_styles/normal = SubResource( 4 )
+custom_styles/normal = SubResource( 3 )
 
 [node name="Label" type="Label" parent="ConfirmPopup/VBoxContainer/no"]
 anchor_right = 1.0

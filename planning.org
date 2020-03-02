@@ -9,7 +9,8 @@
 *** TODO Add better Level up interface
 *** TODO System for saving game
 *** TODO Localization for MonsterFactory and ShopFactory
-*** TODO on death, action menu acts weird
+*** DONE on death, action menu acts weird
+    CLOSED: [2020-03-01 Sun 18:07]
 *** TODO towns (it's TIME)
 *** TODO tutorial cutscene?
 *** TODO vfx for battle, and better battle anims
@@ -23,7 +24,7 @@
 *** TODO whole system for playing turns needs an overhaul. 
     should not be a string of functions calling functions calling each other, but instead
     using signals and triggers to catch user input or state conditions. so that frames can
-    happen when they need to, and only do the more procedural style when the things __need__
+    happen when they need to, a more procedural style when the things __need__
     to happen exactly between frames.
 *** DONE work with doof for better GUI
     CLOSED: [2020-02-28 Fri 23:03]

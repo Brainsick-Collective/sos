@@ -1,4 +1,50 @@
-[gd_scene format=2]
+[gd_scene load_steps=4 format=2]
 
-[node name="Spinner" type="Node2D"]
-position = Vector2( 894.578, 483.909 )
+[ext_resource path="res://interface/UI/combat_ui_theme.tres" type="Theme" id=1]
+[ext_resource path="res://board/Spinner.gd" type="Script" id=2]
+[ext_resource path="res://interface/GUI/OptionButton.tscn" type="PackedScene" id=3]
+
+[node name="Spinner" type="Panel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -275.5
+margin_top = -302.5
+margin_right = 275.5
+margin_bottom = 302.5
+size_flags_vertical = 4
+theme = ExtResource( 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Row" type="VBoxContainer" parent="."]
+margin_left = 2.0
+margin_top = 6.0
+margin_right = 549.0
+margin_bottom = 599.0
+custom_constants/separation = 71
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="OptionButton" parent="Row" instance=ExtResource( 3 )]
+
+[node name="OptionButton2" parent="Row" instance=ExtResource( 3 )]
+margin_top = 277.0
+margin_bottom = 316.0
+
+[node name="OptionButton3" parent="Row" instance=ExtResource( 3 )]
+margin_top = 387.0
+margin_bottom = 426.0
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.12
+
+[node name="ClickBlocker" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

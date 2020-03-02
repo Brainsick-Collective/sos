@@ -72,3 +72,6 @@ func on_move_confirm_choice(choice):
 func _on_ActionMenu_visibility_changed():
     if $ActionMenu.is_visible():
         $Counter.hide()
+
+func _on_tree_entered():
+    $ActionMenu/MarginContainer/VBoxContainer/RollButton.grab_focus()

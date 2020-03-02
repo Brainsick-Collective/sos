@@ -59,12 +59,13 @@ func enter_space_scene(player_pawn):
         scene = $Board/GameBoard.get_space_scene(player_pawn)
             
     if scene:
-        scene.connect("completed", self, "resolve_scene")
+        scene.connect("completed", self, "add_note_to_q")
+        scene.connect("tree_exited", self, "resolve_scene")
         remove_child(board)
         add_child(scene)
         scene.initialize(player_pawn.player)
     else:
-        resolve_scene(null)
+        resolve_scene()
 
 func on_queue_finished():
     set_process(true)
@@ -73,24 +74,24 @@ func on_queue_finished():
 func queue_cutscene(new_cutscene):
     cutscene = new_cutscene
     
-func resolve_scene(notes):
+func add_note_to_q(notes):
     if typeof(notes) == TYPE_ARRAY:
         for note in notes:
             queue.add_notif_to_q(note)
     else:
         queue.add_notif_to_q(notes)
+    print("ended scene, or no scene available")
 
+func resolve_scene():
     for child in get_children():
         if child is CombatArena:
             remove_child(child)
+            
     add_child(board)
     if cutscene:
         play_cutscene(cutscene)
     else:
         queue.play_queue()
-    print("ended scene, or no scene available")
-    return
-    
 
 func _on_move_finished(player):
     print("back to game")

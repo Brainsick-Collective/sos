@@ -15,18 +15,6 @@ var mob = false
 var battle = null
 var actor_name : String
 onready var tween = $Tween
-
-func initialize_n():
-    var new_sprite = Sprite.new()
-    new_sprite.texture = sprite
-    new_sprite.scale = Vector2(0.322, 0.322)
-    $Skin.add_child(new_sprite)
-    sprite = new_sprite
-    stats = stats.duplicate()
-    stats.reset()
-    actor_name = player.player_name   
-    stats.connect("health_depleted", self, "on_death")
-    stats.connect("leveled_up", self, "_on_level_up")
     
 func flip_sprite():
     sprite.set_flip_h(!sprite.is_flipped_h())
@@ -34,9 +22,8 @@ func flip_sprite():
 func initialize(p):
     sprite = $Skin/Sprite
     player = p
-    stats = stats.duplicate()
+    stats = player.stats
     stats.player_id = player.id
-    stats.reset()
     stats.connect("health_depleted", self, "on_death")
     sprite.scale = Vector2(0.322, 0.322)
     actor_name = player.player_name
@@ -45,7 +32,6 @@ func initialize(p):
     
 func initialize_mob():
     mob = true
-    stats = stats.duplicate()
     stats.reset()
     stats.connect("health_depleted", self, "on_death")
     actor_name = name

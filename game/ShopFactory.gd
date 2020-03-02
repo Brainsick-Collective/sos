@@ -7,5 +7,5 @@ func _ready():
 
 func get_shop(_player_pawn, _location):
     var shop = Shop.instance()
-    shop.set_inventory($Inventory)
+    shop.set_inventory($Shop1)
     return shop

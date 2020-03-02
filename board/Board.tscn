@@ -76,6 +76,7 @@ script = ExtResource( 14 )
 
 [node name="Anim" type="AnimatedSprite" parent="BoardViewer"]
 frames = SubResource( 1 )
+frame = 1
 playing = true
 
 [node name="Camera2D" type="Camera2D" parent="BoardViewer"]

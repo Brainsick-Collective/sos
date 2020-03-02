@@ -8,10 +8,9 @@ export (int) var id
 export (String) var player_name
 export (NodePath) var combatant
 export (Resource) var stats
-
+var modded_stats
 
 var inventory
-var equipment
 var actor_name
 export (bool) var in_battle
 var cash := 0
@@ -29,8 +28,8 @@ func initialize( new_id, pawn, battler):
     stats = combatant.stats
     stats.reset()
     combatant.connect("killed", board_character, "on_killed")
-    cash = 100
     inventory = $Inventory
+    cash = 100
     
 func get_inventory():
     return $Inventory
@@ -73,3 +72,11 @@ func on_death():
 func on_revive():
     board_character.on_revive()
     is_dead = false
+
+func _on_Inventory_item_added(item):
+    if item is Equipment:
+        stats.add_modifiers(item.get_stat_mods())
+
+func _on_Inventory_item_removed(item):
+    if item is Equipment:
+        stats.remove_modifiers(item.get_stat_mods())

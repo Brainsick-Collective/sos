@@ -37,6 +37,7 @@ func initialize(p):
 func create_item_button(item):
     var item_button = ItemButton.instance()
     item_button.initialize(item)
+    item_button.disabled = false
     _item_grid.add_child(item_button)
     return item_button
 
@@ -53,6 +54,7 @@ func _on_ItemButton_pressed(item):
 func _buy_item():
     if player.cash >= curr_item.price:
         emit_signal("item_bought", curr_item)
+        player.cash -= curr_item.price
     ##DO SOMETHING
 
 
@@ -71,7 +73,8 @@ func _input(event):
         current_action = EXIT
         _show_confirm()
         
-
+func _process(_delta):
+    $Panel/HBoxContainer/cash.text = String(player.cash) + " G"
 func _do_action():
     match current_action:
         EXIT:

@@ -12,6 +12,7 @@ var game
 var num_players
 var current_player
 var turn_ind
+
 func _ready():
     var dummy = BoardCharacter.instance()
     current_player = dummy

@@ -1,5 +1,7 @@
 extends Node
 
+class_name Inventory
+
 signal content_changed(items_as_string)
 signal item_added(item)
 signal item_removed(item)
