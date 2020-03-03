@@ -79,11 +79,6 @@ animations = [ {
 "name": "up",
 "speed": 4.0
 }, {
-"frames": [ SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 11 ) ],
-"loop": true,
-"name": "down",
-"speed": 4.0
-}, {
 "frames": [  ],
 "loop": true,
 "name": "left_idle",
@@ -103,4 +98,9 @@ animations = [ {
 "loop": true,
 "name": "right_idle",
 "speed": 5.0
+}, {
+"frames": [ SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 11 ) ],
+"loop": true,
+"name": "down",
+"speed": 4.0
 } ]

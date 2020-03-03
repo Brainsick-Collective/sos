@@ -214,8 +214,6 @@ margin_left = -27.218
 margin_top = -13.015
 margin_right = 375.782
 margin_bottom = 114.985
-[connection signal="tree_entered" from="." to="." method="_on_ entered_scene"]
-[connection signal="tree_entered" from="." to="." method="_on_tree_entered"]
 [connection signal="visibility_changed" from="ActionMenu" to="." method="_on_ActionMenu_visibility_changed"]
 [connection signal="pressed" from="ActionMenu/MarginContainer/VBoxContainer/RollButton" to="." method="_on_RollButton_pressed"]
 [connection signal="pressed" from="ActionMenu/MarginContainer/VBoxContainer/InventoryButton" to="." method="_on_InventoryButton_pressed"]

@@ -8,6 +8,7 @@ onready var InventoryMenu = preload("res://interface/menus/InventoryMenu.tscn")
 
 func initialize(new_board):
     board = new_board
+    $DiceRollPopup.connect("completed", self, "show_moves")
     
 func show_action_menu():
     $ActionMenu.show()
@@ -29,7 +30,6 @@ func focus_roll_button():
 func _on_RollButton_pressed():
     $DiceRollPopup.initialize()
 # warning-ignore:return_value_discarded
-    $DiceRollPopup.connect("completed", self, "show_moves")
     $ActionMenu.hide()
 
 func _on_InventoryButton_pressed():
@@ -73,5 +73,3 @@ func _on_ActionMenu_visibility_changed():
     if $ActionMenu.is_visible():
         $Counter.hide()
 
-func _on_tree_entered():
-    $ActionMenu/MarginContainer/VBoxContainer/RollButton.grab_focus()

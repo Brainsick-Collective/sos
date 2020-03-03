@@ -82,6 +82,8 @@ func return_to_player(last_camera_position):
 func enter_shop(player_pawn, location):
     var _shop = ShopFactory.get_shop(player_pawn, location)
     
+func play_gui(gui : Node):
+    $UI.add_child(gui)
 func show_confirm_popup():
     $UI/GUI/MoveConfirmPopup.show()
 

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://game/players/stats/Stats.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+max_health = 30
+max_mana = 10
+strength = 10
+defense = 12
+speed = 3
+magic = 8
+xp = 0
+kill_xp = 30
+level = 1

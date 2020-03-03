@@ -2,9 +2,11 @@ extends Combatant
 
 class_name Mob
 
-export var off_priority : String
-export var def_priority : String
-export var defeated_trigger : PackedScene
+export (float) var spawn_rate
+export (String) var off_priority
+export (String) var def_priority
+export (PackedScene) var defeated_trigger
+
     # TODO make this more complex somehow
     # maybe take into account what class and strengths the opponent has
     # OR: create a custom object that determines the survival rates of each move combo like in doka

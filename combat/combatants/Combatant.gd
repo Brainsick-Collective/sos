@@ -35,6 +35,7 @@ func initialize_mob():
     stats.reset()
     stats.connect("health_depleted", self, "on_death")
     actor_name = name
+    player = GameVariables.GM
     set_moves_from_job()
     
 func set_moves_from_job():
@@ -89,7 +90,7 @@ func sync_stats():
     
 func on_death():
     var reward = null
-    if !player == MonsterFactory.GM:
+    if !player == GameVariables.GM:
         player.stats.health = 0
     else:
         reward = $Rewards.give_rewards()

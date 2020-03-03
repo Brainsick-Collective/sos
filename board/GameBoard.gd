@@ -3,6 +3,7 @@ extends TileMap
 enum CELL_TYPES {PATH, SPACE, GRASS, BUSH, DIRT}
 enum space_types {empty = -1, SHOP, MAGIC, WILD, ITEM}
 var CombatArena = preload("res://combat/CombatArena.tscn")
+var ChoseEncounterPanel = preload("res://interface/GUI/ChoseEncounterPanel.tscn")
 
 func initialize():
     $Pathfinder.initialize(self)
@@ -27,52 +28,53 @@ func get_num_spaces(start, end):
     return path_spaces.size() - 1
     
 func get_space_scene(player_pawn):
-    #print("player position for encounter: %d") % player.position
-#    if player_pawn.player.in_battle:
-#        return player_pawn.player.battle
-    var pos = $Spaces.world_to_map(player_pawn.position)
-    if $Spaces.get_cellv(pos) == space_types.WILD and  !player_pawn.is_dead:
-        for character in $Characters.get_children():
-            if character.position == player_pawn.position and character != player_pawn and !character.is_dead:
-                var combat = CombatArena.instance()
-                combat.set_fighters(player_pawn.get_fighter(), character.get_fighter())
-                return combat
-        return get_random_encounter(player_pawn, space_types.WILD)
-    elif $Spaces.get_cellv(pos) == space_types.SHOP and !player_pawn.is_dead:
-        return get_random_encounter(player_pawn, space_types.SHOP)
-    elif $Spaces.get_cellv(pos) == space_types.MAGIC:
-        return get_location(player_pawn, space_types.MAGIC)
-    else: 
+    if !player_pawn.player.stats.is_alive:
         return null
-
-func find_combatants_for_space(position):
+        
+    var pos = $Spaces.world_to_map(player_pawn.position)
+    var mob
     var combatants = []
-    var pos = $Spaces.world_to_map(position)
-    if $Spaces.get_cellv(pos) in [space_types.WILD, space_types.SHOP]:
-        for character in $Characters.get_children():
-            if ($Spaces.world_to_map(character.position) == pos 
-            and character != get_parent().current_player 
-            and !character.is_dead):
-                combatants.append(character.player.combatant)
-                if character.player.battle:
-                    combatants.append(character.player.battle.get_mob())
-        if combatants.empty():
-            var monster = MonsterFactory.create_mob($Spaces.get_cellv(pos))
-            if monster:
-                combatants.append(monster)
-    return combatants
-            
-            
-                
-    
-# send this to the monster factory or to combat arena        
-func get_random_encounter(player_pawn, space_type):
+    var spawner
+    var colliders = player_pawn.get_collisions()
+    if colliders:
+        print("colliders")
+        for collider in colliders:
+            print(collider.name)
+            if collider is MobSpawner:
+                mob = collider.get_mob()
+                spawner = collider
+                var on_hold = collider.on_hold_combatants
+                if !on_hold.empty():
+                    for combatant in on_hold:
+                        if !combatants.has(combatant) and combatant != player_pawn.get_actor():
+                            combatants.append(combatant)
+            elif collider is Spawner:
+                return collider._build_scene(player_pawn.player)
+            else:
+                if collider is BoardCharacter:
+                    if collider.player.stats.is_alive and !combatants.has(collider.player.combatant):
+                        combatants.append(collider.player.combatant)
+    if not combatants:
+        if mob:
+            return _build_encounter(player_pawn, mob, spawner)
+    elif combatants.size() == 1:
+        return _build_encounter(player_pawn, combatants[0], spawner)
+    else:
+        return _build_chose_encounter(combatants, spawner)
+
+    return null
+          
+func _build_encounter(pawn, enemy, spawner):
     var combat = CombatArena.instance()
-    var monster = MonsterFactory.create_mob(space_type)
-    print(monster.is_mob())
-    combat.set_fighters(player_pawn.get_fighter(), monster)
+    combat.setup(pawn.get_actor(), enemy,spawner)
+#    combat.set_spawner(spawner)
     return combat
 
+func _build_chose_encounter(combatants, spawner):
+    var panel = ChoseEncounterPanel.instance()
+    panel.setup(combatants, spawner)
+    return panel
+    
 func get_location(player_pawn, space_type):
   if space_type == space_types.MAGIC:
     return ShopFactory.get_shop(player_pawn,space_type)

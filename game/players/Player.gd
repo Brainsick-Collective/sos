@@ -25,7 +25,7 @@ func initialize( new_id, pawn, battler):
     board_character = pawn
     id = new_id - 1
     combatant = battler
-    stats = combatant.stats
+    stats = combatant.stats.duplicate()
     stats.reset()
     combatant.connect("killed", board_character, "on_killed")
     inventory = $Inventory

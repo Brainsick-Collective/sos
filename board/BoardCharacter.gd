@@ -28,6 +28,7 @@ export (Vector2) var last_heal_space
 var _direction = Vector2()
 var direction_names = { Vector2(-1,0) : "left", Vector2(1,0) : "right", Vector2(0,-1) : "up", Vector2(0,1) : "down" }
 onready var Notification = preload("res://interface/UI/notification.tscn")
+onready var ray = $Feeler
 
 
 func initialize(game_board, _player, start):
@@ -43,6 +44,7 @@ func initialize(game_board, _player, start):
     timer.connect("timeout", self, "check_moves")
     set_process(false)
     set_process_input(false)
+    $Feeler.add_exception($TileArea)
 
 func set_position(new_pos):
     position = new_pos
@@ -88,9 +90,6 @@ func move_to(target_position):
     spaces_moved.push_back(curr_space)
     curr_space = target_position
     target_position = null
-
-func get_fighter():
-    return player.combatant
 
 func check_moves():
     if moves_left <= 0:
@@ -192,5 +191,30 @@ func get_camera_position():
 func on_revive():
     is_dead = false
     player.reset_stats()
-    
 
+func get_collisions():
+    var combatants = []
+    
+    if ray.is_colliding():
+        var collision_shapes = []
+        
+        while ray.is_colliding():
+            var obj = ray.get_collider() #get the next object that is colliding.
+            collision_shapes.append(obj) #add it to the array.
+            ray.add_exception(obj) #add to ray's exception. That way it could detect something being behind it.
+            ray.force_raycast_update() #update the ray's collision query.
+        
+            
+            for obj in collision_shapes:
+                combatants.append(obj.get_parent())
+                
+        for obj in collision_shapes:
+            ray.remove_exception(obj)
+
+    if !combatants.empty():
+        return combatants
+    else:
+        return null
+
+func get_actor():
+    return player.combatant

@@ -1,0 +1,11 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://board/Spawners/Spawner.tscn" type="PackedScene" id=1]
+[ext_resource path="res://combat/CombatArena.tscn" type="PackedScene" id=2]
+[ext_resource path="res://board/Spawners/MobSpawner.gd" type="Script" id=3]
+
+[node name="MobSpawner" instance=ExtResource( 1 )]
+script = ExtResource( 3 )
+scene = ExtResource( 2 )
+
+[node name="Mobs" type="Node" parent="." index="0"]

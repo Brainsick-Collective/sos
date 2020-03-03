@@ -1,0 +1,16 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://mobs/Mob.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/cutscene_sprites/Cuddle_Blaster.png" type="Texture" id=2]
+[ext_resource path="res://mobs/stats/CuddleBuster.tres" type="Resource" id=3]
+[ext_resource path="res://mobs/classes/CuddleBuster.tres" type="Resource" id=4]
+
+[node name="CuddleBuster" instance=ExtResource( 1 )]
+stats = ExtResource( 3 )
+job = ExtResource( 4 )
+
+[node name="Sprite" parent="Skin" index="0"]
+position = Vector2( 4.02192, -117.207 )
+scale = Vector2( 0.646151, 0.646151 )
+texture = ExtResource( 2 )
+flip_h = true

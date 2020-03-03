@@ -1,0 +1,73 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://assets/ui/panel.png" type="Texture" id=1]
+[ext_resource path="res://interface/UI/combat_ui_theme.tres" type="Theme" id=2]
+[ext_resource path="res://interface/UI/CondensedPlayerPanel.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/cutscene_sprites/Strength_Class_F.png" type="Texture" id=4]
+[ext_resource path="res://interface/GUI/ChoseEncounterPanel.gd" type="Script" id=5]
+
+[node name="ChoseEncounterpanel" type="NinePatchRect"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -517.5
+margin_top = -291.0
+margin_right = 517.5
+margin_bottom = 291.0
+theme = ExtResource( 2 )
+texture = ExtResource( 1 )
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Margins" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 64
+custom_constants/margin_top = 64
+custom_constants/margin_left = 64
+custom_constants/margin_bottom = 64
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Row" type="HBoxContainer" parent="Margins"]
+margin_left = 64.0
+margin_top = 64.0
+margin_right = 971.0
+margin_bottom = 518.0
+custom_constants/separation = 82
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Column" type="VBoxContainer" parent="Margins/Row"]
+margin_right = 412.0
+margin_bottom = 454.0
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="Column2" type="VBoxContainer" parent="Margins/Row"]
+margin_left = 494.0
+margin_right = 907.0
+margin_bottom = 454.0
+size_flags_horizontal = 3
+
+[node name="Sprite" type="TextureRect" parent="Margins/Row/Column2"]
+margin_right = 413.0
+margin_bottom = 225.0
+size_flags_vertical = 3
+texture = ExtResource( 4 )
+expand = true
+stretch_mode = 6
+
+[node name="CondensedPlayerPanel" parent="Margins/Row/Column2" instance=ExtResource( 3 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 229.0
+margin_right = 413.0
+margin_bottom = 454.0
+size_flags_vertical = 3

@@ -10,22 +10,21 @@
 [ext_resource path="res://interface/theme/fonts/actor_panel_name_font.tres" type="DynamicFont" id=9]
 
 [node name="ActorPanel" type="Control"]
-margin_right = 840.0
-margin_bottom = 364.0
+margin_right = 664.0
+margin_bottom = 372.0
 theme = ExtResource( 2 )
 script = ExtResource( 5 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="PlayerStatus" type="TextureProgress" parent="."]
-margin_left = 7.12225
-margin_top = 5.0524
-margin_right = 807.122
-margin_bottom = 365.052
+margin_left = 4.03387
+margin_top = 6.0
+margin_right = 743.034
+margin_bottom = 362.0
+size_flags_horizontal = 3
 value = 40.0
 texture_under = ExtResource( 7 )
 texture_progress = ExtResource( 3 )
+nine_patch_stretch = true
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -65,5 +64,13 @@ margin_right = 725.0
 margin_bottom = 205.0
 align = 1
 valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="StatsRow" parent="." instance=ExtResource( 4 )]
+margin_left = 30.4743
+margin_top = 103.626
+margin_right = 690.474
+margin_bottom = 463.626
+size_flags_vertical = 9

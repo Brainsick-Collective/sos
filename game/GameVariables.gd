@@ -10,6 +10,10 @@ var strike_res = load("res://combat/Actions/moves/Strike.tres")
 var zap_res = load("res://combat/Actions/moves/Zap.tres")
 var ward_res = load("res://combat/Actions/moves/Ward.tres")
 
+enum {EMPTY = -1, ITEM, MAGIC_ITEM, POTION, SHIELD, 
+    SWORD, NORMAL, BLOCKED, BUILDING, CHEST, RISKY_CHEST, 
+    LOCKED_CHEST, INVEST, ENTRANCE, EXIT, TAX}
+    
 export var controls_set =[
 {
         "ui_left" : KEY_A,
@@ -28,6 +32,13 @@ export var controls_set =[
         "ui_cancel" : KEY_DELETE
     }
 ]
+
+var GM
+
+func _ready():
+    GM = Player.new()
+    GM.player_name = "Mob1"
+    GM.id = -1
 
 func set_current_player(id):
     current_player = id

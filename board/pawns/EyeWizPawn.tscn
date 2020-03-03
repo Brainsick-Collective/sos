@@ -1,12 +1,13 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://board/BoardCharacter.tscn" type="PackedScene" id=1]
-[ext_resource path="res://board/pawns/Priest.tres" type="SpriteFrames" id=2]
+[ext_resource path="res://assets/animated_sprites/char_sprites/base_board_character.tres" type="SpriteFrames" id=2]
 
 [node name="EyeWizPawn" instance=ExtResource( 1 )]
 scale = Vector2( 1, 1 )
 
 [node name="AnimatedSprite" parent="Pivot" index="2"]
-position = Vector2( 2.03689, -2.2915 )
+position = Vector2( -0.167961, -34.262 )
+scale = Vector2( 0.6, 0.6 )
 frames = ExtResource( 2 )
 animation = "down"

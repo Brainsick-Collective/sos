@@ -1,5 +1,4 @@
 extends Node2D
-
 class_name CombatArena
 
 var fighter1
@@ -18,6 +17,7 @@ var tween_to_reverse
 enum move_types { empty = -1, normal, special, magic, effect }
 onready var Notification = preload("res://interface/UI/notification.tscn")
 onready var BoardNotification = preload("res://interface/UI/BoardNotification.tscn")
+var spawner : MobSpawner
 
 signal completed (notifications)
 
@@ -54,9 +54,17 @@ func initialize(_player):
     $UI/CombatInterface.decide_turns()
     set_process_input(false)
     
-func set_fighters(f1, f2):
+func setup(f1: Combatant, f2 : Combatant, _spawner : Spawner):
+    if f1.get_parent():
+        f1.get_parent().remove_child(f1)
+    if f2.get_parent():
+        f2.get_parent().remove_child(f2)
     fighter1 = f1
     fighter2 = f2
+    spawner = _spawner
+
+func set_spawner(_spawner):
+    spawner = _spawner
 
 func _process(_delta):
     check_ready()
@@ -198,16 +206,11 @@ func dealloc():
     fighter1.sync_stats()
     fighter2.sync_stats()
     if !is_battle_over:
-        $Timer.stop()
-        fighter1.player.battle = self
-        fighter2.player.battle = self
-    else:
-        fighter2.flip_sprite()
+        spawner.on_hold_combatants.append(fighter1)
+        spawner.on_hold_combatants.append(fighter2)
         $"1".remove_child(fighter1)
         $"2".remove_child(fighter2)
-        fighter1.player.battle = null
-        fighter2.player.battle = null
-        queue_free() 
+    queue_free() 
 
 func get_mob():
     if fighter2 is Mob:
@@ -218,6 +221,8 @@ func _on_Timer_timeout():
     print(get_signal_connection_list("completed"))
     emit_signal("completed", notifications)
     
+func get_fighters():
+    return [fighter1, fighter2]
 
 func play_notification(note):
     $UI/NoteContainer.show()

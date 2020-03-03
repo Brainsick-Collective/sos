@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://board/Board.gd" type="Script" id=1]
 [ext_resource path="res://board/outdoor.tres" type="TileSet" id=2]
@@ -8,10 +8,13 @@
 [ext_resource path="res://TurnQueue.gd" type="Script" id=6]
 [ext_resource path="res://board/Pathfinder.gd" type="Script" id=7]
 [ext_resource path="res://interface/GUI/GUI.tscn" type="PackedScene" id=8]
+[ext_resource path="res://board/Tiles/spaces.tres" type="TileSet" id=9]
+[ext_resource path="res://board/Spawners/ClamCuddleSpawner.tscn" type="PackedScene" id=10]
 [ext_resource path="res://board/Tiles/tileset_1.tres" type="TileSet" id=11]
 [ext_resource path="res://assets/new_crosshairs/c_cross.png" type="Texture" id=12]
 [ext_resource path="res://assets/new_crosshairs/c_dot.png" type="Texture" id=13]
 [ext_resource path="res://board/BoardViewer.gd" type="Script" id=14]
+[ext_resource path="res://board/Spawners/MushBossSpawner.tscn" type="PackedScene" id=15]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -68,6 +71,47 @@ script = ExtResource( 6 )
 [node name="Pathfinder" type="Node" parent="GameBoard"]
 script = ExtResource( 7 )
 
+[node name="TileMap" type="TileMap" parent="GameBoard"]
+tile_set = ExtResource( 9 )
+format = 1
+tile_data = PoolIntArray( 393222, 5, 0, 393232, 5, 0, 393246, 7, 0, 655362, 7, 0, 655366, 5, 0, 655370, 1, 0, 917534, 5, 0, 917544, 7, 0, 1048582, 0, 0, 1048586, 2, 0, 1048590, 7, 0, 1048594, 5, 0, 1048600, 7, 0, 1048616, 5, 0, 1048622, 7, 0, 1310744, 2, 0, 1310756, 8, 0, 1310766, 5, 0, 1572870, 5, 0, 1572876, 7, 0, 1572884, 5, 0, 1572900, 5, 0 )
+
+[node name="Spawners" type="TileMap" parent="GameBoard"]
+format = 1
+
+[node name="ClamCuddleSpawner" parent="GameBoard/Spawners" instance=ExtResource( 10 )]
+position = Vector2( 448, 448 )
+
+[node name="ClamCuddleSpawner2" parent="GameBoard/Spawners" instance=ExtResource( 10 )]
+position = Vector2( 448, 704 )
+
+[node name="ClamCuddleSpawner3" parent="GameBoard/Spawners" instance=ExtResource( 10 )]
+position = Vector2( 1086.67, 449.395 )
+
+[node name="ClamCuddleSpawner4" parent="GameBoard/Spawners" instance=ExtResource( 10 )]
+position = Vector2( 1216, 1080 )
+
+[node name="ClamCuddleSpawner5" parent="GameBoard/Spawners" instance=ExtResource( 10 )]
+position = Vector2( 1984, 958.149 )
+
+[node name="ClamCuddleSpawner6" parent="GameBoard/Spawners" instance=ExtResource( 10 )]
+position = Vector2( 2624, 1088 )
+
+[node name="ClamCuddleSpawner7" parent="GameBoard/Spawners" instance=ExtResource( 10 )]
+position = Vector2( 3008, 1344 )
+
+[node name="ClamCuddleSpawner8" parent="GameBoard/Spawners" instance=ExtResource( 10 )]
+position = Vector2( 2368, 1600 )
+
+[node name="ClamCuddleSpawner9" parent="GameBoard/Spawners" instance=ExtResource( 10 )]
+position = Vector2( 1344, 1600 )
+
+[node name="ClamCuddleSpawner10" parent="GameBoard/Spawners" instance=ExtResource( 10 )]
+position = Vector2( 444.542, 1600 )
+
+[node name="MushBossSpawner" parent="GameBoard/Spawners" instance=ExtResource( 15 )]
+position = Vector2( 1600, 1080 )
+
 [node name="BoardViewer" type="KinematicBody2D" parent="."]
 visible = false
 position = Vector2( 444.542, 449.395 )
@@ -76,7 +120,6 @@ script = ExtResource( 14 )
 
 [node name="Anim" type="AnimatedSprite" parent="BoardViewer"]
 frames = SubResource( 1 )
-frame = 1
 playing = true
 
 [node name="Camera2D" type="Camera2D" parent="BoardViewer"]
@@ -84,9 +127,14 @@ playing = true
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="BoardViewer"]
 polygon = PoolVector2Array( -66.7205, -62.2228, -65.7499, 62.0161, 73.0482, 62.0161, 69.1658, -64.1641 )
 
+[node name="feeler" type="RayCast2D" parent="BoardViewer"]
+enabled = true
+collide_with_areas = true
+
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="GUI" parent="UI" instance=ExtResource( 8 )]
+visible = false
 anchor_left = 0.000873677
 anchor_right = 1.00087
 margin_top = 0.0

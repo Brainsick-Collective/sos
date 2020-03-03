@@ -3,6 +3,7 @@ extends Node
 
 onready var MainMenu = preload("res://interface/MainMenu.tscn") 
 onready var Cutscene = preload("res://interface/UI/Cutscene.tscn")
+onready var CombatArenaScene = preload("res://combat/CombatArena.tscn")
 var board
 var queue = null
 var cutscene = null
@@ -49,23 +50,32 @@ func set_controls():
     
 func enter_space_scene(player_pawn):
     # this whole thing is kinda fucked, could use an overhaul
-    var scene = player_pawn.player.battle
+    var scene
     
+#    if player_pawn.player.in_battle:
+#        if !player_pawn.player.battle.get_node("2").get_children():
+#            scene $Board/GameBoard.get_space_scene(player_pawn)
+#
+#    if scene:
+#        remove_child(board)
+#        add_child(scene)
+#        scene.switch_fighters(player_pawn.player.combatant)
+#    else:
+    scene = $Board/GameBoard.get_space_scene(player_pawn)
+
     if scene:
-        remove_child(board)
-        add_child(scene)
-        scene.switch_fighters(player_pawn.player.combatant)
-    else:
-        scene = $Board/GameBoard.get_space_scene(player_pawn)
-            
-    if scene:
+        if scene is ChoseEncounterPanel:
+            scene.initialize(player_pawn)
+            $Board/UI.add_child(scene)
+            var params = yield(scene, "enemy_chosen")
+            scene = _build_encounter(params[0], params[1], params[2])
         scene.connect("completed", self, "add_note_to_q")
-        scene.connect("tree_exited", self, "resolve_scene")
         remove_child(board)
         add_child(scene)
         scene.initialize(player_pawn.player)
     else:
-        resolve_scene()
+        # play note q instead?
+        board.next_turn()
 
 func on_queue_finished():
     set_process(true)
@@ -81,17 +91,20 @@ func add_note_to_q(notes):
     else:
         queue.add_notif_to_q(notes)
     print("ended scene, or no scene available")
-
-func resolve_scene():
     for child in get_children():
         if child is CombatArena:
             remove_child(child)
-            
+         
     add_child(board)
     if cutscene:
         play_cutscene(cutscene)
     else:
         queue.play_queue()
+
+func _build_encounter(pawn, enemy, spawner):
+    var combat = CombatArenaScene.instance()
+    combat.setup(pawn.get_actor(), enemy, spawner)
+    return combat
 
 func _on_move_finished(player):
     print("back to game")
