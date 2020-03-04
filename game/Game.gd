@@ -70,8 +70,11 @@ func enter_space_scene(player_pawn):
             var params = yield(scene, "enemy_chosen")
             scene = _build_encounter(params[0], params[1], params[2])
         scene.connect("completed", self, "add_note_to_q")
-        remove_child(board)
-        add_child(scene)
+        if scene is CombatArena:
+            remove_child(board)
+            add_child(scene)
+        else:
+            $Board/UI.add_child(scene)
         scene.initialize(player_pawn.player)
     else:
         # play note q instead?

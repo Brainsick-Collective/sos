@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://board/Board.gd" type="Script" id=1]
 [ext_resource path="res://board/outdoor.tres" type="TileSet" id=2]
@@ -15,6 +15,7 @@
 [ext_resource path="res://assets/new_crosshairs/c_dot.png" type="Texture" id=13]
 [ext_resource path="res://board/BoardViewer.gd" type="Script" id=14]
 [ext_resource path="res://board/Spawners/MushBossSpawner.tscn" type="PackedScene" id=15]
+[ext_resource path="res://board/Spawners/ItemShopOne.tscn" type="PackedScene" id=16]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -89,7 +90,7 @@ position = Vector2( 448, 704 )
 position = Vector2( 1086.67, 449.395 )
 
 [node name="ClamCuddleSpawner4" parent="GameBoard/Spawners" instance=ExtResource( 10 )]
-position = Vector2( 1216, 1080 )
+position = Vector2( 1216, 1088 )
 
 [node name="ClamCuddleSpawner5" parent="GameBoard/Spawners" instance=ExtResource( 10 )]
 position = Vector2( 1984, 958.149 )
@@ -110,7 +111,16 @@ position = Vector2( 1344, 1600 )
 position = Vector2( 444.542, 1600 )
 
 [node name="MushBossSpawner" parent="GameBoard/Spawners" instance=ExtResource( 15 )]
-position = Vector2( 1600, 1080 )
+position = Vector2( 1600, 1088 )
+
+[node name="ItemShopOne" parent="GameBoard/Spawners" instance=ExtResource( 16 )]
+position = Vector2( 192, 704 )
+
+[node name="ItemShopOne2" parent="GameBoard/Spawners" instance=ExtResource( 16 )]
+position = Vector2( 960, 1088 )
+
+[node name="ItemShopOne3" parent="GameBoard/Spawners" instance=ExtResource( 16 )]
+position = Vector2( 2624, 958.149 )
 
 [node name="BoardViewer" type="KinematicBody2D" parent="."]
 visible = false

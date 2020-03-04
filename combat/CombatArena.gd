@@ -55,10 +55,6 @@ func initialize(_player):
     set_process_input(false)
     
 func setup(f1: Combatant, f2 : Combatant, _spawner : Spawner):
-    if f1.get_parent():
-        f1.get_parent().remove_child(f1)
-    if f2.get_parent():
-        f2.get_parent().remove_child(f2)
     fighter1 = f1
     fighter2 = f2
     spawner = _spawner
@@ -208,8 +204,8 @@ func dealloc():
     if !is_battle_over:
         spawner.on_hold_combatants.append(fighter1)
         spawner.on_hold_combatants.append(fighter2)
-        $"1".remove_child(fighter1)
-        $"2".remove_child(fighter2)
+    $"1".remove_child(fighter1)
+    $"2".remove_child(fighter2)
     queue_free() 
 
 func get_mob():
