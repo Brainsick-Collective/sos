@@ -51,16 +51,7 @@ func set_controls():
 func enter_space_scene(player_pawn):
     # this whole thing is kinda fucked, could use an overhaul
     var scene
-    
-#    if player_pawn.player.in_battle:
-#        if !player_pawn.player.battle.get_node("2").get_children():
-#            scene $Board/GameBoard.get_space_scene(player_pawn)
-#
-#    if scene:
-#        remove_child(board)
-#        add_child(scene)
-#        scene.switch_fighters(player_pawn.player.combatant)
-#    else:
+
     scene = $Board/GameBoard.get_space_scene(player_pawn)
 
     if scene:
@@ -70,6 +61,7 @@ func enter_space_scene(player_pawn):
             var params = yield(scene, "enemy_chosen")
             scene = _build_encounter(params[0], params[1], params[2])
         scene.connect("completed", self, "add_note_to_q")
+        scene.connect("tree_exited", self, "resolve_scene")
         if scene is CombatArena:
             remove_child(board)
             add_child(scene)
@@ -78,6 +70,7 @@ func enter_space_scene(player_pawn):
         scene.initialize(player_pawn.player)
     else:
         # play note q instead?
+        print("next turn from game.enter_space")
         board.next_turn()
 
 func on_queue_finished():
@@ -97,7 +90,10 @@ func add_note_to_q(notes):
     for child in get_children():
         if child is CombatArena:
             remove_child(child)
-         
+    
+
+func resolve_scene():
+    print("resolving scene")
     add_child(board)
     if cutscene:
         play_cutscene(cutscene)

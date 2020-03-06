@@ -41,13 +41,14 @@ func start_game():
 
     
 func play_turn(board_character, last_camera_position):
+    print (board_character.player_name + "turn started")
     current_player = board_character
     GUI.change_player(board_character.player)
     set_process(true)
     set_process_input(true)
     board_character.connect("turn_finished", self, "on_board_character_moves_finished")
     board_character.start_turn(last_camera_position)
-    print (board_character.player_name + "turn started")
+    
     
 func on_board_character_moves_finished():
     # TODO change this to do scene finding here rather than at game

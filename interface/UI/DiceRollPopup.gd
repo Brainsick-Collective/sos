@@ -32,5 +32,6 @@ func _on_Button_pressed():
     set_process(false)
     # TODO POLISH have a gradual slow down of the number
     # as a roulette effect
+    print("move roll: " + String(num))
     emit_signal("completed", num)
     hide()

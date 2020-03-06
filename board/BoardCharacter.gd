@@ -101,7 +101,8 @@ func check_moves():
             # this is fucked, in terms of OOD, but I don't want to deal
             # with it right now
             var _yes = yield(confirm_move_popup, "completed")
-        else:
+        else: 
+            print("check moves turn finished")
             emit_signal("turn_finished")
             confirm_move_popup.disconnect("completed", self, "confirm_move")
     else:
@@ -126,7 +127,9 @@ func confirm_move(isYes):
             set_process_input(false)
             timer.stop()
             my_turn = false
+            print("confirm move turn finished")
             emit_signal("turn_finished")
+            confirm_move_popup.disconnect("completed", self, "confirm_move")
         else:
             move_to(spaces_moved.back())
             curr_space = position

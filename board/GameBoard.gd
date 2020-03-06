@@ -28,6 +28,7 @@ func get_num_spaces(start, end):
     return path_spaces.size() - 1
     
 func get_space_scene(player_pawn):
+    print("getting space scene from game board")
     if !player_pawn.player.stats.is_alive:
         return null
         
