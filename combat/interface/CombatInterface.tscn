@@ -1,10 +1,38 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://combat/interface/CombatInterface.gd" type="Script" id=1]
 [ext_resource path="res://combat/interface/TurnOrderPopup.tscn" type="PackedScene" id=3]
 [ext_resource path="res://combat/interface/StatsInterface.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/ui/btn_neutral.png" type="Texture" id=5]
 [ext_resource path="res://interface/UI/combat_ui_theme.tres" type="Theme" id=6]
+
+[sub_resource type="Animation" id=1]
+resource_name = "slide in"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/path = NodePath("Options1:rect_position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -712.449, 984 ), Vector2( 282.011, 984 ), Vector2( 0, 984 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Options2:rect_position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 2272.2, 984 ), Vector2( 1271.8, 984 ), Vector2( 1536, 984 ) ]
+}
 
 [node name="CombatInterface" type="Control"]
 anchor_right = 1.0
@@ -20,8 +48,12 @@ __meta__ = {
 [node name="Options1" type="Control" parent="."]
 anchor_top = 1.0
 anchor_bottom = 1.0
+margin_left = -712.449
 margin_top = -96.0
-margin_right = 384.0
+margin_right = -328.45
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Attack" type="TextureButton" parent="Options1"]
 anchor_top = 0.5
@@ -126,8 +158,9 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -384.0
+margin_left = 352.198
 margin_top = -96.0
+margin_right = 736.198
 
 [node name="Attack" type="TextureButton" parent="Options2"]
 anchor_top = 0.5
@@ -237,5 +270,11 @@ valign = 1
 
 [node name="TurnOrderPopup" parent="." instance=ExtResource( 3 )]
 visible = false
+margin_top = -308.965
+margin_bottom = 208.035
 theme = null
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+method_call_mode = 1
+"anims/slide in" = SubResource( 1 )
 [connection signal="chosen" from="TurnOrderPopup" to="." method="_on_TurnOrderPopup_chosen"]

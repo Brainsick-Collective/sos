@@ -45,6 +45,7 @@ func initialize(game_board, _player, start):
     set_process(false)
     set_process_input(false)
     $Feeler.add_exception($TileArea)
+    confirm_move_popup.connect("completed", self, "confirm_move", [], CONNECT_DEFERRED)
 
 func set_position(new_pos):
     position = new_pos
@@ -103,12 +104,12 @@ func check_moves():
             var _yes = yield(confirm_move_popup, "completed")
         else: 
             print("check moves turn finished")
-            emit_signal("turn_finished")
-            confirm_move_popup.disconnect("completed", self, "confirm_move")
+            end_turn()
     else:
         set_process(true)
     
 func get_input_direction(event):
+    print("player pawn " + String(player_id) + " is taking input")
     return Vector2(
         int(event.is_action_pressed("ui_right" + String(player_id))) - int(event.is_action_pressed("ui_left" + String(player_id))),
         int(event.is_action_pressed("ui_down" + String(player_id))) - int(event.is_action_pressed("ui_up" + String(player_id)))
@@ -126,10 +127,8 @@ func confirm_move(isYes):
             set_process(false)
             set_process_input(false)
             timer.stop()
-            my_turn = false
             print("confirm move turn finished")
-            emit_signal("turn_finished")
-            confirm_move_popup.disconnect("completed", self, "confirm_move")
+            end_turn()
         else:
             move_to(spaces_moved.back())
             curr_space = position
@@ -152,17 +151,17 @@ func start_turn(last_camera_position):
     #TODO: use a state machine for player conditions, i.e. in battle, dead, penalty
     if player.in_battle:
         print("in battle turn")
-        emit_signal("turn_finished")
+        end_turn()
         return
     check_penalties()
     if is_dead:
         print("dead turn")
-        emit_signal("turn_finished")
+        end_turn()
         return
     my_turn = true
-    confirm_move_popup.connect("completed", self, "confirm_move")
     spaces_moved = []
     
+    # todo don't use yield here, might fuck shit up
     moves_left = yield(dice_roll_popup, "completed")
 #    moves_left = 1
     set_process_input(true)
@@ -197,27 +196,29 @@ func on_revive():
 
 func get_collisions():
     var combatants = []
-    
+    var collision_shapes = []
+    print("ray colliding " + String(ray.is_colliding()))
+    ray.force_raycast_update() #update the ray's collision query.
     if ray.is_colliding():
-        var collision_shapes = []
-        
         while ray.is_colliding():
             var obj = ray.get_collider() #get the next object that is colliding.
             collision_shapes.append(obj) #add it to the array.
             ray.add_exception(obj) #add to ray's exception. That way it could detect something being behind it.
             ray.force_raycast_update() #update the ray's collision query.
-        
             
-            for obj in collision_shapes:
-                combatants.append(obj.get_parent())
-                
-        for obj in collision_shapes:
-            ray.remove_exception(obj)
-
+    for obj in collision_shapes:
+        combatants.append(obj.get_parent())
+        ray.remove_exception(obj)
+    ray.clear_exceptions()
+    $Feeler.add_exception($TileArea)
     if !combatants.empty():
         return combatants
     else:
         return null
+        
+func end_turn():
+    my_turn = false
+    emit_signal("turn_finished")
 
 func get_actor():
     return player.combatant

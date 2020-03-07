@@ -14,6 +14,7 @@ signal killed(player, reward)
 var mob = false
 var battle = null
 var actor_name : String
+onready var skin = $Skin
 onready var tween = $Tween
     
 func flip_sprite():
@@ -28,15 +29,7 @@ func initialize(p):
     sprite.scale = Vector2(0.322, 0.322)
     actor_name = player.player_name
     set_moves_from_job()
-    stats.connect("leveled_up", self, "_on_level_up")
-    
-func initialize_mob():
-    mob = true
-    stats.reset()
-    stats.connect("health_depleted", self, "on_death")
-    actor_name = name
-    player = GameVariables.GM
-    set_moves_from_job()
+    #stats.connect("leveled_up", self, "_on_level_up")
     
 func set_moves_from_job():
     set_moves_from_dict(job.get_moves_dict())
@@ -87,6 +80,9 @@ func get_sprite():
     
 func sync_stats():
     player.stats = stats
+    
+func play(string):
+    $AnimationPlayer.play(string)
     
 func on_death():
     var reward = null

@@ -31,6 +31,10 @@ func _after_cutscene(curr_cutscene):
     cutscene = null
     get_tree().paused = false
     queue.play_queue()
+
+#func _process(_delta):
+#  if  Input.is_joy_known(0):
+#    print("recognizes_controller")
     
 func initialize_game(new_board):
     board = new_board
@@ -38,8 +42,8 @@ func initialize_game(new_board):
     board.connect("tree_entered", queue, "change_ui_node", [board.get_node("UI")])
     queue.ui_parent = board.get_node("UI")
     set_controls()
-    queue.connect("emptied", self, "on_queue_finished")
-    board.connect("turn_finished", self, "_on_move_finished")
+    queue.connect("emptied", self, "on_queue_finished", [], CONNECT_DEFERRED)
+    board.connect("turn_finished", self, "_on_move_finished", [], CONNECT_DEFERRED)
     
 func set_controls():
     ControlsHandler.initialize($Players)
@@ -48,18 +52,8 @@ func set_controls():
         player.controls = ControlsHandler.get_controls(player.get_id())
         player.board_character.controls = ControlsHandler.get_controls(player.get_id())
     
-func enter_space_scene(player_pawn):
-    # this whole thing is kinda fucked, could use an overhaul
-    var scene
-
-    scene = $Board/GameBoard.get_space_scene(player_pawn)
-
+func enter_space_scene(player_pawn, scene):
     if scene:
-        if scene is ChoseEncounterPanel:
-            scene.initialize(player_pawn)
-            $Board/UI.add_child(scene)
-            var params = yield(scene, "enemy_chosen")
-            scene = _build_encounter(params[0], params[1], params[2])
         scene.connect("completed", self, "add_note_to_q")
         scene.connect("tree_exited", self, "resolve_scene")
         if scene is CombatArena:
@@ -105,6 +99,6 @@ func _build_encounter(pawn, enemy, spawner):
     combat.setup(pawn.get_actor(), enemy, spawner)
     return combat
 
-func _on_move_finished(player):
+func _on_move_finished(player, scene):
     print("back to game")
-    enter_space_scene(player)
+    enter_space_scene(player,scene)

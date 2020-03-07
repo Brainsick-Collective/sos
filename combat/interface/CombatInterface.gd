@@ -72,4 +72,5 @@ func map_options(Option, moves):
 func _on_TurnOrderPopup_chosen(_choice):
     $Options1.show()
     $Options2.show()
+    $AnimationPlayer.play("slide in")
     pass # Replace with function body.

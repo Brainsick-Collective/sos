@@ -19,6 +19,16 @@ export var controls_set =[
     }
 ]
 
+var controller_map = {
+    "ui_accept" : JOY_BUTTON_0,
+    "ui_cancel" : JOY_BUTTON_3,
+    "ui_right" : JOY_BUTTON_15,
+    "ui_left" : JOY_BUTTON_14,
+    "ui_down" : JOY_BUTTON_13,
+    "ui_up" : JOY_BUTTON_12,
+    "ui_select" : JOY_BUTTON_3
+   }
+
 var control_lookup_map ={}
 var current_player = 0
 

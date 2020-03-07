@@ -34,10 +34,10 @@ const choice_map = {"ui_left" : move_types.normal,
                     "ui_down" : move_types.effect}
     
 func initialize(_player):
-    fighter1.connect("killed", self, "on_won_battle")
-    fighter2.connect("killed", self, "on_won_battle")
-    fighter1.stats.connect("leveled_up", self, "play_notification")
-    fighter2.stats.connect("leveled_up", self, "play_notification")
+    fighter1.connect("killed", self, "on_won_battle", [], CONNECT_DEFERRED)
+    fighter2.connect("killed", self, "on_won_battle", [], CONNECT_DEFERRED)
+    fighter1.stats.connect("leveled_up", self, "play_notification", [], CONNECT_DEFERRED)
+    fighter2.stats.connect("leveled_up", self, "play_notification", [], CONNECT_DEFERRED)
     fighter1chose = false
     fighter2chose = false
     $"1".add_child(fighter1)
@@ -48,9 +48,9 @@ func initialize(_player):
     $MatchupInterface.initialize(fighter1, fighter2)
     $UI/CombatInterface.initialize(fighter1, fighter2)
 # warning-ignore:return_value_discarded
-    $UI/CombatInterface/TurnOrderPopup.connect("hide", self, "on_turnorder_popup_hide")
+    $UI/CombatInterface/TurnOrderPopup.connect("hide", self, "on_turnorder_popup_hide", [], CONNECT_DEFERRED)
 # warning-ignore:return_value_discarded
-    $UI/CombatInterface/TurnOrderPopup.connect("chosen", self, "on_choice")
+    $UI/CombatInterface/TurnOrderPopup.connect("chosen", self, "on_choice", [], CONNECT_DEFERRED)
     $UI/CombatInterface.decide_turns()
     set_process_input(false)
     
@@ -100,6 +100,10 @@ func do_phase(attacker, defender, attacker_move, defender_move):
             0.5 , Tween.TRANS_LINEAR, Tween.EASE_IN) 
         attacker.tween.start()
         yield(attacker.tween, "tween_completed")
+        # TODO: externalize
+        $UI/PopupLabelBuilder.spawn_label(String(hit.damage), defender, "health")
+        defender.play("take damage")
+        
         attacker.tween.interpolate_property(attacker.get_parent(), "position",
             defender.get_parent().position, curr_pos, 
             1.0 , Tween.TRANS_LINEAR, Tween.EASE_IN)
@@ -201,6 +205,7 @@ func dealloc():
     fighter2.player.in_battle = !is_battle_over
     fighter1.sync_stats()
     fighter2.sync_stats()
+    fighter2.flip_sprite()
     if !is_battle_over:
         spawner.on_hold_combatants.append(fighter1)
         spawner.on_hold_combatants.append(fighter2)
@@ -214,7 +219,6 @@ func get_mob():
 
 func _on_Timer_timeout():
     dealloc()
-    print(get_signal_connection_list("completed"))
     emit_signal("completed", notifications)
     
 func get_fighters():
@@ -230,5 +234,6 @@ func play_notification(note):
     
 func _on_CombatArena_tree_entered():
     set_process_input(false)
+    $AnimationPlayer.play("slide in")
     if round_num > 0:
         $UI/CombatInterface.decide_turns()

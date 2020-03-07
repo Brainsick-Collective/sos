@@ -22,9 +22,7 @@ func _ready():
     character_select_sprite.set_texture(classes.get_first().get_texture())
     num_players = 1
     curr_player = 1
-    $Carts/CharacterCartridge.set_text("Vape Rider")
-    $Carts/CharacterCartridge2.set_text("Eye Witch")
-    $Carts/CharacterCartridge3.set_text("Fist Blade")
+
     for i in range($Carts.get_child_count()):
         var cart = $Carts.get_child(i)
         cart.connect("entered", self, "_on_cartridge_hovered", [cart])
@@ -35,9 +33,9 @@ func initialize(game_node, num):
     game = game_node
     num_players = num
     Players = game_node.get_node("Players")
-    $Column/PlayerLabel.text = "Player " + String(curr_player)
+    $PlayerLabel.text = "Player " + String(curr_player)
     current_class = classes.get_combatant()
-    $Column/StartButton.grab_focus()
+    $Go.grab_focus()
     
 func _on_cartridge_hovered(cart):
     if $Tween.is_active():
@@ -54,10 +52,25 @@ func _on_cartridge_left(cart):
     $Tween.interpolate_property(cart, "rect_position", cart.rect_position, cart.rect_position - Vector2(50,0), 0.1, Tween.TRANS_LINEAR)
     $Tween.start()
     yield($Tween, "tween_completed")
+    
+func _on_cart_selected(index):
+    current_class = classes.get_class_by_index(index)
+    character_select_sprite.texture = current_class.get_sprite()
+    
+func get_player(character):
+    for player in Players.get_children():
+        if player.board_character == character:
+            return player
 
-func _on_StartButton_pressed():
+func _process(_delta):
+    $VBoxContainer/DescriptionPanel/Label.text = current_class.description
+    $VBoxContainer/PanelContainer/Label.text = current_class.name
+    
+
+
+func _on_Go_pressed():    
     var player = Player.instance()
-    player.player_name = $Column/PlayerLabel.text
+    player.player_name = $PlayerLabel.text
     var combatant = classes.get_combatant()
     var board_character = classes.get_pawn()
     characters.append(board_character)
@@ -76,17 +89,9 @@ func _on_StartButton_pressed():
         queue_free()
     else:
         curr_player+=1
-        $Column/PlayerLabel.text = "Player " + String(curr_player)
-    
-func _on_cart_selected(index):
-    current_class = classes.get_class_by_index(index)
-    character_select_sprite.texture = current_class.get_sprite()
-    
-func get_player(character):
-    for player in Players.get_children():
-        if player.board_character == character:
-            return player
+        $PlayerLabel.text = "Player " + String(curr_player)
 
-func _process(_delta):
-    $VBoxContainer/DescriptionPanel/Label.text = current_class.description
-    
+
+func _on_CosmeticSpinner_pressed():
+    $CosmeticSpinner.set_rotation($CosmeticSpinner.get_rotation() + 1)
+    pass # Replace with function body.

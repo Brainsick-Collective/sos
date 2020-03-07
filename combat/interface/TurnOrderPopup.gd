@@ -2,12 +2,12 @@ extends Control
 
 var right
 var left
-onready var LeftOption = $Panel/MarginContainer/HBoxContainer/Left
-onready var RightOption = $Panel/MarginContainer/HBoxContainer/Right
+onready var LeftOption = $MarginContainer/HBoxContainer/Left
+onready var RightOption = $MarginContainer/HBoxContainer/Right
 signal chosen(choice)
 
 func _ready():
-    $Panel/MarginContainer/HBoxContainer/Left/Button.grab_focus()
+    $MarginContainer/HBoxContainer/Left/Button.grab_focus()
 
 func decide_turns(left_speed, right_speed):
     randomize()
@@ -15,7 +15,7 @@ func decide_turns(left_speed, right_speed):
     var roll = randi() % total
     left = roll < left_speed
     right = !left
-    $Panel/MarginContainer/HBoxContainer/Left/Button.grab_focus()
+    $MarginContainer/HBoxContainer/Left/Button.grab_focus()
     
 
 #left
@@ -45,6 +45,6 @@ func reset():
     LeftOption.get_node("Button").show()
     RightOption.get_node("Button").show()
     LeftOption.grab_click_focus()
-    $Panel/MarginContainer/HBoxContainer/Left/Button.grab_focus()
+    $MarginContainer/HBoxContainer/Left/Button.grab_focus()
     RightOption.get_node("Label").text = "" 
     LeftOption.get_node("Label").text =  ""

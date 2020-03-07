@@ -1,12 +1,55 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://combat/CombatArena.gd" type="Script" id=1]
 [ext_resource path="res://assets/backgrounds/grasslands.png" type="Texture" id=2]
-[ext_resource path="res://combat/interface/ActorPanel.tscn" type="PackedScene" id=3]
 [ext_resource path="res://interface/UI/Combatant1Panel.tscn" type="PackedScene" id=4]
 [ext_resource path="res://interface/UI/Combatant2Panel.tscn" type="PackedScene" id=5]
+[ext_resource path="res://combat/interface/PopupLabelBuilder.tscn" type="PackedScene" id=6]
 [ext_resource path="res://combat/interface/CombatInterface.tscn" type="PackedScene" id=7]
 [ext_resource path="res://combat/interface/MatchupInterface.tscn" type="PackedScene" id=9]
+
+[sub_resource type="Animation" id=2]
+resource_name = "options slide in"
+
+[sub_resource type="Animation" id=1]
+resource_name = "slide in"
+tracks/0/type = "value"
+tracks/0/path = NodePath("UI/GUI/Combatant1Panel:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -986.798, 9.96442 ), Vector2( 8.74646, 9.96442 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("UI/GUI/Combatant2Panel:rect_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1921, -23.9075 ), Vector2( 944.788, -23.9075 ) ]
+}
+
+[sub_resource type="ParticlesMaterial" id=3]
+lifetime_randomness = 0.02
+emission_shape = 2
+emission_box_extents = Vector3( 50, 20, 1 )
+flag_disable_z = true
+direction = Vector3( 0, 1, 0 )
+spread = 0.0
+gravity = Vector3( 0, -10, 0 )
+initial_velocity = 55.56
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+angle = 93.3
 
 [node name="CombatArena" type="Node2D"]
 script = ExtResource( 1 )
@@ -44,37 +87,26 @@ __meta__ = {
 }
 
 [node name="Combatant1Panel" parent="UI/GUI" instance=ExtResource( 4 )]
-margin_left = 8.74646
+margin_left = -588.58
 margin_top = 9.96442
-margin_right = -932.254
+margin_right = -1529.58
 margin_bottom = -758.036
 
-[node name="ActorPanel1" parent="UI/GUI" instance=ExtResource( 3 )]
-visible = false
-margin_left = 111.133
-margin_top = 88.8043
-margin_right = 514.133
-margin_bottom = 216.804
-
 [node name="Combatant2Panel" parent="UI/GUI" instance=ExtResource( 5 )]
-margin_left = 944.788
+margin_left = 1530.52
 margin_top = -23.9075
-margin_right = 25.7885
-margin_bottom = -783.908
+margin_right = 611.517
+margin_bottom = -783.907
 
-[node name="ActorPanel2" parent="UI/GUI" instance=ExtResource( 3 )]
-visible = false
-anchor_left = 0.794
+[node name="PhaseHandler" type="Control" parent="UI/GUI"]
 anchor_right = 1.0
-anchor_bottom = 0.119
-margin_left = -84.3536
-margin_top = 92.3622
-margin_right = -84.8735
-margin_bottom = 91.8421
+anchor_bottom = 1.0
 
 [node name="CombatInterface" parent="UI" instance=ExtResource( 7 )]
 margin_left = 0.0
 margin_right = 0.0
+
+[node name="PopupLabelBuilder" parent="UI" instance=ExtResource( 6 )]
 
 [node name="NoteContainer" type="Container" parent="UI"]
 visible = false
@@ -95,5 +127,18 @@ __meta__ = {
 [node name="TurnQueue" type="YSort" parent="."]
 
 [node name="Timer" type="Timer" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+"anims/options slide in" = SubResource( 2 )
+"anims/slide in" = SubResource( 1 )
+
+[node name="CPUParticles2D" type="Particles2D" parent="."]
+position = Vector2( 455.68, 651.728 )
+rotation = -3.14159
+amount = 28
+process_material = SubResource( 3 )
+
+[node name="Particles2D" type="CanvasModulate" parent="CPUParticles2D"]
+color = Color( 0.290196, 0.341176, 0.545098, 1 )
 [connection signal="tree_entered" from="." to="." method="_on_CombatArena_tree_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

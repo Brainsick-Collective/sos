@@ -23,6 +23,7 @@ func _physics_process(_delta):
     move_and_collide(direction.normalized() * speed)
     
     if ray.is_colliding():
+        collision_shapes = []
         if not on_space:
             on_space = true
             while ray.is_colliding():
@@ -33,12 +34,13 @@ func _physics_process(_delta):
     
             var combatants = []
             for obj in collision_shapes:
-                combatants.append(obj.get_parent().get_actor())
+                if obj is Combatant:
+                    combatants.append(obj.get_parent().get_actor())
             emit_signal("actor_found", combatants)
             
             for obj in collision_shapes:
                 ray.remove_exception(obj)
-                collision_shapes = []
+            collision_shapes = []
     elif on_space:
         emit_signal("actor_left")
         on_space = false

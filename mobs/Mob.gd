@@ -11,6 +11,16 @@ export (PackedScene) var defeated_trigger
     # maybe take into account what class and strengths the opponent has
     # OR: create a custom object that determines the survival rates of each move combo like in doka
     # and have different mobs have different strategies for survival / victory
+    
+func initialize_mob():
+    mob = true
+    stats = stats.duplicate()
+    stats.reset()
+    stats.connect("health_depleted", self, "on_death")
+    actor_name = name
+    player = GameVariables.GM
+    set_moves_from_job()
+
 func get_ai_move(turn):
     var options = moves[turn]
     if turn == "offense":

@@ -5,7 +5,7 @@ var CharacterSelectMenu = preload("res://interface/menus/CharacterSelectMenu.tsc
 onready var num_players = 1
 const min_size = 1
 const max_size = 4
-onready var terminal = $Console/MarginContainer/Terminal
+onready var terminal = $bg/Console/MarginContainer/Terminal
 
 func close():
     get_tree().quit()
@@ -26,10 +26,13 @@ func initialize(game_node):
 
 func _menu_selected():
     $Column2/VBoxContainer.hide()
+    $bg/Console/AnimatedSprite.hide()
     $AnimationPlayer.play("TerminalZoom")
     yield($AnimationPlayer, "animation_finished")
     $Controllers/Controller1.show()
+    
     $Controllers/Controller1.play("out")
+    
     $Column2.hide()
     terminal.DIALOG = "How many players?"
     terminal.play_and_hold()

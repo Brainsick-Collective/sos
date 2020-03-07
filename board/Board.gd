@@ -7,7 +7,8 @@ onready var BoardCharacter = preload("res://board/BoardCharacter.tscn")
 onready var Board = $GameBoard
 onready var GUI = $UI/GUI
 onready var BoardNotification = preload("res://interface/UI/BoardNotification.tscn")
-signal turn_finished(player)
+onready var CombatArenaScene = preload("res://combat/CombatArena.tscn")
+signal turn_finished(player, scene)
 var game
 var num_players
 var current_player
@@ -25,7 +26,8 @@ func initialize(characters, _game):
     for character in characters:
         character.set_position(START)
         Characters.add_child(character)
-        character.connect("last_move_taken", self, "show_confirm_popup")
+        character.connect("last_move_taken", self, "show_confirm_popup", [], CONNECT_DEFERRED)
+        character.connect("turn_finished", self, "on_board_character_moves_finished", [], CONNECT_DEFERRED)
     num_players = Characters.get_child_count()
     turn_ind = Characters.get_child_count() - 1
     Board.initialize()
@@ -46,16 +48,28 @@ func play_turn(board_character, last_camera_position):
     GUI.change_player(board_character.player)
     set_process(true)
     set_process_input(true)
-    board_character.connect("turn_finished", self, "on_board_character_moves_finished")
+
     board_character.start_turn(last_camera_position)
     
     
 func on_board_character_moves_finished():
     # TODO change this to do scene finding here rather than at game
     print("board character turn finished")
-    emit_signal("turn_finished", current_player)
+    var scene = $GameBoard.get_space_scene(current_player)
+    
+    if scene is ChoseEncounterPanel:
+        scene.initialize(current_player)
+        $UI.add_child(scene)
+        var params = yield(scene, "enemy_chosen")
+        scene = _build_encounter(params[0], params[1], params[2])
+    
+    emit_signal("turn_finished", current_player, scene)
 
-
+func _build_encounter(pawn, enemy, spawner):
+    var combat = CombatArenaScene.instance()
+    combat.setup(pawn.get_actor(), enemy, spawner)
+    return combat
+    
 func next_turn():
     var last_camera_position = current_player.get_camera_position()
     var new_ind = (current_player.get_index() + 1) % num_players
