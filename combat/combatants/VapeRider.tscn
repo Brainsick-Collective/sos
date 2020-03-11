@@ -6,11 +6,25 @@
 [ext_resource path="res://assets/cutscene_sprites/Speed_Class_F.png" type="Texture" id=4]
 
 [node name="VapeRider" instance=ExtResource( 1 )]
+position = Vector2( 0.58139, 0 )
 stats = ExtResource( 3 )
 description = "A class that utilizes speed and agility,, one hand has a data extender attached to it, allowing the forearm to  reach out to 100 units away."
 job = ExtResource( 2 )
 
+[node name="Skin" parent="." index="0"]
+position = Vector2( 0, 0.58139 )
+
 [node name="Sprite" parent="Skin" index="0"]
-position = Vector2( 7.62939e-06, 3.05176e-05 )
-scale = Vector2( 0.111406, 0.134281 )
+position = Vector2( 2.38246, -131.529 )
+scale = Vector2( 0.274366, 0.330702 )
 texture = ExtResource( 4 )
+
+[node name="RectExtents" parent="Skin" index="1"]
+position = Vector2( 0.0191681, -1.2319 )
+size = Vector2( 100, 100 )
+
+[node name="BuffParticles" parent="." index="8"]
+position = Vector2( -3.12901, 41.7848 )
+lifetime = 1.5
+emission_rect_extents = Vector2( 60, 1 )
+initial_velocity = 166.67

@@ -1,13 +1,124 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://combat/combatants/Combatant.gd" type="Script" id=1]
 [ext_resource path="res://combat/combatants/Rewards.gd" type="Script" id=2]
 [ext_resource path="res://utils/RectExtents.tscn" type="PackedScene" id=3]
 [ext_resource path="res://combat/combatants/Skin.gd" type="Script" id=4]
 [ext_resource path="res://assets/cutscene_sprites/Final_Boss.png" type="Texture" id=5]
+[ext_resource path="res://combat/combatants/shaders/test_shader.tres" type="Material" id=6]
+[ext_resource path="res://combat/combatants/shaders/buff.tres" type="Material" id=7]
 
-[sub_resource type="Animation" id=1]
-resource_name = "take damage"
+[sub_resource type="Animation" id=7]
+resource_name = "attack"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Skin/Sprite:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = false
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 1.1, 1.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -2.41265, -55.5196 ), Vector2( -270.44, -46.0395 ), Vector2( -273.025, -40.0068 ), Vector2( -8.44543, -45.1777 ) ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "play_attack"
+} ]
+}
+
+[sub_resource type="Animation" id=8]
+resource_name = "death"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Skin:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.5, 0.6, 0.754761, 0.973955, 1.62895, 1.98778 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0.894118, 0.337255, 0.337255, 1 ), Color( 1, 1, 1, 1 ), Color( 0.854902, 0.337255, 0.337255, 1 ), Color( 1, 1, 1, 1 ), Color( 0.803922, 0.266667, 0.266667, 1 ), Color( 0.803922, 0.266667, 0.266667, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "effect"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Skin/Sprite:material:shader_param/time")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 1.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Skin/Sprite:material")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ ExtResource( 7 ), null ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("BuffParticles:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[sub_resource type="Animation" id=4]
+tracks/0/type = "method"
+tracks/0/path = NodePath("Skin/Sprite")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray(  ),
+"transitions": PoolRealArray(  ),
+"values": [  ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Skin/Sprite:material")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.9 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ ExtResource( 6 ), null ]
+}
+
+[sub_resource type="Animation" id=5]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Skin:modulate")
 tracks/0/interp = 1
@@ -21,6 +132,8 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 0.894118, 0.337255, 0.337255, 1 ), Color( 1, 1, 1, 1 ), Color( 0.854902, 0.337255, 0.337255, 1 ), Color( 1, 1, 1, 1 ), Color( 0.803922, 0.266667, 0.266667, 1 ), Color( 1, 1, 1, 1 ) ]
 }
 
+[sub_resource type="ShaderMaterial" id=6]
+
 [node name="Combatant" type="Position2D"]
 script = ExtResource( 1 )
 
@@ -28,13 +141,17 @@ script = ExtResource( 1 )
 script = ExtResource( 4 )
 
 [node name="Sprite" type="Sprite" parent="Skin"]
-position = Vector2( -8.44543, -52.9341 )
-scale = Vector2( 0.277805, 0.277805 )
+position = Vector2( -8.44542, -132.483 )
+scale = Vector2( 0.884435, 0.884435 )
 texture = ExtResource( 5 )
+region_rect = Rect2( 38.3842, 101.867, 316.42, 365.98 )
 
 [node name="RectExtents" parent="Skin" instance=ExtResource( 3 )]
+size = Vector2( 40, 40 )
+color = Color( 1, 0.054902, 0.654902, 1 )
 
 [node name="TargetAnchor" type="Position2D" parent="."]
+position = Vector2( 113.376, 5.93248 )
 
 [node name="OffenseMoves" type="Node" parent="."]
 
@@ -48,4 +165,26 @@ texture = ExtResource( 5 )
 script = ExtResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-"anims/take damage" = SubResource( 1 )
+anims/attack = SubResource( 7 )
+anims/death = SubResource( 8 )
+anims/effect = SubResource( 3 )
+"anims/raise attack" = SubResource( 4 )
+"anims/take damage" = SubResource( 5 )
+
+[node name="BuffParticles" type="CPUParticles2D" parent="."]
+material = SubResource( 6 )
+position = Vector2( 0.472672, 10.3988 )
+emitting = false
+amount = 20
+lifetime = 1.8
+randomness = 0.05
+emission_shape = 2
+emission_rect_extents = Vector2( 70, 1 )
+direction = Vector2( 0, -1 )
+spread = 0.0
+gravity = Vector2( 0, -100 )
+initial_velocity = 160.32
+scale_amount = 5.0
+color = Color( 0.635294, 0.635294, 0.701961, 1 )
+hue_variation = -0.1
+hue_variation_random = 0.56

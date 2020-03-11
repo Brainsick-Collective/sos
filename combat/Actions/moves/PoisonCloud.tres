@@ -11,3 +11,4 @@ modifier = 3.9
 description = "sprays a cloud of smokey mist at the enemy"
 base_damage = 10
 success_chance = 0.85
+anim_name = "effect"

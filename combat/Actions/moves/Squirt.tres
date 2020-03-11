@@ -11,3 +11,4 @@ modifier = null
 description = ""
 base_damage = 1
 success_chance = 0.0
+anim_name = "effect"

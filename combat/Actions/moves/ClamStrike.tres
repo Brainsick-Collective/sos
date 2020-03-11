@@ -11,3 +11,4 @@ modifier = null
 description = "Launch an all out attack, but leave yourself open to retaliation"
 base_damage = 20
 success_chance = 0.85
+anim_name = "effect"

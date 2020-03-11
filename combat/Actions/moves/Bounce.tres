@@ -11,3 +11,4 @@ modifier = 0.9
 description = "Creates a protective wall, blocking some incoming damage"
 base_damage = 0
 success_chance = 0.85
+anim_name = "effect"

@@ -2,17 +2,17 @@
 
 [ext_resource path="res://combat/CombatArena.gd" type="Script" id=1]
 [ext_resource path="res://assets/backgrounds/grasslands.png" type="Texture" id=2]
+[ext_resource path="res://CombatPhaseHandler.gd" type="Script" id=3]
 [ext_resource path="res://interface/UI/Combatant1Panel.tscn" type="PackedScene" id=4]
 [ext_resource path="res://interface/UI/Combatant2Panel.tscn" type="PackedScene" id=5]
 [ext_resource path="res://combat/interface/PopupLabelBuilder.tscn" type="PackedScene" id=6]
 [ext_resource path="res://combat/interface/CombatInterface.tscn" type="PackedScene" id=7]
 [ext_resource path="res://combat/interface/MatchupInterface.tscn" type="PackedScene" id=9]
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=1]
 resource_name = "options slide in"
 
-[sub_resource type="Animation" id=1]
-resource_name = "slide in"
+[sub_resource type="Animation" id=2]
 tracks/0/type = "value"
 tracks/0/path = NodePath("UI/GUI/Combatant1Panel:rect_position")
 tracks/0/interp = 1
@@ -38,34 +38,21 @@ tracks/1/keys = {
 "values": [ Vector2( 1921, -23.9075 ), Vector2( 944.788, -23.9075 ) ]
 }
 
-[sub_resource type="ParticlesMaterial" id=3]
-lifetime_randomness = 0.02
-emission_shape = 2
-emission_box_extents = Vector3( 50, 20, 1 )
-flag_disable_z = true
-direction = Vector3( 0, 1, 0 )
-spread = 0.0
-gravity = Vector3( 0, -10, 0 )
-initial_velocity = 55.56
-orbit_velocity = 0.0
-orbit_velocity_random = 0.0
-angle = 93.3
-
 [node name="CombatArena" type="Node2D"]
 script = ExtResource( 1 )
 
 [node name="1" type="Position2D" parent="."]
-position = Vector2( 457.191, 652.094 )
+position = Vector2( 443.902, 705.251 )
 z_index = 1
 
 [node name="2" type="Position2D" parent="."]
-position = Vector2( 1478.91, 647.101 )
+position = Vector2( 1500.17, 681.653 )
 z_index = 1
 
-[node name="Background" type="CanvasLayer" parent="."]
+[node name="BackgroundLayer" type="CanvasLayer" parent="."]
 layer = -1
 
-[node name="grasslands" type="TextureRect" parent="Background"]
+[node name="BackgroundTexture" type="TextureRect" parent="BackgroundLayer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 texture = ExtResource( 2 )
@@ -77,6 +64,7 @@ __meta__ = {
 
 [node name="UI" type="CanvasLayer" parent="."]
 layer = 0
+script = ExtResource( 3 )
 
 [node name="GUI" type="Control" parent="UI"]
 anchor_right = 1.0
@@ -97,10 +85,6 @@ margin_left = 1530.52
 margin_top = -23.9075
 margin_right = 611.517
 margin_bottom = -783.907
-
-[node name="PhaseHandler" type="Control" parent="UI/GUI"]
-anchor_right = 1.0
-anchor_bottom = 1.0
 
 [node name="CombatInterface" parent="UI" instance=ExtResource( 7 )]
 margin_left = 0.0
@@ -129,16 +113,10 @@ __meta__ = {
 [node name="Timer" type="Timer" parent="."]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-"anims/options slide in" = SubResource( 2 )
-"anims/slide in" = SubResource( 1 )
+"anims/options slide in" = SubResource( 1 )
+"anims/slide in" = SubResource( 2 )
 
-[node name="CPUParticles2D" type="Particles2D" parent="."]
-position = Vector2( 455.68, 651.728 )
-rotation = -3.14159
-amount = 28
-process_material = SubResource( 3 )
-
-[node name="Particles2D" type="CanvasModulate" parent="CPUParticles2D"]
-color = Color( 0.290196, 0.341176, 0.545098, 1 )
+[node name="CombatPhaseHandler" type="Node" parent="."]
+script = ExtResource( 3 )
 [connection signal="tree_entered" from="." to="." method="_on_CombatArena_tree_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

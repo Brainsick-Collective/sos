@@ -4,3 +4,4 @@
 
 [node name="OffensiveAction" type="Node"]
 script = ExtResource( 1 )
+description = null

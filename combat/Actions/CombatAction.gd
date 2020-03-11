@@ -32,6 +32,9 @@ func execute(_target, _reaction):
     print("%s missing overwrite of the execute method" % name)
     return false
 
+func additional_effect():
+    pass
+    
 func return_to_start_position():
     yield(actor.skin.return_to_start(), "completed")
 

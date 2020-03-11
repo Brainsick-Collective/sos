@@ -11,3 +11,4 @@ modifier = null
 description = "Leave your defenses down and prepare a counter attack"
 base_damage = 15
 success_chance = 0.95
+anim_name = "effect"

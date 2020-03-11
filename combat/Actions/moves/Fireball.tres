@@ -11,3 +11,4 @@ modifier = 1.2
 description = "shoot a fireball"
 base_damage = 5
 success_chance = 0.85
+anim_name = "effect"

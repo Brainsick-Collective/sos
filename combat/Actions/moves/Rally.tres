@@ -11,3 +11,4 @@ modifier = null
 description = "Give out a battle cry and raise your stats!"
 base_damage = 0
 success_chance = 1.0
+anim_name = "effect"

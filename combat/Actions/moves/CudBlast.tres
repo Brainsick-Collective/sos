@@ -11,3 +11,4 @@ modifier = 1.4
 description = "the poor clam just wants to protect his family"
 base_damage = 17
 success_chance = 0.85
+anim_name = "effect"

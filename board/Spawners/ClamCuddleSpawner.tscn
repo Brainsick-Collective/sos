@@ -9,5 +9,5 @@
 [node name="CuddleBuster" parent="Mobs" index="0" instance=ExtResource( 2 )]
 spawn_rate = 0.15
 
-[node name="Klam" parent="Mobs" index="1" instance=ExtResource( 1 )]
+[node name="Clam" parent="Mobs" index="1" instance=ExtResource( 1 )]
 spawn_rate = 0.85

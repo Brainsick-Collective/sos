@@ -16,5 +16,7 @@ func execute(target, reaction):
             hit.damage = max(1, hit.damage - (target.stats.defense * DEF_MOD))
         move_types.effect:
             hit = null
-
+    
+    #if chance of ability is met, then attach the buff or debuf animation
     return hit
+

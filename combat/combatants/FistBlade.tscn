@@ -11,6 +11,6 @@ description = "A brutish fighter with a tenacity for heavy weapons and  armor. T
 job = ExtResource( 2 )
 
 [node name="Sprite" parent="Skin" index="0"]
-position = Vector2( 3.05176e-05, 4.57764e-05 )
-scale = Vector2( 0.657919, 0.657919 )
+position = Vector2( -21.91, -174.307 )
+scale = Vector2( 0.349555, 0.349555 )
 texture = ExtResource( 4 )

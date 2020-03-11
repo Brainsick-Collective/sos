@@ -62,7 +62,7 @@ func reset_stats():
     stats.reset()
     combatant.stats.reset()
     combatant.stats.connect("health_depleted", combatant, "on_death")
-    print(String(stats.health))
+    print(String(stats.health)) 
     print(String(combatant.stats.health))
     
 

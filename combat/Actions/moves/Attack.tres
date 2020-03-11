@@ -11,3 +11,4 @@ modifier = null
 description = "Attack with your weapon"
 base_damage = 10
 success_chance = 0.95
+anim_name = "effect"

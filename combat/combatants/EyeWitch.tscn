@@ -11,9 +11,10 @@ description = "The eye witches are members of an ancient brood of sorceresses wh
 job = ExtResource( 2 )
 
 [node name="Sprite" parent="Skin" index="0"]
-position = Vector2( 7.62939e-06, -3.8147e-06 )
-scale = Vector2( 0.156506, 0.156506 )
+position = Vector2( -1.62108, -174.545 )
+scale = Vector2( 0.392518, 0.392518 )
 texture = ExtResource( 4 )
 
 [node name="RectExtents" parent="Skin" index="1"]
-size = Vector2( 120, 180 )
+position = Vector2( -0.490535, -2.0612 )
+size = Vector2( 50, 50 )

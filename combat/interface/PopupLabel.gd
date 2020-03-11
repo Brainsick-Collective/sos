@@ -8,7 +8,7 @@ export var offset : = Vector2(0.0, -40.0)
 func start(battler : Combatant, type : String, message : String) -> void:
     # Initializes the node and starts its animation
     # @type: either health, mana, missed. Determines the animation the label will use
-    assert(type in ['missed', 'mana', 'health'])
+    assert(type in ['missed', 'mana', 'health', 'move', 'effect'])
     var extents : RectExtents = battler.skin.get_extents()
     label.text = message
     
@@ -18,5 +18,8 @@ func start(battler : Combatant, type : String, message : String) -> void:
         animation_name = type
     elif type == "health" or type == "mana":
         animation_name = type + "_loss" if int(message) <= 0 else type + "_gain"
+    elif type == 'move' or 'effect':
+        animation_name = "effect"
     rect_global_position = battler.global_position - Vector2(0.0, extents.size.y) + offset
     anim_player.play(animation_name)
+

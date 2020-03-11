@@ -17,6 +17,8 @@ var tween_to_reverse
 enum move_types { empty = -1, normal, special, magic, effect }
 onready var Notification = preload("res://interface/UI/notification.tscn")
 onready var BoardNotification = preload("res://interface/UI/BoardNotification.tscn")
+onready var phase_handler = $CombatPhaseHandler
+
 var spawner : MobSpawner
 
 signal completed (notifications)
@@ -45,6 +47,8 @@ func initialize(_player):
     $UI/GUI/Combatant2Panel.set_actor(fighter2)
     $"2".add_child(fighter2)
     fighter2.flip_sprite()
+    fighter1.set_target($"2")
+    fighter2.set_target($"1")
     $MatchupInterface.initialize(fighter1, fighter2)
     $UI/CombatInterface.initialize(fighter1, fighter2)
 # warning-ignore:return_value_discarded
@@ -82,37 +86,17 @@ func check_ready():
     
 
 func do_phase(attacker, defender, attacker_move, defender_move):
-    var hit = attacker_move.execute(defender,defender_move)
-    round_num += 1
-        #add that defender_move  animation still plays
-    fighter1chose = false
-    fighter2chose = false
-    # TODO change this to be from a gave_up signal
     if defender_move.type == move_types.effect:
         on_give_up(defender.player)
         return
-    if hit:
-        # TODO externalize this to the combatant, with a "target" 2d pos
-        # who will get details from the action
-        var curr_pos = attacker.get_parent().position
-        attacker.tween.interpolate_property(attacker.get_parent(), "position",
-            attacker.get_parent().position, defender.get_parent().position, 
-            0.5 , Tween.TRANS_LINEAR, Tween.EASE_IN) 
-        attacker.tween.start()
-        yield(attacker.tween, "tween_completed")
-        # TODO: externalize
-        $UI/PopupLabelBuilder.spawn_label(String(hit.damage), defender, "health")
-        defender.play("take damage")
-        
-        attacker.tween.interpolate_property(attacker.get_parent(), "position",
-            defender.get_parent().position, curr_pos, 
-            1.0 , Tween.TRANS_LINEAR, Tween.EASE_IN)
-        attacker.tween.start()
-        hit.execute()
-        yield(attacker.tween, "tween_completed")
-       
-#        attacker.tween.connect("tween_completed", self, "reverse_tween")
-#        tween_to_reverse = attacker.tween
+
+    fighter1chose = false
+    fighter2chose = false
+    phase_handler.do_phase(attacker, defender, attacker_move, defender_move)
+    yield(phase_handler, "phase_completed")
+
+    round_num += 1
+    
     if round_num % 2 == 1:
         isfighter1First = !isfighter1First
         $UI/CombatInterface.do_combat_phase(isfighter1First)
@@ -203,12 +187,12 @@ func switch_fighters(fighter):
 func dealloc():
     fighter1.player.in_battle = !is_battle_over
     fighter2.player.in_battle = !is_battle_over
-    fighter1.sync_stats()
-    fighter2.sync_stats()
     fighter2.flip_sprite()
+    
     if !is_battle_over:
         spawner.on_hold_combatants.append(fighter1)
         spawner.on_hold_combatants.append(fighter2)
+
     $"1".remove_child(fighter1)
     $"2".remove_child(fighter2)
     queue_free() 

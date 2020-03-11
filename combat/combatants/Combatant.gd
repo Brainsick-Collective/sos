@@ -16,6 +16,8 @@ var battle = null
 var actor_name : String
 onready var skin = $Skin
 onready var tween = $Tween
+signal damage_given
+signal attack_finished
     
 func flip_sprite():
     sprite.set_flip_h(!sprite.is_flipped_h())
@@ -26,11 +28,13 @@ func initialize(p):
     stats = player.stats
     stats.player_id = player.id
     stats.connect("health_depleted", self, "on_death")
-    sprite.scale = Vector2(0.322, 0.322)
     actor_name = player.player_name
     set_moves_from_job()
     #stats.connect("leveled_up", self, "_on_level_up")
-    
+
+func set_target(target):
+    $TargetAnchor.global_position = target.global_position
+
 func set_moves_from_job():
     set_moves_from_dict(job.get_moves_dict())
 
@@ -70,6 +74,10 @@ func get_id():
     return player.get_id()
 
 func take_damage(hit):
+    if hit.damage < stats.health:
+        play("take damage")
+    else:
+        play("death") # change to death anim
     stats.take_damage(hit)
 
 func is_mob():
@@ -77,12 +85,13 @@ func is_mob():
 
 func get_sprite():
     return $Skin/Sprite.get_texture()
-    
-func sync_stats():
-    player.stats = stats
-    
+
 func play(string):
-    $AnimationPlayer.play(string)
+    if string == "attack":
+        play_attack()
+    else:
+        $AnimationPlayer.play(string)
+        yield($AnimationPlayer, "animation_finished")
     
 func on_death():
     var reward = null
@@ -91,3 +100,15 @@ func on_death():
     else:
         reward = $Rewards.give_rewards()
     emit_signal("killed", self, reward)
+    
+func play_attack():
+    var pos = $Skin.global_position
+    $Tween.interpolate_property($Skin, "global_position", $Skin.global_position, $TargetAnchor.global_position, 0.5, Tween.TRANS_LINEAR, Tween.EASE_OUT_IN)
+    $Tween.start()
+    yield($Tween, "tween_completed")
+    emit_signal("damage_given")
+    $Tween.interpolate_property($Skin, "global_position", $TargetAnchor.global_position, pos, 0.75, Tween.TRANS_LINEAR, Tween.EASE_OUT)
+    $Tween.start()
+    yield($Tween, "tween_completed")
+    emit_signal("attack_finished")
+    
