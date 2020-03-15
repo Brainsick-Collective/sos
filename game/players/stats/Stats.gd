@@ -146,7 +146,7 @@ func remove_modifier(id: String, modifier):
     modifiers[id] = max(0, modifiers[id] - modifier)
     
 func _is_alive() -> bool:
-    return health >= 0
+    return health > 0
 
 func _get_max_health() -> int:
     return max_health + modifiers["max_health"]

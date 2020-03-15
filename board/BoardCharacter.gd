@@ -4,6 +4,7 @@ class_name BoardCharacter
 
 signal turn_finished
 signal last_move_taken
+signal camera_centered
 
 export (NodePath) var curr_space = null
 export (String) var player_name
@@ -20,8 +21,8 @@ var spaces_moved
 var board
 var dice_roll_popup
 var timer
-export (int) var death_penalty = 0
-var is_dead = false
+export (int) var turn_penalty = 0
+var can_enter_scene = true
 var ui_up = false
 onready var my_turn = false
 export (Vector2) var last_heal_space 
@@ -145,16 +146,21 @@ func center_camera(last_camera_position  = camera.position):
     $Tween.interpolate_property($Pivot/Camera2D, "position", camera.position, Vector2(), .5, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
     $Tween.start()
     yield($Tween, "tween_completed")
+    emit_signal("camera_centered")
 
-func start_turn(last_camera_position):
-    center_camera(last_camera_position)
+func start_turn():
+    print(player_name + " board character turn")
+    print(player.stats.health)
+    print(player.stats.is_alive)
+#    center_camera(last_camera_position)
+    can_enter_scene = true
     #TODO: use a state machine for player conditions, i.e. in battle, dead, penalty
     if player.in_battle:
         print("in battle turn")
         end_turn()
         return
-    check_penalties()
-    if is_dead:
+    if has_penalties():
+        can_enter_scene = false
         print("dead turn")
         end_turn()
         return
@@ -171,27 +177,26 @@ func start_turn(last_camera_position):
     spaces_moved = Array()
 
 func on_killed(_p, _reward):
-    death_penalty = 3
-    is_dead = true
+    turn_penalty = 3
     position = last_heal_space
 
-func check_penalties():
-    if death_penalty == 0:
-            return
+func has_penalties():
+    if turn_penalty == 0:
+            return false
     else:
-        death_penalty = max(0, death_penalty - 1)
-        if death_penalty == 0:
+        turn_penalty = max(0, turn_penalty - 1)
+        if turn_penalty == 0:
             on_revive()
-            return
+            can_enter_scene = false
         var note = Notification.instance()
         note.initialize(self, null, player_name + " is in timeout!")
         game.add_note_to_q(note)
+        return true
 
 func get_camera_position():
     return camera.to_global(camera.position)
     
 func on_revive():
-    is_dead = false
     player.reset_stats()
 
 func get_collisions():

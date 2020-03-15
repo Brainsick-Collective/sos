@@ -43,26 +43,41 @@ func start_game():
 
     
 func play_turn(board_character, last_camera_position):
-    print (board_character.player_name + "turn started")
+    print ("board starting " + board_character.player_name + "'s turn")
     current_player = board_character
+    
+    # Transition to new player
     GUI.change_player(board_character.player)
+    get_tree().paused = true
+    board_character.center_camera(last_camera_position)
+    yield(board_character, "camera_centered")
+    if current_player.turn_penalty > 0 or current_player.player.in_battle:
+        $UI/GUI/AnimationPlayer.play("penalty turn")
+    else:
+        $UI/GUI/AnimationPlayer.play("playable turn")
+    yield($UI/GUI/AnimationPlayer, "animation_finished")
+    get_tree().paused = false
+    
+    # re-enable input
     set_process(true)
     set_process_input(true)
-
-    board_character.start_turn(last_camera_position)
+    GUI.set_process_input(true)
+    board_character.start_turn()
     
     
 func on_board_character_moves_finished():
-    # TODO change this to do scene finding here rather than at game
     print("board character turn finished")
-    var scene = $GameBoard.get_space_scene(current_player)
-    
-    if scene is ChoseEncounterPanel:
-        scene.initialize(current_player)
-        $UI.add_child(scene)
-        var params = yield(scene, "enemy_chosen")
-        scene = _build_encounter(params[0], params[1], params[2])
-    
+    GUI.set_process_input(false)
+    var scene = null
+
+    if current_player.can_enter_scene:
+        scene = $GameBoard.get_space_scene(current_player)
+        if scene is ChoseEncounterPanel:
+            scene.initialize(current_player)
+            $UI.add_child(scene)
+            var params = yield(scene, "enemy_chosen")
+            scene = _build_encounter(params[0], params[1], params[2])
+ 
     emit_signal("turn_finished", current_player, scene)
 
 func _build_encounter(pawn, enemy, spawner):

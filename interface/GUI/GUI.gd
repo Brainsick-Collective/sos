@@ -18,10 +18,13 @@ func show_action_menu():
 func change_player(player):
     current_player = player
     $ActorPanel.set_actor(player)
-    $ActionMenu.show()
+    $ActionMenu.hide()
     $ActionMenu/MarginContainer/VBoxContainer/RollButton.grab_focus()
     $ActionMenu/MarginContainer/VBoxContainer/RollButton.grab_click_focus()
     $Counter.hide()
+    $NextTurnPanel/Label.text = player.player_name + ", GO!"
+    set_process_input(false)
+ 
     
 func focus_roll_button():
     $ActionMenu/MarginContainer/VBoxContainer/RollButton.grab_click_focus()
@@ -42,7 +45,6 @@ func _on_InventoryButton_pressed():
     $ActionMenu.show()
     $ActionMenu/MarginContainer/VBoxContainer/InventoryButton.grab_focus()
 
-
 func _on_ViewBoardButton_pressed():
     board.view_board()
     $ActionMenu.hide()
@@ -54,6 +56,7 @@ func _on_PlayerInfoButton_pressed():
 
 func _process(_delta):
     moves_left_label.text = String(current_player.board_character.get_moves())
+    
 func show_moves(_num):
     $Counter.show()
     

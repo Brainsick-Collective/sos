@@ -1,0 +1,10 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=2]
+
+[ext_resource path="res://interface/transitions/shaders/transition.shader" type="Shader" id=1]
+[ext_resource path="res://interface/transitions/masks/right_swipe.png" type="Texture" id=2]
+
+[resource]
+shader = ExtResource( 1 )
+shader_param/cutoff = 0.316061
+shader_param/smooth_size = 0.37037
+shader_param/mask = ExtResource( 2 )

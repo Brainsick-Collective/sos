@@ -164,8 +164,7 @@ func on_give_up(retiree):
 #    $UI/GUI/Choices.text = retiree.player_name + " has given up!"
     print(retiree.player_name + " has given up!")
     $UI/CombatInterface.queue_free()
-    $Timer.set_wait_time(2)
-    $Timer.start()
+
     var note = Notification.instance()
     note.initialize(retiree, null, retiree.player_name + " is in timeout!")
     notifications.append(note) 
@@ -200,7 +199,12 @@ func dealloc():
 func get_mob():
     if fighter2 is Mob:
         return fighter2
-
+        
+func _exit_transition():
+    $Timer.set_wait_time(2)
+    $Timer.start()
+    $UI/CombatInterface.hide()
+    
 func _on_Timer_timeout():
     dealloc()
     emit_signal("completed", notifications)

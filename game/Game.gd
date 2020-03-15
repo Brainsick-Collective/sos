@@ -65,7 +65,7 @@ func enter_space_scene(player_pawn, scene):
     else:
         # play note q instead?
         print("next turn from game.enter_space")
-        board.next_turn()
+        queue.play_queue()
 
 func on_queue_finished():
     set_process(true)

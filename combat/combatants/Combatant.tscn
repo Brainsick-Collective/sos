@@ -8,7 +8,7 @@
 [ext_resource path="res://combat/combatants/shaders/test_shader.tres" type="Material" id=6]
 [ext_resource path="res://combat/combatants/shaders/buff.tres" type="Material" id=7]
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=1]
 resource_name = "attack"
 length = 1.5
 tracks/0/type = "value"
@@ -38,7 +38,7 @@ tracks/1/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=2]
 resource_name = "death"
 length = 2.0
 tracks/0/type = "value"
@@ -87,7 +87,7 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 1 ),
+"times": PoolRealArray( 0, 0.7 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ true, false ]
@@ -165,8 +165,8 @@ position = Vector2( 113.376, 5.93248 )
 script = ExtResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/attack = SubResource( 7 )
-anims/death = SubResource( 8 )
+anims/attack = SubResource( 1 )
+anims/death = SubResource( 2 )
 anims/effect = SubResource( 3 )
 "anims/raise attack" = SubResource( 4 )
 "anims/take damage" = SubResource( 5 )

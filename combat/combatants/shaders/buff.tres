@@ -11,4 +11,4 @@ shader_param/offset_factor = Vector2( 5, 2 )
 shader_param/amplitude = 10.0
 shader_param/mask_color = Color( 0.113725, 0.411765, 0.501961, 1 )
 shader_param/mix_amount = 0.3
-shader_param/time = 0.992145
+shader_param/time = 1.0
