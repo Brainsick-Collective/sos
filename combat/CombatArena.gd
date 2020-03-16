@@ -12,6 +12,7 @@ var round_num = 0
 var is_round_over = false
 var is_battle_over = false
 var notifications = []
+var battle_notes = []
 var note_q
 var tween_to_reverse
 enum move_types { empty = -1, normal, special, magic, effect }
@@ -19,8 +20,10 @@ onready var Notification = preload("res://interface/UI/notification.tscn")
 onready var BoardNotification = preload("res://interface/UI/BoardNotification.tscn")
 onready var phase_handler = $CombatPhaseHandler
 
+
 var spawner : MobSpawner
 
+signal transitioning
 signal completed (notifications)
 
 const choices =[
@@ -38,8 +41,8 @@ const choice_map = {"ui_left" : move_types.normal,
 func initialize(_player):
     fighter1.connect("killed", self, "on_won_battle", [], CONNECT_DEFERRED)
     fighter2.connect("killed", self, "on_won_battle", [], CONNECT_DEFERRED)
-    fighter1.stats.connect("leveled_up", self, "play_notification", [], CONNECT_DEFERRED)
-    fighter2.stats.connect("leveled_up", self, "play_notification", [], CONNECT_DEFERRED)
+    fighter1.stats.connect("leveled_up", self, "add_notification")
+    fighter2.stats.connect("leveled_up", self, "add_notification")
     fighter1chose = false
     fighter2chose = false
     $"1".add_child(fighter1)
@@ -103,8 +106,7 @@ func do_phase(attacker, defender, attacker_move, defender_move):
         set_process_input(true)
         $MatchupInterface.set_predictions(defender)
     else:
-        $Timer.set_wait_time(2)
-        $Timer.start()
+        _exit_transition()
 
 func _input(event):
     for key in choices:
@@ -145,9 +147,10 @@ func on_won_battle(killed, reward):
     #do a notification in combatArena
     var kill_desc = killed.actor_name + " has been killed!"
     print(kill_desc)
-    
-    $Timer.set_wait_time(2)
-    $Timer.start()
+    var b_note = Notification.instance()
+    b_note.initialize(null, null, winner.actor_name + " won!")
+    battle_notes.push_front(b_note)
+    _exit_transition()
 #    $UI/GUI/Choices.text = "awarded " + String(killed.stats.kill_xp) + " xp"
     
     if !killed.is_mob():
@@ -194,16 +197,25 @@ func dealloc():
 
     $"1".remove_child(fighter1)
     $"2".remove_child(fighter2)
-    queue_free() 
+    queue_free()
 
 func get_mob():
     if fighter2 is Mob:
         return fighter2
         
 func _exit_transition():
-    $Timer.set_wait_time(2)
+    for note in battle_notes:
+        $UI/NoteContainer.show()
+        $UI/NoteContainer.add_child(note)
+        note.popup()
+        yield(note, "tree_exited")
+        if note == battle_notes.back():
+            emit_signal("transitioning")
+    yield(self, "transitioning")
+    $Timer.set_wait_time(1)
     $Timer.start()
     $UI/CombatInterface.hide()
+    get_parent().play_transition()
     
 func _on_Timer_timeout():
     dealloc()
@@ -212,13 +224,8 @@ func _on_Timer_timeout():
 func get_fighters():
     return [fighter1, fighter2]
 
-func play_notification(note):
-    $UI/NoteContainer.show()
-    $UI/NoteContainer.add_child(note)
-    note.show()
-    $Timer.stop()
-    yield(note, "tree_exited")
-    $Timer.start()
+func add_notification(note):
+    battle_notes.append(note)
     
 func _on_CombatArena_tree_entered():
     set_process_input(false)

@@ -12,7 +12,7 @@
 [ext_resource path="res://interface/transitions/materials/left_swipe.tres" type="Material" id=10]
 [ext_resource path="res://interface/theme/panel/GUI_block_blue.tres" type="StyleBox" id=11]
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=1]
 resource_name = "penalty turn"
 length = 2.0
 tracks/0/type = "value"
@@ -66,7 +66,7 @@ tracks/3/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=2]
 resource_name = "playable turn"
 length = 2.0
 tracks/0/type = "value"
@@ -464,13 +464,14 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="NextTurnPanel"]
+modulate = Color( 1, 1, 1, 0 )
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -565.765
+margin_left = -1536.66
 margin_top = -32.5
-margin_right = -94.754
+margin_right = -1065.65
 margin_bottom = 32.5
 grow_horizontal = 2
 grow_vertical = 2
@@ -485,8 +486,8 @@ __meta__ = {
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 pause_mode = 2
-"anims/penalty turn" = SubResource( 2 )
-"anims/playable turn" = SubResource( 5 )
+"anims/penalty turn" = SubResource( 1 )
+"anims/playable turn" = SubResource( 2 )
 "anims/show action menu" = SubResource( 3 )
 anims/transition = SubResource( 4 )
 [connection signal="visibility_changed" from="ActionMenu" to="." method="_on_ActionMenu_visibility_changed"]

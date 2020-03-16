@@ -28,7 +28,6 @@ func play_queue() -> void:
             note.target.center_camera()
         ui_parent.add_child(note)
         note.popup()
-        note.grab_focus()
         yield(note, "popup_hide")
         note.queue_free()
     queue.clear()

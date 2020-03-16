@@ -8,6 +8,8 @@ var board
 var queue = null
 var cutscene = null
 
+
+
 func _ready():
     var main_menu = MainMenu.instance()
     add_child(main_menu)
@@ -54,12 +56,16 @@ func set_controls():
     
 func enter_space_scene(player_pawn, scene):
     if scene:
-        scene.connect("completed", self, "add_note_to_q")
-        scene.connect("tree_exited", self, "resolve_scene")
+        scene.connect("completed", self, "add_note_to_q") 
+#        scene.connect("tree_exited", self, "resolve_scene")
         if scene is CombatArena:
+            $UI/Transition/AnimationPlayer.play("versus")
+            yield($UI/Transition/, "transitioned")
             remove_child(board)
             add_child(scene)
         else:
+            $UI/Transition/AnimationPlayer.play("New Anim")
+            yield($UI/Transition/AnimationPlayer, "transitioned")
             $Board/UI.add_child(scene)
         scene.initialize(player_pawn.player)
     else:
@@ -85,8 +91,9 @@ func add_note_to_q(notes):
         if child is CombatArena:
             remove_child(child)
     
-
-func resolve_scene():
+func play_transition():
+    $UI/Transition/AnimationPlayer.play("transition")
+    yield($UI/Transition, "transitioned")
     print("resolving scene")
     add_child(board)
     if cutscene:
