@@ -209,9 +209,7 @@ func _exit_transition():
         $UI/NoteContainer.add_child(note)
         note.popup()
         yield(note, "tree_exited")
-        if note == battle_notes.back():
-            emit_signal("transitioning")
-    yield(self, "transitioning")
+
     $Timer.set_wait_time(1)
     $Timer.start()
     $UI/CombatInterface.hide()
