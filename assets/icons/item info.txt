@@ -1,0 +1,60 @@
+Cardsword:
+	Description: A not so mighty sword made of cardboard. 
+	With a little imagination, It could strike down the most powerful of monsters.
+	But only in your imagination.
+
+	Stats: Can cause bleed damage on enemies, but breaks when it gets wet.
+
+Clamhammer:
+	Description: These damn clams shells are rock solid, I can't get the damn things open.
+	Maybe you will have better luck than me.
+
+	Stats: Not very stronge, but has a chance to break and drop a rare item.
+
+Purpsword:
+	Description: I'ts sharp and you can poke things with it, don't be greedy.
+
+	Stats: No special abilities.
+
+Spoon:
+	Description: You could use it for fighting, and for soup!
+
+	Stats: No special abilities.
+
+
+Sticky Socks:
+
+	Description: A damn clam got into my shipment of socks and now they're ALL STICKY!!
+	I'm willing to sell them to you at a discount as long as you don't mind a squish in your step.
+
+	Stats: No special abilities.
+
+Throwple:
+	Description: These are some nasty litle berries. I'm just minding my own business and I catch
+	them trying to take a chunk out of my ankle. The only thing they're good for is throwing and
+	the local teens tyring to steal from my shop.
+
+	Stats: Can be thrown at an enemy and cause damage.
+
+Digital Smash:
+	Description: Make Stin figure this one out.
+
+	Stats: Not my problem.
+
+Lily Staff:
+	Description: A flower plucked from the magical bogs right behind the garbage heap.
+
+	Stats: Water elemental bonus.
+
+Bone Staff:
+	Description: Don't ask me how I got this.
+
+	Stats: Can cripple opponets movement.
+
+Your Son:
+	Description: Will you love him? Will you love your son?
+
+	Stats: 
+
+
+
