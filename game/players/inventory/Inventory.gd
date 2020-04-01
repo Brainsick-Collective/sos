@@ -11,7 +11,7 @@ func get_items():
 
 func find_item(reference):
     for item in get_items():
-        if item.name == reference.name:
+        if item.display_name == reference.display_name:
             return item
 
 func has(item):

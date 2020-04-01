@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://board/Board.gd" type="Script" id=1]
 [ext_resource path="res://board/outdoor.tres" type="TileSet" id=2]
@@ -16,6 +16,7 @@
 [ext_resource path="res://board/BoardViewer.gd" type="Script" id=14]
 [ext_resource path="res://board/Spawners/MushBossSpawner.tscn" type="PackedScene" id=15]
 [ext_resource path="res://board/Spawners/ItemShopOne.tscn" type="PackedScene" id=16]
+[ext_resource path="res://board/Spawners/Potion1SpinnerSpawner.tscn" type="PackedScene" id=17]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -122,6 +123,21 @@ position = Vector2( 960, 1088 )
 [node name="ItemShopOne3" parent="GameBoard/Spawners" instance=ExtResource( 16 )]
 position = Vector2( 2624, 958.149 )
 
+[node name="Potion1SpinnerSpawner" parent="GameBoard/Spawners" instance=ExtResource( 17 )]
+position = Vector2( 704, 704 )
+
+[node name="Potion1SpinnerSpawner2" parent="GameBoard/Spawners" instance=ExtResource( 17 )]
+position = Vector2( 704, 1088 )
+
+[node name="Potion1SpinnerSpawner3" parent="GameBoard/Spawners" instance=ExtResource( 17 )]
+position = Vector2( 448, 1088 )
+
+[node name="Potion1SpinnerSpawner4" parent="GameBoard/Spawners" instance=ExtResource( 17 )]
+position = Vector2( 1600, 1344 )
+
+[node name="Potion1SpinnerSpawner5" parent="GameBoard/Spawners" instance=ExtResource( 17 )]
+position = Vector2( 2368, 1344 )
+
 [node name="BoardViewer" type="KinematicBody2D" parent="."]
 visible = false
 position = Vector2( 444.542, 449.395 )
@@ -130,6 +146,7 @@ script = ExtResource( 14 )
 
 [node name="Anim" type="AnimatedSprite" parent="BoardViewer"]
 frames = SubResource( 1 )
+frame = 1
 playing = true
 
 [node name="Camera2D" type="Camera2D" parent="BoardViewer"]

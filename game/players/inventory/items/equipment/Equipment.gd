@@ -8,6 +8,7 @@ export(int) var DEFENSE = 0
 export(int) var SPEED = 0
 export(int) var HEALTH = 0
 export(int) var MANA = 0
+
 func hit_effect(hit):
     pass
     

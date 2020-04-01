@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource( 1 )
-move_name = "Poison Cloud"
+name = "Poision Cloud"
 type = 2
 phase = 0
 modifier = 3.9
@@ -12,3 +12,5 @@ description = "sprays a cloud of smokey mist at the enemy"
 base_damage = 10
 success_chance = 0.85
 anim_name = "effect"
+effect_chance = 0.0
+tags = [  ]

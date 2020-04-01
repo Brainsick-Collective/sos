@@ -1,27 +1,39 @@
 ** Dokapon Clone TODO list
 *** TODO use accuracy testing
-*** TODO add system for battle abilities and effects
-*** TODO equipment system
 *** TODO rework gui element handling from boardcharacter to board / gui
 *** TODO reword inventory / inventory menu to better use polymorphism / inheritence
 **** have two seperate buttons one for shop one for inventory
 *** TODO sound effects
 *** TODO Add better Level up interface
 *** TODO System for saving game
-*** TODO Localization for MonsterFactory and ShopFactory
-*** DONE on death, action menu acts weird
-    CLOSED: [2020-03-01 Sun 18:07]
 *** TODO towns (it's TIME)
 *** TODO tutorial cutscene?
-*** TODO vfx for battle, and better battle anims
 *** TODO better controls handler
-*** TODO scene transitions
 *** TODO music player
 *** TODO board view preview of all space types
 *** TODO look into making an online multiplayer demo
 *** TODO mob AI behaviour
 *** TODO tool tips
-*** TODO whole system for playing turns needs an overhaul. 
+*** TODO make sure transition plays on leaving a shop
+*** TODO BUG: make combat work again
+*** DONE add system for battle abilities and effects
+    CLOSED: [2020-03-31 Tue 09:32]
+*** DONE equipment system
+    CLOSED: [2020-03-31 Tue 09:32]
+*** DONE Localization for MonsterFactory and ShopFactory
+    CLOSED: [2020-03-31 Tue 09:32]
+*** DONE on death, action menu acts weird
+    CLOSED: [2020-03-01 Sun 18:07]
+*** DONE vfx for battle, and better battle anims
+    CLOSED: [2020-03-31 Tue 09:32]
+*** DONE scene transitions
+    CLOSED: [2020-03-31 Tue 09:32]
+*** DONE spinners need to add items to inventory
+    CLOSED: [2020-03-31 Tue 09:32]
+*** DONE when starting turn on active battle tile, make sure turn transition plays before versus transiton=
+    CLOSED: [2020-03-31 Tue 09:33]
+*** DONE whole system for playing turns needs an overhaul. 
+    CLOSED: [2020-03-27 Fri 17:36]
     should not be a string of functions calling functions calling each other, but instead
     using signals and triggers to catch user input or state conditions. so that frames can
     happen when they need to, a more procedural style when the things __need__

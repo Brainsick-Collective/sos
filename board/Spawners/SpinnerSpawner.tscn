@@ -1,0 +1,10 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://board/Spawners/Spawner.tscn" type="PackedScene" id=1]
+[ext_resource path="res://game/players/inventory/Inventory.tscn" type="PackedScene" id=2]
+[ext_resource path="res://board/Spawners/SpinnerSpawner.gd" type="Script" id=3]
+
+[node name="SpinnerSpawner" instance=ExtResource( 1 )]
+script = ExtResource( 3 )
+
+[node name="Inventory" parent="." index="1" instance=ExtResource( 2 )]

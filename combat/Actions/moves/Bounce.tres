@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource( 1 )
-move_name = "Bounce"
+name = "Bounce"
 type = 2
 phase = 1
 modifier = 0.9
@@ -12,3 +12,5 @@ description = "Creates a protective wall, blocking some incoming damage"
 base_damage = 0
 success_chance = 0.85
 anim_name = "effect"
+effect_chance = 0.0
+tags = [  ]

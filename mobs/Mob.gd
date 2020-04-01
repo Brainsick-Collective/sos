@@ -6,6 +6,9 @@ export (float) var spawn_rate
 export (String) var off_priority
 export (String) var def_priority
 export (PackedScene) var defeated_trigger
+export (float, 0,1) var money_drop_rate
+export (int) var money_min = 0
+export (int) var money_max = 0
 
     # TODO make this more complex somehow
     # maybe take into account what class and strengths the opponent has

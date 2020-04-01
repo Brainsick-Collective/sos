@@ -15,6 +15,7 @@ var notifications = []
 var battle_notes = []
 var note_q
 var tween_to_reverse
+var exiting = false
 enum move_types { empty = -1, normal, special, magic, effect }
 onready var Notification = preload("res://interface/UI/notification.tscn")
 onready var BoardNotification = preload("res://interface/UI/BoardNotification.tscn")
@@ -41,8 +42,8 @@ const choice_map = {"ui_left" : move_types.normal,
 func initialize(_player):
     fighter1.connect("killed", self, "on_won_battle", [], CONNECT_DEFERRED)
     fighter2.connect("killed", self, "on_won_battle", [], CONNECT_DEFERRED)
-    fighter1.stats.connect("leveled_up", self, "add_notification")
-    fighter2.stats.connect("leveled_up", self, "add_notification")
+    fighter1.stats.connect("leveled_up", self, "add_notification", [], CONNECT_DEFERRED)
+    fighter2.stats.connect("leveled_up", self, "add_notification", [], CONNECT_DEFERRED)
     fighter1chose = false
     fighter2chose = false
     $"1".add_child(fighter1)
@@ -105,7 +106,7 @@ func do_phase(attacker, defender, attacker_move, defender_move):
         $UI/CombatInterface.do_combat_phase(isfighter1First)
         set_process_input(true)
         $MatchupInterface.set_predictions(defender)
-    else:
+    elif not exiting:
         _exit_transition()
 
 func _input(event):
@@ -130,6 +131,8 @@ func on_turnorder_popup_hide():
     set_process_input(true)
     
 func on_won_battle(killed, reward):
+    exiting = true
+    
     var winner : Combatant
     if killed == fighter1:
         winner = fighter2
@@ -139,19 +142,23 @@ func on_won_battle(killed, reward):
         winner = null
     if winner:
         winner.player.receive_item(reward)
+        if reward:
+            var reward_note = Notification.instance()
+            reward_note.initialize(null,null, winner.actor_name + "received " + reward.name + "!")
+            battle_notes.push_front(reward_note)
         winner.stats.set_xp(winner.stats.get_xp() + killed.stats.kill_xp)
-    
+        var b_note = Notification.instance()
+        b_note.initialize(null, null, winner.actor_name + " won!")
+        battle_notes.push_front(b_note)
+
     set_process_input(false)
     is_battle_over = true
     
-    #do a notification in combatArena
     var kill_desc = killed.actor_name + " has been killed!"
     print(kill_desc)
-    var b_note = Notification.instance()
-    b_note.initialize(null, null, winner.actor_name + " won!")
-    battle_notes.push_front(b_note)
-    _exit_transition()
-#    $UI/GUI/Choices.text = "awarded " + String(killed.stats.kill_xp) + " xp"
+    
+    
+
     
     if !killed.is_mob():
         var note = BoardNotification.instance()
@@ -160,8 +167,11 @@ func on_won_battle(killed, reward):
     else:
         if killed.defeated_trigger:
             get_parent().queue_cutscene(killed.get_cutscene_trigger())
+            
+    _exit_transition()
 
 func on_give_up(retiree):
+    exiting = true
     set_process_input(false)
     is_battle_over = true
 #    $UI/GUI/Choices.text = retiree.player_name + " has given up!"
@@ -171,6 +181,7 @@ func on_give_up(retiree):
     var note = Notification.instance()
     note.initialize(retiree, null, retiree.player_name + " is in timeout!")
     notifications.append(note) 
+    _exit_transition()
 
 func switch_fighters(fighter):
     if fighter == fighter1:
@@ -204,15 +215,27 @@ func get_mob():
         return fighter2
         
 func _exit_transition():
-    for note in battle_notes:
+    $UI/CombatInterface.hide()
+    if not battle_notes.empty():
+        var note = battle_notes.pop_front()
         $UI/NoteContainer.show()
         $UI/NoteContainer.add_child(note)
         note.popup()
         yield(note, "tree_exited")
+        print("nonsense")
+        var timer = Timer.new()
+        timer.one_shot = true
+        add_child(timer)
+        timer.start(0.4)
+        yield(timer, "timeout")
+        call_deferred("_exit_transition")
+    else:
+        _exit()
 
+func _exit():
+    print("exiting")
     $Timer.set_wait_time(1)
     $Timer.start()
-    $UI/CombatInterface.hide()
     get_parent().play_transition()
     
 func _on_Timer_timeout():

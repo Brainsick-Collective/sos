@@ -59,4 +59,14 @@ size_flags_horizontal = 4
 size_flags_vertical = 3
 theme = ExtResource( 3 )
 text = "Roll"
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[node name="DelayTimer" type="Timer" parent="."]
+one_shot = true
+[connection signal="visibility_changed" from="." to="." method="_on_DiceRollPopup_visibility_changed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Button" to="." method="_on_Button_pressed"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="timeout" from="DelayTimer" to="." method="_on_DelayTimer_timeout"]

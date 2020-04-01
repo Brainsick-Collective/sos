@@ -1,8 +1,24 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://interface/UI/combat_ui_theme.tres" type="Theme" id=1]
 [ext_resource path="res://board/Spinner.gd" type="Script" id=2]
-[ext_resource path="res://interface/GUI/OptionButton.tscn" type="PackedScene" id=3]
+[ext_resource path="res://combat/interface/theme/styleboxes/panel.tres" type="StyleBox" id=4]
+
+[sub_resource type="Animation" id=1]
+resource_name = "slide in"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 684.5, 1183.67 ), Vector2( 684.5, 200.274 ), Vector2( 684.5, 237.5 ) ]
+}
 
 [node name="Spinner" type="Panel"]
 anchor_left = 0.5
@@ -10,11 +26,12 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -275.5
-margin_top = -302.5
+margin_top = 643.672
 margin_right = 275.5
-margin_bottom = 302.5
+margin_bottom = 1248.67
 size_flags_vertical = 4
 theme = ExtResource( 1 )
+custom_styles/panel = ExtResource( 4 )
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -31,20 +48,19 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="OptionButton" parent="Row" instance=ExtResource( 3 )]
-
-[node name="OptionButton2" parent="Row" instance=ExtResource( 3 )]
-margin_top = 277.0
-margin_bottom = 316.0
-
-[node name="OptionButton3" parent="Row" instance=ExtResource( 3 )]
-margin_top = 387.0
-margin_bottom = 426.0
-
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.12
 
 [node name="ClickBlocker" type="Control" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DelayTimer" type="Timer" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+"anims/slide in" = SubResource( 1 )
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="timeout" from="DelayTimer" to="." method="_on_delay_over"]

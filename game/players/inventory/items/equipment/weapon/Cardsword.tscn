@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/icons/cardsword.png" type="Texture" id=1]
+[ext_resource path="res://game/players/inventory/items/equipment/Equipment.tscn" type="PackedScene" id=2]
+
+[node name="Cardsword" instance=ExtResource( 2 )]
+icon = ExtResource( 1 )
+display_name = "Cardsword"
+description = "a weapon made out of cardboard... it's not very sharp, and keep it away from water, but it gets the job done! (sometimes)"
+STRENGTH = 2

@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/icons/clammer.png" type="Texture" id=1]
+[ext_resource path="res://game/players/inventory/items/equipment/Equipment.tscn" type="PackedScene" id=2]
+
+[node name="Clammer" instance=ExtResource( 2 )]
+icon = ExtResource( 1 )
+display_name = "Clammer"
+description = "Breaks easily, but sometimes leaves a surprise for anyone cruel enough to smash it open"
+STRENGTH = 10

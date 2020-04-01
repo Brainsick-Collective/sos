@@ -2,7 +2,7 @@ extends "res://interface/Menu.gd"
 
 onready var Board = preload("res://board/Board.tscn")
 onready var Character = preload("res://board/BoardCharacter.tscn")
-onready var Player = preload("res://game/players/Player.tscn")
+onready var player_scene = preload("res://game/players/Player.tscn")
 onready var StartingClasses = preload("res://game/StartingClasses.tscn")
 
 onready var character_select_sprite = $Column/Row/Character
@@ -69,7 +69,7 @@ func _process(_delta):
 
 
 func _on_Go_pressed():    
-    var player = Player.instance()
+    var player = player_scene.instance()
     player.player_name = $PlayerLabel.text
     var combatant = classes.get_combatant()
     var board_character = classes.get_pawn()

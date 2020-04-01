@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://game/players/inventory/items/equipment/Equipment.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/icons/digital smash.png" type="Texture" id=2]
+
+[node name="E-Hammer" instance=ExtResource( 1 )]
+icon = ExtResource( 2 )
+display_name = "E-Hammer"
+description = "uses captured UI canvas to draw wipe enemies, suceptible to virus blockers"
+STRENGTH = 20

@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://game/players/inventory/items/equipment/Equipment.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/icons/lily staff.png" type="Texture" id=2]
+
+[node name="LilyStaff" instance=ExtResource( 1 )]
+icon = ExtResource( 2 )
+display_name = "Lily Staff"
+description = "uses the magical powers of RNA to build particles and effects from other game dimensions"
+MAGIC = 8

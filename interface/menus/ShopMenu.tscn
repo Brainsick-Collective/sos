@@ -169,7 +169,21 @@ margin_top = 32.0
 margin_right = 1824.0
 margin_bottom = 348.0
 script = ExtResource( 8 )
+DIALOG = ""
+CHARACTER_NAME = ""
+CHARACTER_PROFILE = ""
+AUTO_ADVANCE = true
 FONT = "res://interface/UI/base_font.tres"
+ALTERNATE_FONTS = [  ]
+PADDING = 3
+TEXT_VOICE = ""
+PLAY_VOICE_ONCE = false
+COLOR = Color( 1, 1, 1, 1 )
+TEXT_SPEED = 0.03
+PAUSE_AT_PUNCTUATION = false
+PUNCTUATION_PAUSE_LENGTH = 0.0
+INSTANT_PRINT = false
+CUSTOM_EFFECTS = ""
 
 [node name="ConfirmPopup" type="NinePatchRect" parent="."]
 visible = false

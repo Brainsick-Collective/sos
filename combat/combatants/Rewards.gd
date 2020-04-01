@@ -7,8 +7,13 @@ func _ready():
     pass
 
 func give_rewards():
+    var children = get_children()
+    randomize()
+    children.shuffle()
     if get_child_count() > 0:
-        var which_reward = randi() % get_children().size()
-        return get_child(which_reward)
-    else:
-        return null
+        for child in children:
+            var chance = randf()
+            if chance < child.drop_rate:
+                print("rewarding " + child.name)
+                return child
+    return null

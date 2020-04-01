@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://game/players/inventory/items/equipment/Equipment.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/icons/redsword.png" type="Texture" id=2]
+
+[node name="RedSword" instance=ExtResource( 1 )]
+icon = ExtResource( 2 )
+display_name = "Red sword"
+description = "a sword made from redium alloy, mined from pure (255,0,0) assets, mixed with traditional polygonite"
+STRENGTH = 40

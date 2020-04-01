@@ -1,0 +1,14 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://game/players/inventory/items/Item.tscn" type="PackedScene" id=1]
+[ext_resource path="res://game/players/inventory/items/usable/potions/BuffPotion.gd" type="Script" id=2]
+[ext_resource path="res://assets/icons/strength up potion.png" type="Texture" id=3]
+[ext_resource path="res://actors/effects/StrengthBuffSmall.tres" type="Resource" id=4]
+
+[node name="StrengthPotion" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+icon = ExtResource( 3 )
+display_name = "Strength potion"
+description = "don't ask what is in it"
+price = 20
+effect = ExtResource( 4 )

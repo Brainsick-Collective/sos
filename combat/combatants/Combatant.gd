@@ -92,7 +92,11 @@ func play(string):
     else:
         $AnimationPlayer.play(string)
         yield($AnimationPlayer, "animation_finished")
-    
+
+func apply_effect(effect):
+    if player.id != -1:
+        player.apply_effect(effect)
+
 func on_death():
     var reward = null
     if !player == GameVariables.GM:

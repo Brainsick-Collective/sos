@@ -9,10 +9,11 @@ enum target_types { SELF, ENEMY, ALLY }
 
 export(Texture) var icon
 export(String) var display_name = ""
-export(String) var description = ""
+export(String, MULTILINE) var description = ""
 export(int) var price = 100
 export(target_types) var target_type
 export(int) var amount = 1 setget set_amount
+export(float, 0,1) var drop_rate = 0
 
 export(bool) var unique = false
 export(bool) var usable = true

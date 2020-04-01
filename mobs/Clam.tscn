@@ -15,6 +15,7 @@ scale = Vector2( 0.677299, 0.677299 )
 flip_h = true
 
 [node name="MinorHealthPotion" parent="Rewards" index="0" instance=ExtResource( 5 )]
+drop_rate = 1.0
 
 [node name="BuffParticles" parent="." index="8"]
 lifetime = 1.3

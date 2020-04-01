@@ -9,14 +9,12 @@ const ATK_MOD = 2.8
 const MAG_MOD = 2.8
 const STK_MOD = 4.0 
 
-# Since Actions can be instanced by code (ie skills) these
-# actions doesn't have an owner, that's why we get the owner
-# from it's parent (BattlerActions.gd)
+
 enum move_types { empty = -1, normal, special, magic, effect }
-onready var actor = get_parent().get_owner()
-export var move : Resource
+onready var actor
+export(Resource) var move
 var type
-#export(Texture) var icon = load("res://assets/sprites/icons/slash.png")
+#export(Texture) var icon ???
 export(String) var description : String = "Base combat action"
 
 
@@ -32,9 +30,31 @@ func execute(_target, _reaction):
     print("%s missing overwrite of the execute method" % name)
     return false
 
-func additional_effect():
-    pass
-    
+func get_additional_effect(target):
+    var chance = randf()
+    if chance <= move.effect_chance:
+        var effect = move.effect.duplicate()
+        effect.set_target(actor, target)
+        return effect
+        # TODO: play animation or add/or notif to queue
+    else:
+        return null
+
+# TODO: maybe change this so that higher speed helps you land hard to hit moves?
+func determine_accuracy(hit):
+    randomize()
+    var hit_chance = randf()
+    var dodge_chance = randf()
+    if (dodge_chance < determine_dodge(hit.user.stats.speed, hit.target.stats.speed)
+        or hit_chance > move.success_chance):
+            hit.miss = true
+
+func determine_dodge(sp_a, sp_d):
+    var diff = clamp(((sp_d - sp_a) / sp_a), -1, 5.7)
+    var chance = (diff + 1) / 6
+    print("dodge chance is " + String(chance)) 
+    return chance
+ 
 func return_to_start_position():
     yield(actor.skin.return_to_start(), "completed")
 
@@ -45,4 +65,4 @@ func get_type():
     return move.type
 
 func get_name():
-    return move.move_name
+    return move.name

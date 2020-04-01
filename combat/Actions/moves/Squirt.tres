@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource( 1 )
-move_name = "Squirt"
+name = "Squirt"
 type = 2
 phase = -1
 modifier = null
@@ -12,3 +12,5 @@ description = ""
 base_damage = 1
 success_chance = 0.0
 anim_name = "effect"
+effect_chance = 0.0
+tags = [  ]

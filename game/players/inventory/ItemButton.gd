@@ -2,12 +2,14 @@ extends Button
 
 var description = ""
 
-func initialize(item):
-    $Name.text = item.display_name
-    $Amount.text = str(item.amount)
-    $Icon.texture = item.icon
-    $Cost.text = String(item.price) + " G"
+func initialize(item, store = false):
+    $Row/Name.text = item.display_name
+    $Row/Amount.text = str(item.amount)
+    $Row/Icon.texture = item.icon
+    $Row/Cost.text = String(item.price) + " G"
     description = item.description
+    if store:
+        $Row/Amount.text = ""
     
     disabled = not item.usable
     
@@ -15,4 +17,4 @@ func initialize(item):
     item.connect("depleted", self, "queue_free")
 
 func _on_Item_amount_changed(amount):
-    $Amount.text = str(amount)
+    $Row/Amount.text = str(amount)

@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource( 1 )
-move_name = "Zap"
+name = "Fireball"
 type = 2
 phase = 0
 modifier = 1.2
@@ -12,3 +12,5 @@ description = "shoot a fireball"
 base_damage = 5
 success_chance = 0.85
 anim_name = "effect"
+effect_chance = 0.0
+tags = [  ]

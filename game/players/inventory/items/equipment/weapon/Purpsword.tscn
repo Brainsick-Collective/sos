@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://game/players/inventory/items/equipment/Equipment.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/icons/purpsword.png" type="Texture" id=2]
+
+[node name="Purpsword" instance=ExtResource( 1 )]
+icon = ExtResource( 2 )
+display_name = "Purp sword"
+description = "I'ts sharp and you can poke things with it, don't be greedy."
+price = 400
+STRENGTH = 25
+MAGIC = 10

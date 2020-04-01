@@ -34,7 +34,12 @@ func get_actor():
     
 func get_on_hold():
     return on_hold_combatants
+
 func put_combatants_on_hold(arr):
     for combatant in arr:
         if !on_hold_combatants.has(combatant):
             on_hold_combatants.append(combatant)
+            combatant.connect("killed", self, "remove_combatant", [combatant])
+
+func remove_combatant(combatant):
+    on_hold_combatants.remove(combatant)

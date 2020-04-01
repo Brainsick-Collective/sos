@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource( 1 )
-move_name = "Strike"
+name = "Strike"
 type = 1
 phase = 0
 modifier = null
@@ -12,3 +12,5 @@ description = "Launch an all out attack, but leave yourself open to retaliation"
 base_damage = 20
 success_chance = 0.85
 anim_name = "effect"
+effect_chance = 0.0
+tags = [  ]

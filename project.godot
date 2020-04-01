@@ -24,6 +24,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://BoardNotification.gd"
 }, {
+"base": "Item",
+"class": "BuffPotion",
+"language": "GDScript",
+"path": "res://game/players/inventory/items/usable/potions/BuffPotion.gd"
+}, {
 "base": "NinePatchRect",
 "class": "ChoseEncounterPanel",
 "language": "GDScript",
@@ -68,6 +73,11 @@ _global_script_classes=[ {
 "class": "CutsceneParser",
 "language": "GDScript",
 "path": "res://CutsceneParser.gd"
+}, {
+"base": "Resource",
+"class": "Effect",
+"language": "GDScript",
+"path": "res://actors/effects/Effect.gd"
 }, {
 "base": "CombatAction",
 "class": "EffectAction",
@@ -144,6 +154,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://combat/combatants/Rewards.gd"
 }, {
+"base": "Inventory",
+"class": "ShopInventory",
+"language": "GDScript",
+"path": "res://game/ShopInventory.gd"
+}, {
+"base": "Control",
+"class": "ShopMenu",
+"language": "GDScript",
+"path": "res://interface/menus/ShopMenu.gd"
+}, {
 "base": "Spawner",
 "class": "ShopSpawner",
 "language": "GDScript",
@@ -159,6 +179,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://combat/Actions/SpecialAttackAction.gd"
 }, {
+"base": "Spawner",
+"class": "SpinnerSpawner",
+"language": "GDScript",
+"path": "res://board/Spawners/SpinnerSpawner.gd"
+}, {
+"base": "Effect",
+"class": "StatEffect",
+"language": "GDScript",
+"path": "res://actors/effects/StatEffect.gd"
+}, {
 "base": "Resource",
 "class": "Stats",
 "language": "GDScript",
@@ -173,6 +203,7 @@ _global_script_class_icons={
 "AttackAction": "",
 "BoardCharacter": "",
 "BoardNotification": "",
+"BuffPotion": "",
 "ChoseEncounterPanel": "",
 "CombatAction": "",
 "CombatArena": "",
@@ -182,6 +213,7 @@ _global_script_class_icons={
 "Combatant": "",
 "Cutscene": "",
 "CutsceneParser": "",
+"Effect": "",
 "EffectAction": "",
 "Equipment": "",
 "Hit": "",
@@ -197,9 +229,13 @@ _global_script_class_icons={
 "RandomSelector": "",
 "RectExtents": "",
 "Rewards": "",
+"ShopInventory": "",
+"ShopMenu": "",
 "ShopSpawner": "",
 "Spawner": "",
 "SpecialAttackAction": "",
+"SpinnerSpawner": "",
+"StatEffect": "",
 "Stats": "",
 "Task": ""
 }

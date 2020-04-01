@@ -1,5 +1,6 @@
 extends Control
 
+class_name ShopMenu
 
 ## TODO make a class for inventory and extend it for player and shop
 
@@ -36,7 +37,7 @@ func initialize(p):
 
 func create_item_button(item):
     var item_button = ItemButton.instance()
-    item_button.initialize(item)
+    item_button.initialize(item, true)
     item_button.disabled = false
     _item_grid.add_child(item_button)
     return item_button

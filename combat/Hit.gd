@@ -12,6 +12,8 @@ var reverse = false
 var user setget _set_user, _get_user
 var buff
 var debuff
+var effect
+var miss : bool = false
 
 func _set_damage(dg: int):
     damage = dg
@@ -37,5 +39,7 @@ func _get_user():
     return user
     
 func execute():
-    # do rand chance based on accuracy, if success then take damage
-    target.take_damage(self)
+    if miss:
+        emit_signal("missed")
+    else:
+        target.take_damage(self)

@@ -65,6 +65,11 @@ func reset_stats():
     print(String(stats.health)) 
     print(String(combatant.stats.health))
     
+func apply_effect(effect):
+    $EffectsHolder.add_effect(effect)
+    if board_character.visible:
+        # play anim?
+        pass
 
 func on_death():
     pass

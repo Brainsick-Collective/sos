@@ -223,7 +223,9 @@ func get_collisions():
         
 func end_turn():
     my_turn = false
+    moves_left
     emit_signal("turn_finished")
+    
 
 func get_actor():
     return player.combatant
