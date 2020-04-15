@@ -4,18 +4,3 @@
 
 [node name="ControlsHandler" type="Node"]
 script = ExtResource( 1 )
-controls_set = [ {
-"ui_accept": 69,
-"ui_cancel": 16777217,
-"ui_down": 83,
-"ui_left": 65,
-"ui_right": 68,
-"ui_up": 87
-}, {
-"ui_accept": 16777221,
-"ui_cancel": 16777224,
-"ui_down": 16777234,
-"ui_left": 16777231,
-"ui_right": 16777233,
-"ui_up": 16777232
-} ]

@@ -1,6 +1,5 @@
 extends Node
 
-export var ui_parent_path : NodePath
 onready var queue = []
 var ui_parent
 onready var Notification = preload("res://interface/UI/notification.tscn")

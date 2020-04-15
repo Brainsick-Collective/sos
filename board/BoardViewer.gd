@@ -26,17 +26,27 @@ func _physics_process(_delta):
         collision_shapes = []
         if not on_space:
             on_space = true
+            
             while ray.is_colliding():
                 var obj = ray.get_collider() #get the next object that is colliding.
                 collision_shapes.append(obj) #add it to the array.
                 ray.add_exception(obj) #add to ray's exception. That way it could detect something being behind it.
                 ray.force_raycast_update() #update the ray's collision query.
-    
-            var combatants = []
+            
+            var previews = []
+            
             for obj in collision_shapes:
-                if obj is Combatant:
-                    combatants.append(obj.get_parent().get_actor())
-            emit_signal("actor_found", combatants)
+                if obj.get_parent() is Spawner:
+                    var spawner_previews = obj.get_parent().get_previews()
+                    if spawner_previews is Array:
+                        for prev in spawner_previews:
+                            previews.append(prev)
+                    elif spawner_previews:
+                        previews.append(spawner_previews)
+                elif obj.get_parent() is Combatant:
+                    previews.append(obj.get_parent.get_actor())
+            if !previews.empty():
+                emit_signal("actor_found", previews)
             
             for obj in collision_shapes:
                 ray.remove_exception(obj)
@@ -46,5 +56,5 @@ func _physics_process(_delta):
         on_space = false
 
 func _input(event):
-    if event is InputEventKey and ControlsHandler.is_action_pressed_by_players(event, "ui_cancel", [get_parent().current_player.player]):
+    if event and ControlsHandler.is_action_pressed_by_players(event, "ui_cancel", [get_parent().current_player.player]):
         get_parent().return_to_player(to_global(camera.position))

@@ -16,8 +16,6 @@ export (int) var money_max = 0
     # and have different mobs have different strategies for survival / victory
     
 func initialize_mob():
-    mob = true
-    stats = stats.duplicate()
     stats.reset()
     stats.connect("health_depleted", self, "on_death")
     actor_name = name

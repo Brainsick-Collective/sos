@@ -44,6 +44,6 @@ func _on_ItemButton_pressed(item):
     ##DO SOMETHING
     
 func _input(event):
-    if event is InputEventKey and ControlsHandler.is_current_player_action(event):
+    if event and ControlsHandler.is_current_player_action(event):
         if event.is_action_pressed("ui_cancel" + String(player.id)):
                 queue_free()

@@ -21,9 +21,6 @@ onready var Notification = preload("res://interface/UI/notification.tscn")
 onready var BoardNotification = preload("res://interface/UI/BoardNotification.tscn")
 onready var phase_handler = $CombatPhaseHandler
 
-
-var spawner : MobSpawner
-
 signal transitioning
 signal completed (notifications)
 
@@ -62,13 +59,12 @@ func initialize(_player):
     $UI/CombatInterface.decide_turns()
     set_process_input(false)
     
-func setup(f1: Combatant, f2 : Combatant, _spawner : Spawner):
+func setup(f1: Combatant, f2 : Combatant):
     fighter1 = f1
     fighter2 = f2
-    spawner = _spawner
 
-func set_spawner(_spawner):
-    spawner = _spawner
+
+
 
 func _process(_delta):
     check_ready()
@@ -77,7 +73,7 @@ func _process(_delta):
 func check_ready():
     if is_battle_over:
         return
-    if fighter2.is_mob() and fighter1chose:
+    if fighter2 is Mob and fighter1chose:
         choice2 = move_types.normal
         fighter2chose = true
     if fighter1chose and fighter2chose:
@@ -114,7 +110,7 @@ func _input(event):
         if !fighter1chose and event.is_action_pressed(key + String(fighter1.get_id())):
             choice1 = choice_map[key]
             fighter1chose = true
-        elif !fighter2chose and !fighter2.is_mob() and event.is_action_pressed(key + String(fighter2.get_id())):
+        elif !fighter2chose and !fighter2 is Mob and event.is_action_pressed(key + String(fighter2.get_id())):
             choice2 = choice_map[key]
             fighter2chose = true
 
@@ -160,7 +156,7 @@ func on_won_battle(killed, reward):
     
 
     
-    if !killed.is_mob():
+    if !(killed is Mob):
         var note = BoardNotification.instance()
         note.initialize(killed.player, null, killed.actor_name + " is dead!")
         notifications.append(note)
@@ -202,9 +198,8 @@ func dealloc():
     fighter2.player.in_battle = !is_battle_over
     fighter2.flip_sprite()
     
-    if !is_battle_over:
-        spawner.on_hold_combatants.append(fighter1)
-        spawner.on_hold_combatants.append(fighter2)
+#    if !is_battle_over:
+        #tell mob pawn to delete self
 
     $"1".remove_child(fighter1)
     $"2".remove_child(fighter2)

@@ -13,6 +13,7 @@ func set_combatant(c):
     
 func _process(_delta):
     if combatant:
+
         max_value = combatant.stats.max_health
         value = combatant.stats.health
         $HealthLabel.text = String(combatant.stats.health) + "/" + String(combatant.stats.max_health)

@@ -31,49 +31,49 @@ func get_space_scene(player_pawn):
     print("getting space scene from game board")
     if !player_pawn.player.stats.is_alive:
         return null
-        
+    # todo send this to mob spawner?
     var pos = $Spaces.world_to_map(player_pawn.position)
     var mob
     var combatants = []
+    var pawns = []
     var spawner
+    var player_combatant = player_pawn.player.get_combatant()
     var colliders = player_pawn.get_collisions()
     if colliders:
         print("colliders")
         for collider in colliders:
-            print(collider.name)
             if collider is MobSpawner:
-                mob = collider.get_mob()
                 spawner = collider
-                var on_hold = collider.on_hold_combatants
-                if !on_hold.empty():
-                    for combatant in on_hold:
-                        if !combatants.has(combatant) and combatant != player_pawn.get_actor():
-                            combatants.append(combatant)
+                
+            # shop, town, or spinner
             elif collider is Spawner:
                 return collider._build_scene(player_pawn.player)
-            else:
-                if collider is BoardCharacter:
-                    if collider.player.stats.is_alive and !combatants.has(collider.player.combatant):
-                        combatants.append(collider.player.combatant)
-    if not combatants:
-        if mob:
-            return _build_encounter(player_pawn, mob, spawner)
-    elif combatants.size() == 1:
-        return _build_encounter(player_pawn, combatants[0], spawner)
-    else:
-        return _build_chose_encounter(combatants, spawner)
+
+            #player or MobPawn
+            # turn board character collisions off when dead instead of checking here
+            elif collider is BoardCharacter and !pawns.has(collider):
+                    pawns.append(collider)
+    
+    if pawns.empty() and spawner:
+        return _build_encounter(player_pawn, spawner.get_mob(), spawner)
+    
+    elif pawns.size() == 1:
+        return _build_encounter(player_pawn, pawns[0], spawner)
+    elif pawns.size() > 1 and spawner:
+        return _build_chose_encounter(pawns, spawner)
 
     return null
           
-func _build_encounter(pawn, enemy, spawner):
+func _build_encounter(pawn, enemy_pawn, spawner):
     var combat = CombatArena.instance()
-    combat.setup(pawn.get_actor(), enemy,spawner)
+    combat.setup(pawn.get_combatant(), enemy_pawn.get_combatant())
 #    combat.set_spawner(spawner)
     return combat
 
-func _build_chose_encounter(combatants, spawner):
+#TODO fix this
+func _build_chose_encounter(pawns, spawner):
     var panel = ChoseEncounterPanel.instance()
-    panel.setup(combatants, spawner)
+    panel.setup(pawns, spawner)
     return panel
     
 func get_location(player_pawn, space_type):

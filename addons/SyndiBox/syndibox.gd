@@ -53,6 +53,7 @@ export(String, MULTILINE) var DIALOG # Dialog
 export(String) var CHARACTER_NAME # Character name
 export(String, FILE, "*.png, *.jpg") var CHARACTER_PROFILE # Character profile
 export(bool) var AUTO_ADVANCE = false # Auto-advance setting
+export(bool) var HIDE_AFTER_DONE = true
 export(String, FILE, "*.fnt, *.tres") var FONT # Default font
 export(Array, String, FILE, "*.fnt, *.tres") var ALTERNATE_FONTS # Alternate fonts, [%0] to [%9]
 export(int) var PADDING = 3 # Pixel padding between lines of text
@@ -142,6 +143,9 @@ func reset():
             # Remove existent tweens for existent characters.
             if cur_tween.has(i):
                 cur_tween[i].free()
+
+    cur_string = ""
+    cur_length = ""
     cur_speed = speed
     cur_char = {}
     cur_tween = {}
@@ -154,9 +158,11 @@ func reset():
     escape = false
     
 func play_and_hold():
+
     reset()
     hold = true
     play()
+
 func set_and_play(new_text):
     reset()
     DIALOG = new_text
@@ -216,7 +222,7 @@ func play():
     add_child(tween)
     
     if !Engine.editor_hint && visible:
-        print_dialog(cur_string)
+        print_dialog()
 #	else:
 #		edit_dialog()
 #	print_dialog(cur_string)
@@ -767,11 +773,11 @@ Comments are ahead to explain everything. Proceed with caution.
 """
 
 ################################# BEGIN #################################
-func print_dialog(string): # Called on draw
-    string = string.insert(string.length()," ")
-    # If there are characters left to print...
-    while step <= string.length() - 1 && visible:
-        # Set up profile
+func print_dialog(): # Called on draw
+    var string = strings[cur_set]
+#    string = string.insert(string.length()," ")
+    # If there are characters left to print..
+    if step <= string.length() - 1 && visible:
         if !text_hide:
 #            if CHARACTER_PROFILE is String:
 #                def_profile = load(CHARACTER_PROFILE)
@@ -863,6 +869,7 @@ func print_dialog(string): # Called on draw
                 snd_stream = null
         cur_string = string
         step += 1
+        print_dialog()
 
 func edit_dialog(): # This is probably indefinitely broken.
     for i in cur_string.length() - 1:
@@ -883,7 +890,6 @@ func edit_dialog(): # This is probably indefinitely broken.
 func _input(event): # Called on input
     # If accept button is pressed for manual advancement...
     if (
-        event is InputEventKey &&
         !Engine.editor_hint && ControlsHandler.is_action_pressed_by_current_player(event, "ui_accept") &&
         !AUTO_ADVANCE &&
         visible
@@ -928,7 +934,7 @@ func _input(event): # Called on input
                 cur_string = strings[cur_set]
                 # Call our print_dialog function.
                 if visible:
-                    print_dialog(cur_string)
+                    print_dialog()
 
 func _physics_process(delta): # Called every step
     # If 3 seconds have passed for auto advancement...
@@ -939,12 +945,12 @@ func _physics_process(delta): # Called every step
         visible
     ):
         # If there are no more strings in the dialog...
-        if cur_set >= strings.size() - 1:
-            # Hide the textbox.
-            hide()
+        if (cur_set >= strings.size() - 1):
+            if HIDE_AFTER_DONE:
+                # Hide the textbox.
+                hide()
         # If there are strings in the dialog...
         else:
-            
             # Ready the dialog variables for the next string.
             reset()
             cur_set += 1
@@ -952,7 +958,8 @@ func _physics_process(delta): # Called every step
             cur_string = strings[cur_set]
             # Call our print_dialog function.
             if visible:
-                print_dialog(cur_string)
+                print_dialog()
+        
     # If the last step in the string length is reached...
     elif !Engine.editor_hint && step >= cur_string.length() - 1:
         # Increment our steps in waiting for auto advancement.

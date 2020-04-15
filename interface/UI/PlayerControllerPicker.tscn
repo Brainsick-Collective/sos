@@ -1,0 +1,48 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://interface/UI/PlayerControllerPicker.gd" type="Script" id=1]
+
+[node name="PlayerControllerPicker" type="Panel"]
+margin_top = 275.0
+margin_right = 631.0
+margin_bottom = 355.0
+rect_min_size = Vector2( 0, 80 )
+size_flags_horizontal = 3
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 10.0
+margin_top = 10.0
+margin_right = -10.0
+margin_bottom = -10.0
+rect_min_size = Vector2( 0, 60 )
+size_flags_horizontal = 3
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="HBoxContainer"]
+margin_top = 23.0
+margin_right = 491.0
+margin_bottom = 37.0
+size_flags_horizontal = 3
+text = "Player 1"
+
+[node name="OptionButton" type="OptionButton" parent="HBoxContainer"]
+margin_left = 495.0
+margin_top = 5.0
+margin_right = 611.0
+margin_bottom = 55.0
+rect_min_size = Vector2( 0, 50 )
+size_flags_vertical = 4
+custom_constants/arrow_margin = 4
+text = "Controller 1"
+items = [ "Controller 1", null, false, 0, null, "Controller 2", null, false, 1, null, "Controller 3", null, false, 2, null, "Controller 4", null, false, 3, null, "Keyboard 1", null, false, 4, null, "Keyboard 2", null, false, 5, null ]
+selected = 0
+[connection signal="item_selected" from="HBoxContainer/OptionButton" to="." method="_on_OptionButton_item_selected"]

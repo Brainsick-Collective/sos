@@ -11,7 +11,7 @@ func initialize(id):
     player_id = id
     
 func _input(event):
-    if event is InputEventKey and ControlsHandler.which_player(event) == player_id:
+    if ControlsHandler.which_player(event) == player_id:
         queue_free()
 
 func set_old_stats(stats):

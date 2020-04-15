@@ -2,15 +2,14 @@ extends Node
 
 class_name Player
 
-export (NodePath) var board_character
-export (Dictionary) var controls = {}
-export (int) var id
-export (String) var player_name
-export (NodePath) var combatant
-export (Resource) var stats
+var board_character
+var controls = {}
+var id
+var player_name
+var stats
 var modded_stats
-
-var inventory
+var combatant_scene
+onready var inventory = $Inventory
 var actor_name
 export (bool) var in_battle
 var cash := 0
@@ -18,19 +17,25 @@ var is_dead = false
 var battle : Node
 var death_penalty := 0
 var last_heal_space 
+var control_scheme_keyword : String
+onready var SAVE_KEY = "player_" + name
 
-
-func initialize( new_id, pawn, battler):
+func initialize(new_id, pawn, battler):
     actor_name = player_name
     board_character = pawn
     id = new_id - 1
-    combatant = battler
+    combatant_scene = battler
+    var combatant = combatant_scene.instance()
     stats = combatant.stats.duplicate()
     stats.reset()
-    combatant.connect("killed", board_character, "on_killed")
-    inventory = $Inventory
     cash = 100
-    
+
+func save_resources():
+    stats = GameSerializer.save_resource(stats, SAVE_KEY, "stats")
+
+func refresh_after_load():
+    ControlsHandler.set_player_controls(self)
+
 func get_inventory():
     return $Inventory
 
@@ -48,6 +53,8 @@ func get_board_character():
     return board_character
     
 func get_combatant():
+    var combatant = combatant_scene.instance()
+    combatant.initialize(self)
     return combatant
 
 func get_stats_string():
@@ -55,15 +62,9 @@ func get_stats_string():
     return string
     
 func reset_stats():
-    print("reseting stats")
-    print(String(stats.health))
-    print(String(combatant.stats.health))
-    stats.copy(combatant.stats)
     stats.reset()
-    combatant.stats.reset()
-    combatant.stats.connect("health_depleted", combatant, "on_death")
-    print(String(stats.health)) 
-    print(String(combatant.stats.health))
+#    combatant.stats.connect("health_depleted", combatant, "on_death")
+
     
 func apply_effect(effect):
     $EffectsHolder.add_effect(effect)

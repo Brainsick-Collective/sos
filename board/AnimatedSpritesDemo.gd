@@ -7,7 +7,6 @@ func _ready():
     pass
 
 func  _input(event):
-    if event is InputEventKey:
         #this change might have made pausemode on board redundant
         _direction = get_input_direction(event)
 

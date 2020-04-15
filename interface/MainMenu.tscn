@@ -325,9 +325,9 @@ animations = [ {
 "speed": 24.0
 } ]
 
-[sub_resource type="ButtonGroup" id=8]
+[sub_resource type="ButtonGroup" id=7]
 
-[sub_resource type="DynamicFont" id=7]
+[sub_resource type="DynamicFont" id=8]
 size = 128
 font_data = ExtResource( 5 )
 
@@ -377,7 +377,7 @@ position = Vector2( 369.25, 139.484 )
 scale = Vector2( 0.958064, 0.958064 )
 frames = ExtResource( 71 )
 animation = "slow"
-frame = 29
+frame = 7
 playing = true
 
 [node name="MarginContainer" type="MarginContainer" parent="bg/Console"]
@@ -392,26 +392,12 @@ __meta__ = {
 }
 
 [node name="Terminal" type="ReferenceRect" parent="bg/Console/MarginContainer"]
-margin_right = 118.0
+margin_right = 119.0
 script = ExtResource( 10 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-DIALOG = ""
-CHARACTER_NAME = ""
-CHARACTER_PROFILE = ""
-AUTO_ADVANCE = false
 FONT = "res://interface/theme/fonts/CharacterCartridge.tres"
-ALTERNATE_FONTS = [  ]
-PADDING = 3
-TEXT_VOICE = ""
-PLAY_VOICE_ONCE = false
-COLOR = Color( 1, 1, 1, 1 )
-TEXT_SPEED = 0.03
-PAUSE_AT_PUNCTUATION = false
-PUNCTUATION_PAUSE_LENGTH = 0.0
-INSTANT_PRINT = false
-CUSTOM_EFFECTS = ""
 
 [node name="Controllers" type="CanvasLayer" parent="."]
 layer = -1
@@ -497,7 +483,7 @@ rect_min_size = Vector2( 499, 100 )
 mouse_filter = 1
 size_flags_horizontal = 4
 size_flags_vertical = 4
-group = SubResource( 8 )
+group = SubResource( 7 )
 text = "Confirm"
 
 [node name="Right" type="TextureButton" parent="Column/Row"]
@@ -515,6 +501,15 @@ texture_pressed = ExtResource( 7 )
 expand = true
 stretch_mode = 5
 
+[node name="TextureRect2" type="TextureRect" parent="."]
+visible = false
+margin_right = 1920.0
+margin_bottom = 1080.0
+texture = ExtResource( 72 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Column2" type="VBoxContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -523,45 +518,44 @@ custom_constants/separation = 258
 alignment = 1
 __meta__ = {
 "_edit_group_": true,
-"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
 [node name="TitleMargins" type="MarginContainer" parent="Column2"]
 margin_right = 1920.0
-margin_bottom = 590.0
+margin_bottom = 524.0
 mouse_filter = 1
 size_flags_horizontal = 7
 size_flags_vertical = 7
 
 [node name="Title" type="Label" parent="Column2/TitleMargins"]
 margin_left = 16.0
-margin_top = 231.0
+margin_top = 198.0
 margin_right = 1904.0
-margin_bottom = 359.0
+margin_bottom = 326.0
 mouse_filter = 1
 size_flags_horizontal = 3
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 8 )
 custom_colors/font_color = Color( 0.27451, 0.882353, 0.470588, 1 )
 text = "Save Our System"
 align = 1
 valign = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Column2"]
-margin_top = 848.0
+margin_top = 782.0
 margin_right = 1920.0
 margin_bottom = 1030.0
 
-[node name="StartButton" type="Button" parent="Column2/VBoxContainer"]
+[node name="NewGameButton" type="Button" parent="Column2/VBoxContainer"]
 margin_left = 810.0
 margin_right = 1110.0
 margin_bottom = 50.0
 rect_min_size = Vector2( 300, 50 )
 mouse_filter = 1
 size_flags_horizontal = 4
-text = "Start New Game"
+text = "New Game"
 
-[node name="SettingsButton" type="Button" parent="Column2/VBoxContainer"]
+[node name="ContinueButton" type="Button" parent="Column2/VBoxContainer"]
 margin_left = 810.0
 margin_top = 66.0
 margin_right = 1110.0
@@ -569,9 +563,9 @@ margin_bottom = 116.0
 rect_min_size = Vector2( 300, 50 )
 mouse_filter = 1
 size_flags_horizontal = 4
-text = "Settings"
+text = "Continue"
 
-[node name="QuitButton" type="Button" parent="Column2/VBoxContainer"]
+[node name="SettingsButton" type="Button" parent="Column2/VBoxContainer"]
 margin_left = 810.0
 margin_top = 132.0
 margin_right = 1110.0
@@ -579,16 +573,19 @@ margin_bottom = 182.0
 rect_min_size = Vector2( 300, 50 )
 mouse_filter = 1
 size_flags_horizontal = 4
-text = "Quit"
+text = "Settings"
 
-[node name="TextureRect2" type="TextureRect" parent="."]
-visible = false
-margin_right = 40.0
-margin_bottom = 40.0
-texture = ExtResource( 72 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="QuitButton" type="Button" parent="Column2/VBoxContainer"]
+margin_left = 810.0
+margin_top = 198.0
+margin_right = 1110.0
+margin_bottom = 248.0
+rect_min_size = Vector2( 300, 50 )
+mouse_filter = 1
+size_flags_horizontal = 4
+text = "Quit"
 [connection signal="pressed" from="Column/Row/Left" to="." method="_on_left_pressed"]
 [connection signal="pressed" from="Column/Row/ConfirmButton" to="." method="_on_confirm_pressed"]
 [connection signal="pressed" from="Column/Row/Right" to="." method="_on_right_pressed"]
+[connection signal="pressed" from="Column2/VBoxContainer/NewGameButton" to="." method="_menu_selected"]
+[connection signal="pressed" from="Column2/VBoxContainer/ContinueButton" to="." method="_on_continue"]

@@ -17,10 +17,10 @@ onready var camera = $Pivot/Camera2D
 var confirm_move_popup
 var target_space
 var moves_left = 0
-var spaces_moved
+var spaces_moved = []
 var board
 var dice_roll_popup
-var timer
+var last_space
 export (int) var turn_penalty = 0
 var can_enter_scene = true
 var ui_up = false
@@ -30,7 +30,7 @@ var _direction = Vector2()
 var direction_names = { Vector2(-1,0) : "left", Vector2(1,0) : "right", Vector2(0,-1) : "up", Vector2(0,1) : "down" }
 onready var Notification = preload("res://interface/UI/notification.tscn")
 onready var ray = $Feeler
-
+onready var timer = $MoveTimer
 
 func initialize(game_board, _player, start):
     last_heal_space = start
@@ -40,20 +40,30 @@ func initialize(game_board, _player, start):
     player_name = player.player_name
     board = game_board.get_node("GameBoard")
     game = get_node("/root/Game")
-    timer = Timer.new()
-    add_child(timer)
+
+    refresh_after_load()
+    last_space = start
+    
+func refresh_after_load():
     timer.connect("timeout", self, "check_moves")
+    if confirm_move_popup:
+        confirm_move_popup.connect("completed", self, "confirm_move", [], CONNECT_DEFERRED)
+    $Feeler.add_exception($TileArea)
+    spaces_moved = []
     set_process(false)
     set_process_input(false)
-    $Feeler.add_exception($TileArea)
-    confirm_move_popup.connect("completed", self, "confirm_move", [], CONNECT_DEFERRED)
 
 func set_position(new_pos):
     position = new_pos
     
 func _input(event):
-    if event is InputEventKey:
-        #this change might have made pausemode on board redundant
+    if not my_turn:
+        return
+        
+    if event is InputEventKey and event.scancode == KEY_X:
+        GameSerializer.save_game(null)
+    
+    if ControlsHandler.is_current_player_action(event):
         _direction = get_input_direction(event)
         
 func _process(_delta):
@@ -129,6 +139,7 @@ func confirm_move(isYes):
             set_process_input(false)
             timer.stop()
             print("confirm move turn finished")
+            last_space = curr_space
             end_turn()
         else:
             move_to(spaces_moved.back())
@@ -150,11 +161,8 @@ func center_camera(last_camera_position  = camera.position):
 
 func start_turn():
     print(player_name + " board character turn")
-    print(player.stats.health)
-    print(player.stats.is_alive)
-#    center_camera(last_camera_position)
     can_enter_scene = true
-    #TODO: use a state machine for player conditions, i.e. in battle, dead, penalty
+    
     if player.in_battle:
         print("in battle turn")
         end_turn()
@@ -174,6 +182,7 @@ func start_turn():
     set_process(true)
     check_moves()
     curr_space = position
+    last_space = curr_space
     spaces_moved = Array()
 
 func on_killed(_p, _reward):
@@ -228,4 +237,7 @@ func end_turn():
     
 
 func get_actor():
-    return player.combatant
+    return player.get_combatant()
+    
+func get_combatant():
+    return player.get_combatant()

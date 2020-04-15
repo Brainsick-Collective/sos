@@ -1,4 +1,5 @@
 extends Resource
+
 class_name Stats
 
 signal health_changed(new_health, old_health)
@@ -17,8 +18,8 @@ var modifiers = {
     }
 
 var MAX_LEVEL = 100
-var health : int
-var mana : int setget set_mana
+export(int) var health
+export(int) var mana setget set_mana
 export(int) var max_health = 0 setget set_max_health, _get_max_health
 export(int) var max_mana = 0 setget set_max_mana, _get_max_mana
 export(int) var strength = 0 setget set_strength,_get_strength

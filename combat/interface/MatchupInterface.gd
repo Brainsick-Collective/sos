@@ -37,7 +37,7 @@ func get_matchups():
 func _unhandled_input(event):
     if $PredictionsPanel/Margin/Column.get_child_count() == 1:
         return
-    if event is InputEventKey and ControlsHandler.is_action_pressed_by_players(event, "ui_cancel", [fighter1.player, fighter2.player]):
+    if event and ControlsHandler.is_action_pressed_by_players(event, "ui_cancel", [fighter1.player, fighter2.player]):
         if matchup_visible:
             $PredictionsPanel/AnimationPlayer.play("Hide Matchup")
             matchup_visible = false

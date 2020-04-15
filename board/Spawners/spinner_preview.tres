@@ -1,0 +1,9 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://assets/icons/sm health potion.png" type="Texture" id=1]
+[ext_resource path="res://board/Spawners/ActorPreview.gd" type="Script" id=2]
+
+[resource]
+script = ExtResource( 2 )
+texture = ExtResource( 1 )
+description = "an item space, there is a chance to receive a random usable item"

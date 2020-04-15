@@ -3,6 +3,9 @@
 [ext_resource path="res://game/players/inventory/items/Item.gd" type="Script" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
 
-[node name="Item" type="Node"]
+[node name="Item" type="Node" groups=[
+"save",
+"unique_to_save_file",
+]]
 script = ExtResource( 1 )
 icon = ExtResource( 2 )

@@ -1,0 +1,39 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://combat/interface/combat_theme.tres" type="Theme" id=1]
+[ext_resource path="res://interface/SaveSystem/SaveGameOption.gd" type="Script" id=2]
+
+[node name="SaveGameOption" type="Button"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -1132.0
+margin_bottom = -973.0
+rect_min_size = Vector2( 0, 100 )
+theme = ExtResource( 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Row" type="HBoxContainer" parent="MarginContainer"]
+margin_right = 788.0
+margin_bottom = 107.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="MarginContainer/Row"]
+margin_right = 788.0
+margin_bottom = 107.0
+size_flags_horizontal = 3
+size_flags_vertical = 5
+text = "save name"
+align = 1
+valign = 1

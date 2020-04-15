@@ -4,8 +4,9 @@ onready var Board = preload("res://board/Board.tscn")
 onready var Character = preload("res://board/BoardCharacter.tscn")
 onready var player_scene = preload("res://game/players/Player.tscn")
 onready var StartingClasses = preload("res://game/StartingClasses.tscn")
+onready var ControllerPicker = preload("res://interface/UI/PlayerControllerPicker.tscn")
 
-onready var character_select_sprite = $Column/Row/Character
+onready var character_select_sprite = $SelectScreen/Column/Row/Character
 var Players
 var current_class
 
@@ -33,8 +34,8 @@ func initialize(game_node, num):
     game = game_node
     num_players = num
     Players = game_node.get_node("Players")
-    $PlayerLabel.text = "Player " + String(curr_player)
-    current_class = classes.get_combatant()
+    $SelectScreen/PlayerLabel.text = "Player " + String(curr_player)
+    current_class = classes.get_combatant().instance()
     $Go.grab_focus()
     
 func _on_cartridge_hovered(cart):
@@ -54,7 +55,7 @@ func _on_cartridge_left(cart):
     yield($Tween, "tween_completed")
     
 func _on_cart_selected(index):
-    current_class = classes.get_class_by_index(index)
+    current_class = classes.get_class_by_index(index).instance()
     character_select_sprite.texture = current_class.get_sprite()
     
 func get_player(character):
@@ -63,34 +64,68 @@ func get_player(character):
             return player
 
 func _process(_delta):
-    $VBoxContainer/DescriptionPanel/Label.text = current_class.description
-    $VBoxContainer/PanelContainer/Label.text = current_class.name
+    $SelectScreen/VBoxContainer/DescriptionPanel/Label.text = current_class.description
+    $SelectScreen/VBoxContainer/PanelContainer/Label.text = current_class.name
+    if $ControllerChoices.visible:
+        $Go.disabled = !check_valid_controllers()
     
 
-
-func _on_Go_pressed():    
-    var player = player_scene.instance()
-    player.player_name = $PlayerLabel.text
-    var combatant = classes.get_combatant()
-    var board_character = classes.get_pawn()
-    characters.append(board_character)
-    player.initialize(curr_player, board_character, combatant)
-    combatant.initialize(player) 
-    Players.add_child(player)
+func check_valid_controllers():
+    var controller_choices = []
+    var valid_choices = true
     
+    for picker in $ControllerChoices.get_children():
+        if picker.choice == -1 or controller_choices.has(picker.choice):
+            valid_choices = false
+        else:
+            controller_choices.append(picker.choice)
+    
+    return valid_choices
+
+func _on_Go_pressed():  
+    if $SelectScreen.visible:
+        var player = player_scene.instance()
+        player.player_name = $SelectScreen/PlayerLabel.text
+        var combatant = classes.get_combatant()
+        var board_character = classes.get_pawn()
+        characters.append(board_character)
+        
+        Players.add_child(player, true)
+        player.initialize(curr_player, board_character, combatant)
+
     if curr_player == num_players:
-        var board = Board.instance()
-        game.add_child(board)
-        board.initialize(characters, game)
-        for character in characters:
-            character.initialize(board, get_player(character), board.START)
-        game.initialize_game(board)
-        board.start_game()
-        queue_free()
+        if !$SelectScreen.visible:
+           start_game() 
+        else:
+            transition_to_controller_choice()
+            $Go.disabled = true
     else:
         curr_player+=1
-        $PlayerLabel.text = "Player " + String(curr_player)
+        $SelectScreen/PlayerLabel.text = "Player " + String(curr_player)
 
+func transition_to_controller_choice():
+    # TODO: animate
+    $SelectScreen.hide()
+    $Carts.hide()
+    $ControllerChoices.show()
+    for ind in Players.get_child_count():
+        var picker = ControllerPicker.instance()
+        picker.set_label(Players.get_child(ind).player_name)
+        $ControllerChoices.add_child(picker)
+        
+func start_game():
+    for player in Players.get_children():
+        player.control_scheme_keyword = $ControllerChoices.get_child(player.id).get_choice()
+    var board = Board.instance()
+    game.add_child(board)
+    board.initialize(characters, game)
+
+    for character in characters:
+        character.initialize(board, get_player(character), board.START)
+
+    game.initialize_game(board)
+    board.start_game()
+    queue_free()
 
 func _on_CosmeticSpinner_pressed():
     $CosmeticSpinner.set_rotation($CosmeticSpinner.get_rotation() + 1)

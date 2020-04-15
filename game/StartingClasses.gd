@@ -28,7 +28,7 @@ func get_index():
     
 func get_combatant() -> PackedScene:
     var combatant = starting_class_combatants[index]
-    return combatant.instance()
+    return combatant
     
 func get_pawn():
     var pawn = starting_class_pawns[index]

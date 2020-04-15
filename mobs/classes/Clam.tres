@@ -11,6 +11,7 @@
 [ext_resource path="res://combat/Actions/moves/Parry.tres" type="Resource" id=9]
 
 [resource]
+resource_local_to_scene = true
 script = ExtResource( 8 )
 job_name = "Clam"
 off_normal = ExtResource( 4 )

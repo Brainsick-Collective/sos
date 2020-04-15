@@ -49,11 +49,6 @@ func _on_ViewBoardButton_pressed():
     board.view_board()
     $ActionMenu.hide()
 
-
-func _on_PlayerInfoButton_pressed():
-    #show player stats and board character
-    pass # Replace with function body.
-
 func _process(_delta):
     moves_left_label.text = String(current_player.board_character.get_moves())
     
@@ -76,3 +71,8 @@ func _on_ActionMenu_visibility_changed():
     if $ActionMenu.is_visible():
         $Counter.hide()
 
+
+
+func _on_InfoButton_pressed():
+    #animate
+    pass

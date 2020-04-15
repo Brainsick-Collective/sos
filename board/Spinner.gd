@@ -33,8 +33,7 @@ func initialize(player):
     timer.start()
 
 func _unhandled_input(event):
-    if (event is InputEventKey 
-    and ControlsHandler.is_action_pressed_by_current_player(event, "ui_accept")):
+    if (ControlsHandler.is_action_pressed_by_current_player(event, "ui_accept")):
         spin_decaying = true
 
 func _on_Timer_timeout():

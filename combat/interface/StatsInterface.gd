@@ -20,11 +20,11 @@ func _process(_delta):
             for fighter in [fighter1, fighter2]:
                 var label = get_node(stat + "/Row/F" + fighter.get_parent().name)
                 if fighter.stats.modifiers[stat] > 0:
-                    label.modulate = buff_color
+                    label.add_color_override("font_color", buff_color)
                 elif fighter1.stats.modifiers[stat] < 0:
-                    label.modulate = debuff_color
+                    label.add_color_override("font_color", debuff_color)
                 else:
-                    label.modulate = Color(1,1,1,1)
+                    label.add_color_override("font_color", Color(1,1,1,1))
 
         $strength/Row/F1.text = String(fighter1.stats.strength)
         $defense/Row/F1.text = String(fighter1.stats.defense)

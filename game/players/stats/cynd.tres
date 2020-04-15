@@ -8,7 +8,10 @@
 [ext_resource path="res://game/players/stats/strength_curve.tres" type="Curve" id=7]
 
 [resource]
+resource_local_to_scene = true
 script = ExtResource( 1 )
+health = 0
+mana = 0
 max_health = 15
 max_mana = 20
 strength = 8

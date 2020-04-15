@@ -1,21 +1,56 @@
 ** Dokapon Clone TODO list
-*** TODO use accuracy testing
+*** TODO [#A] player info screen
+*** TODO [#A] make sure transition plays on leaving a shop
 *** TODO rework gui element handling from boardcharacter to board / gui
-*** TODO reword inventory / inventory menu to better use polymorphism / inheritence
-**** have two seperate buttons one for shop one for inventory
 *** TODO sound effects
 *** TODO Add better Level up interface
-*** TODO System for saving game
+*** TODO [#B] System for saving game
 *** TODO towns (it's TIME)
 *** TODO tutorial cutscene?
-*** TODO better controls handler
-*** TODO music player
-*** TODO board view preview of all space types
+*** TODO [#B] music player
+*** DONE [#B] board view preview of all space types
+    CLOSED: [2020-04-03 Fri 14:13]
 *** TODO look into making an online multiplayer demo
 *** TODO mob AI behaviour
 *** TODO tool tips
-*** TODO make sure transition plays on leaving a shop
-*** TODO BUG: make combat work again
+*** TODO Week rounds / day of the week or month
+*** TODO Random event encounters
+*** TODO Rework stat growth, make it flat rate to stats based on job
+*** TODO add manual stat point allotment
+*** TODO add battle animations
+*** TODO animate health bar on heal and damage
+*** TODO Remove mobpawn after giveup or runaway
+*** TODO sometimes (once after loading and then using a potion) the board character still moves while player is navigating action menu
+*** TODO Add a transition to the save game screen so that the camera effects aren't noticed
+*** TODO Move all save/load logic to an autoloaded global script
+*** TODO custom combatant sprites AND board pawn sprites
+**** color is swapped
+**** male / female
+**** weapon / equipment ?
+**** class
+**** face
+*** TODO battle theater scene for testing /debugging
+*** TODO fix spinners, add animation / notification
+*** TODO fix syndibox
+**** should have a functioning auto_advance, i.e. loads full string instantly
+**** should have functioning scroll, where pressing ui_accept speeds up or auto_advances the current string
+**** when a string is being processed and a new string is assigned, abandon current string
+*** DONE change color of stat in panels if buffed / debuffed
+    CLOSED: [2020-04-02 Thu 14:35]
+*** TODO FIX MOVE COUNTER 
+*** DONE [#A] Controler support!
+    CLOSED: [2020-04-01 Wed 18:17]
+*** DONE better controls handler
+    CLOSED: [2020-04-01 Wed 18:17]
+*** DONE use accuracy testing
+    CLOSED: [2020-03-31 Tue 18:59]
+*** DONE reword inventory / inventory menu to better use polymorphism / inheritence
+    CLOSED: [2020-03-31 Tue 20:07]
+**** have two seperate buttons one for shop one for inventory
+*** DONE add notification for item aquisition
+    CLOSED: [2020-03-31 Tue 20:05]
+*** DONE BUG: make combat work again
+    CLOSED: [2020-03-31 Tue 20:04]
 *** DONE add system for battle abilities and effects
     CLOSED: [2020-03-31 Tue 09:32]
 *** DONE equipment system

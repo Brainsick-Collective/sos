@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Resource",
+"class": "ActorPreview",
+"language": "GDScript",
+"path": "res://board/Spawners/ActorPreview.gd"
+}, {
 "base": "CombatAction",
 "class": "AttackAction",
 "language": "GDScript",
@@ -114,6 +119,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://mobs/Mob.gd"
 }, {
+"base": "BoardCharacter",
+"class": "MobPawn",
+"language": "GDScript",
+"path": "res://board/pawns/MobPawn.gd"
+}, {
 "base": "Spawner",
 "class": "MobSpawner",
 "language": "GDScript",
@@ -153,6 +163,11 @@ _global_script_classes=[ {
 "class": "Rewards",
 "language": "GDScript",
 "path": "res://combat/combatants/Rewards.gd"
+}, {
+"base": "Resource",
+"class": "SaveGame",
+"language": "GDScript",
+"path": "res://SaveGame.gd"
 }, {
 "base": "Inventory",
 "class": "ShopInventory",
@@ -200,6 +215,7 @@ _global_script_classes=[ {
 "path": "res://mobs/ai/Task.gd"
 } ]
 _global_script_class_icons={
+"ActorPreview": "",
 "AttackAction": "",
 "BoardCharacter": "",
 "BoardNotification": "",
@@ -221,6 +237,7 @@ _global_script_class_icons={
 "Item": "",
 "Job": "",
 "Mob": "",
+"MobPawn": "",
 "MobSpawner": "",
 "Notification": "",
 "OffensiveMagicAction": "",
@@ -229,6 +246,7 @@ _global_script_class_icons={
 "RandomSelector": "",
 "RectExtents": "",
 "Rewards": "",
+"SaveGame": "",
 "ShopInventory": "",
 "ShopMenu": "",
 "ShopSpawner": "",
@@ -253,6 +271,7 @@ ItemDatabase="*res://game/players/inventory/ItemDatabase.tscn"
 ControlsHandler="*res://system/ControlsHandler.gd"
 MonsterFactory="*res://mobs/MonsterFactory.tscn"
 ShopFactory="*res://game/ShopFactory.tscn"
+GameSerializer="*res://game/GameSerializer.gd"
 
 [display]
 

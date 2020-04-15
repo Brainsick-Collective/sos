@@ -2,6 +2,8 @@ extends Node2D
 
 class_name Spawner
 
+
+export (Resource) var preview
 export (PackedScene) var scene
 
 func _build_scene(player):
@@ -11,3 +13,5 @@ func _on_area_entered(body):
     print("spawner collided")
 
 
+func get_previews():
+    return preview

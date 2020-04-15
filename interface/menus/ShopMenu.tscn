@@ -1,17 +1,19 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://interface/menus/ShopMenu.gd" type="Script" id=1]
 [ext_resource path="res://game/players/inventory/ItemButton.tscn" type="PackedScene" id=2]
 [ext_resource path="res://interface/menus/Grid.gd" type="Script" id=3]
-[ext_resource path="res://assets/cutscene_sprites/Suit_Goblin.png" type="Texture" id=4]
+[ext_resource path="res://assets/cutscene_sprites/Glitch_background.png" type="Texture" id=4]
 [ext_resource path="res://interface/theme/default.theme" type="Theme" id=5]
 [ext_resource path="res://assets/ui/panel.png" type="Texture" id=6]
-[ext_resource path="res://assets/backgrounds/bg.jpg" type="Texture" id=7]
+[ext_resource path="res://assets/shops/clammart counter.png" type="Texture" id=7]
 [ext_resource path="res://addons/SyndiBox/syndibox.gd" type="Script" id=8]
 [ext_resource path="res://interface/UI/hover_outline_styleboxflat.tres" type="StyleBox" id=9]
 [ext_resource path="res://interface/UI/presssed_outline_stylebox.tres" type="StyleBox" id=10]
 [ext_resource path="res://interface/UI/focus_outline_stylebox.tres" type="StyleBox" id=11]
 [ext_resource path="res://interface/theme/fonts/actor_panel_name_font.tres" type="DynamicFont" id=12]
+[ext_resource path="res://assets/actors/clammart shopkeep.png" type="Texture" id=13]
+[ext_resource path="res://assets/shops/clammart building.png" type="Texture" id=14]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
@@ -30,7 +32,38 @@ __meta__ = {
 }
 ItemButton = ExtResource( 2 )
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="background" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 4 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="shopbackground" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 14 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ShopKeep" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 300, 300 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 13 )
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="shopforeground" type="TextureRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 texture = ExtResource( 7 )
@@ -39,22 +72,8 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureRect2" type="TextureRect" parent="."]
-margin_left = 1026.63
-margin_top = 180.445
-margin_right = 1785.63
-margin_bottom = 1196.45
-rect_min_size = Vector2( 300, 300 )
-size_flags_horizontal = 3
-size_flags_vertical = 3
-texture = ExtResource( 4 )
-expand = true
-stretch_mode = 6
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="Panel" type="NinePatchRect" parent="."]
+modulate = Color( 1, 1, 1, 0.901961 )
 margin_left = 1389.11
 margin_top = 43.7184
 margin_right = 1851.11
@@ -86,6 +105,7 @@ align = 1
 valign = 1
 
 [node name="Column" type="VBoxContainer" parent="."]
+modulate = Color( 1, 1, 1, 0.901961 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 32.0
@@ -169,21 +189,9 @@ margin_top = 32.0
 margin_right = 1824.0
 margin_bottom = 348.0
 script = ExtResource( 8 )
-DIALOG = ""
-CHARACTER_NAME = ""
-CHARACTER_PROFILE = ""
 AUTO_ADVANCE = true
+HIDE_AFTER_DONE = false
 FONT = "res://interface/UI/base_font.tres"
-ALTERNATE_FONTS = [  ]
-PADDING = 3
-TEXT_VOICE = ""
-PLAY_VOICE_ONCE = false
-COLOR = Color( 1, 1, 1, 1 )
-TEXT_SPEED = 0.03
-PAUSE_AT_PUNCTUATION = false
-PUNCTUATION_PAUSE_LENGTH = 0.0
-INSTANT_PRINT = false
-CUSTOM_EFFECTS = ""
 
 [node name="ConfirmPopup" type="NinePatchRect" parent="."]
 visible = false

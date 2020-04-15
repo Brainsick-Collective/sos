@@ -23,7 +23,6 @@ func initialize(_target, newEffect, desc):
 func _input(event):
     # TODO this might cause bugs in PvP
     if (event.is_pressed() 
-    and  event is InputEventKey 
     and ControlsHandler.is_current_player_action(event) 
     and click_through):
         queue_free()

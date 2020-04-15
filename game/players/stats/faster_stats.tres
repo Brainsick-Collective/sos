@@ -4,6 +4,8 @@
 
 [resource]
 script = ExtResource( 1 )
+health = 0
+mana = 0
 max_health = 1
 max_mana = 0
 strength = 1

@@ -21,26 +21,43 @@ func _ready():
 func initialize(characters, _game):
     game = _game
     game.board = self
-    num_players = characters.size()
     START = $GameBoard/Start.get_position()
     for character in characters:
         character.set_position(START)
-        Characters.add_child(character)
+        Characters.add_child(character, true)
         character.connect("last_move_taken", self, "show_confirm_popup", [], CONNECT_DEFERRED)
         character.connect("turn_finished", self, "on_board_character_moves_finished", [], CONNECT_DEFERRED)
     num_players = Characters.get_child_count()
     turn_ind = Characters.get_child_count() - 1
     Board.initialize()
     GUI.initialize(self)
+    $GameBoard/Spawners/MushBossSpawner.spawn_pawn()
     current_player = characters[0]
+
+func refresh_after_load():
+    var characters = Characters.get_children()
+    num_players = characters.size()
     
+    for character in characters:
+        character.set_position(character.last_space)
+        character.connect("last_move_taken", self, "show_confirm_popup", [], CONNECT_DEFERRED)
+        character.connect("turn_finished", self, "on_board_character_moves_finished", [], CONNECT_DEFERRED)
+    num_players = Characters.get_child_count()
+    Board.initialize()
+    GUI.initialize(self)
+    GUI.show()
+    game.initialize_game(self)
+    ControlsHandler.clear_controls()
+    ControlsHandler.give_player_ui_control(current_player.player)
+    play_turn(current_player, current_player.get_camera_position())
+
 func start_game():
     GUI.hide()
     var cutscene = game.load_cutscene("res://dialogue/intro_cutscene.json")
     yield(cutscene, "tree_exited")
     GUI.show()
-#    play_turn(Characters.get_child(0), START)
-
+    ControlsHandler.give_player_ui_control(game.get_node("Players").get_child(0))
+    play_turn(Characters.get_child(0), START)
     
 func play_turn(board_character, last_camera_position):
     print ("board starting " + board_character.player_name + "'s turn")
@@ -85,12 +102,19 @@ func _build_encounter(pawn, enemy, spawner):
     combat.setup(pawn.get_actor(), enemy, spawner)
     return combat
     
+func new_turn_on_load():
+    refresh_pathing()
+    
+func refresh_pathing():
+    $GameBoard/Pathfinder.initialize($GameBoard)
+
 func next_turn():
     var last_camera_position = current_player.get_camera_position()
     var new_ind = (current_player.get_index() + 1) % num_players
     ControlsHandler.clear_controls()
-    ControlsHandler.set_controls(new_ind)
+    ControlsHandler.give_player_ui_control(game.get_node("Players").get_child(new_ind))
     ControlsHandler.current_player = new_ind
+    print(InputMap.get_action_list("ui_accept0"))
     play_turn(Characters.get_child(new_ind), last_camera_position)
 
 func view_board():

@@ -80,9 +80,6 @@ func take_damage(hit):
         play("death") # change to death anim
     stats.take_damage(hit)
 
-func is_mob():
-    return mob
-
 func get_sprite():
     return $Skin/Sprite.get_texture()
 

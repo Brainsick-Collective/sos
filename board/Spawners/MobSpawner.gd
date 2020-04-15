@@ -3,43 +3,37 @@ extends Spawner
 class_name MobSpawner
 
 export (bool) var is_boss = false
-
-var on_hold_combatants := []
+onready var MobPawn = preload("res://board/pawns/MobPawn.tscn")
 
 func _ready():
     for child in $Mobs.get_children():
         child.hide()
-
     
 func _build_scene(player):
     var combat_arena = scene.instance()
     combat_arena.set_fighters(player.combatant, get_mob(), self)
     return combat_arena
+
+func spawn_pawn(mob = $Mobs.get_child(0)):
+    var pawn = MobPawn.instance()
+    add_child(pawn)
+    pawn.initialize(self, mob, null)
+    return pawn
     
 func get_mob():
     var choice = (randi() % 100) / 100.0
+    var mob
     for child in $Mobs.get_children():
         if choice - child.spawn_rate <= 0:
-            var mob = child.duplicate()
-            mob.initialize_mob()
-            mob.show()
-            return mob
+            mob = child
         else:
             choice -= child.spawn_rate
-    return $Mobs.get_child(0)
+    if !mob:      
+        mob = $Mobs.get_child(0)
+    var pawn = spawn_pawn(mob)
+    return pawn
 
 # Make generic
 func get_actor():
     return get_mob()
-    
-func get_on_hold():
-    return on_hold_combatants
 
-func put_combatants_on_hold(arr):
-    for combatant in arr:
-        if !on_hold_combatants.has(combatant):
-            on_hold_combatants.append(combatant)
-            combatant.connect("killed", self, "remove_combatant", [combatant])
-
-func remove_combatant(combatant):
-    on_hold_combatants.remove(combatant)

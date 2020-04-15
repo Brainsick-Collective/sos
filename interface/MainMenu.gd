@@ -2,27 +2,27 @@ extends "res://interface/Menu.gd"
 
 var game
 var CharacterSelectMenu = preload("res://interface/menus/CharacterSelectMenu.tscn")
+onready var SaveMenu = preload("res://interface/SaveSystem/SaveFileMenu.tscn")
 onready var num_players = 1
 const min_size = 1
 const max_size = 4
 onready var terminal = $bg/Console/MarginContainer/Terminal
+
 
 func close():
     get_tree().quit()
     
     pass
 
-func initialize(game_node):
-    game = game_node
+func _ready():
+    game = get_parent()
     
 # warning-ignore:return_value_discarded
     $Column2/VBoxContainer/QuitButton.connect("pressed", self, "close")
 # warning-ignore:return_value_discarded
-    $Column2/VBoxContainer/StartButton.connect("pressed",self,"_menu_selected")
-    $Column2/VBoxContainer/StartButton.grab_focus()
-    $Column2/VBoxContainer/StartButton.grab_click_focus()
-
-
+    $Column2/VBoxContainer/NewGameButton.connect("pressed",self,"_menu_selected")
+    $Column2/VBoxContainer/NewGameButton.grab_focus()
+    $Column2/VBoxContainer/NewGameButton.grab_click_focus()
 
 func _menu_selected():
     $Column2/VBoxContainer.hide()
@@ -38,14 +38,17 @@ func _menu_selected():
     terminal.play_and_hold()
     $Column/Row/ConfirmButton.grab_focus()
     $Column.show()
-    
+
+func _on_continue():
+    var save_menu = SaveMenu.instance()
+    hide()
+    game.add_child(save_menu)
+
 func _on_confirm_pressed():
     var menu = CharacterSelectMenu.instance()
-    #
     game.add_child(menu)
     menu.initialize(game, num_players)
     queue_free()
-    pass # replace with function body
 
 func _input(event):
     if $Column.is_visible():

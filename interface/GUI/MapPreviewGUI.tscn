@@ -1,15 +1,21 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://assets/cutscene_sprites/Cuddle_Blaster.png" type="Texture" id=1]
 [ext_resource path="res://interface/GUI/MapPreviewGUI.gd" type="Script" id=2]
 [ext_resource path="res://combat/interface/ActorPanel.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/ui/panel.png" type="Texture" id=4]
+[ext_resource path="res://combat/interface/combat_theme.tres" type="Theme" id=5]
 
 [node name="MapPreviewGUI" type="PanelContainer"]
+anchor_left = 1.0
+anchor_top = 0.5
 anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 612.0
-margin_bottom = -229.0
+anchor_bottom = 0.5
+margin_left = -670.0
+margin_top = -315.5
+margin_bottom = 315.5
 rect_min_size = Vector2( 300, 0 )
+theme = ExtResource( 5 )
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_group_": true,
@@ -19,12 +25,12 @@ __meta__ = {
 [node name="Column" type="VBoxContainer" parent="."]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 1301.0
-margin_bottom = 844.0
+margin_right = 663.0
+margin_bottom = 624.0
 custom_constants/separation = 16
 
 [node name="Preview" type="TextureRect" parent="Column"]
-margin_right = 1294.0
+margin_right = 656.0
 margin_bottom = 300.0
 rect_min_size = Vector2( 0, 300 )
 texture = ExtResource( 1 )
@@ -33,6 +39,42 @@ stretch_mode = 6
 
 [node name="ActorPanel" parent="Column" instance=ExtResource( 3 )]
 margin_top = 316.0
-margin_right = 1294.0
-margin_bottom = 316.0
+margin_right = 656.0
+margin_bottom = 617.0
 rect_min_size = Vector2( 400, 0 )
+size_flags_vertical = 3
+
+[node name="DescriptionPanel" type="NinePatchRect" parent="Column"]
+visible = false
+margin_top = 474.0
+margin_right = 656.0
+margin_bottom = 617.0
+size_flags_vertical = 3
+texture = ExtResource( 4 )
+patch_margin_left = 50
+patch_margin_top = 33
+patch_margin_right = 44
+patch_margin_bottom = 74
+
+[node name="Margins" type="MarginContainer" parent="Column/DescriptionPanel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 20
+custom_constants/margin_top = 20
+custom_constants/margin_left = 20
+custom_constants/margin_bottom = 20
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Column/DescriptionPanel/Margins"]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 636.0
+margin_bottom = 123.0
+size_flags_vertical = 3
+text = "description"
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}

@@ -4,7 +4,10 @@
 [ext_resource path="res://board/Pivot.gd" type="Script" id=2]
 [ext_resource path="res://board/Tiles/TileArea.tscn" type="PackedScene" id=3]
 
-[node name="BoardCharacter" type="Node2D"]
+[node name="BoardCharacter" type="Node2D" groups=[
+"save",
+"unique_to_save_file",
+]]
 pause_mode = 2
 position = Vector2( 48, 48 )
 scale = Vector2( 1.5, 1.5 )
@@ -32,3 +35,5 @@ playing = true
 [node name="Feeler" type="RayCast2D" parent="."]
 enabled = true
 collide_with_areas = true
+
+[node name="MoveTimer" type="Timer" parent="."]

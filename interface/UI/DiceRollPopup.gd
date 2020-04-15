@@ -18,7 +18,7 @@ func initialize():
     $MarginContainer/VBoxContainer/Button.grab_focus()
 
 func _input(event):
-    if is_visible() and event is InputEventKey and ControlsHandler.is_action_pressed_by_players(event, "ui_cancel", [ControlsHandler.current_player]):
+    if is_visible() and ControlsHandler.is_action_pressed_by_players(event, "ui_cancel", [ControlsHandler.current_player]):
         get_parent().show_action_menu()
         hide()
     

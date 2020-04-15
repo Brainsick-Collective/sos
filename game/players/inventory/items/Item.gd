@@ -35,3 +35,6 @@ func set_amount(value):
 
 func _apply_effect(user):
     print("Item %s has no apply_effect override" % name)
+    
+func refresh_after_load():
+    pass

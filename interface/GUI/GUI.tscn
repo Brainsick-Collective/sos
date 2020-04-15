@@ -345,14 +345,14 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PlayerInfoButton" type="Button" parent="ActionMenu/MarginContainer/VBoxContainer"]
+[node name="InfoButton" type="Button" parent="ActionMenu/MarginContainer/VBoxContainer"]
 margin_top = 208.0
 margin_right = 260.0
 margin_bottom = 258.0
 rect_min_size = Vector2( 100, 50 )
 size_flags_horizontal = 7
 
-[node name="Label" type="Label" parent="ActionMenu/MarginContainer/VBoxContainer/PlayerInfoButton"]
+[node name="Label" type="Label" parent="ActionMenu/MarginContainer/VBoxContainer/InfoButton"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 text = "Player Info"
@@ -364,12 +364,9 @@ __meta__ = {
 
 [node name="MapPreviewGUI" parent="." instance=ExtResource( 8 )]
 visible = false
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_bottom = 0.5
-margin_left = -414.0
-margin_top = -229.0
-margin_bottom = 229.0
+margin_left = -628.0
+margin_top = -316.0
+margin_bottom = 316.0
 
 [node name="Counter" type="NinePatchRect" parent="."]
 visible = false
@@ -448,10 +445,10 @@ margin_right = 143.0
 margin_bottom = 69.0
 
 [node name="ActorPanel" parent="." instance=ExtResource( 3 )]
-margin_left = -27.218
-margin_top = -13.015
-margin_right = 375.782
-margin_bottom = 114.985
+margin_left = -5.31561
+margin_top = 11.7821
+margin_right = 626.684
+margin_bottom = 328.782
 
 [node name="NextTurnPanel" type="Panel" parent="."]
 pause_mode = 2
@@ -494,5 +491,5 @@ anims/transition = SubResource( 4 )
 [connection signal="pressed" from="ActionMenu/MarginContainer/VBoxContainer/RollButton" to="." method="_on_RollButton_pressed"]
 [connection signal="pressed" from="ActionMenu/MarginContainer/VBoxContainer/InventoryButton" to="." method="_on_InventoryButton_pressed"]
 [connection signal="pressed" from="ActionMenu/MarginContainer/VBoxContainer/ViewBoardButton" to="." method="_on_ViewBoardButton_pressed"]
-[connection signal="pressed" from="ActionMenu/MarginContainer/VBoxContainer/PlayerInfoButton" to="." method="_on_PlayerInfoButton_pressed"]
+[connection signal="pressed" from="ActionMenu/MarginContainer/VBoxContainer/InfoButton" to="." method="_on_InfoButton_pressed"]
 [connection signal="popup_hide" from="MoveConfirmPopup" to="." method="on_move_confirm_choice"]

@@ -7,14 +7,8 @@ onready var CombatArenaScene = preload("res://combat/CombatArena.tscn")
 var board
 var queue = null
 var cutscene = null
+var first_turn = true
 
-
-
-func _ready():
-    var main_menu = MainMenu.instance()
-    add_child(main_menu)
-    main_menu.initialize(self)
-    
     
 func load_cutscene(cutscene_file):
     var new_cutscene = Cutscene.instance()
@@ -32,7 +26,10 @@ func _after_cutscene(curr_cutscene):
     curr_cutscene.queue_free()
     cutscene = null
     get_tree().paused = false
-    queue.play_queue()
+    if !first_turn:
+        queue.play_queue()
+    else:
+        first_turn = false
 
 #func _process(_delta):
 #  if  Input.is_joy_known(0):
@@ -43,17 +40,13 @@ func initialize_game(new_board):
     queue = $NotificationQueue
     board.connect("tree_entered", queue, "change_ui_node", [board.get_node("UI")])
     queue.ui_parent = board.get_node("UI")
-    set_controls()
-    queue.connect("emptied", self, "on_queue_finished", [], CONNECT_DEFERRED)
-    board.connect("turn_finished", self, "_on_move_finished", [], CONNECT_DEFERRED)
-    
-func set_controls():
     ControlsHandler.initialize($Players)
     for player in $Players.get_children():
         player.board_character.player_id = player.get_id()
-        player.controls = ControlsHandler.get_controls(player.get_id())
-        player.board_character.controls = ControlsHandler.get_controls(player.get_id())
-    
+    queue.connect("emptied", self, "on_queue_finished", [], CONNECT_DEFERRED)
+    board.connect("turn_finished", self, "_on_move_finished", [], CONNECT_DEFERRED)
+    #ControlsHandler.give_player_ui_control($Players.get_child(0))
+
 func enter_space_scene(player_pawn, scene):
     if scene:
         scene.connect("completed", self, "add_note_to_q")     
@@ -94,7 +87,7 @@ func add_note_to_q(notes):
     for child in get_children():
         if child is CombatArena:
             remove_child(child)
-    
+
 func play_transition():
     $UI/Transition/AnimationPlayer.play("transition")
     yield($UI/Transition, "transitioned")
