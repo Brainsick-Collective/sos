@@ -1,7 +1,7 @@
 extends "res://interface/Menu.gd"
 
-onready var Board = preload("res://board/Board.tscn")
-onready var Character = preload("res://board/BoardCharacter.tscn")
+onready var Board = preload("res://board/BoardManager.tscn")
+onready var Character = preload("res://board/pawns/PlayerPawn.tscn")
 onready var player_scene = preload("res://game/players/Player.tscn")
 onready var StartingClasses = preload("res://game/StartingClasses.tscn")
 onready var ControllerPicker = preload("res://interface/UI/PlayerControllerPicker.tscn")

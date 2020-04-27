@@ -59,9 +59,9 @@ func enter_space_scene(player_pawn, scene):
         elif scene is ShopMenu:
             $UI/Transition/AnimationPlayer.play("transition")
             yield($UI/Transition, "transitioned")
-            $Board/UI.add_child(scene)
+            $BoardManager/UI.add_child(scene)
         else:
-            $Board/UI.add_child(scene)
+            $BoardManager/UI.add_child(scene)
             
             
         scene.initialize(player_pawn.player)

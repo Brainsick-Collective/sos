@@ -1,14 +1,5 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://assets/animated_sprites/char_sprites/base_board_character.tres" type="SpriteFrames" id=1]
-[ext_resource path="res://board/BoardCharacter.tscn" type="PackedScene" id=2]
+[ext_resource path="res://board/pawns/PlayerPawn.tscn" type="PackedScene" id=2]
 
 [node name="BoardCharacter" instance=ExtResource( 2 )]
-scale = Vector2( 1, 1 )
-
-[node name="AnimatedSprite" parent="Pivot" index="2"]
-position = Vector2( 0.50016, -33.8619 )
-scale = Vector2( 0.6, 0.6 )
-frames = ExtResource( 1 )
-animation = "down"
-frame = 3

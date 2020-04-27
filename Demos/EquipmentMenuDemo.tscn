@@ -1,0 +1,23 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Demos/EquipmentMenuDemo.gd" type="Script" id=1]
+[ext_resource path="res://interface/menus/EquipmentMenu.tscn" type="PackedScene" id=2]
+[ext_resource path="res://game/players/inventory/items/equipment/magic/Ward.tscn" type="PackedScene" id=3]
+[ext_resource path="res://game/players/inventory/items/equipment/weapon/RedSword.tscn" type="PackedScene" id=4]
+[ext_resource path="res://game/players/Player.tscn" type="PackedScene" id=5]
+[ext_resource path="res://game/players/inventory/items/equipment/weapon/BoneStaff.tscn" type="PackedScene" id=6]
+
+[node name="EquipmentMenuDemo" type="Node"]
+script = ExtResource( 1 )
+
+[node name="EquipmentMenu" parent="." instance=ExtResource( 2 )]
+
+[node name="Player" parent="." instance=ExtResource( 5 )]
+
+[node name="Ward" parent="Player/Inventory" index="0" instance=ExtResource( 3 )]
+
+[node name="BoneStaff" parent="Player/Inventory" index="1" instance=ExtResource( 6 )]
+
+[node name="RedSword" parent="Player/Inventory" index="2" instance=ExtResource( 4 )]
+
+[editable path="Player"]

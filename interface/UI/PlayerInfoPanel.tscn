@@ -1,57 +1,40 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://assets/ui/panel.png" type="Texture" id=1]
 [ext_resource path="res://interface/UI/ui_theme.tres" type="Theme" id=2]
 [ext_resource path="res://assets/cutscene_sprites/Strength_Class_F.png" type="Texture" id=3]
 [ext_resource path="res://interface/UI/CondensedPlayerPanel.tscn" type="PackedScene" id=4]
-[ext_resource path="res://assets/ui/left.png" type="Texture" id=5]
-[ext_resource path="res://assets/ui/right.png" type="Texture" id=6]
-[ext_resource path="res://assets/ui/right_pressed.png" type="Texture" id=7]
-[ext_resource path="res://assets/ui/left_pressed.png" type="Texture" id=8]
-[ext_resource path="res://assets/icons/greensword.png" type="Texture" id=9]
+[ext_resource path="res://interface/UI/EquipmentMenuItem.tscn" type="PackedScene" id=9]
 [ext_resource path="res://interface/UI/PlayerInfoPanel.gd" type="Script" id=10]
+[ext_resource path="res://interface/UI/EquipmentGrid.gd" type="Script" id=11]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.376471, 0.490196, 0.545098, 1 )
 
-[node name="PlayerInfoPanel" type="HBoxContainer"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -793.0
-margin_top = -398.0
-margin_right = 793.0
-margin_bottom = 398.0
+[node name="PlayerInfoPanel" type="VBoxContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 32.0
+margin_top = 32.0
+margin_right = -32.0
+margin_bottom = -32.0
 custom_constants/separation = 60
 script = ExtResource( 10 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Left" type="TextureButton" parent="."]
-margin_top = 270.0
-margin_right = 256.0
-margin_bottom = 526.0
-size_flags_vertical = 4
-texture_normal = ExtResource( 5 )
-texture_pressed = ExtResource( 8 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="PlayerInfoPanel" type="NinePatchRect" parent="."]
-margin_left = 316.0
-margin_right = 1270.0
-margin_bottom = 796.0
+margin_right = 1856.0
+margin_bottom = 756.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource( 2 )
 texture = ExtResource( 1 )
-patch_margin_left = 256
-patch_margin_top = 256
-patch_margin_right = 256
-patch_margin_bottom = 256
+patch_margin_left = 53
+patch_margin_top = 49
+patch_margin_right = 47
+patch_margin_bottom = 57
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -60,15 +43,16 @@ __meta__ = {
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 16.0
-margin_top = 16.0
+margin_top = 19.4778
 margin_right = -16.0
-margin_bottom = -32.0
+margin_bottom = -28.5222
 custom_styles/panel = SubResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Summary" type="Tabs" parent="PlayerInfoPanel/TabContainer"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 31.0
@@ -84,13 +68,13 @@ __meta__ = {
 }
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PlayerInfoPanel/TabContainer/Summary/VBoxContainer"]
-margin_right = 922.0
-margin_bottom = 356.0
+margin_right = 1824.0
+margin_bottom = 677.0
 size_flags_vertical = 3
 
 [node name="TextureRect" type="TextureRect" parent="PlayerInfoPanel/TabContainer/Summary/VBoxContainer/HBoxContainer"]
-margin_right = 459.0
-margin_bottom = 356.0
+margin_right = 910.0
+margin_bottom = 677.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 texture = ExtResource( 3 )
@@ -98,51 +82,67 @@ expand = true
 stretch_mode = 6
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PlayerInfoPanel/TabContainer/Summary/VBoxContainer/HBoxContainer"]
-margin_left = 463.0
-margin_right = 922.0
-margin_bottom = 356.0
+margin_left = 914.0
+margin_right = 1824.0
+margin_bottom = 677.0
 size_flags_horizontal = 3
 
 [node name="CondensedPlayerPanel" parent="PlayerInfoPanel/TabContainer/Summary/VBoxContainer/HBoxContainer/VBoxContainer" instance=ExtResource( 4 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 103.0
-margin_right = 459.0
-margin_bottom = 253.0
+margin_top = 93.0
+margin_right = 910.0
+margin_bottom = 243.0
 rect_min_size = Vector2( 0, 150 )
 size_flags_horizontal = 3
 size_flags_vertical = 6
 
-[node name="grid" type="GridContainer" parent="PlayerInfoPanel/TabContainer/Summary/VBoxContainer"]
-margin_top = 360.0
-margin_right = 922.0
-margin_bottom = 717.0
+[node name="grid" type="GridContainer" parent="PlayerInfoPanel/TabContainer/Summary/VBoxContainer/HBoxContainer/VBoxContainer"]
+margin_top = 340.0
+margin_right = 910.0
+margin_bottom = 677.0
 size_flags_vertical = 3
-columns = 2
 
-[node name="Label" type="Label" parent="PlayerInfoPanel/TabContainer/Summary/VBoxContainer/grid"]
-margin_right = 459.0
+[node name="Label" type="Label" parent="PlayerInfoPanel/TabContainer/Summary/VBoxContainer/HBoxContainer/VBoxContainer/grid"]
+margin_right = 910.0
 margin_bottom = 21.0
 size_flags_horizontal = 3
 text = "EXP"
 
-[node name="Label2" type="Label" parent="PlayerInfoPanel/TabContainer/Summary/VBoxContainer/grid"]
-margin_left = 463.0
-margin_right = 922.0
-margin_bottom = 21.0
+[node name="Panel" type="PanelContainer" parent="PlayerInfoPanel/TabContainer/Summary/VBoxContainer/HBoxContainer/VBoxContainer/grid"]
+margin_top = 25.0
+margin_right = 910.0
+margin_bottom = 60.0
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="PlayerInfoPanel/TabContainer/Summary/VBoxContainer/HBoxContainer/VBoxContainer/grid/Panel"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 903.0
+margin_bottom = 28.0
+size_flags_horizontal = 3
+text = "next"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="PlayerInfoPanel/TabContainer/Summary/VBoxContainer/HBoxContainer/VBoxContainer/grid"]
+margin_top = 64.0
+margin_right = 910.0
+margin_bottom = 85.0
 size_flags_horizontal = 3
 text = "NEXT"
 
-[node name="Panel" type="PanelContainer" parent="PlayerInfoPanel/TabContainer/Summary/VBoxContainer/grid"]
-margin_top = 25.0
-margin_right = 459.0
-margin_bottom = 60.0
+[node name="Panel2" type="PanelContainer" parent="PlayerInfoPanel/TabContainer/Summary/VBoxContainer/HBoxContainer/VBoxContainer/grid"]
+margin_top = 89.0
+margin_right = 910.0
+margin_bottom = 124.0
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="PlayerInfoPanel/TabContainer/Summary/VBoxContainer/grid/Panel"]
+[node name="Label" type="Label" parent="PlayerInfoPanel/TabContainer/Summary/VBoxContainer/HBoxContainer/VBoxContainer/grid/Panel2"]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 452.0
+margin_right = 903.0
 margin_bottom = 28.0
 size_flags_horizontal = 3
 text = "next"
@@ -150,49 +150,23 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Panel2" type="PanelContainer" parent="PlayerInfoPanel/TabContainer/Summary/VBoxContainer/grid"]
-margin_left = 463.0
-margin_top = 25.0
-margin_right = 922.0
-margin_bottom = 60.0
-size_flags_horizontal = 3
-
-[node name="Label" type="Label" parent="PlayerInfoPanel/TabContainer/Summary/VBoxContainer/grid/Panel2"]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 452.0
-margin_bottom = 28.0
-size_flags_horizontal = 3
-text = "next"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label3" type="Label" parent="PlayerInfoPanel/TabContainer/Summary/VBoxContainer/grid"]
-margin_top = 64.0
-margin_right = 459.0
-margin_bottom = 85.0
+[node name="Label3" type="Label" parent="PlayerInfoPanel/TabContainer/Summary/VBoxContainer/HBoxContainer/VBoxContainer/grid"]
+margin_top = 128.0
+margin_right = 910.0
+margin_bottom = 149.0
 size_flags_horizontal = 3
 text = "JOB"
 
-[node name="Label4" type="Label" parent="PlayerInfoPanel/TabContainer/Summary/VBoxContainer/grid"]
-margin_left = 463.0
-margin_top = 64.0
-margin_right = 922.0
-margin_bottom = 85.0
-size_flags_horizontal = 3
-text = "NET WORTH"
-
-[node name="Panel3" type="PanelContainer" parent="PlayerInfoPanel/TabContainer/Summary/VBoxContainer/grid"]
-margin_top = 89.0
-margin_right = 459.0
-margin_bottom = 124.0
+[node name="Panel3" type="PanelContainer" parent="PlayerInfoPanel/TabContainer/Summary/VBoxContainer/HBoxContainer/VBoxContainer/grid"]
+margin_top = 153.0
+margin_right = 910.0
+margin_bottom = 188.0
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="PlayerInfoPanel/TabContainer/Summary/VBoxContainer/grid/Panel3"]
+[node name="Label" type="Label" parent="PlayerInfoPanel/TabContainer/Summary/VBoxContainer/HBoxContainer/VBoxContainer/grid/Panel3"]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 452.0
+margin_right = 903.0
 margin_bottom = 28.0
 size_flags_horizontal = 3
 text = "next"
@@ -200,17 +174,23 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Panel4" type="PanelContainer" parent="PlayerInfoPanel/TabContainer/Summary/VBoxContainer/grid"]
-margin_left = 463.0
-margin_top = 89.0
-margin_right = 922.0
-margin_bottom = 124.0
+[node name="Label4" type="Label" parent="PlayerInfoPanel/TabContainer/Summary/VBoxContainer/HBoxContainer/VBoxContainer/grid"]
+margin_top = 192.0
+margin_right = 910.0
+margin_bottom = 213.0
+size_flags_horizontal = 3
+text = "NET WORTH"
+
+[node name="Panel4" type="PanelContainer" parent="PlayerInfoPanel/TabContainer/Summary/VBoxContainer/HBoxContainer/VBoxContainer/grid"]
+margin_top = 217.0
+margin_right = 910.0
+margin_bottom = 252.0
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="PlayerInfoPanel/TabContainer/Summary/VBoxContainer/grid/Panel4"]
+[node name="Label" type="Label" parent="PlayerInfoPanel/TabContainer/Summary/VBoxContainer/HBoxContainer/VBoxContainer/grid/Panel4"]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 452.0
+margin_right = 903.0
 margin_bottom = 28.0
 size_flags_horizontal = 3
 text = "next"
@@ -219,7 +199,6 @@ __meta__ = {
 }
 
 [node name="Equipment" type="Tabs" parent="PlayerInfoPanel/TabContainer"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 31.0
@@ -227,176 +206,86 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PlayerInfoPanel/TabContainer/Equipment"]
+[node name="Column" type="VBoxContainer" parent="PlayerInfoPanel/TabContainer/Equipment"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PlayerInfoPanel/TabContainer/Equipment/VBoxContainer"]
-margin_right = 922.0
-margin_bottom = 356.0
+[node name="Row" type="HBoxContainer" parent="PlayerInfoPanel/TabContainer/Equipment/Column"]
+margin_right = 1824.0
+margin_bottom = 336.0
 size_flags_vertical = 3
 
-[node name="TextureRect" type="TextureRect" parent="PlayerInfoPanel/TabContainer/Equipment/VBoxContainer/HBoxContainer"]
-margin_right = 459.0
-margin_bottom = 356.0
+[node name="TextureRect" type="TextureRect" parent="PlayerInfoPanel/TabContainer/Equipment/Column/Row"]
+margin_right = 910.0
+margin_bottom = 336.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 texture = ExtResource( 3 )
 expand = true
 stretch_mode = 6
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PlayerInfoPanel/TabContainer/Equipment/VBoxContainer/HBoxContainer"]
-margin_left = 463.0
-margin_right = 922.0
-margin_bottom = 356.0
-size_flags_horizontal = 3
-
-[node name="CondensedPlayerPanel" parent="PlayerInfoPanel/TabContainer/Equipment/VBoxContainer/HBoxContainer/VBoxContainer" instance=ExtResource( 4 )]
+[node name="CondensedPlayerPanel" parent="PlayerInfoPanel/TabContainer/Equipment/Column/Row" instance=ExtResource( 4 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 103.0
-margin_right = 459.0
-margin_bottom = 253.0
+margin_left = 914.0
+margin_top = 93.0
+margin_right = 1824.0
+margin_bottom = 243.0
 rect_min_size = Vector2( 0, 150 )
 size_flags_horizontal = 3
 size_flags_vertical = 6
 
-[node name="grid" type="GridContainer" parent="PlayerInfoPanel/TabContainer/Equipment/VBoxContainer"]
-margin_top = 360.0
-margin_right = 922.0
-margin_bottom = 717.0
+[node name="EquipmentGrid" type="GridContainer" parent="PlayerInfoPanel/TabContainer/Equipment/Column"]
+margin_left = 610.0
+margin_top = 340.0
+margin_right = 1214.0
+margin_bottom = 677.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 4
 size_flags_vertical = 3
+custom_constants/vseparation = 30
 columns = 2
+script = ExtResource( 11 )
 
-[node name="Weapon" type="Label" parent="PlayerInfoPanel/TabContainer/Equipment/VBoxContainer/grid"]
-margin_right = 459.0
-margin_bottom = 21.0
-size_flags_horizontal = 3
-text = "Weapon"
-align = 1
+[node name="Weapon" parent="PlayerInfoPanel/TabContainer/Equipment/Column/EquipmentGrid" instance=ExtResource( 9 )]
+margin_right = 300.0
+margin_bottom = 153.0
+size_flags_horizontal = 1
+alignment = 1
 
-[node name="off-hand" type="Label" parent="PlayerInfoPanel/TabContainer/Equipment/VBoxContainer/grid"]
-margin_left = 463.0
-margin_right = 922.0
-margin_bottom = 21.0
-size_flags_horizontal = 3
-text = "NEXT"
+[node name="OffHand" parent="PlayerInfoPanel/TabContainer/Equipment/Column/EquipmentGrid" instance=ExtResource( 9 )]
+margin_left = 304.0
+margin_right = 604.0
+margin_bottom = 153.0
+size_flags_horizontal = 1
+alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PlayerInfoPanel/TabContainer/Equipment/VBoxContainer/grid"]
-margin_top = 25.0
-margin_right = 459.0
-margin_bottom = 176.0
+[node name="OffensiveMagic" parent="PlayerInfoPanel/TabContainer/Equipment/Column/EquipmentGrid" instance=ExtResource( 9 )]
+margin_top = 183.0
+margin_right = 300.0
+margin_bottom = 336.0
+size_flags_horizontal = 1
+alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="PlayerInfoPanel/TabContainer/Equipment/VBoxContainer/grid/HBoxContainer"]
-margin_right = 100.0
-margin_bottom = 151.0
-rect_min_size = Vector2( 100, 0 )
-size_flags_vertical = 3
-texture = ExtResource( 9 )
-expand = true
-stretch_mode = 5
+[node name="DefensiveMagic" parent="PlayerInfoPanel/TabContainer/Equipment/Column/EquipmentGrid" instance=ExtResource( 9 )]
+margin_left = 304.0
+margin_top = 183.0
+margin_right = 604.0
+margin_bottom = 336.0
+size_flags_horizontal = 1
+alignment = 1
 
-[node name="EquipmentPanel" type="PanelContainer" parent="PlayerInfoPanel/TabContainer/Equipment/VBoxContainer/grid/HBoxContainer"]
-margin_left = 104.0
-margin_top = 58.0
-margin_right = 459.0
-margin_bottom = 93.0
-size_flags_horizontal = 3
-size_flags_vertical = 4
-
-[node name="Label" type="Label" parent="PlayerInfoPanel/TabContainer/Equipment/VBoxContainer/grid/HBoxContainer/EquipmentPanel"]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 348.0
-margin_bottom = 28.0
-size_flags_horizontal = 3
-text = "next"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Panel2" type="PanelContainer" parent="PlayerInfoPanel/TabContainer/Equipment/VBoxContainer/grid"]
-margin_left = 463.0
-margin_top = 25.0
-margin_right = 922.0
-margin_bottom = 176.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="Label" type="Label" parent="PlayerInfoPanel/TabContainer/Equipment/VBoxContainer/grid/Panel2"]
-margin_left = 7.0
-margin_top = 65.0
-margin_right = 452.0
-margin_bottom = 86.0
-size_flags_horizontal = 3
-text = "next"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label3" type="Label" parent="PlayerInfoPanel/TabContainer/Equipment/VBoxContainer/grid"]
-margin_top = 180.0
-margin_right = 459.0
-margin_bottom = 201.0
-size_flags_horizontal = 3
-text = "JOB"
-
-[node name="Label4" type="Label" parent="PlayerInfoPanel/TabContainer/Equipment/VBoxContainer/grid"]
-margin_left = 463.0
-margin_top = 180.0
-margin_right = 922.0
-margin_bottom = 201.0
-size_flags_horizontal = 3
-text = "NET WORTH"
-
-[node name="Panel3" type="PanelContainer" parent="PlayerInfoPanel/TabContainer/Equipment/VBoxContainer/grid"]
-margin_top = 205.0
-margin_right = 459.0
-margin_bottom = 356.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="Label" type="Label" parent="PlayerInfoPanel/TabContainer/Equipment/VBoxContainer/grid/Panel3"]
-margin_left = 7.0
-margin_top = 65.0
-margin_right = 452.0
-margin_bottom = 86.0
-size_flags_horizontal = 3
-text = "next"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Panel4" type="PanelContainer" parent="PlayerInfoPanel/TabContainer/Equipment/VBoxContainer/grid"]
-margin_left = 463.0
-margin_top = 205.0
-margin_right = 922.0
-margin_bottom = 356.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="Label" type="Label" parent="PlayerInfoPanel/TabContainer/Equipment/VBoxContainer/grid/Panel4"]
-margin_left = 7.0
-margin_top = 65.0
-margin_right = 452.0
-margin_bottom = 86.0
-size_flags_horizontal = 3
-text = "next"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Right" type="TextureButton" parent="."]
-margin_left = 1330.0
-margin_top = 270.0
-margin_right = 1586.0
-margin_bottom = 526.0
-size_flags_vertical = 4
-texture_normal = ExtResource( 6 )
-texture_pressed = ExtResource( 7 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="EquipmentBelt" type="NinePatchRect" parent="."]
+margin_top = 816.0
+margin_right = 1856.0
+margin_bottom = 1016.0
+rect_min_size = Vector2( 0, 200 )
+texture = ExtResource( 1 )
+patch_margin_left = 45
+patch_margin_top = 35
+patch_margin_right = 48
+patch_margin_bottom = 49

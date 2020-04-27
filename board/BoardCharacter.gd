@@ -1,6 +1,6 @@
 extends Node2D
 
-class_name BoardCharacter
+class_name PlayerPawn
 
 signal turn_finished
 signal last_move_taken
@@ -71,13 +71,11 @@ func _process(_delta):
         $Pivot/AnimatedSprite.play(direction_names[_direction])
         var next_space = board.request_move(self, _direction)
         if next_space :
-            move_to(next_space)
+            move_to(board.map_to_world(next_space) + board.cell_size / 2)
         _direction = Vector2()
     
 func move_to(target_position):
     set_process(false)
-    target_position = board.map_to_world(board.world_to_map(target_position))
-    target_position = target_position + board.cell_size / 2
     # Move the node to the target cell instantly,
     # and animate the sprite moving from the start to the target cell
     

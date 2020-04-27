@@ -9,6 +9,12 @@
 
 [resource]
 script = ExtResource( 1 )
+level = 1
+max_health_curve = ExtResource( 2 )
+max_mana_curve = ExtResource( 5 )
+strength_curve = ExtResource( 7 )
+defense_curve = ExtResource( 3 )
+speed_curve = ExtResource( 6 )
 health = 0
 mana = 0
 max_health = 20
@@ -19,9 +25,3 @@ speed = 3
 magic = 3
 xp = 0
 kill_xp = 0
-level = 1
-max_health_curve = ExtResource( 2 )
-max_mana_curve = ExtResource( 5 )
-strength_curve = ExtResource( 7 )
-defense_curve = ExtResource( 3 )
-speed_curve = ExtResource( 6 )

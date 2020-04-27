@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://game/players/inventory/items/equipment/magic/OffensiveMagic.tscn" type="PackedScene" id=1]
+[ext_resource path="res://combat/Actions/moves/Zap.tres" type="Resource" id=2]
+
+[node name="Zap" instance=ExtResource( 1 )]
+display_name = "Zap"
+description = "a spell that shoots lightning at the opponent."
+type = 2
+move = ExtResource( 2 )

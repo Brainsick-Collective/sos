@@ -43,6 +43,7 @@ func _on_continue():
     var save_menu = SaveMenu.instance()
     hide()
     game.add_child(save_menu)
+    save_menu.set_loading(true)
 
 func _on_confirm_pressed():
     var menu = CharacterSelectMenu.instance()

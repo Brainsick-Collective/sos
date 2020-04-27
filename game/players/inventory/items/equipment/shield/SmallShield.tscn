@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://game/players/inventory/items/equipment/Equipment.tscn" type="PackedScene" id=1]
+
+[node name="SmallShield" instance=ExtResource( 1 )]
+display_name = "Small Shield"
+description = "barely fits on your forearm, but at least you are more nimble this way."
+price = 20
+type = 1
+DEFENSE = 5

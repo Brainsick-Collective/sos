@@ -12,7 +12,9 @@ export var def_normal : Resource
 export var def_special: Resource
 export var def_effect : Resource
 export var def_magic  : Resource
+
 var move_dict = {}
+
 func _ready():
     pass
 

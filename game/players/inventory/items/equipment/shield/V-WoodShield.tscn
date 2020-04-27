@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://game/players/inventory/items/equipment/Equipment.tscn" type="PackedScene" id=1]
+
+[node name="V-WoodShield" instance=ExtResource( 1 )]
+display_name = "V-Wood Shield"
+description = "made from Virtual Wood. it's defenses, coincidentally, might as well be virtual."
+price = 60
+type = 1
+DEFENSE = 10

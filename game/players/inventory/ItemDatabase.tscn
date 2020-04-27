@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://game/players/inventory/ItemDatabase.gd" type="Script" id=1]
 [ext_resource path="res://game/players/inventory/items/equipment/sword/Sword.tscn" type="PackedScene" id=2]
@@ -15,9 +15,15 @@
 [ext_resource path="res://game/players/inventory/items/equipment/weapon/LilyStaff.tscn" type="PackedScene" id=13]
 [ext_resource path="res://game/players/inventory/items/equipment/weapon/RedSword.tscn" type="PackedScene" id=14]
 [ext_resource path="res://game/players/inventory/items/equipment/weapon/Purpsword.tscn" type="PackedScene" id=15]
+[ext_resource path="res://game/players/inventory/items/Cash.tscn" type="PackedScene" id=16]
+[ext_resource path="res://game/players/inventory/items/equipment/shield/TrashCanLid.tscn" type="PackedScene" id=17]
+[ext_resource path="res://game/players/inventory/items/equipment/shield/V-WoodShield.tscn" type="PackedScene" id=18]
+[ext_resource path="res://game/players/inventory/items/equipment/shield/SmallShield.tscn" type="PackedScene" id=19]
 
 [node name="ItemDatabase" type="Node"]
 script = ExtResource( 1 )
+
+[node name="Cash" parent="." instance=ExtResource( 16 )]
 
 [node name="E-Hammer" parent="." instance=ExtResource( 11 )]
 
@@ -49,3 +55,9 @@ price = 5
 [node name="Clammer" parent="." instance=ExtResource( 8 )]
 
 [node name="LilyStaff" parent="." instance=ExtResource( 13 )]
+
+[node name="SmallShield" parent="." instance=ExtResource( 19 )]
+
+[node name="TrashCanLid" parent="." instance=ExtResource( 17 )]
+
+[node name="V-WoodShield" parent="." instance=ExtResource( 18 )]

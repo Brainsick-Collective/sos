@@ -19,10 +19,10 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://combat/Actions/AttackAction.gd"
 }, {
-"base": "Node2D",
-"class": "BoardCharacter",
+"base": "Equipment",
+"class": "BattleMagic",
 "language": "GDScript",
-"path": "res://board/BoardCharacter.gd"
+"path": "res://game/players/inventory/items/equipment/magic/BattleMagic.gd"
 }, {
 "base": "Notification",
 "class": "BoardNotification",
@@ -33,6 +33,11 @@ _global_script_classes=[ {
 "class": "BuffPotion",
 "language": "GDScript",
 "path": "res://game/players/inventory/items/usable/potions/BuffPotion.gd"
+}, {
+"base": "Item",
+"class": "CashItem",
+"language": "GDScript",
+"path": "res://game/players/inventory/items/Cash.gd"
 }, {
 "base": "NinePatchRect",
 "class": "ChoseEncounterPanel",
@@ -79,6 +84,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://CutsceneParser.gd"
 }, {
+"base": "BattleMagic",
+"class": "DefensiveMagic",
+"language": "GDScript",
+"path": "res://DefensiveMagic.gd"
+}, {
 "base": "Resource",
 "class": "Effect",
 "language": "GDScript",
@@ -93,6 +103,11 @@ _global_script_classes=[ {
 "class": "Equipment",
 "language": "GDScript",
 "path": "res://game/players/inventory/items/equipment/Equipment.gd"
+}, {
+"base": "Panel",
+"class": "EquipmentSlot",
+"language": "GDScript",
+"path": "res://interface/menus/EquipMenu/EquipmentSlot.gd"
 }, {
 "base": "Reference",
 "class": "Hit",
@@ -119,7 +134,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://mobs/Mob.gd"
 }, {
-"base": "BoardCharacter",
+"base": "Pawn",
 "class": "MobPawn",
 "language": "GDScript",
 "path": "res://board/pawns/MobPawn.gd"
@@ -134,10 +149,20 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://interface/UI/notification.gd"
 }, {
+"base": "BattleMagic",
+"class": "OffensiveMagic",
+"language": "GDScript",
+"path": "res://game/players/inventory/items/equipment/magic/OffensiveMagic.gd"
+}, {
 "base": "CombatAction",
 "class": "OffensiveMagicAction",
 "language": "GDScript",
 "path": "res://combat/Actions/OffensiveMagicAction.gd"
+}, {
+"base": "Node2D",
+"class": "Pawn",
+"language": "GDScript",
+"path": "res://board/pawns/Pawn.gd"
 }, {
 "base": "Node",
 "class": "Player",
@@ -148,6 +173,11 @@ _global_script_classes=[ {
 "class": "PlayerInventory",
 "language": "GDScript",
 "path": "res://game/players/inventory/PlayerInventory.gd"
+}, {
+"base": "Pawn",
+"class": "PlayerPawn",
+"language": "GDScript",
+"path": "res://board/pawns/PlayerPawn.gd"
 }, {
 "base": "Task",
 "class": "RandomSelector",
@@ -213,13 +243,19 @@ _global_script_classes=[ {
 "class": "Task",
 "language": "GDScript",
 "path": "res://mobs/ai/Task.gd"
+}, {
+"base": "Area2D",
+"class": "TileArea",
+"language": "GDScript",
+"path": "res://board/Tiles/TileArea.gd"
 } ]
 _global_script_class_icons={
 "ActorPreview": "",
 "AttackAction": "",
-"BoardCharacter": "",
+"BattleMagic": "",
 "BoardNotification": "",
 "BuffPotion": "",
+"CashItem": "",
 "ChoseEncounterPanel": "",
 "CombatAction": "",
 "CombatArena": "",
@@ -229,9 +265,11 @@ _global_script_class_icons={
 "Combatant": "",
 "Cutscene": "",
 "CutsceneParser": "",
+"DefensiveMagic": "",
 "Effect": "",
 "EffectAction": "",
 "Equipment": "",
+"EquipmentSlot": "",
 "Hit": "",
 "Inventory": "",
 "Item": "",
@@ -240,9 +278,12 @@ _global_script_class_icons={
 "MobPawn": "",
 "MobSpawner": "",
 "Notification": "",
+"OffensiveMagic": "",
 "OffensiveMagicAction": "",
+"Pawn": "",
 "Player": "",
 "PlayerInventory": "",
+"PlayerPawn": "",
 "RandomSelector": "",
 "RectExtents": "",
 "Rewards": "",
@@ -255,7 +296,8 @@ _global_script_class_icons={
 "SpinnerSpawner": "",
 "StatEffect": "",
 "Stats": "",
-"Task": ""
+"Task": "",
+"TileArea": ""
 }
 
 [application]

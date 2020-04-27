@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://game/players/inventory/items/equipment/Equipment.tscn" type="PackedScene" id=1]
+
+[node name="TrashCanLid" instance=ExtResource( 1 )]
+display_name = "Trash Can Lid"
+description = "It might not be very strong, but it IS very big, and isn't that what matters most?"
+price = 30
+type = 1
+DEFENSE = 9
+SPEED = -2

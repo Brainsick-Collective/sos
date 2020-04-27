@@ -377,7 +377,7 @@ position = Vector2( 369.25, 139.484 )
 scale = Vector2( 0.958064, 0.958064 )
 frames = ExtResource( 71 )
 animation = "slow"
-frame = 7
+frame = 22
 playing = true
 
 [node name="MarginContainer" type="MarginContainer" parent="bg/Console"]

@@ -18,6 +18,14 @@ var modifiers = {
     }
 
 var MAX_LEVEL = 100
+export(int) var level = 1
+var experience_curve = [ 0, 5, 15, 50, 120, 200, 325, 500, 800, 1250 ]
+export(Curve) var max_health_curve
+export(Curve) var max_mana_curve
+export(Curve) var strength_curve
+export(Curve) var defense_curve
+export(Curve) var speed_curve
+
 export(int) var health
 export(int) var mana setget set_mana
 export(int) var max_health = 0 setget set_max_health, _get_max_health
@@ -31,13 +39,6 @@ export(int) var kill_xp = 0
 
 
 var is_alive : bool setget ,_is_alive
-export(int) var level = 1
-export(Curve) var max_health_curve
-export(Curve) var max_mana_curve
-export(Curve) var strength_curve
-export(Curve) var defense_curve
-export(Curve) var speed_curve
-var experience_curve = [ 0, 5, 15, 50, 120, 200, 325, 500, 800, 1250 ]
 var required_experience : int
 var _interpolated_level
 var player_id : int
@@ -96,7 +97,7 @@ func set_mana(value : int):
 func set_max_health(value : int):
     if value == null:
         return
-    max_health = max(1, value)
+    max_health = max(0, value)
 
 func set_max_mana(value : int):
     if value == null:
@@ -106,17 +107,17 @@ func set_max_mana(value : int):
 func set_speed(value : int):
     if value == null:
         return
-    speed = max(1, value)
+    speed = max(0, value)
 
 func set_strength(value : int):
     if value == null:
         return
-    strength = max(1, value)
+    strength = max(0, value)
 
 func set_defense(value : int):
     if value == null:
         return
-    defense = max(1, value)
+    defense = max(0, value)
 
 func set_xp(value : int):
     xp = value
@@ -143,9 +144,13 @@ func add_modifiers(mods : Dictionary):
     for key in mods.keys():
         add_to_modifier(key, mods[key])
 
-func remove_modifier(id: String, modifier):
+func remove_from_modifier(id: String, modifier):
     modifiers[id] = max(0, modifiers[id] - modifier)
     
+func remove_modifiers(mods : Dictionary):
+    for key in mods.keys():
+        remove_from_modifier(key, mods[key])
+
 func _is_alive() -> bool:
     return health > 0
 

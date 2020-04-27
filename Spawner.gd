@@ -15,3 +15,6 @@ func _on_area_entered(body):
 
 func get_previews():
     return preview
+
+func build_preview():
+    pass

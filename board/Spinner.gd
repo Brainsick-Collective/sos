@@ -5,6 +5,7 @@ var item_num
 var curr_item : int
 var spin_decay = 8
 var spin_decaying = false
+var done_picking = false
 onready var option_button = preload("res://interface/GUI/OptionButton.tscn")
 var items = []
 signal item_chosen(item)
@@ -39,7 +40,6 @@ func _unhandled_input(event):
 func _on_Timer_timeout():
     if spin_decaying:
         if spin_decay <= 0:
-            timer.queue_free()
             var new_timer = Timer.new()
             new_timer.one_shot = true
             add_child(new_timer)
@@ -50,9 +50,10 @@ func _on_Timer_timeout():
         else:
             spin_decay -= 1
             timer.wait_time += .03
-            curr_item = (curr_item + 1) % 3
-            $Row.get_child(curr_item).grab_focus()
-            timer.start()
+
+    curr_item = (curr_item + 1) % item_num
+    $Row.get_child(curr_item).grab_focus()
+    timer.start()
     
     
 func _on_delay_over():

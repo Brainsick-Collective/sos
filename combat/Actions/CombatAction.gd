@@ -17,8 +17,6 @@ var type
 #export(Texture) var icon ???
 export(String) var description : String = "Base combat action"
 
-
-
 func initialize(battler) -> void:
     move = move.duplicate()
     type = move.type

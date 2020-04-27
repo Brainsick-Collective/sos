@@ -21,9 +21,11 @@ export (Array) var tags
 func react(_hit):
     print("didn't override")
 
-
 func do_self_effect():
     pass
 
 func do_enemy_effect(enemy):
     pass
+
+func supplant_move_dict(dict : Dictionary):
+    dict[phase_type.keys()[phase]][move_types.keys[type]] = self

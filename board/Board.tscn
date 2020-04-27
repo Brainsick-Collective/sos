@@ -1,6 +1,6 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=15 format=2]
 
-[ext_resource path="res://board/Board.gd" type="Script" id=1]
+[ext_resource path="res://board/BoardManager.gd" type="Script" id=1]
 [ext_resource path="res://board/outdoor.tres" type="TileSet" id=2]
 [ext_resource path="res://board/GameBoard.gd" type="Script" id=3]
 [ext_resource path="res://board/spaces.tres" type="TileSet" id=4]
@@ -9,15 +9,11 @@
 [ext_resource path="res://board/Pathfinder.gd" type="Script" id=7]
 [ext_resource path="res://interface/GUI/GUI.tscn" type="PackedScene" id=8]
 [ext_resource path="res://board/Tiles/spaces.tres" type="TileSet" id=9]
-[ext_resource path="res://board/Spawners/ClamCuddleSpawner.tscn" type="PackedScene" id=10]
 [ext_resource path="res://board/Tiles/tileset_1.tres" type="TileSet" id=11]
 [ext_resource path="res://assets/new_crosshairs/c_cross.png" type="Texture" id=12]
 [ext_resource path="res://assets/new_crosshairs/c_dot.png" type="Texture" id=13]
 [ext_resource path="res://board/BoardViewer.gd" type="Script" id=14]
-[ext_resource path="res://board/Spawners/MushBossSpawner.tscn" type="PackedScene" id=15]
-[ext_resource path="res://board/Spawners/ItemShopOne.tscn" type="PackedScene" id=16]
-[ext_resource path="res://board/Spawners/Potion1SpinnerSpawner.tscn" type="PackedScene" id=17]
-[ext_resource path="res://board/Spawners/spinner_preview.tres" type="Resource" id=18]
+
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -27,7 +23,7 @@ animations = [ {
 "speed": 2.0
 } ]
 
-[node name="Board" type="Node2D" groups=[
+[node name="BoardManager" type="Node2D" groups=[
 "save",
 ]]
 script = ExtResource( 1 )
@@ -84,68 +80,6 @@ tile_data = PoolIntArray( 393222, 5, 0, 393232, 5, 0, 393246, 7, 0, 655362, 7, 0
 [node name="Spawners" type="TileMap" parent="GameBoard"]
 format = 1
 
-[node name="ClamCuddleSpawner" parent="GameBoard/Spawners" instance=ExtResource( 10 )]
-position = Vector2( 448, 448 )
-
-[node name="ClamCuddleSpawner2" parent="GameBoard/Spawners" instance=ExtResource( 10 )]
-position = Vector2( 448, 704 )
-
-[node name="ClamCuddleSpawner3" parent="GameBoard/Spawners" instance=ExtResource( 10 )]
-position = Vector2( 1086.67, 449.395 )
-
-[node name="ClamCuddleSpawner4" parent="GameBoard/Spawners" instance=ExtResource( 10 )]
-position = Vector2( 1216, 1088 )
-
-[node name="ClamCuddleSpawner5" parent="GameBoard/Spawners" instance=ExtResource( 10 )]
-position = Vector2( 1984, 958.149 )
-
-[node name="ClamCuddleSpawner6" parent="GameBoard/Spawners" instance=ExtResource( 10 )]
-position = Vector2( 2624, 1088 )
-
-[node name="ClamCuddleSpawner7" parent="GameBoard/Spawners" instance=ExtResource( 10 )]
-position = Vector2( 3008, 1344 )
-
-[node name="ClamCuddleSpawner8" parent="GameBoard/Spawners" instance=ExtResource( 10 )]
-position = Vector2( 2368, 1600 )
-
-[node name="ClamCuddleSpawner9" parent="GameBoard/Spawners" instance=ExtResource( 10 )]
-position = Vector2( 1344, 1600 )
-
-[node name="ClamCuddleSpawner10" parent="GameBoard/Spawners" instance=ExtResource( 10 )]
-position = Vector2( 444.542, 1600 )
-
-[node name="MushBossSpawner" parent="GameBoard/Spawners" instance=ExtResource( 15 )]
-position = Vector2( 1600, 1088 )
-
-[node name="ItemShopOne" parent="GameBoard/Spawners" instance=ExtResource( 16 )]
-position = Vector2( 192, 704 )
-
-[node name="ItemShopOne2" parent="GameBoard/Spawners" instance=ExtResource( 16 )]
-position = Vector2( 960, 1088 )
-
-[node name="ItemShopOne3" parent="GameBoard/Spawners" instance=ExtResource( 16 )]
-position = Vector2( 2624, 958.149 )
-
-[node name="Potion1SpinnerSpawner" parent="GameBoard/Spawners" instance=ExtResource( 17 )]
-position = Vector2( 704, 704 )
-preview = ExtResource( 18 )
-
-[node name="Potion1SpinnerSpawner2" parent="GameBoard/Spawners" instance=ExtResource( 17 )]
-position = Vector2( 704, 1088 )
-preview = ExtResource( 18 )
-
-[node name="Potion1SpinnerSpawner3" parent="GameBoard/Spawners" instance=ExtResource( 17 )]
-position = Vector2( 448, 1088 )
-preview = ExtResource( 18 )
-
-[node name="Potion1SpinnerSpawner4" parent="GameBoard/Spawners" instance=ExtResource( 17 )]
-position = Vector2( 1600, 1344 )
-preview = ExtResource( 18 )
-
-[node name="Potion1SpinnerSpawner5" parent="GameBoard/Spawners" instance=ExtResource( 17 )]
-position = Vector2( 2368, 1344 )
-preview = ExtResource( 18 )
-
 [node name="BoardViewer" type="KinematicBody2D" parent="."]
 visible = false
 position = Vector2( 444.542, 449.395 )
@@ -154,7 +88,6 @@ script = ExtResource( 14 )
 
 [node name="Anim" type="AnimatedSprite" parent="BoardViewer"]
 frames = SubResource( 1 )
-frame = 1
 playing = true
 
 [node name="Camera2D" type="Camera2D" parent="BoardViewer"]

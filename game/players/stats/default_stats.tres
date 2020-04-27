@@ -4,6 +4,7 @@
 
 [resource]
 script = ExtResource( 1 )
+level = 1
 health = 0
 mana = 0
 max_health = 1
@@ -14,4 +15,3 @@ speed = 1
 magic = 0
 xp = 0
 kill_xp = 0
-level = 1

@@ -6,14 +6,15 @@ var file_hash = 0
 export(String) var save_directory_path = "res://debug/save"
 var save_file_format = "save_%03d.tres"
 var resource_file_format = "save_%03d_%s.tres"
-onready var Game = get_node("/root/Game")
+var Game
 var save_directory : Directory
 
 signal game_loaded
 
 func _ready():
     save_directory = Directory.new()
-    
+    if has_node("/root/Game"):
+        Game = get_node("/root/Game")
     if not save_directory.dir_exists(save_directory_path):
         save_directory.make_dir_recursive(save_directory_path)
     save_directory.open(save_directory_path)

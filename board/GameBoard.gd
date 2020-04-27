@@ -1,7 +1,6 @@
 extends TileMap
 
 enum CELL_TYPES {PATH, SPACE, GRASS, BUSH, DIRT}
-enum space_types {empty = -1, SHOP, MAGIC, WILD, ITEM}
 var CombatArena = preload("res://combat/CombatArena.tscn")
 var ChoseEncounterPanel = preload("res://interface/GUI/ChoseEncounterPanel.tscn")
 
@@ -12,11 +11,11 @@ func request_move(pawn, direction):
     var cell_start = world_to_map(pawn.position)
     var cell_target = find_space(cell_start + direction, direction)
     if cell_target:
-        return map_to_world(cell_target)
+        return cell_target
     
 func find_space(tile, direction):
     var space = $Spaces.get_cellv(tile)
-    if space != space_types.empty:
+    if space != -1:
         return tile
     space = $Path.get_cellv(tile)
     if space == CELL_TYPES.PATH:
@@ -40,7 +39,6 @@ func get_space_scene(player_pawn):
     var player_combatant = player_pawn.player.get_combatant()
     var colliders = player_pawn.get_collisions()
     if colliders:
-        print("colliders")
         for collider in colliders:
             if collider is MobSpawner:
                 spawner = collider
@@ -51,7 +49,7 @@ func get_space_scene(player_pawn):
 
             #player or MobPawn
             # turn board character collisions off when dead instead of checking here
-            elif collider is BoardCharacter and !pawns.has(collider):
+            elif collider is Pawn and !pawns.has(collider):
                     pawns.append(collider)
     
     if pawns.empty() and spawner:
@@ -75,7 +73,3 @@ func _build_chose_encounter(pawns, spawner):
     var panel = ChoseEncounterPanel.instance()
     panel.setup(pawns, spawner)
     return panel
-    
-func get_location(player_pawn, space_type):
-  if space_type == space_types.MAGIC:
-    return ShopFactory.get_shop(player_pawn,space_type)

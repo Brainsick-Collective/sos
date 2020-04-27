@@ -1,10 +1,17 @@
 ** Dokapon Clone TODO list
-*** TODO [#A] player info screen
-*** TODO [#A] make sure transition plays on leaving a shop
+*** TODO [#A] Player info screen
+*** TODO [#A] Make sure transition plays on leaving a shop
+*** TODO [#A] Fix prievew board viewer using tileArea
+*** TODO make each equipment slot unique
+*** TODO Create system for supplanting battle abilities
+*** TODO Paginate inventories on: shops, player inv, spinners
+*** TODO add movement effect items and movement alteration system
+*** TODO Add functionality for Board loading
 *** TODO rework gui element handling from boardcharacter to board / gui
 *** TODO sound effects
 *** TODO Add better Level up interface
-*** TODO [#B] System for saving game
+*** DONE [#B] System for saving game
+    CLOSED: [2020-04-15 Wed 16:20]
 *** TODO towns (it's TIME)
 *** TODO tutorial cutscene?
 *** TODO [#B] music player

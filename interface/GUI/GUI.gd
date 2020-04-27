@@ -5,7 +5,7 @@ var current_player
 
 onready var moves_left_label = $Counter/MarginContainer/VBoxContainer/MovesLeft
 onready var InventoryMenu = preload("res://interface/menus/InventoryMenu.tscn")
-
+onready var SaveMenu = preload("res://interface/SaveSystem/SaveFileMenu.tscn")
 func initialize(new_board):
     board = new_board
     $DiceRollPopup.connect("completed", self, "show_moves")
@@ -74,5 +74,6 @@ func _on_ActionMenu_visibility_changed():
 
 
 func _on_InfoButton_pressed():
-    #animate
-    pass
+    var save_menu = SaveMenu.instance()
+    add_child(save_menu, true)
+    save_menu.set_loading(false)

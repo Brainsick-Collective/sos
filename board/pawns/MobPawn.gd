@@ -1,4 +1,4 @@
-extends BoardCharacter
+extends Pawn
 
 class_name MobPawn
 

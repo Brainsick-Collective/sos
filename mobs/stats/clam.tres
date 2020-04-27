@@ -10,6 +10,12 @@
 [resource]
 resource_local_to_scene = true
 script = ExtResource( 3 )
+level = 1
+max_health_curve = ExtResource( 6 )
+max_mana_curve = ExtResource( 5 )
+strength_curve = ExtResource( 1 )
+defense_curve = ExtResource( 4 )
+speed_curve = ExtResource( 2 )
 health = 0
 mana = 0
 max_health = 15
@@ -20,9 +26,3 @@ speed = 5
 magic = 1
 xp = 0
 kill_xp = 15
-level = 1
-max_health_curve = ExtResource( 6 )
-max_mana_curve = ExtResource( 5 )
-strength_curve = ExtResource( 1 )
-defense_curve = ExtResource( 4 )
-speed_curve = ExtResource( 2 )
