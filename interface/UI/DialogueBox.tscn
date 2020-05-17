@@ -1,16 +1,32 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://addons/SyndiBox/syndibox.gd" type="Script" id=1]
 [ext_resource path="res://interface/UI/DialogueBox.gd" type="Script" id=3]
 
 [sub_resource type="Theme" id=1]
 Panel/styles/panel = null
 
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.171, 0.185883, 0.19, 1 )
+border_width_left = 16
+border_width_top = 16
+border_width_right = 16
+border_width_bottom = 16
+border_color = Color( 0.0666667, 0.0705882, 0.0705882, 1 )
+corner_radius_top_left = 32
+corner_radius_top_right = 32
+corner_radius_bottom_right = 32
+corner_radius_bottom_left = 32
+
 [node name="DialogueBox" type="Panel"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = 369.353
+margin_top = 167.976
+margin_right = -395.647
+margin_bottom = -285.024
 rect_min_size = Vector2( 0, 100 )
 theme = SubResource( 1 )
+custom_styles/panel = SubResource( 2 )
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -19,26 +35,10 @@ __meta__ = {
 [node name="MarginContainer" type="MarginContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_constants/margin_right = 15
-custom_constants/margin_top = 15
-custom_constants/margin_left = 15
-custom_constants/margin_bottom = 15
+custom_constants/margin_right = 32
+custom_constants/margin_top = 64
+custom_constants/margin_left = 32
+custom_constants/margin_bottom = 32
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="SyndiBox" type="ReferenceRect" parent="MarginContainer"]
-margin_left = 15.0
-margin_top = 15.0
-margin_right = 1905.0
-margin_bottom = 1065.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-DIALOG = "wowowowowow
-"
-FONT = "res://interface/theme/fonts/num_font.tres"
-[connection signal="strings_finished" from="MarginContainer/SyndiBox" to="." method="_on_SyndiBox_strings_finished"]

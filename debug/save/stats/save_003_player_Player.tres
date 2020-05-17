@@ -1,0 +1,28 @@
+[gd_resource type="Resource" load_steps=7 format=2]
+
+[ext_resource path="res://game/players/stats/Stats.gd" type="Script" id=1]
+[ext_resource path="res://game/players/stats/health_curve.tres" type="Curve" id=2]
+[ext_resource path="res://game/players/stats/strength_curve.tres" type="Curve" id=3]
+[ext_resource path="res://game/players/stats/defense_curve.tres" type="Curve" id=4]
+[ext_resource path="res://game/players/stats/mana_curve.tres" type="Curve" id=5]
+[ext_resource path="res://game/players/stats/speed_curve.tres" type="Curve" id=6]
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource( 1 )
+level = 1
+max_health_curve = ExtResource( 2 )
+max_mana_curve = ExtResource( 5 )
+strength_curve = ExtResource( 3 )
+defense_curve = ExtResource( 4 )
+speed_curve = ExtResource( 6 )
+health = 30
+mana = 10
+max_health = 30
+max_mana = 10
+strength = 3
+defense = 5
+speed = 4
+magic = 5
+xp = 0
+kill_xp = 0

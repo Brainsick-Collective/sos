@@ -53,7 +53,7 @@ func refresh_after_load():
 
 func start_game():
     GUI.hide()
-    var cutscene = game.load_cutscene("res://dialogue/intro_cutscene.json")
+    var cutscene = game.load_cutscene("res://dialogue/intro.dialog")
     yield(cutscene, "tree_exited")
     GUI.show()
     ControlsHandler.give_player_ui_control(game.get_node("Players").get_child(0))

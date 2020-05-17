@@ -1,19 +1,13 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://assets/ui/panel.png" type="Texture" id=1]
 [ext_resource path="res://interface/SaveSystem/SavePreviewPanel.tscn" type="PackedScene" id=2]
 [ext_resource path="res://combat/interface/combat_theme.tres" type="Theme" id=4]
 [ext_resource path="res://interface/SaveSystem/SaveFileMenu.gd" type="Script" id=5]
 
-[node name="SaveFileMenu" type="NinePatchRect"]
+[node name="SaveFileMenu" type="Panel"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 4 )
-texture = ExtResource( 1 )
-patch_margin_left = 101
-patch_margin_top = 101
-patch_margin_right = 94
-patch_margin_bottom = 126
 script = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false

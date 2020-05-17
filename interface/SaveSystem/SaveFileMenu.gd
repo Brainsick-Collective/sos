@@ -1,10 +1,13 @@
-extends NinePatchRect
+extends Panel
 
 onready var SaveOption = preload("res://interface/SaveSystem/SaveGameOption.tscn")
 onready var Saves = $Margins/Row/Column
 
 signal canceled
 var loading : bool
+
+func initialize(_player):
+    pass
 
 func _ready():
     var new_save_option : Button = SaveOption.instance()

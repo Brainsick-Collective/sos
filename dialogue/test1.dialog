@@ -1,0 +1,4 @@
+this is a test
+each line will be a new entry in the dialog
+[<name>]: indicates that this block will have a name label that sits above the rest of the text
+{pic} a

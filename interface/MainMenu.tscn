@@ -1,4 +1,4 @@
-[gd_scene load_steps=80 format=2]
+[gd_scene load_steps=79 format=2]
 
 [ext_resource path="res://interface/theme/default.theme" type="Theme" id=1]
 [ext_resource path="res://interface/MainMenu.gd" type="Script" id=2]
@@ -9,7 +9,6 @@
 [ext_resource path="res://assets/ui/right_pressed.png" type="Texture" id=7]
 [ext_resource path="res://assets/ui/left.png" type="Texture" id=8]
 [ext_resource path="res://assets/ui/left_pressed.png" type="Texture" id=9]
-[ext_resource path="res://addons/SyndiBox/syndibox.gd" type="Script" id=10]
 [ext_resource path="res://assets/animated_sprites/controller_sprites/Controller 2/Controller 10003.png" type="Texture" id=11]
 [ext_resource path="res://assets/animated_sprites/controller_sprites/Controller 1/Controller 10005.png" type="Texture" id=12]
 [ext_resource path="res://assets/animated_sprites/controller_sprites/Controller 1/Controller 10014.png" type="Texture" id=13]
@@ -377,7 +376,7 @@ position = Vector2( 369.25, 139.484 )
 scale = Vector2( 0.958064, 0.958064 )
 frames = ExtResource( 71 )
 animation = "slow"
-frame = 22
+frame = 3
 playing = true
 
 [node name="MarginContainer" type="MarginContainer" parent="bg/Console"]
@@ -390,14 +389,6 @@ margin_bottom = -884.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="Terminal" type="ReferenceRect" parent="bg/Console/MarginContainer"]
-margin_right = 119.0
-script = ExtResource( 10 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-FONT = "res://interface/theme/fonts/CharacterCartridge.tres"
 
 [node name="Controllers" type="CanvasLayer" parent="."]
 layer = -1

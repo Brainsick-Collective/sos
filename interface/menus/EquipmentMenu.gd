@@ -11,7 +11,7 @@ func initialize( _player : Player):
     var stats = player.stats.as_mods()
     var equipment = player.inventory.get_equipment()
     var moves = player.moves
-    
+    $VBoxContainer/Main/ViewModule/CharacterPreview.texture = player.get_character_image()
     summary_panel.initialize(player)
     item_belt.initialize(equipment, summary_panel)
     view_module.initialize(player)

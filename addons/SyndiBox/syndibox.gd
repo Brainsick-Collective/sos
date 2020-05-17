@@ -3,8 +3,10 @@
 ################### SyndiBox Text Engine for Godot ######################
 ########################### Version 1.5.0 ###############################
 #########################################################################
+
 'A text engine with everything you want and need will cost
  you two years time and 20 gallons of tears.' ~ Sudo
+
  -----------------------------------------------------------------------
 |																		|
 |	Quick Navigation (Ctrl+F and paste):								|
@@ -16,12 +18,14 @@
 |		3. Credits					# I love these people				|
 |																		|
  -----------------------------------------------------------------------
+
 This is the script used for the SyndiBox text engine.
 Scrapped from a previously created text engine I made
 called the 'MaloBox' text engine, part of the 'MaloSuite'
 GameMaker toolset, and adapted for use in Godot Engine.
 No current plans for release, but I do hope to release it
 at some point. Maybe after Polterheist! is released itself.
+
 This text engine allows for custom features, such as:
     + Loading custom dialog from a separate GDScript
     + Setting character presets which can be accessed
@@ -35,6 +39,7 @@ This text engine allows for custom features, such as:
       (in progress)
     + Dynamic switching of properties for characters
       already set (to-do)
+
 #########################################################################
 #########################################################################
 """
@@ -52,8 +57,9 @@ extends ReferenceRect
 export(String, MULTILINE) var DIALOG # Dialog
 export(String) var CHARACTER_NAME # Character name
 export(String, FILE, "*.png, *.jpg") var CHARACTER_PROFILE # Character profile
+export(Vector2) var prof_offset = Vector2(16,-38)#The x and y offset for the label from the rest of the dialog
+export(Color) var prof_color = Color(0,0,0) # The character's color, used for coloring the name label
 export(bool) var AUTO_ADVANCE = false # Auto-advance setting
-export(bool) var HIDE_AFTER_DONE = true
 export(String, FILE, "*.fnt, *.tres") var FONT # Default font
 export(Array, String, FILE, "*.fnt, *.tres") var ALTERNATE_FONTS # Alternate fonts, [%0] to [%9]
 export(int) var PADDING = 3 # Pixel padding between lines of text
@@ -111,7 +117,6 @@ onready var text_pause : bool = false # Whether or not to pause the printing
 onready var text_hide : bool = false # Whether or not to hide the printing
 onready var hide_timer # fuck
 onready var custom = Node.new() # Filler for custom effect script
-onready var hold = false
 
 signal strings_finished
 ################################## END ##################################
@@ -128,49 +133,10 @@ signal strings_finished
 
 ################################# BEGIN #################################
 func _enter_tree():
-    pass
+    strings = DIALOG.split("\n")
 
 
 func _ready(): # Called when ready.
-    pass
-
-func reset():
-    # For every character that has been printed...
-    for i in cur_char:
-        # Remove all existent characters.
-        if cur_char.has(i):
-            cur_char[i].free()
-            # Remove existent tweens for existent characters.
-            if cur_tween.has(i):
-                cur_tween[i].free()
-
-    cur_string = ""
-    cur_length = ""
-    cur_speed = speed
-    cur_char = {}
-    cur_tween = {}
-    cur_length = ""
-    str_line = 0
-    step = 0
-    heightTrack = 0
-    maxLineHeight = 0
-    step_pause = 0
-    escape = false
-    
-func play_and_hold():
-
-    reset()
-    hold = true
-    play()
-
-func set_and_play(new_text):
-    reset()
-    DIALOG = new_text
-    hold = true
-    play()
-
-func play():
-    strings = DIALOG.split("\n")
     set_physics_process(true)
     # Grab custom effects script.
     if !CUSTOM_EFFECTS:
@@ -184,11 +150,13 @@ func play():
     profile.set("position",profile.position + Vector2(-(margin_left / 2) + 5,-rect_size.y + (margin_bottom / 2) + 5))
     add_child(profile)
     prof_label = Label.new()
-    prof_label.set("rect_position",prof_label.rect_position + Vector2(16,-38))
+    prof_label.set("custom_colors/font_color", prof_color)
+    prof_label.set("rect_position",prof_label.rect_position + prof_offset)
     add_child(prof_label)
     # Set these variables to their appropriate exports.
     cur_string = strings[cur_set]
-    snd_stream = load(TEXT_VOICE)
+    if TEXT_VOICE:
+        snd_stream = load(TEXT_VOICE)
     if !FONT:
         FONT = load("res://addons/SyndiBox/Assets/TextDefault.tres")
     if FONT is String:
@@ -222,7 +190,7 @@ func play():
     add_child(tween)
     
     if !Engine.editor_hint && visible:
-        print_dialog()
+        print_dialog(cur_string)
 #	else:
 #		edit_dialog()
 #	print_dialog(cur_string)
@@ -323,6 +291,7 @@ Ctrl+F for:
     - font_check(): Using Alt Fonts
     - speed_check(): Speed Effects
     - pos_check(): Position Effects
+
 Each match statement works like this:
  -------------------------------------------------------------------------------
 |																				|
@@ -334,7 +303,7 @@ Each match statement works like this:
 |			'C:':																|
 |				# Only execute if we don't have an escape pending				|
 |				# (In this case, it would be '`:'.)								|
-|				if !escape:														|
+|																		|
 |					# Erase the tag from the string.							|
 |					string.erase(step,4)										|
 |					# Insert a special non-width space to replace it.			|
@@ -360,6 +329,7 @@ Each match statement works like this:
 |	return string																|
 |																				|
  -------------------------------------------------------------------------------
+
 You can add as many cases to match as you'd like. Follow this pattern if
 you'd like to make your own custom check as well. If you do make your own
 custom check, you must add your check within the emph_check() function to
@@ -376,9 +346,11 @@ execute along with the defaults:
 |		custom_check()						|
 |											|
  -------------------------------------------
+
 Finally, make a function for setting your values to the correct character
 properties in the list of set functions (can't help you there), and call
 that function in the print_dialog() function.
+
 (Yes, this is a lot of work just to see fun little squigglies on a
 screen. I suffered, and if you don't like what I made for you, you'll
 suffer, too.)
@@ -388,7 +360,7 @@ suffer, too.)
 func speaker_check(string):
     match emph:
         "[_:]": # Default
-            if !escape:
+            
                 string.erase(step,4)
                 string = string.insert(step,char(8203) + "[:2][^r]")
                 saved_length += font.get_string_size(cur_length).x
@@ -404,7 +376,7 @@ func speaker_check(string):
                 INSTANT_PRINT = def_print
                 cur_length = ""
         "[_!]": # Default Interject
-            if !escape:
+            
                 for i in cur_char:
                     var wr = weakref(cur_char[i])
                     if !wr.get_ref():
@@ -437,77 +409,77 @@ func speaker_check(string):
 func font_check(string):
     match emph:
         "[%0]": # Alt Font 0
-            if !escape:
+            
                 string.erase(step,4)
                 string = string.insert(step,char(8203))
                 saved_length += font.get_string_size(cur_length).x
                 cur_length = ""
                 font = alt_fonts[0]
         "[%1]": # Alt Font 1
-            if !escape:
+            
                 string.erase(step,4)
                 string = string.insert(step,char(8203))
                 saved_length += font.get_string_size(cur_length).x
                 cur_length = ""
                 font = alt_fonts[1]
         "[%2]": # Alt Font 2
-            if !escape:
+            
                 string.erase(step,4)
                 string = string.insert(step,char(8203))
                 saved_length += font.get_string_size(cur_length).x
                 cur_length = ""
                 font = alt_fonts[2]
         "[%3]": # Alt Font 3
-            if !escape:
+            
                 string.erase(step,4)
                 string = string.insert(step,char(8203))
                 saved_length += font.get_string_size(cur_length).x
                 cur_length = ""
                 font = alt_fonts[3]
         "[%4]": # Alt Font 4
-            if !escape:
+            
                 string.erase(step,4)
                 string = string.insert(step,char(8203))
                 saved_length += font.get_string_size(cur_length).x
                 cur_length = ""
                 font = alt_fonts[4]
         "[%5]": # Alt Font 5
-            if !escape:
+            
                 string.erase(step,4)
                 string = string.insert(step,char(8203))
                 saved_length += font.get_string_size(cur_length).x
                 cur_length = ""
                 font = alt_fonts[5]
         "[%6]": # Alt Font 6
-            if !escape:
+            
                 string.erase(step,4)
                 string = string.insert(step,char(8203))
                 saved_length += font.get_string_size(cur_length).x
                 cur_length = ""
                 font = alt_fonts[6]
         "[%7]": # Alt Font 7
-            if !escape:
+            
                 string.erase(step,4)
                 string = string.insert(step,char(8203))
                 saved_length += font.get_string_size(cur_length).x
                 cur_length = ""
                 font = alt_fonts[7]
         "[%8]": # Alt Font 8
-            if !escape:
+            
                 string.erase(step,4)
                 string = string.insert(step,char(8203))
                 saved_length += font.get_string_size(cur_length).x
                 cur_length = ""
                 font = alt_fonts[8]
         "[%9]": # Alt Font 9
-            if !escape:
+            
                 string.erase(step,4)
                 string = string.insert(step,char(8203))
                 saved_length += font.get_string_size(cur_length).x
                 cur_length = ""
                 font = alt_fonts[9]
         "[%r]": # Reset
-            if !escape:
+            
                 string.erase(step,4)
                 string = string.insert(step,char(8203))
                 saved_length += font.get_string_size(cur_length).x
@@ -519,146 +491,126 @@ func font_check(string):
 func color_check(string):
     match emph:
         "[`0]": # Black
-            if !escape:
-                string.erase(step,4)
-                string = string.insert(step,char(8203))
-                color = Color("#000000")
+            string.erase(step,4)
+            string = string.insert(step,char(8203))
+            color = Color("#000000")
         "[`1]": # Dark Blue
-            if !escape:
-                string.erase(step,4)
-                string = string.insert(step,char(8203))
-                color = Color("#0000AA")
+            string.erase(step,4)
+            string = string.insert(step,char(8203))
+            color = Color("#0000AA")
         "[`2]": # Dark Green
-            if !escape:
-                string.erase(step,4)
-                string = string.insert(step,char(8203))
-                color = Color("#00AA00")
+            string.erase(step,4)
+            string = string.insert(step,char(8203))
+            color = Color("#00AA00")
         "[`3]": # Dark Aqua
-            if !escape:
-                string.erase(step,4)
-                string = string.insert(step,char(8203))
-                color = Color("#00AAAA")
+            string.erase(step,4)
+            string = string.insert(step,char(8203))
+            color = Color("#00AAAA")
         "[`4]": # Dark Red
-            if !escape:
-                string.erase(step,4)
-                string = string.insert(step,char(8203))
-                color = Color("#AA0000")
+            string.erase(step,4)
+            string = string.insert(step,char(8203))
+            color = Color("#AA0000")
         "[`5]": # Dark Purple
-            if !escape:
-                string.erase(step,4)
-                string = string.insert(step,char(8203))
-                color = Color("#AA00AA")
+            string.erase(step,4)
+            string = string.insert(step,char(8203))
+            color = Color("#AA00AA")
         "[`6]": # Gold
-            if !escape:
                 string.erase(step,4)
                 string = string.insert(step,char(8203))
                 color = Color("#FFAA00")
         "[`7]": # Gray
-            if !escape:
-                string.erase(step,4)
-                string = string.insert(step,char(8203))
-                color = Color("#AAAAAA")
+            string.erase(step,4)
+            string = string.insert(step,char(8203))
+            color = Color("#AAAAAA")
         "[`8]": # Dark Gray
-            if !escape:
-                string.erase(step,4)
-                string = string.insert(step,char(8203))
-                color = Color("#555555")
+            string.erase(step,4)
+            string = string.insert(step,char(8203))
+            color = Color("#555555")
         "[`9]": # Blue
-            if !escape:
-                string.erase(step,4)
-                string = string.insert(step,char(8203))
-                color = Color("#5555FF")
+            string.erase(step,4)
+            string = string.insert(step,char(8203))
+            color = Color("#5555FF")
         "[`a]": # Green
-            if !escape:
-                string.erase(step,4)
-                string = string.insert(step,char(8203))
-                color = Color("#55FF55")
+            string.erase(step,4)
+            string = string.insert(step,char(8203))
+            color = Color("#55FF55")
         "[`b]": # Aqua
-            if !escape:
-                string.erase(step,4)
-                string = string.insert(step,char(8203))
-                color = Color("#55FFFF")
+            string.erase(step,4)
+            string = string.insert(step,char(8203))
+            color = Color("#55FFFF")
         "[`c]": # Red
-            if !escape:
-                string.erase(step,4)
-                string = string.insert(step,char(8203))
-                color = Color("#FF5555")
+            string.erase(step,4)
+            string = string.insert(step,char(8203))
+            color = Color("#FF5555")
         "[`d]": # Light Purple
-            if !escape:
-                string.erase(step,4)
-                string = string.insert(step,char(8203))
-                color = Color("#FF55FF")
+            string.erase(step,4)
+            string = string.insert(step,char(8203))
+            color = Color("#FF55FF")
         "[`e]": # Yellow
-            if !escape:
-                string.erase(step,4)
-                string = string.insert(step,char(8203))
-                color = Color("#FFFF55")
+            string.erase(step,4)
+            string = string.insert(step,char(8203))
+            color = Color("#FFFF55")
         "[`f]": # White
-            if !escape:
-                string.erase(step,4)
-                string = string.insert(step,char(8203))
-                color = Color("#FFFFFF")
+            string.erase(step,4)
+            string = string.insert(step,char(8203))
+            color = Color("#FFFFFF")
         "[`r]": # Reset
-            if !escape:
-                string.erase(step,4)
-                string = string.insert(step,char(8203))
-                color = def_color
+            string.erase(step,4)
+            string = string.insert(step,char(8203))
+            color = def_color
         "[`#]": # New Line
-            if !escape:
-                string.erase(step,4)
-                string = string.insert(step,char(8203))
-                cur_length = ""
-                saved_length = 0
-                heightTrack = maxLineHeight + PADDING
-                str_line = str_line + 1
+            string.erase(step,4)
+            string = string.insert(step,char(8203))
+            cur_length = ""
+            saved_length = 0
+            heightTrack = maxLineHeight + PADDING
+            str_line = str_line + 1
     return string
 
 # Speed Effects #
 func speed_check(string):
     match emph:
         "[*1]": # Fastest
+            string.erase(step,4)
             if !escape && !INSTANT_PRINT:
-                string.erase(step,4)
                 string = string.insert(step,char(8203))
                 speed = 0.01
         "[*2]": # Fast
+            string.erase(step,4)
             if !escape && !INSTANT_PRINT:
-                string.erase(step,4)
                 string = string.insert(step,char(8203))
                 speed = 0.03
         "[*3]": # Normal
-            if !escape && !INSTANT_PRINT:
-                string.erase(step,4)
+            string.erase(step,4)
+            if !INSTANT_PRINT:
                 string = string.insert(step,char(8203))
                 speed = 0.05
         "[*4]": # Slow
-            if !escape && !INSTANT_PRINT:
-                string.erase(step,4)
+            string.erase(step,4)
+            if !INSTANT_PRINT:
                 string = string.insert(step,char(8203))
                 speed = 0.1
         "[*5]": # Slowest
+            string.erase(step,4)
             if !escape && !INSTANT_PRINT:
-                string.erase(step,4)
                 string = string.insert(step,char(8203))
                 speed = 0.2
         "[*i]": # Instant
-            if !escape:
-                string.erase(step,4)
-                string = string.insert(step,char(8203))
-                INSTANT_PRINT = true
+            string.erase(step,4)
+            string = string.insert(step,char(8203))
+            INSTANT_PRINT = true
         "[*r]": # Reset
-            if !escape:
-                string.erase(step,4)
-                string = string.insert(step,char(8203))
-                INSTANT_PRINT = def_print
-                speed = def_speed
+            string.erase(step,4)
+            string = string.insert(step,char(8203))
+            INSTANT_PRINT = def_print
+            speed = def_speed
     return string
 
 # Positional Effects #
 func pos_check(string):
     match emph:
         "[^t]": # Tipsy
-            if !escape:
+            
                 string.erase(step,4)
                 string = string.insert(step,char(8203))
                 tween_start = Vector2(0,0)
@@ -669,7 +621,7 @@ func pos_check(string):
                 tween_back = true
                 tween_set = true
         "[^d]": # Drunk
-            if !escape:
+            
                 string.erase(step,4)
                 string = string.insert(step,char(8203))
                 tween_start = Vector2(-1,0)
@@ -680,7 +632,7 @@ func pos_check(string):
                 tween_back = true
                 tween_set = true
         "[^v]": # Vibrate
-            if !escape:
+            
                 string.erase(step,4)
                 string = string.insert(step,char(8203))
                 tween_start = Vector2(rand_range(-2,2),rand_range(-2,2))
@@ -691,7 +643,7 @@ func pos_check(string):
                 tween_back = false
                 tween_set = true
         "[^r]": # Reset
-            if !escape:
+            
                 string.erase(step,4)
                 string = string.insert(step,char(8203))
                 tween_start = Vector2(0,0)
@@ -769,26 +721,28 @@ func emph_check(string): # Called before printing each step
 I'd preface what you're about to see, but...it's just drawing some text
 characters. If it was interesting, I'd be streaming it on Picarto and
 flipping out over how it's 'oRiGiNaL cHaRaCtEr Do NoT sTeAl'
+
 Comments are ahead to explain everything. Proceed with caution.
 """
 
 ################################# BEGIN #################################
-func print_dialog(): # Called on draw
-    var string = strings[cur_set]
-#    string = string.insert(string.length()," ")
-    # If there are characters left to print..
-    if step <= string.length() - 1 && visible:
+func print_dialog(string): # Called on draw
+    string = string.insert(string.length()," ")
+    # If there are characters left to print...
+    while step <= string.length() - 1 && visible:
+        # Set up profile
         if !text_hide:
-#            if CHARACTER_PROFILE is String:
-#                def_profile = load(CHARACTER_PROFILE)
-#            else:
-#                def_profile = CHARACTER_PROFILE
-#            if CHARACTER_PROFILE != null:
-#                x_offset = 48
-#            else:
-            x_offset = 0
+            if CHARACTER_PROFILE is String and CHARACTER_PROFILE != "":
+                def_profile = load(CHARACTER_PROFILE)
+            elif def_profile is Texture:
+                def_profile = CHARACTER_PROFILE
+            if CHARACTER_PROFILE != null:
+                x_offset = 48
+            else:
+                
+                x_offset = 0
             prof_label.add_font_override("font",def_font)
-            prof_label.add_color_override("font_color",def_color)
+            prof_label.add_color_override("font_color",prof_color)
             prof_label.set_text(CHARACTER_NAME)
             profile.set_texture(def_profile)
         else:
@@ -869,7 +823,6 @@ func print_dialog(): # Called on draw
                 snd_stream = null
         cur_string = string
         step += 1
-        print_dialog()
 
 func edit_dialog(): # This is probably indefinitely broken.
     for i in cur_string.length() - 1:
@@ -890,7 +843,7 @@ func edit_dialog(): # This is probably indefinitely broken.
 func _input(event): # Called on input
     # If accept button is pressed for manual advancement...
     if (
-        !Engine.editor_hint && ControlsHandler.is_action_pressed_by_current_player(event, "ui_accept") &&
+        !Engine.editor_hint && event.is_action_pressed("ui_accept") &&
         !AUTO_ADVANCE &&
         visible
     ):
@@ -904,9 +857,8 @@ func _input(event): # Called on input
             # ...then if there are no more strings in the dialog...
             if cur_set >= strings.size() - 1:
                 # Hide the textbox.
+                hide()
                 emit_signal("strings_finished")
-                if not hold:
-                    hide()
             # ...then if there are more strings in the dialog...
             else:
                 # For every character that has been printed...
@@ -934,7 +886,7 @@ func _input(event): # Called on input
                 cur_string = strings[cur_set]
                 # Call our print_dialog function.
                 if visible:
-                    print_dialog()
+                    print_dialog(cur_string)
 
 func _physics_process(delta): # Called every step
     # If 3 seconds have passed for auto advancement...
@@ -945,21 +897,36 @@ func _physics_process(delta): # Called every step
         visible
     ):
         # If there are no more strings in the dialog...
-        if (cur_set >= strings.size() - 1):
-            if HIDE_AFTER_DONE:
-                # Hide the textbox.
-                hide()
+        if cur_set >= strings.size() - 1:
+            # Hide the textbox.
+            hide()
         # If there are strings in the dialog...
         else:
+            # For every character that has been printed...
+            for i in cur_char:
+                # Remove all existent characters.
+                if cur_char.has(i):
+                    cur_char[i].free()
+                    # Remove existent tweens for existent characters.
+                    if cur_tween.has(i):
+                        cur_tween[i].free()
             # Ready the dialog variables for the next string.
-            reset()
+            cur_speed = speed
+            cur_char = {}
+            cur_tween = {}
+            cur_length = ""
+            str_line = 0
             cur_set += 1
+            step = 0
+            heightTrack = 0
+            maxLineHeight = 0
+            step_pause = 0
+            escape = false
             # Set our current string to the next string in the set.
             cur_string = strings[cur_set]
             # Call our print_dialog function.
             if visible:
-                print_dialog()
-        
+                print_dialog(cur_string)
     # If the last step in the string length is reached...
     elif !Engine.editor_hint && step >= cur_string.length() - 1:
         # Increment our steps in waiting for auto advancement.
@@ -976,8 +943,9 @@ func _exit_tree():
 ############################
 
 """
-You made it to the end and you're still concious after probably bashing
+You made it to the end and you're still conscious after probably bashing
 your head in multiple times! Very impressive.
+
 I'd like to personally thank a few people that have helped in the
 process of me tailoring this code, whether tremendous, insignificant,
 or even unknown.
@@ -998,6 +966,7 @@ or even unknown.
 |		YOU - This is who it was made for, after all.					|
 |																		|
  -----------------------------------------------------------------------
+
 enjoy your fun wigglies
 ~ Sudo
         oOOo <- (it my pawb beans)

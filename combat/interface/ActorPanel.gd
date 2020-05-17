@@ -12,5 +12,6 @@ func set_actor(a):
 
 func set_condensed(a):
     actor = a
+    $VBoxContainer/Label.text = a.actor_name
     $VBoxContainer/HealthBar.set_actor(a)
     $VBoxContainer/StatsRow.initialize(a.stats)

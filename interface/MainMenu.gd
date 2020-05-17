@@ -3,6 +3,7 @@ extends "res://interface/Menu.gd"
 var game
 var CharacterSelectMenu = preload("res://interface/menus/CharacterSelectMenu.tscn")
 onready var SaveMenu = preload("res://interface/SaveSystem/SaveFileMenu.tscn")
+onready var box = preload("res://addons/SyndiBox/SyndiBox.tscn")
 onready var num_players = 1
 const min_size = 1
 const max_size = 4
@@ -34,8 +35,11 @@ func _menu_selected():
     $Controllers/Controller1.play("out")
     
     $Column2.hide()
-    terminal.DIALOG = "How many players?"
-    terminal.play_and_hold()
+    var new_box = box.instance()
+    new_box.DIALOG = "How many players?"
+    new_box.AUTO_ADVANCE == false
+    new_box.text_hide = false
+    $bg/Console/MarginContainer.add_child(new_box)
     $Column/Row/ConfirmButton.grab_focus()
     $Column.show()
 

@@ -13,10 +13,9 @@ var player
 func set_inventory(inv):
     inventory = inv
 
-func initialize():
-    #this is sus
-    player = inventory.get_parent()
-
+func initialize(player):
+    inventory = player.get_inventory()
+    
     for item in inventory.get_items():
         var item_button = create_item_button(item)
         item_button.connect("focus_entered", self, "_on_ItemButton_focus_entered")
@@ -43,8 +42,3 @@ func _on_ItemButton_pressed(item):
     var button = get_focus_owner()
     button.grab_focus()
     ##DO SOMETHING
-
-func _input(event):
-    if event and ControlsHandler.is_current_player_action(event):
-        if event.is_action_pressed("ui_cancel" + String(player.id)):
-                queue_free()

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/clammart shopkeep.png-e8f67d41c40904215d9fcb367337175b.stex"
+path="res://.import/icon.png-be1b7949b36aead098360a3858e91695.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/actors/clammart shopkeep.png"
-dest_files=[ "res://.import/clammart shopkeep.png-e8f67d41c40904215d9fcb367337175b.stex" ]
+source_file="res://addons/GDBehavior/icon.png"
+dest_files=[ "res://.import/icon.png-be1b7949b36aead098360a3858e91695.stex" ]
 
 [params]
 

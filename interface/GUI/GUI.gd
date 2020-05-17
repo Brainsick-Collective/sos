@@ -6,6 +6,7 @@ var current_player
 onready var moves_left_label = $Counter/MarginContainer/VBoxContainer/MovesLeft
 onready var InventoryMenu = preload("res://interface/menus/InventoryMenu.tscn")
 onready var SaveMenu = preload("res://interface/SaveSystem/SaveFileMenu.tscn")
+
 func initialize(new_board):
     board = new_board
     $DiceRollPopup.connect("completed", self, "show_moves")
@@ -36,14 +37,7 @@ func _on_RollButton_pressed():
     $ActionMenu.hide()
 
 func _on_InventoryButton_pressed():
-    var inventory_menu = InventoryMenu.instance()
-    inventory_menu.set_inventory(current_player.get_inventory())
-    add_child(inventory_menu)
-    inventory_menu.initialize()
-    $ActionMenu.hide() 
-    yield(inventory_menu, "tree_exited") 
-    $ActionMenu.show()
-    $ActionMenu/MarginContainer/VBoxContainer/InventoryButton.grab_focus()
+    open_player_menu("Inventory")
 
 func _on_ViewBoardButton_pressed():
     board.view_board()
@@ -71,9 +65,18 @@ func _on_ActionMenu_visibility_changed():
     if $ActionMenu.is_visible():
         $Counter.hide()
 
-
-
 func _on_InfoButton_pressed():
-    var save_menu = SaveMenu.instance()
-    add_child(save_menu, true)
-    save_menu.set_loading(false)
+    open_player_menu("Player Info")
+
+func _on_SystemButton_pressed():
+    open_player_menu("System")
+
+func open_player_menu(menu_string):
+    var last_focus = get_focus_owner()
+    $PlayerMenu.show()
+    $PlayerMenu.change_player(current_player)
+    $PlayerMenu.open(menu_string)
+    get_tree().paused = true
+    yield($PlayerMenu, "completed")
+    last_focus.grab_focus()
+    

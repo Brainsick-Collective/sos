@@ -1,6 +1,5 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://assets/cutscene_sprites/kpop1.png" type="Texture" id=1]
 [ext_resource path="res://interface/UI/DialogueBox.tscn" type="PackedScene" id=2]
 [ext_resource path="res://interface/UI/Cutscene.gd" type="Script" id=3]
 
@@ -20,24 +19,36 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CharacterPortrait" type="TextureRect" parent="."]
-anchor_left = 0.295189
-anchor_top = 0.0994895
-anchor_right = 0.738189
-anchor_bottom = 0.91549
-margin_left = -0.234436
-margin_top = 0.190392
-margin_right = -810.794
-margin_bottom = -841.09
-grow_horizontal = 2
-grow_vertical = 2
-rect_scale = Vector2( 21.2637, 22.0257 )
-texture = ExtResource( 1 )
-expand = true
-stretch_mode = 6
+[node name="Actors" type="HBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+alignment = 1
 __meta__ = {
-"_edit_use_anchors_": true
+"_edit_use_anchors_": false
 }
+
+[node name="LeftPortraits" type="HBoxContainer" parent="Actors"]
+margin_right = 637.0
+margin_bottom = 1080.0
+size_flags_horizontal = 3
+custom_constants/separation = -400
+alignment = 1
+
+[node name="CenterPortraits" type="HBoxContainer" parent="Actors"]
+margin_left = 641.0
+margin_right = 1278.0
+margin_bottom = 1080.0
+size_flags_horizontal = 3
+custom_constants/separation = -400
+alignment = 1
+
+[node name="RightPortraits" type="HBoxContainer" parent="Actors"]
+margin_left = 1282.0
+margin_right = 1920.0
+margin_bottom = 1080.0
+size_flags_horizontal = 3
+custom_constants/separation = -400
+alignment = 1
 
 [node name="Margin" type="MarginContainer" parent="."]
 anchor_top = 1.0

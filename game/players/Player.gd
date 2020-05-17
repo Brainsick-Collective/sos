@@ -138,3 +138,6 @@ func remove_move(move):
         for type in moves[phase].keys():
             if moves[phase][type] == move:
                 moves[phase][type] = null
+                
+func get_character_image():
+    return get_combatant().get_sprite()

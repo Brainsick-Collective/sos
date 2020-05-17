@@ -39,6 +39,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://game/players/inventory/items/Cash.gd"
 }, {
+"base": "Resource",
+"class": "Character",
+"language": "GDScript",
+"path": "res://game/Kabuki/Character.gd"
+}, {
 "base": "NinePatchRect",
 "class": "ChoseEncounterPanel",
 "language": "GDScript",
@@ -88,6 +93,11 @@ _global_script_classes=[ {
 "class": "DefensiveMagic",
 "language": "GDScript",
 "path": "res://DefensiveMagic.gd"
+}, {
+"base": "Node",
+"class": "DialogBuilder",
+"language": "GDScript",
+"path": "res://game/Kabuki/Dialog/DialogBuilder.gd"
 }, {
 "base": "Resource",
 "class": "Effect",
@@ -179,6 +189,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://board/pawns/PlayerPawn.gd"
 }, {
+"base": "TextureRect",
+"class": "Portrait",
+"language": "GDScript",
+"path": "res://interface/UI/Cutscene/Portrait.gd"
+}, {
 "base": "Task",
 "class": "RandomSelector",
 "language": "GDScript",
@@ -256,6 +271,7 @@ _global_script_class_icons={
 "BoardNotification": "",
 "BuffPotion": "",
 "CashItem": "",
+"Character": "",
 "ChoseEncounterPanel": "",
 "CombatAction": "",
 "CombatArena": "",
@@ -266,6 +282,7 @@ _global_script_class_icons={
 "Cutscene": "",
 "CutsceneParser": "",
 "DefensiveMagic": "",
+"DialogBuilder": "",
 "Effect": "",
 "EffectAction": "",
 "Equipment": "",
@@ -284,6 +301,7 @@ _global_script_class_icons={
 "Player": "",
 "PlayerInventory": "",
 "PlayerPawn": "",
+"Portrait": "",
 "RandomSelector": "",
 "RectExtents": "",
 "Rewards": "",
@@ -304,7 +322,19 @@ _global_script_class_icons={
 
 config/name="Doka 2"
 run/main_scene="res://game/Game.tscn"
-config/icon="res://icon.png"
+config/icon="res://assets/animated_sprites/console_sprites/magicclass_card.png"
+rakugo/version="0.0.1"
+rakugo/game_credits="Your Company"
+rakugo/markup="renpy"
+rakugo/debug=false
+rakugo/test_saves=false
+rakugo/scenes_links="res://game/scenes_links.tres"
+rakugo/theme="res://themes/question/question.tres"
+rakugo/default_kind="adv"
+rakugo/punctuation_pause="adv"
+rakugo/default_mkind="vertical"
+rakugo/default_mcolumns=2
+rakugo/default_manchor="center"
 
 [autoload]
 
@@ -314,6 +344,7 @@ ControlsHandler="*res://system/ControlsHandler.gd"
 MonsterFactory="*res://mobs/MonsterFactory.tscn"
 ShopFactory="*res://game/ShopFactory.tscn"
 GameSerializer="*res://game/GameSerializer.gd"
+Kabuki="*res://game/Kabuki/Kabuki.gd"
 
 [display]
 
@@ -325,7 +356,7 @@ window/stretch/aspect="keep"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "SyndiBox" )
+enabled=PoolStringArray( "SyndiBox", "editor_icon_previewer", "godot-plugin-refresher" )
 
 [input]
 

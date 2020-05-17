@@ -1,9 +1,13 @@
 ** Dokapon Clone TODO list
-*** TODO [#A] Player info screen
+*** DONE [#A] Player info screen
+    CLOSED: [2020-05-03 Sun 02:55]
 *** TODO [#A] Make sure transition plays on leaving a shop
 *** TODO [#A] Fix prievew board viewer using tileArea
-*** TODO make each equipment slot unique
-*** TODO Create system for supplanting battle abilities
+*** DONE make each equipment slot unique
+    CLOSED: [2020-04-27 Mon 01:51]
+*** DONE Create system for supplanting battle abilities
+    CLOSED: [2020-04-27 Mon 01:51]
+*** TODO Add drag and drop to equipment menu
 *** TODO Paginate inventories on: shops, player inv, spinners
 *** TODO add movement effect items and movement alteration system
 *** TODO Add functionality for Board loading

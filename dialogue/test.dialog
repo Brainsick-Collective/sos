@@ -1,0 +1,14 @@
+  {"name" : "Annie", "left_avi" : "default"}
+hey! this is a test
+and I wonder what happens here?
+  {"name" : "Feyn", "right_avi" : "default"}
+BOO!!!
+haha
+get the f out of here loser
+  {"name" : "Annie"}
+fine
+  {"remove" : ["Annie"]}
+  {"name" : "Feyn"}
+Thats right, dummy.
+well. better get going too
+  {"remove" : ["Feyn"]}

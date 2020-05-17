@@ -12,8 +12,9 @@
 [ext_resource path="res://interface/UI/presssed_outline_stylebox.tres" type="StyleBox" id=10]
 [ext_resource path="res://interface/UI/focus_outline_stylebox.tres" type="StyleBox" id=11]
 [ext_resource path="res://interface/theme/fonts/actor_panel_name_font.tres" type="DynamicFont" id=12]
-[ext_resource path="res://assets/actors/clammart shopkeep.png" type="Texture" id=13]
+[ext_resource path="res://assets/actors/clammart_shopkeep.png" type="Texture" id=13]
 [ext_resource path="res://assets/shops/clammart building.png" type="Texture" id=14]
+
 
 [sub_resource type="StyleBoxEmpty" id=1]
 

@@ -14,7 +14,6 @@
 [ext_resource path="res://assets/new_crosshairs/c_dot.png" type="Texture" id=13]
 [ext_resource path="res://board/BoardViewer.gd" type="Script" id=14]
 
-
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
 "frames": [ ExtResource( 12 ), ExtResource( 13 ) ],
@@ -88,6 +87,7 @@ script = ExtResource( 14 )
 
 [node name="Anim" type="AnimatedSprite" parent="BoardViewer"]
 frames = SubResource( 1 )
+frame = 1
 playing = true
 
 [node name="Camera2D" type="Camera2D" parent="BoardViewer"]

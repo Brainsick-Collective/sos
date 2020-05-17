@@ -25,7 +25,8 @@ func play_cutscene(new_cutscene):
 func _after_cutscene(curr_cutscene):
     curr_cutscene.queue_free()
     cutscene = null
-    get_tree().paused = false
+    if get_tree():
+        get_tree().paused = false
     if !first_turn:
         queue.play_queue()
     else:
@@ -45,7 +46,7 @@ func initialize_game(new_board):
         player.board_character.player_id = player.get_id()
     queue.connect("emptied", self, "on_queue_finished", [], CONNECT_DEFERRED)
     board.connect("turn_finished", self, "_on_move_finished", [], CONNECT_DEFERRED)
-    #ControlsHandler.give_player_ui_control($Players.get_child(0))
+    ControlsHandler.give_player_ui_control($Players.get_child(0))
 
 func enter_space_scene(player_pawn, scene):
     if scene:

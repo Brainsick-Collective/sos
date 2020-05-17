@@ -1,0 +1,24 @@
+  {"name" : "Annie", "center_avi" : "default"}
+...
+Huh?
+Where did you come from?
+...
+A player? There haven't been one of those around here in ages.
+No I mean literally. Those are just fairy tales.
+You do look kinda special though.
+. . .
+Alright look, If you ARE a player, you're supposed to be some sort of hero right?
+well then I think we can help each other out.
+See you need to get to the town elder, and I need to get to town to quit my job.
+don't ask.
+Theres a lot of monsters on the way, alright, and I can't handle them myself.
+  {"name" : "Annie", "map_move" : "mush_boss"}
+you want to get over here, see?
+but you probably want weapons first.
+  {"name" : "Annie", "map_move" : "weapon_spot"}
+I bet there will be some spare equipment over in the abandoned houses over there, everyone evacuated from that side of town when the monsters came
+  {"name" : "Annie", "map_move" : "start"}
+...
+I'm Annie.
+If you make it to the town center alive, I'll meet you over there, then we can talk about what to do next.
+Good luck!
