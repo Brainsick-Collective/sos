@@ -332,7 +332,8 @@ _global_script_class_icons={
 
 [application]
 
-config/name="Doka 2"
+config/name="Save Our System"
+config/description="A co-op rpg with a board game playstyle"
 run/main_scene="res://game/Game.tscn"
 config/icon="res://assets/animated_sprites/console_sprites/magicclass_card.png"
 rakugo/version="0.0.1"
