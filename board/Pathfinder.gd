@@ -34,6 +34,8 @@ func initialize(grid):
                     continue
                 if not astar.has_point(point_relative_index):
                     continue
+                if point_index == point_relative_index:
+                    print("what")
                 astar.connect_points(point_index, point_relative_index, true)
     _points = astar.get_points()
 

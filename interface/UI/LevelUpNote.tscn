@@ -1,13 +1,40 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://interface/theme/default.theme" type="Theme" id=1]
 [ext_resource path="res://interface/theme/fonts/source_code_pro_26.tres" type="DynamicFont" id=2]
 [ext_resource path="res://interface/theme/panel/dialogue_box.tres" type="StyleBox" id=3]
 [ext_resource path="res://interface/UI/LevelUpNote.gd" type="Script" id=4]
+[ext_resource path="res://interface/UI/LevelUpNote/ConfirmPopup.gd" type="Script" id=5]
 
-[node name="Control" type="Popup"]
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color( 0.176471, 0.552941, 0.733333, 1 )
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.1518, 0.28842, 0.33, 1 )
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color( 0.0617371, 0.0664062, 0.0662689, 1 )
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[node name="LevelUpNote" type="Popup"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = -1.5116
+margin_right = -1.5116
 popup_exclusive = true
 script = ExtResource( 4 )
 __meta__ = {
@@ -19,10 +46,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -228.0
-margin_top = -92.5
-margin_right = 228.0
-margin_bottom = 92.5
+margin_left = -341.0
+margin_top = -245.5
+margin_right = 341.0
+margin_bottom = 245.5
 theme = ExtResource( 1 )
 custom_styles/panel = ExtResource( 3 )
 __meta__ = {
@@ -32,6 +59,8 @@ __meta__ = {
 [node name="MarginContainer" type="MarginContainer" parent="Panel"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = -1.98846
+margin_right = -1.98846
 custom_constants/margin_right = 32
 custom_constants/margin_top = 32
 custom_constants/margin_left = 32
@@ -43,23 +72,335 @@ __meta__ = {
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer"]
 margin_left = 32.0
 margin_top = 32.0
-margin_right = 424.0
-margin_bottom = 153.0
+margin_right = 650.0
+margin_bottom = 459.0
+custom_constants/separation = 32
 alignment = 1
 
 [node name="Level up!" type="Label" parent="Panel/MarginContainer/VBoxContainer"]
-margin_top = 18.0
-margin_right = 392.0
-margin_bottom = 52.0
+margin_top = 42.0
+margin_right = 618.0
+margin_bottom = 63.0
+size_flags_vertical = 6
 theme = ExtResource( 1 )
 custom_fonts/font = ExtResource( 2 )
 text = "Level up!"
 align = 1
+valign = 1
 
-[node name="stats" type="Label" parent="Panel/MarginContainer/VBoxContainer"]
-margin_top = 68.0
-margin_right = 392.0
-margin_bottom = 102.0
-theme = ExtResource( 1 )
-custom_fonts/font = ExtResource( 2 )
+[node name="UnusedPoints" type="Label" parent="Panel/MarginContainer/VBoxContainer"]
+visible = false
+margin_top = 121.0
+margin_right = 618.0
+margin_bottom = 137.0
+text = "3"
 align = 1
+valign = 1
+
+[node name="Labels" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer"]
+margin_top = 137.0
+margin_right = 618.0
+margin_bottom = 153.0
+
+[node name="strength" type="Label" parent="Panel/MarginContainer/VBoxContainer/Labels"]
+margin_right = 110.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "STR"
+align = 1
+valign = 1
+
+[node name="defense" type="Label" parent="Panel/MarginContainer/VBoxContainer/Labels"]
+margin_left = 126.0
+margin_right = 236.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "DEF"
+align = 1
+valign = 1
+
+[node name="magic" type="Label" parent="Panel/MarginContainer/VBoxContainer/Labels"]
+margin_left = 252.0
+margin_right = 362.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "MAG"
+align = 1
+valign = 1
+
+[node name="speed" type="Label" parent="Panel/MarginContainer/VBoxContainer/Labels"]
+margin_left = 378.0
+margin_right = 488.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "SPD"
+align = 1
+valign = 1
+
+[node name="health" type="Label" parent="Panel/MarginContainer/VBoxContainer/Labels"]
+margin_left = 504.0
+margin_right = 618.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "HP"
+align = 1
+valign = 1
+
+[node name="OldStats" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer"]
+margin_top = 185.0
+margin_right = 618.0
+margin_bottom = 290.0
+size_flags_vertical = 3
+
+[node name="strength" type="Button" parent="Panel/MarginContainer/VBoxContainer/OldStats"]
+margin_right = 110.0
+margin_bottom = 105.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_colors/font_color_disabled = Color( 1, 1, 1, 1 )
+enabled_focus_mode = 0
+text = "1"
+
+[node name="defense" type="Button" parent="Panel/MarginContainer/VBoxContainer/OldStats"]
+margin_left = 126.0
+margin_right = 236.0
+margin_bottom = 105.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_colors/font_color_disabled = Color( 1, 1, 1, 1 )
+enabled_focus_mode = 0
+
+[node name="magic" type="Button" parent="Panel/MarginContainer/VBoxContainer/OldStats"]
+margin_left = 252.0
+margin_right = 362.0
+margin_bottom = 105.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_colors/font_color_disabled = Color( 1, 1, 1, 1 )
+enabled_focus_mode = 0
+
+[node name="speed" type="Button" parent="Panel/MarginContainer/VBoxContainer/OldStats"]
+margin_left = 378.0
+margin_right = 488.0
+margin_bottom = 105.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_colors/font_color_disabled = Color( 1, 1, 1, 1 )
+enabled_focus_mode = 0
+
+[node name="max_health" type="Button" parent="Panel/MarginContainer/VBoxContainer/OldStats"]
+margin_left = 504.0
+margin_right = 618.0
+margin_bottom = 105.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_colors/font_color_disabled = Color( 1, 1, 1, 1 )
+enabled_focus_mode = 0
+
+[node name="Difference" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer"]
+visible = false
+margin_top = 286.0
+margin_right = 618.0
+margin_bottom = 306.0
+
+[node name="strength" type="Button" parent="Panel/MarginContainer/VBoxContainer/Difference"]
+margin_right = 110.0
+margin_bottom = 20.0
+focus_mode = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+enabled_focus_mode = 0
+text = "1"
+flat = true
+
+[node name="defense" type="Button" parent="Panel/MarginContainer/VBoxContainer/Difference"]
+margin_left = 126.0
+margin_right = 236.0
+margin_bottom = 20.0
+focus_mode = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+enabled_focus_mode = 0
+flat = true
+
+[node name="magic" type="Button" parent="Panel/MarginContainer/VBoxContainer/Difference"]
+margin_left = 252.0
+margin_right = 362.0
+margin_bottom = 20.0
+focus_mode = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+enabled_focus_mode = 0
+flat = true
+
+[node name="speed" type="Button" parent="Panel/MarginContainer/VBoxContainer/Difference"]
+margin_left = 378.0
+margin_right = 488.0
+margin_bottom = 20.0
+focus_mode = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+enabled_focus_mode = 0
+flat = true
+
+[node name="max_health" type="Button" parent="Panel/MarginContainer/VBoxContainer/Difference"]
+margin_left = 504.0
+margin_right = 618.0
+margin_bottom = 20.0
+focus_mode = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+enabled_focus_mode = 0
+flat = true
+
+[node name="NewStats" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer"]
+margin_top = 322.0
+margin_right = 618.0
+margin_bottom = 427.0
+size_flags_vertical = 3
+
+[node name="strength" type="Button" parent="Panel/MarginContainer/VBoxContainer/NewStats"]
+margin_right = 110.0
+margin_bottom = 105.0
+focus_mode = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/disabled = SubResource( 2 )
+custom_styles/normal = SubResource( 2 )
+custom_colors/font_color_disabled = Color( 1, 1, 1, 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+disabled = true
+enabled_focus_mode = 0
+text = "2"
+
+[node name="defense" type="Button" parent="Panel/MarginContainer/VBoxContainer/NewStats"]
+margin_left = 126.0
+margin_right = 236.0
+margin_bottom = 105.0
+focus_mode = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/disabled = SubResource( 2 )
+custom_styles/normal = SubResource( 2 )
+custom_colors/font_color_disabled = Color( 1, 1, 1, 1 )
+disabled = true
+enabled_focus_mode = 0
+
+[node name="magic" type="Button" parent="Panel/MarginContainer/VBoxContainer/NewStats"]
+margin_left = 252.0
+margin_right = 362.0
+margin_bottom = 105.0
+focus_mode = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/disabled = SubResource( 2 )
+custom_styles/normal = SubResource( 2 )
+custom_colors/font_color_disabled = Color( 1, 1, 1, 1 )
+disabled = true
+enabled_focus_mode = 0
+
+[node name="speed" type="Button" parent="Panel/MarginContainer/VBoxContainer/NewStats"]
+margin_left = 378.0
+margin_right = 488.0
+margin_bottom = 105.0
+focus_mode = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/disabled = SubResource( 2 )
+custom_styles/normal = SubResource( 2 )
+custom_colors/font_color_disabled = Color( 1, 1, 1, 1 )
+disabled = true
+enabled_focus_mode = 0
+
+[node name="max_health" type="Button" parent="Panel/MarginContainer/VBoxContainer/NewStats"]
+margin_left = 504.0
+margin_right = 618.0
+margin_bottom = 105.0
+focus_mode = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/disabled = SubResource( 2 )
+custom_styles/normal = SubResource( 2 )
+custom_colors/font_color_disabled = Color( 1, 1, 1, 1 )
+disabled = true
+enabled_focus_mode = 0
+
+[node name="ConfirmPopup" type="Panel" parent="."]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -113.426
+margin_top = 225.273
+margin_right = 121.574
+margin_bottom = 309.273
+custom_styles/panel = SubResource( 1 )
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="margin" type="MarginContainer" parent="ConfirmPopup"]
+margin_right = 235.0
+margin_bottom = 84.0
+size_flags_horizontal = 3
+custom_constants/margin_right = 16
+custom_constants/margin_top = 16
+custom_constants/margin_left = 16
+custom_constants/margin_bottom = 16
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="column" type="VBoxContainer" parent="ConfirmPopup/margin"]
+margin_left = 16.0
+margin_top = 16.0
+margin_right = 219.0
+margin_bottom = 68.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="ConfirmPopup/margin/column"]
+margin_right = 203.0
+margin_bottom = 14.0
+text = "continue?"
+align = 1
+
+[node name="row" type="HBoxContainer" parent="ConfirmPopup/margin/column"]
+margin_top = 18.0
+margin_right = 203.0
+margin_bottom = 52.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="yes" type="Button" parent="ConfirmPopup/margin/column/row"]
+margin_right = 99.0
+margin_bottom = 34.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_colors/font_color_hover = Color( 0.473495, 0.759962, 0.847656, 1 )
+custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
+text = "yes"
+flat = true
+
+[node name="no" type="Button" parent="ConfirmPopup/margin/column/row"]
+margin_left = 103.0
+margin_right = 203.0
+margin_bottom = 34.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_colors/font_color_hover = Color( 0.473495, 0.759962, 0.847656, 1 )
+custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
+text = "no"
+flat = true
+[connection signal="pressed" from="ConfirmPopup/margin/column/row/yes" to="ConfirmPopup" method="_on_yes_pressed"]
+[connection signal="pressed" from="ConfirmPopup/margin/column/row/no" to="ConfirmPopup" method="_on_no_pressed"]

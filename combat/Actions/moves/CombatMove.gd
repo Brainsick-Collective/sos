@@ -4,7 +4,8 @@ class_name CombatMove
 
 enum move_types { empty = -1, normal, special, magic, effect }
 enum phase_type { empty = -1, offense, defense }
-
+var phase_lookup = {-1 : "empty", 0 : "offense", 1 : "defense"}
+var type_lookup = { -1 : "empty", 0 : "normal", 1 : "special", 2 : "magic", 3 : "effect"}
 export var name : String = "BaseMove"
 export (move_types) var type = move_types.empty
 export (phase_type) var phase = phase_type.empty

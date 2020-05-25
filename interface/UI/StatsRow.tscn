@@ -7,7 +7,6 @@
 [ext_resource path="res://assets/ui/worldmap_statusbar_def.png" type="Texture" id=5]
 [ext_resource path="res://assets/ui/worldmap_statusbar_spe.png" type="Texture" id=6]
 
-
 [node name="StatsRow" type="HBoxContainer"]
 margin_left = 2.0
 margin_top = 220.0

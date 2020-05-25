@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/POL-lone-wolf-short.wav-818f2258902ce0864acc62ac28d363ef.sample"
+
+[deps]
+
+source_file="res://assets/sounds/BGM/POL-lone-wolf-short.wav"
+dest_files=[ "res://.import/POL-lone-wolf-short.wav-818f2258902ce0864acc62ac28d363ef.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=true
+compress/mode=0

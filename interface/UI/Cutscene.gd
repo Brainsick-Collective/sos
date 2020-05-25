@@ -24,12 +24,12 @@ func play():
         load_dialogue(dialog_file)
 
     dialogue.show()
-    
+
     for dialog in dialogs:
         var box = build_dialog_box(dialog)
         dialogue.play_dialog_box(box)
         yield(dialogue, "strings_finished")
-        
+
     queue_free()
 
 func _on_DialogueBox_strings_finished():
@@ -47,10 +47,12 @@ func build_dialog_box(dialog):
         if key.match("*avi"):
             add_portrait(key.trim_suffix("_avi"), box.CHARACTER_NAME, options[key])
         if key == "map_move":
-                move_on_map(options[key])
+                Kabuki.map_move(options[key])
         if key == "remove":
             for n in options[key]:
                 remove_portrait(n)
+        if key == "music":
+            SoundManager.play_bgm(options[key])
     box.DIALOG = dialog["dialog"]
     return box
 
@@ -78,9 +80,6 @@ func remove_portrait(n):
     for portrait in $Actors/RightPortraits.get_children():
         if portrait.name == n:
             portrait.play("fadeout_right")
-
-func move_on_map(position):
-    pass
 
 func end_cutscene():
     for portrait in $Actors/LeftPortraits.get_children():

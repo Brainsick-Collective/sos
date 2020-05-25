@@ -1,0 +1,64 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Demos/LevelUpDemo.gd" type="Script" id=1]
+[ext_resource path="res://game/players/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://interface/UI/CondensedPlayerPanel.tscn" type="PackedScene" id=3]
+
+[node name="LevelUpDemo" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Player" parent="." instance=ExtResource( 2 )]
+
+[node name="Button" type="Button" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -144.5
+margin_top = 195.868
+margin_right = 144.5
+margin_bottom = 287.868
+text = "level up"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CondensedPlayerPanel" parent="." instance=ExtResource( 3 )]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -287.0
+margin_top = -421.539
+margin_right = 287.0
+margin_bottom = -206.539
+
+[node name="Panel" type="Panel" parent="."]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -345.549
+margin_top = -131.5
+margin_right = 349.451
+margin_bottom = 131.5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="column" type="VBoxContainer" parent="Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="row" type="HBoxContainer" parent="Panel/column"]
+margin_right = 695.0
+[connection signal="pressed" from="Button" to="." method="level_up"]

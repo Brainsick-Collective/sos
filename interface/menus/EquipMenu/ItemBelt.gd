@@ -6,8 +6,11 @@ signal item_chosen(item)
 
 func initialize(items, summary):
     summary_panel = summary
+    for child in get_children():
+        child.queue_free()
     for item in items:
         var button = ItemButton.instance()
+        button.draggable = true
         add_child(button)
         button.initialize(item)
         button.connect("pressed", self, "item_chosen", [item], CONNECT_DEFERRED)        
@@ -16,9 +19,12 @@ func initialize(items, summary):
             button.disabled = true
         else:
             button.disabled = false
-    if get_child_count() > 0:
-        get_child(0).grab_focus()
         
         
 func item_chosen(item):
     emit_signal("item_chosen", item)
+
+
+func _on_show():
+    if visible and get_child_count() > 0:
+        get_child(0).grab_focus()

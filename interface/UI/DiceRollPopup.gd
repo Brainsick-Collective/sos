@@ -30,6 +30,7 @@ func _on_Button_pressed():
 
 
 func _on_Timer_timeout():
+    SoundManager.play_se("beep", true, false)
     if !visible:
         return
     if decaying and not done:
@@ -37,7 +38,6 @@ func _on_Timer_timeout():
             decaying = false
             done = true
             $DelayTimer.start()
-            
         else:
             timer.wait_time += .03
             decay -= 1

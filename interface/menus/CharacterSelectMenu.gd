@@ -1,6 +1,6 @@
 extends "res://interface/Menu.gd"
 
-onready var Board = preload("res://board/BoardManager.tscn")
+onready var BoardManager = preload("res://board/BoardManager.tscn")
 onready var Character = preload("res://board/pawns/PlayerPawn.tscn")
 onready var player_scene = preload("res://game/players/Player.tscn")
 onready var StartingClasses = preload("res://game/StartingClasses.tscn")
@@ -57,6 +57,7 @@ func _on_cartridge_left(cart):
 func _on_cart_selected(index):
     current_class = classes.get_class_by_index(index).instance()
     character_select_sprite.texture = current_class.get_sprite()
+    SoundManager.play_se("wet_click")
     
 func get_player(character):
     for player in Players.get_children():
@@ -83,6 +84,7 @@ func check_valid_controllers():
     return valid_choices
 
 func _on_Go_pressed():  
+    SoundManager.play_se("wet_click")
     if $SelectScreen.visible:
         var player = player_scene.instance()
         player.player_name = $SelectScreen/PlayerLabel.text
@@ -116,10 +118,11 @@ func transition_to_controller_choice():
 func start_game():
     for player in Players.get_children():
         player.control_scheme_keyword = $ControllerChoices.get_child(player.id).get_choice()
-    var board = Board.instance()
+    var board = BoardManager.instance()
     game.add_child(board)
     board.initialize(characters, game)
-
+    Kabuki.board = board
+    
     for character in characters:
         character.initialize(board, get_player(character), board.START)
 
@@ -129,4 +132,5 @@ func start_game():
 
 func _on_CosmeticSpinner_pressed():
     $CosmeticSpinner.set_rotation($CosmeticSpinner.get_rotation() + 1)
+    SoundManager.play_se("wet_click")
     pass # Replace with function body.

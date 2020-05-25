@@ -8,11 +8,11 @@
 [ext_resource path="res://interface/menus/EquipMenu/ItemBelt.gd" type="Script" id=6]
 [ext_resource path="res://interface/UI/ui_theme.tres" type="Theme" id=7]
 [ext_resource path="res://interface/menus/EquipMenu/ViewModule.gd" type="Script" id=8]
-[ext_resource path="res://interface/menus/EquipMenu/EquipmentSlot.gd" type="Script" id=9]
 [ext_resource path="res://interface/menus/EquipMenu/BattleActionsDisplay.gd" type="Script" id=10]
 [ext_resource path="res://interface/menus/EquipMenu/BattleOption.gd" type="Script" id=11]
 [ext_resource path="res://interface/UI/spinner_theme.tres" type="Theme" id=12]
 [ext_resource path="res://interface/menus/EquipmentMenu.gd" type="Script" id=13]
+[ext_resource path="res://interface/PlayerMenu/EquipmentSlot.tscn" type="PackedScene" id=14]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
@@ -85,67 +85,22 @@ size_flags_vertical = 6
 custom_constants/separation = 18
 alignment = 1
 
-[node name="Weapon" type="Panel" parent="VBoxContainer/Main/ViewModule/Margins/Column"]
-margin_right = 128.0
-margin_bottom = 111.0
-size_flags_vertical = 3
-script = ExtResource( 9 )
+[node name="Weapon" parent="VBoxContainer/Main/ViewModule/Margins/Column" instance=ExtResource( 14 )]
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/Main/ViewModule/Margins/Column/Weapon"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-stretch_mode = 4
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="OffHand" type="Panel" parent="VBoxContainer/Main/ViewModule/Margins/Column"]
+[node name="OffHand" parent="VBoxContainer/Main/ViewModule/Margins/Column" instance=ExtResource( 14 )]
 margin_top = 129.0
-margin_right = 128.0
 margin_bottom = 240.0
-size_flags_vertical = 3
-script = ExtResource( 9 )
 equipment_type = 1
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/Main/ViewModule/Margins/Column/OffHand"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-stretch_mode = 4
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="AttackMagic" type="Panel" parent="VBoxContainer/Main/ViewModule/Margins/Column"]
+[node name="AttackMagic" parent="VBoxContainer/Main/ViewModule/Margins/Column" instance=ExtResource( 14 )]
 margin_top = 258.0
-margin_right = 128.0
 margin_bottom = 369.0
-size_flags_vertical = 3
-script = ExtResource( 9 )
 equipment_type = 2
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/Main/ViewModule/Margins/Column/AttackMagic"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-stretch_mode = 4
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="DefenseMagic" type="Panel" parent="VBoxContainer/Main/ViewModule/Margins/Column"]
+[node name="DefenseMagic" parent="VBoxContainer/Main/ViewModule/Margins/Column" instance=ExtResource( 14 )]
 margin_top = 387.0
-margin_right = 128.0
 margin_bottom = 500.0
-size_flags_vertical = 3
-script = ExtResource( 9 )
 equipment_type = 3
-
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/Main/ViewModule/Margins/Column/DefenseMagic"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-stretch_mode = 4
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="BAMargins" type="MarginContainer" parent="VBoxContainer/Main/ViewModule"]
 margin_left = 568.0
@@ -413,3 +368,4 @@ script = ExtResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+[connection signal="visibility_changed" from="ItemContainer/Margins/Row/ScrollContainer/ItemBelt" to="ItemContainer/Margins/Row/ScrollContainer/ItemBelt" method="_on_show"]

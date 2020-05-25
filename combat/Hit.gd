@@ -43,3 +43,4 @@ func execute():
         emit_signal("missed")
     else:
         target.take_damage(self)
+        SoundManager.play_se(target.hurt_sound)

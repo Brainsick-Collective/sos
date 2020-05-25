@@ -15,7 +15,6 @@ func set_fighters(f1, f2):
     
 func _process(_delta):
     if fighter1 and fighter2:
-        
         for stat in ["strength", "defense", "magic", "speed"]:
             for fighter in [fighter1, fighter2]:
                 var label = get_node(stat + "/Row/F" + fighter.get_parent().name)

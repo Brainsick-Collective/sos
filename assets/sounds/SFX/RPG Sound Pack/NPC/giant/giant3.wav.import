@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/giant3.wav-266c0f5be2cc7c73d2f8b29e01cf6288.sample"
+
+[deps]
+
+source_file="res://assets/sounds/SFX/RPG Sound Pack/NPC/giant/giant3.wav"
+dest_files=[ "res://.import/giant3.wav-266c0f5be2cc7c73d2f8b29e01cf6288.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

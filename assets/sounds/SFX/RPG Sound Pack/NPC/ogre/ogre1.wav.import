@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/ogre1.wav-a15ea97cf4963631d897876c521dc417.sample"
+
+[deps]
+
+source_file="res://assets/sounds/SFX/RPG Sound Pack/NPC/ogre/ogre1.wav"
+dest_files=[ "res://.import/ogre1.wav-a15ea97cf4963631d897876c521dc417.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

@@ -2,9 +2,9 @@ extends Node2D
 
 
 onready var START
-onready var Characters = $GameBoard/Characters
+onready var Characters = $Fooberg/Characters
 onready var PlayerPawnScene = preload("res://board/pawns/PlayerPawn.tscn")
-onready var Board = $GameBoard
+onready var board = get_board()
 onready var GUI = $UI/GUI
 onready var BoardNotification = preload("res://interface/UI/BoardNotification.tscn")
 onready var CombatArenaScene = preload("res://combat/CombatArena.tscn")
@@ -17,11 +17,12 @@ var turn_ind
 func _ready():
     var dummy = PlayerPawnScene.instance()
     current_player = dummy
+    Characters = board.get_node("Characters")
     
 func initialize(characters, _game):
     game = _game
     game.board = self
-    START = $GameBoard/Start.get_position()
+    START = get_board().get_pos("start")
     for character in characters:
         character.set_position(START)
         Characters.add_child(character, true)
@@ -29,10 +30,11 @@ func initialize(characters, _game):
         character.connect("turn_finished", self, "on_board_character_moves_finished", [], CONNECT_DEFERRED)
     num_players = Characters.get_child_count()
     turn_ind = Characters.get_child_count() - 1
-    Board.initialize()
+    board.initialize()
     GUI.initialize(self)
-    $GameBoard/Spawners/MushBossSpawner.spawn_pawn()
+    $Fooberg/Spawners/MushBossSpawner.spawn_pawn()
     current_player = characters[0]
+    $Camera2D.current = true
 
 func refresh_after_load():
     var characters = Characters.get_children()
@@ -43,7 +45,7 @@ func refresh_after_load():
         character.connect("last_move_taken", self, "show_confirm_popup", [], CONNECT_DEFERRED)
         character.connect("turn_finished", self, "on_board_character_moves_finished", [], CONNECT_DEFERRED)
     num_players = Characters.get_child_count()
-    Board.initialize()
+    board.initialize()
     GUI.initialize(self)
     GUI.show()
     game.initialize_game(self)
@@ -65,7 +67,8 @@ func play_turn(board_character, last_camera_position):
     
     # Transition to new player
     GUI.change_player(board_character.player)
-    get_tree().paused = true
+    if get_tree():
+        get_tree().paused = true
     board_character.center_camera(last_camera_position)
     yield(board_character, "camera_centered")
     if current_player.turn_penalty > 0 or current_player.player.in_battle:
@@ -88,7 +91,7 @@ func on_board_character_moves_finished():
     var scene = null
 
     if current_player.can_enter_scene:
-        scene = $GameBoard.get_space_scene(current_player)
+        scene = $Fooberg.get_space_scene(current_player)
         if scene is ChoseEncounterPanel:
             scene.initialize(current_player)
             $UI.add_child(scene)
@@ -106,7 +109,7 @@ func new_turn_on_load():
     refresh_pathing()
     
 func refresh_pathing():
-    $GameBoard/Pathfinder.initialize($GameBoard)
+    $Fooberg/Pathfinder.initialize($Fooberg)
 
 func next_turn():
     var last_camera_position = current_player.get_camera_position()
@@ -141,3 +144,15 @@ func play_gui(gui : Node):
 func show_confirm_popup():
     $UI/GUI/MoveConfirmPopup.show()
 
+func move_camera(keyword):
+    var pos = get_board().get_pos(keyword)
+    $Tween.interpolate_property($Camera2D, "position", null, pos, .5, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+    $Camera2D.position = pos
+    $Tween.start()
+    yield($Tween, "tween_completed")
+
+    
+func get_board():
+    for child in get_children():
+        if child is TileMap and child.visible:
+            return child

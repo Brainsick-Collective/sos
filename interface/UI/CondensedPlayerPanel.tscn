@@ -16,7 +16,7 @@ theme = ExtResource( 1 )
 custom_styles/panel = ExtResource( 2 )
 script = ExtResource( 6 )
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="column" type="VBoxContainer" parent="."]
 margin_left = 2.0
 margin_top = 2.0
 margin_right = 572.0
@@ -25,8 +25,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="VBoxContainer"]
+[node name="row" type="HBoxContainer" parent="column"]
 margin_right = 570.0
+margin_bottom = 31.0
+
+[node name="name" type="Label" parent="column/row"]
+margin_right = 254.0
 margin_bottom = 31.0
 size_flags_vertical = 0
 custom_fonts/font = ExtResource( 5 )
@@ -34,7 +38,13 @@ text = "Player Name"
 align = 1
 valign = 1
 
-[node name="HealthBar" parent="VBoxContainer" instance=ExtResource( 3 )]
+[node name="level" type="Label" parent="column/row"]
+margin_left = 270.0
+margin_top = 7.0
+margin_right = 270.0
+margin_bottom = 23.0
+
+[node name="HealthBar" parent="column" instance=ExtResource( 3 )]
 margin_left = 0.0
 margin_top = 47.0
 margin_right = 570.0
@@ -42,7 +52,7 @@ margin_bottom = 67.0
 rect_min_size = Vector2( 0, 20 )
 size_flags_vertical = 0
 
-[node name="StatsRow" parent="VBoxContainer" instance=ExtResource( 4 )]
+[node name="StatsRow" parent="column" instance=ExtResource( 4 )]
 margin_left = 0.0
 margin_top = 83.0
 margin_right = 570.0

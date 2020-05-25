@@ -1,26 +1,16 @@
 ** Dokapon Clone TODO list
-*** DONE [#A] Player info screen
-    CLOSED: [2020-05-03 Sun 02:55]
 *** TODO [#A] Make sure transition plays on leaving a shop
 *** TODO [#A] Fix prievew board viewer using tileArea
-*** DONE make each equipment slot unique
-    CLOSED: [2020-04-27 Mon 01:51]
-*** DONE Create system for supplanting battle abilities
-    CLOSED: [2020-04-27 Mon 01:51]
+*** TODO Fix button neighbor system for player menu
+*** TODO add zoom to board preview
+*** TODO Add auto move functionality
 *** TODO Add drag and drop to equipment menu
-*** TODO Paginate inventories on: shops, player inv, spinners
 *** TODO add movement effect items and movement alteration system
 *** TODO Add functionality for Board loading
 *** TODO rework gui element handling from boardcharacter to board / gui
-*** TODO sound effects
 *** TODO Add better Level up interface
-*** DONE [#B] System for saving game
-    CLOSED: [2020-04-15 Wed 16:20]
 *** TODO towns (it's TIME)
 *** TODO tutorial cutscene?
-*** TODO [#B] music player
-*** DONE [#B] board view preview of all space types
-    CLOSED: [2020-04-03 Fri 14:13]
 *** TODO look into making an online multiplayer demo
 *** TODO mob AI behaviour
 *** TODO tool tips
@@ -43,12 +33,29 @@
 *** TODO battle theater scene for testing /debugging
 *** TODO fix spinners, add animation / notification
 *** TODO fix syndibox
+*** TODO [BUG] every time the inventory is opening, equipment duplicates
 **** should have a functioning auto_advance, i.e. loads full string instantly
 **** should have functioning scroll, where pressing ui_accept speeds up or auto_advances the current string
 **** when a string is being processed and a new string is assigned, abandon current string
+*** TODO FIX MOVE COUNTER 
+*** DONE [#A] Player info screen
+    CLOSED: [2020-05-03 Sun 02:55]
+*** DONE make each equipment slot unique
+    CLOSED: [2020-04-27 Mon 01:51]
+*** DONE Create system for supplanting battle abilities
+    CLOSED: [2020-04-27 Mon 01:51]
+*** DONE Paginate inventories on: shops, player inv, spinners
+    CLOSED: [2020-05-17 Sun 15:23]
+*** DONE sound effects
+    CLOSED: [2020-05-17 Sun 15:19]
+*** DONE [#B] System for saving game
+    CLOSED: [2020-04-15 Wed 16:20]
+*** DONE [#B] music player
+    CLOSED: [2020-05-17 Sun 15:19]
+*** DONE [#B] board view preview of all space types
+    CLOSED: [2020-04-03 Fri 14:13]
 *** DONE change color of stat in panels if buffed / debuffed
     CLOSED: [2020-04-02 Thu 14:35]
-*** TODO FIX MOVE COUNTER 
 *** DONE [#A] Controler support!
     CLOSED: [2020-04-01 Wed 18:17]
 *** DONE better controls handler

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/sword-unsheathe5.wav-26b01f349f3197cc66956a7702e48a80.sample"
+
+[deps]
+
+source_file="res://assets/sounds/SFX/sword-unsheathe5.wav"
+dest_files=[ "res://.import/sword-unsheathe5.wav-26b01f349f3197cc66956a7702e48a80.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

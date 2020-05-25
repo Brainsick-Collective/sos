@@ -9,6 +9,7 @@
 stats = ExtResource( 3 )
 description = "The eye witches are members of an ancient brood of sorceresses who harness magic from the fabric of the universe itself, the eyes that are manifest on their totems are said to be the eyes of beings from microscopic worlds"
 job = ExtResource( 2 )
+attack_sound = "swing"
 
 [node name="Sprite" parent="Skin" index="0"]
 position = Vector2( -1.62108, -174.545 )

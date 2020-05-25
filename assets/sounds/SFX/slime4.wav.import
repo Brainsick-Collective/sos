@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/slime4.wav-85f7eabcbfa7ed4164c8441887b92e5e.sample"
+
+[deps]
+
+source_file="res://assets/sounds/SFX/slime4.wav"
+dest_files=[ "res://.import/slime4.wav-85f7eabcbfa7ed4164c8441887b92e5e.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

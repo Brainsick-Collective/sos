@@ -10,8 +10,6 @@ func initialize(_player : Player):
 func set_item(item):
     $Margins/Row/Column/Row/NameLabel.text = item.name
     $Margins/Row/Column/Description.text = item.description
-    if item.equipped:
-        return
     
     for child in stats_row.get_children():
         if child == stats_row.get_node("NameLabel"):
@@ -19,9 +17,9 @@ func set_item(item):
         else:
             stats_row.remove_child(child)
     
-    var old_mods = player.stats.modifiers.duplicate()
+    var old_mods = player.stats.as_mods()
     var old_item = player.equip_item(item)
-    var new_mods = player.stats.modifiers.duplicate()
+    var new_mods = player.stats.as_mods()
     
     for mod_key in old_mods.keys():
         if old_mods[mod_key] != new_mods[mod_key]:
@@ -31,9 +29,8 @@ func set_item(item):
     
     if old_item:
         player.equip_item(old_item)
-    else:
-        player.unequip_item(item)
-    var reverted_mods = player.stats.modifiers.duplicate() 
+        
+    var reverted_mods = player.stats.as_mods() 
     for key in reverted_mods.keys():
         if reverted_mods[key] != old_mods[key]:
             print("wtf mate")

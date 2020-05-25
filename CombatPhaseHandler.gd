@@ -6,7 +6,7 @@ signal phase_completed
 
 var effects : Array
 onready var label_handler = $"../UI/PopupLabelBuilder"
-onready var timer : Timer = $"Timer"
+onready var timer : Timer = $Timer
 
 enum move_types { empty = -1, normal, special, magic, effect }
 

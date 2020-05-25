@@ -9,6 +9,9 @@ export(Resource) var stats
 export (String, MULTILINE) var description
 export var moves = {}
 export(Resource) var job
+export(String) var hurt_sound
+export(String) var death_sound
+export(String) var attack_sound
 onready var sprite = $Skin/Sprite
 signal killed(player, reward)
 var mob = false
@@ -76,6 +79,7 @@ func get_id():
 func take_damage(hit):
     if hit.damage < stats.health:
         play("take damage")
+        SoundManager.play_se(hurt_sound)
     else:
         play("death") # change to death anim
     stats.take_damage(hit)
@@ -103,6 +107,7 @@ func on_death():
     emit_signal("killed", self, reward)
     
 func play_attack():
+    SoundManager.play_se(attack_sound)
     var pos = $Skin.global_position
     $Tween.interpolate_property($Skin, "global_position", $Skin.global_position, $TargetAnchor.global_position, 0.5, Tween.TRANS_LINEAR, Tween.EASE_OUT_IN)
     $Tween.start()

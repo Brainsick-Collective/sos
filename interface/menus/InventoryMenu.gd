@@ -13,10 +13,11 @@ var player
 func set_inventory(inv):
     inventory = inv
 
-func initialize(player):
+func initialize(_player):
+    player = _player
     inventory = player.get_inventory()
-    
-    for item in inventory.get_items():
+    _item_grid.clear()
+    for item in inventory.get_non_equip_items():
         var item_button = create_item_button(item)
         item_button.connect("focus_entered", self, "_on_ItemButton_focus_entered")
         item_button.connect("pressed", self, "_on_ItemButton_pressed", [item])

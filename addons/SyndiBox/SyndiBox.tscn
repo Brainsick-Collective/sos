@@ -18,3 +18,5 @@ __meta__ = {
 DIALOG = "
 "
 FONT = "res://interface/theme/fonts/sc_12.tres"
+TEXT_VOICE = "res://assets/sounds/text_sound.wav"
+CUSTOM_EFFECTS = "res://addons/SyndiBox/custom.gd"

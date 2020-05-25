@@ -6,7 +6,7 @@ signal health_changed(new_health, old_health)
 signal health_depleted()
 signal mana_changed(new_mana, old_mana)
 signal mana_depleted()
-signal leveled_up(note)
+signal leveled_up(old, new, points)
 
 var modifiers = {
     "max_health" : 0,
@@ -25,7 +25,8 @@ export(Curve) var max_mana_curve
 export(Curve) var strength_curve
 export(Curve) var defense_curve
 export(Curve) var speed_curve
-
+export(Curve) var experience_set_curve
+export(Resource) var job
 export(int) var health
 export(int) var mana setget set_mana
 export(int) var max_health = 0 setget set_max_health, _get_max_health
@@ -36,6 +37,7 @@ export(int) var speed = 0 setget set_speed,_get_speed
 export(int) var magic = 0 setget ,_get_magic
 export(int) var xp = 0 setget set_xp, get_xp
 export(int) var kill_xp = 0
+var next_level_xp = 15
 
 
 var is_alive : bool setget ,_is_alive
@@ -72,13 +74,6 @@ func take_damage(hit): # Hit
     emit_signal("health_changed", health, old_health)
     if health == 0:
         emit_signal("health_depleted")
-
-func level_up():
-    set_max_health(int(max_health_curve.interpolate_baked(_interpolated_level)))
-    set_max_mana(int(max_mana_curve.interpolate_baked(_interpolated_level)))
-    set_strength(int(strength_curve.interpolate_baked(_interpolated_level)))
-    set_defense(int(defense_curve.interpolate_baked(_interpolated_level)))
-    set_speed(int(speed_curve.interpolate_baked(_interpolated_level)))
 
 func heal(amount : int):
     var old_health = health
@@ -121,21 +116,29 @@ func set_defense(value : int):
 
 func set_xp(value : int):
     xp = value
-    var l = level    
-    while l + 1 < self.MAX_LEVEL && xp >= experience_curve[l + 1]:
-        l += 1
+    var l = level
+    var points_gained = 0
+    
+    while xp >= next_level_xp:
+        l+= 1
+        if l % 2 == 0:
+            points_gained += 2
+        next_level_xp = get_level_xp(l)
+
     if l > level:
-        var note = level_up_note.instance()
-        note.initialize(player_id)
-        note.set_old_stats(self)
+        var diff = l - level
+        var old = as_mods()
+        job.level_up(self, diff)
+        var new = as_mods()
         level = l
         _interpolated_level =  float(level) / float(self.MAX_LEVEL)
-        level_up()
-        kill_xp = int(experience_curve[level] / 2)
         reset()
-        note.set_new_stats(self)
-        note.play_text()
-        emit_signal("leveled_up", note)
+        print(get_signal_connection_list("leveled_up"))
+        
+        emit_signal("leveled_up",old, new, points_gained)
+
+func get_level_xp(level):
+    return round((4 * pow(level, 3)) / 5)
 
 func add_to_modifier(id : String, modifier):
     modifiers[id] += modifier
@@ -177,6 +180,10 @@ func _get_magic() -> int:
     
 func get_xp() -> int:
     return xp
+
+func from_dict(dict):
+    for key in dict.keys():
+        set(key, dict[key])
 
 func as_mods():
     var mods = {}

@@ -32,13 +32,13 @@ onready var Notification = preload("res://interface/UI/notification.tscn")
 onready var ray = $Feeler
 onready var timer = $MoveTimer
 
-func initialize(game_board, _player, start):
+func initialize(board_manager, _player, start):
     last_heal_space = start
-    confirm_move_popup = game_board.get_node("UI/GUI/MoveConfirmPopup")
+    confirm_move_popup = board_manager.get_node("UI/GUI/MoveConfirmPopup")
     player = _player
-    dice_roll_popup = game_board.get_node("UI/GUI/DiceRollPopup")
+    dice_roll_popup = board_manager.get_node("UI/GUI/DiceRollPopup")
     player_name = player.player_name
-    board = game_board.get_node("GameBoard")
+    board = board_manager.get_board()
     game = get_node("/root/Game")
 
     refresh_after_load()

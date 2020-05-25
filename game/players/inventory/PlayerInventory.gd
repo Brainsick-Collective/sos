@@ -34,3 +34,10 @@ func equip_item(item):
     item.usable = false
     item.equipped = true
     player.equip_item(item)
+
+func get_non_equip_items():
+    var ret = []
+    for item in get_children():
+        if not (item is Equipment):
+            ret.append(item)
+    return ret

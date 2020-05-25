@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/POL-forgotten-woods-short.wav-3213b97c647736d31c3de4a8fc86fb8e.sample"
+
+[deps]
+
+source_file="res://assets/sounds/BGM/POL-forgotten-woods-short.wav"
+dest_files=[ "res://.import/POL-forgotten-woods-short.wav-3213b97c647736d31c3de4a8fc86fb8e.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=true
+compress/mode=0

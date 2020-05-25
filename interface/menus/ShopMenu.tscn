@@ -15,7 +15,6 @@
 [ext_resource path="res://assets/actors/clammart_shopkeep.png" type="Texture" id=13]
 [ext_resource path="res://assets/shops/clammart building.png" type="Texture" id=14]
 
-
 [sub_resource type="StyleBoxEmpty" id=1]
 
 [sub_resource type="StyleBoxEmpty" id=2]
@@ -193,8 +192,9 @@ script = ExtResource( 8 )
 DIALOG = ""
 CHARACTER_NAME = ""
 CHARACTER_PROFILE = ""
+prof_offset = Vector2( 16, -38 )
+prof_color = Color( 0, 0, 0, 1 )
 AUTO_ADVANCE = true
-HIDE_AFTER_DONE = false
 FONT = "res://interface/UI/base_font.tres"
 ALTERNATE_FONTS = [  ]
 PADDING = 3
@@ -205,10 +205,9 @@ TEXT_SPEED = 0.03
 PAUSE_AT_PUNCTUATION = false
 PUNCTUATION_PAUSE_LENGTH = 0.0
 INSTANT_PRINT = false
-CUSTOM_EFFECTS = ""
+CUSTOM_EFFECTS = "res://addons/SyndiBox/custom.gd"
 
 [node name="ConfirmPopup" type="NinePatchRect" parent="."]
-visible = false
 margin_left = 1574.05
 margin_top = 558.143
 margin_right = 1735.05

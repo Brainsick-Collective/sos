@@ -2,7 +2,7 @@ extends Button
 
 var description = ""
 var item : Item
-var dragable = false
+var draggable : bool = false
 onready var DragIcon = preload("res://interface/menus/EquipMenu/DragIcon.tscn")
 
 signal button_dragged(drag_icon)
@@ -39,11 +39,13 @@ func _process(_delta):
         $Margins/Row/Equipped.show()
     elif $Margins/Row/Equipped.visible and !item.equipped:
         $Margins/Row/Equipped.hide()
-
-func _gui_input(event):
-    if dragable and event is InputEventMouseButton:
-        if event.pressed:
-            var drag_icon = DragIcon.instance()
-            drag_icon.item = item
-            emit_signal("button_dragged", drag_icon)
             
+func get_drag_data(_pos):
+    if draggable:
+        var preview = TextureRect.new()
+        preview.texture = item.icon
+        set_drag_preview(preview)
+        print("dragging")
+        return item
+    else:
+        return null

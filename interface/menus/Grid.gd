@@ -25,3 +25,7 @@ func update_focus_neighbours(ignore=null):
         button.focus_neighbour_left = button.get_path_to(buttons_to_update[index_previous])
         button.focus_neighbour_right = button.get_path_to(buttons_to_update[index_next])
         index += 1
+
+func clear():
+    for child in get_children():
+        child.queue_free()

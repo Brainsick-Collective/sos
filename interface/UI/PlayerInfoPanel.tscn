@@ -56,13 +56,13 @@ margin_bottom = 21.0
 size_flags_horizontal = 3
 text = "EXP"
 
-[node name="Panel" type="PanelContainer" parent="Row/VBoxContainer/grid"]
+[node name="Exp" type="PanelContainer" parent="Row/VBoxContainer/grid"]
 margin_top = 25.0
 margin_right = 637.0
 margin_bottom = 60.0
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="Row/VBoxContainer/grid/Panel"]
+[node name="Label" type="Label" parent="Row/VBoxContainer/grid/Exp"]
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 630.0
@@ -80,13 +80,13 @@ margin_bottom = 85.0
 size_flags_horizontal = 3
 text = "NEXT"
 
-[node name="Panel2" type="PanelContainer" parent="Row/VBoxContainer/grid"]
+[node name="Next" type="PanelContainer" parent="Row/VBoxContainer/grid"]
 margin_top = 89.0
 margin_right = 637.0
 margin_bottom = 124.0
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="Row/VBoxContainer/grid/Panel2"]
+[node name="Label" type="Label" parent="Row/VBoxContainer/grid/Next"]
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 630.0
@@ -104,13 +104,13 @@ margin_bottom = 149.0
 size_flags_horizontal = 3
 text = "JOB"
 
-[node name="Panel3" type="PanelContainer" parent="Row/VBoxContainer/grid"]
+[node name="Job" type="PanelContainer" parent="Row/VBoxContainer/grid"]
 margin_top = 153.0
 margin_right = 637.0
 margin_bottom = 188.0
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="Row/VBoxContainer/grid/Panel3"]
+[node name="Label" type="Label" parent="Row/VBoxContainer/grid/Job"]
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 630.0
@@ -128,13 +128,13 @@ margin_bottom = 213.0
 size_flags_horizontal = 3
 text = "NET WORTH"
 
-[node name="Panel4" type="PanelContainer" parent="Row/VBoxContainer/grid"]
+[node name="NewWorth" type="PanelContainer" parent="Row/VBoxContainer/grid"]
 margin_top = 217.0
 margin_right = 637.0
 margin_bottom = 252.0
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="Row/VBoxContainer/grid/Panel4"]
+[node name="Label" type="Label" parent="Row/VBoxContainer/grid/NewWorth"]
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 630.0

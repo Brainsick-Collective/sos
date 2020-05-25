@@ -136,6 +136,7 @@ tracks/0/keys = {
 
 [node name="Combatant" type="Position2D"]
 script = ExtResource( 1 )
+attack_sound = "swing"
 
 [node name="Skin" type="Position2D" parent="."]
 script = ExtResource( 4 )

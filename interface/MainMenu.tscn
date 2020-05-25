@@ -1,4 +1,4 @@
-[gd_scene load_steps=79 format=2]
+[gd_scene load_steps=80 format=2]
 
 [ext_resource path="res://interface/theme/default.theme" type="Theme" id=1]
 [ext_resource path="res://interface/MainMenu.gd" type="Script" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://assets/ui/right_pressed.png" type="Texture" id=7]
 [ext_resource path="res://assets/ui/left.png" type="Texture" id=8]
 [ext_resource path="res://assets/ui/left_pressed.png" type="Texture" id=9]
+[ext_resource path="res://assets/sounds/bottle_open.wav" type="AudioStream" id=10]
 [ext_resource path="res://assets/animated_sprites/controller_sprites/Controller 2/Controller 10003.png" type="Texture" id=11]
 [ext_resource path="res://assets/animated_sprites/controller_sprites/Controller 1/Controller 10005.png" type="Texture" id=12]
 [ext_resource path="res://assets/animated_sprites/controller_sprites/Controller 1/Controller 10014.png" type="Texture" id=13]
@@ -234,15 +235,15 @@ tracks/1/keys = {
 
 [sub_resource type="SpriteFrames" id=3]
 animations = [ {
-"frames": [ ExtResource( 19 ), ExtResource( 18 ) ],
-"loop": true,
-"name": "idle",
-"speed": 2.0
-}, {
 "frames": [ ExtResource( 25 ) ],
 "loop": true,
 "name": "empty",
 "speed": 5.0
+}, {
+"frames": [ ExtResource( 19 ), ExtResource( 18 ) ],
+"loop": true,
+"name": "idle",
+"speed": 2.0
 }, {
 "frames": [ ExtResource( 19 ), ExtResource( 18 ), ExtResource( 16 ), ExtResource( 20 ), ExtResource( 12 ), ExtResource( 21 ), ExtResource( 22 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 17 ), ExtResource( 26 ), ExtResource( 23 ), ExtResource( 24 ), ExtResource( 13 ), ExtResource( 25 ) ],
 "loop": false,
@@ -257,15 +258,15 @@ animations = [ {
 
 [sub_resource type="SpriteFrames" id=4]
 animations = [ {
-"frames": [ ExtResource( 27 ), ExtResource( 38 ) ],
-"loop": true,
-"name": "idle",
-"speed": 2.0
-}, {
 "frames": [ ExtResource( 37 ) ],
 "loop": false,
 "name": "empty",
 "speed": 5.0
+}, {
+"frames": [ ExtResource( 27 ), ExtResource( 38 ) ],
+"loop": true,
+"name": "idle",
+"speed": 2.0
 }, {
 "frames": [ ExtResource( 27 ), ExtResource( 38 ), ExtResource( 11 ), ExtResource( 29 ), ExtResource( 31 ), ExtResource( 28 ), ExtResource( 32 ), ExtResource( 30 ), ExtResource( 34 ), ExtResource( 39 ), ExtResource( 40 ), ExtResource( 33 ), ExtResource( 35 ), ExtResource( 36 ), ExtResource( 37 ) ],
 "loop": false,
@@ -280,15 +281,15 @@ animations = [ {
 
 [sub_resource type="SpriteFrames" id=5]
 animations = [ {
-"frames": [ ExtResource( 46 ), ExtResource( 50 ) ],
-"loop": true,
-"name": "idle",
-"speed": 2.0
-}, {
 "frames": [ ExtResource( 68 ) ],
 "loop": false,
 "name": "empty",
 "speed": 5.0
+}, {
+"frames": [ ExtResource( 46 ), ExtResource( 50 ) ],
+"loop": true,
+"name": "idle",
+"speed": 2.0
 }, {
 "frames": [ ExtResource( 46 ), ExtResource( 50 ), ExtResource( 51 ), ExtResource( 54 ), ExtResource( 45 ), ExtResource( 63 ), ExtResource( 55 ), ExtResource( 53 ), ExtResource( 64 ), ExtResource( 65 ), ExtResource( 66 ), ExtResource( 58 ), ExtResource( 67 ), ExtResource( 68 ) ],
 "loop": false,
@@ -303,15 +304,15 @@ animations = [ {
 
 [sub_resource type="SpriteFrames" id=6]
 animations = [ {
-"frames": [ ExtResource( 47 ), ExtResource( 48 ) ],
-"loop": true,
-"name": "idle",
-"speed": 2.0
-}, {
 "frames": [ ExtResource( 52 ) ],
 "loop": true,
 "name": "empty",
 "speed": 5.0
+}, {
+"frames": [ ExtResource( 47 ), ExtResource( 48 ) ],
+"loop": true,
+"name": "idle",
+"speed": 2.0
 }, {
 "frames": [ ExtResource( 47 ), ExtResource( 48 ), ExtResource( 62 ), ExtResource( 61 ), ExtResource( 41 ), ExtResource( 43 ), ExtResource( 59 ), ExtResource( 49 ), ExtResource( 60 ), ExtResource( 56 ), ExtResource( 44 ), ExtResource( 42 ), ExtResource( 57 ), ExtResource( 52 ) ],
 "loop": false,
@@ -376,7 +377,7 @@ position = Vector2( 369.25, 139.484 )
 scale = Vector2( 0.958064, 0.958064 )
 frames = ExtResource( 71 )
 animation = "slow"
-frame = 3
+frame = 13
 playing = true
 
 [node name="MarginContainer" type="MarginContainer" parent="bg/Console"]
@@ -575,6 +576,9 @@ rect_min_size = Vector2( 300, 50 )
 mouse_filter = 1
 size_flags_horizontal = 4
 text = "Quit"
+
+[node name="Vents" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 10 )
 [connection signal="pressed" from="Column/Row/Left" to="." method="_on_left_pressed"]
 [connection signal="pressed" from="Column/Row/ConfirmButton" to="." method="_on_confirm_pressed"]
 [connection signal="pressed" from="Column/Row/Right" to="." method="_on_right_pressed"]

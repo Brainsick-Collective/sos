@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/random1.wav-9b7fd9d4ded4a233b5d8dca08eec3372.sample"
+
+[deps]
+
+source_file="res://assets/sounds/SFX/RPG Sound Pack/misc/random1.wav"
+dest_files=[ "res://.import/random1.wav-9b7fd9d4ded4a233b5d8dca08eec3372.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

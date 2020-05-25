@@ -6,4 +6,4 @@
 [resource]
 script = ExtResource( 1 )
 texture = ExtResource( 2 )
-description = "A store to buy clams.... and other useful items"
+description = "A store to buy items"

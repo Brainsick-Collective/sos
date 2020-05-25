@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/metal-small3.wav-ccfbe65eb3383f2dd62ff25d7d59408f.sample"
+
+[deps]
+
+source_file="res://assets/sounds/SFX/RPG Sound Pack/inventory/metal-small3.wav"
+dest_files=[ "res://.import/metal-small3.wav-ccfbe65eb3383f2dd62ff25d7d59408f.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

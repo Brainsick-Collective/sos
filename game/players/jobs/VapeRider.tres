@@ -21,3 +21,11 @@ def_normal = ExtResource( 5 )
 def_special = ExtResource( 9 )
 def_effect = ExtResource( 6 )
 def_magic = ExtResource( 7 )
+stat_boosts = {
+"defense": 0,
+"magic": 0,
+"max_health": 0,
+"max_mana": 0,
+"speed": 2,
+"strength": 0
+}

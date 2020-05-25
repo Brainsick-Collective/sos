@@ -24,6 +24,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://game/players/inventory/items/equipment/magic/BattleMagic.gd"
 }, {
+"base": "TileMap",
+"class": "Board",
+"language": "GDScript",
+"path": "res://board/GameBoard.gd"
+}, {
 "base": "Notification",
 "class": "BoardNotification",
 "language": "GDScript",
@@ -114,7 +119,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://game/players/inventory/items/equipment/Equipment.gd"
 }, {
-"base": "Panel",
+"base": "Button",
 "class": "EquipmentSlot",
 "language": "GDScript",
 "path": "res://interface/menus/EquipMenu/EquipmentSlot.gd"
@@ -229,6 +234,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://board/Spawners/ShopSpawner.gd"
 }, {
+"base": "Node",
+"class": "SoundManagerModule",
+"language": "GDScript",
+"path": "res://addons/sound_manager/module/internal_scripts/SoundManager_config.gd"
+}, {
 "base": "Node2D",
 "class": "Spawner",
 "language": "GDScript",
@@ -268,6 +278,7 @@ _global_script_class_icons={
 "ActorPreview": "",
 "AttackAction": "",
 "BattleMagic": "",
+"Board": "",
 "BoardNotification": "",
 "BuffPotion": "",
 "CashItem": "",
@@ -309,6 +320,7 @@ _global_script_class_icons={
 "ShopInventory": "",
 "ShopMenu": "",
 "ShopSpawner": "",
+"SoundManagerModule": "",
 "Spawner": "",
 "SpecialAttackAction": "",
 "SpinnerSpawner": "",
@@ -345,6 +357,7 @@ MonsterFactory="*res://mobs/MonsterFactory.tscn"
 ShopFactory="*res://game/ShopFactory.tscn"
 GameSerializer="*res://game/GameSerializer.gd"
 Kabuki="*res://game/Kabuki/Kabuki.gd"
+SoundManager="*res://addons/sound_manager/module/SoundManager.tscn"
 
 [display]
 
@@ -356,7 +369,7 @@ window/stretch/aspect="keep"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "SyndiBox", "editor_icon_previewer", "godot-plugin-refresher" )
+enabled=PoolStringArray( "SyndiBox", "editor_icon_previewer", "godot-plugin-refresher", "sound_manager" )
 
 [input]
 

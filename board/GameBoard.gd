@@ -1,8 +1,11 @@
 extends TileMap
 
+class_name Board
+
 enum CELL_TYPES {PATH, SPACE, GRASS, BUSH, DIRT}
 var CombatArena = preload("res://combat/CombatArena.tscn")
 var ChoseEncounterPanel = preload("res://interface/GUI/ChoseEncounterPanel.tscn")
+export (String) var bgm
 
 func initialize():
     $Pathfinder.initialize(self)
@@ -73,3 +76,8 @@ func _build_chose_encounter(pawns, spawner):
     var panel = ChoseEncounterPanel.instance()
     panel.setup(pawns, spawner)
     return panel
+
+func get_pos(keyword):
+    for child in $KeyPositions.get_children():
+        if child.name == keyword:
+            return child.position

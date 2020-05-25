@@ -31,6 +31,7 @@ func initialize(new_id, pawn, battler):
     moves = get_moves_from_combatant_job()
     stats.reset()
     cash = 100
+    stats.connect("level_up", self, "level_up")
 
 func save_resources():
     stats = GameSerializer.save_resource(stats, SAVE_KEY, "stats")
@@ -78,6 +79,10 @@ func apply_effect(effect):
         # play anim?
         pass
 
+func get_net_worth():
+    # TODO: add mods
+    return cash
+
 func on_death():
     pass
 
@@ -94,12 +99,14 @@ func _on_Inventory_item_removed(item):
     if item is Equipment:
         unequip_item(item)
         
-
 func equip_item(item) -> Item:
     var old_item
     
+    if item.equipped:
+        return null
+    
     for existing in inventory.get_items():
-        if existing is Equipment and existing.type == item.type and existing.equipped:
+        if existing is Equipment and existing.type == item.type and existing.equipped and existing != item:
             unequip_item(existing)
             old_item = existing
     
@@ -126,7 +133,7 @@ func get_moves_from_combatant_job():
     return job_moves
 
 func supplant_move_dict(move):
-    moves[move.phase_type.keys()[move.phase]][move.move_types.keys()[move.type]] = move
+    moves[move.phase_lookup[move.phase]][move.type_lookup[move.type]] = move
 
 func revert_move(move):
     var job_moves = get_moves_from_combatant_job()

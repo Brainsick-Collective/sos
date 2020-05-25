@@ -86,7 +86,6 @@ focus_neighbour_right = NodePath("../Right")
 focus_neighbour_bottom = NodePath("../../EquipmentMenu")
 size_flags_horizontal = 6
 custom_fonts/font = ExtResource( 3 )
-group = ExtResource( 5 )
 text = "Inventory"
 flat = true
 
@@ -109,7 +108,6 @@ focus_neighbour_left = NodePath("../Left")
 focus_neighbour_bottom = NodePath("../../EquipmentMenu")
 size_flags_horizontal = 6
 custom_fonts/font = ExtResource( 3 )
-group = ExtResource( 5 )
 text = "System"
 flat = true
 

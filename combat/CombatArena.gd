@@ -19,6 +19,7 @@ var exiting = false
 enum move_types { empty = -1, normal, special, magic, effect }
 onready var Notification = preload("res://interface/UI/notification.tscn")
 onready var BoardNotification = preload("res://interface/UI/BoardNotification.tscn")
+onready var level_note = preload("res://interface/UI/LevelUpNote.tscn")
 onready var phase_handler = $CombatPhaseHandler
 
 signal transitioning
@@ -39,8 +40,8 @@ const choice_map = {"ui_left" : move_types.normal,
 func initialize(_player):
     fighter1.connect("killed", self, "on_won_battle", [], CONNECT_DEFERRED)
     fighter2.connect("killed", self, "on_won_battle", [], CONNECT_DEFERRED)
-    fighter1.stats.connect("leveled_up", self, "add_notification", [], CONNECT_DEFERRED)
-    fighter2.stats.connect("leveled_up", self, "add_notification", [], CONNECT_DEFERRED)
+    fighter1.stats.connect("leveled_up", self, "level_up", [fighter1.stats])
+    fighter2.stats.connect("leveled_up", self, "level_up", [fighter2.stats])
     fighter1chose = false
     fighter2chose = false
     $"1".add_child(fighter1)
@@ -63,12 +64,8 @@ func setup(f1: Combatant, f2 : Combatant):
     fighter1 = f1
     fighter2 = f2
 
-
-
-
 func _process(_delta):
     check_ready()
-    
     
 func check_ready():
     if is_battle_over:
@@ -83,7 +80,6 @@ func check_ready():
             do_phase(fighter1, fighter2, fighter1.get_move(choice1, true), fighter2.get_move(choice2, false))
         else:
             do_phase(fighter2, fighter1, fighter2.get_move(choice2, true), fighter1.get_move(choice1, false))
-    
 
 func do_phase(attacker, defender, attacker_move, defender_move):
     if defender_move.type == move_types.effect:
@@ -128,12 +124,14 @@ func on_turnorder_popup_hide():
     
 func on_won_battle(killed, reward):
     exiting = true
+    SoundManager.play_se("fanfare", true, false)
     
     var winner : Combatant
     if killed == fighter1:
         winner = fighter2
     else:
         winner = fighter1
+        
     if winner is Mob:
         winner = null
     if winner:
@@ -151,10 +149,6 @@ func on_won_battle(killed, reward):
     is_battle_over = true
     
     var kill_desc = killed.actor_name + " has been killed!"
-    print(kill_desc)
-    
-    
-
     
     if !(killed is Mob):
         var note = BoardNotification.instance()
@@ -167,6 +161,7 @@ func on_won_battle(killed, reward):
     _exit_transition()
 
 func on_give_up(retiree):
+    SoundManager.play_se("fanfare")
     exiting = true
     set_process_input(false)
     is_battle_over = true
@@ -217,7 +212,6 @@ func _exit_transition():
         $UI/NoteContainer.add_child(note)
         note.popup()
         yield(note, "tree_exited")
-        print("nonsense")
         var timer = Timer.new()
         timer.one_shot = true
         add_child(timer)
@@ -240,6 +234,11 @@ func _on_Timer_timeout():
 func get_fighters():
     return [fighter1, fighter2]
 
+func level_up(old, new, points, stats):
+    var note = level_note.instance()
+    note.initialize(old, new, points, stats)
+    add_notification(note) 
+    
 func add_notification(note):
     battle_notes.append(note)
     

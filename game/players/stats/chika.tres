@@ -1,11 +1,16 @@
-[gd_resource type="Resource" load_steps=7 format=2]
+[gd_resource type="Resource" load_steps=9 format=2]
 
 [ext_resource path="res://game/players/stats/Stats.gd" type="Script" id=1]
 [ext_resource path="res://game/players/stats/health_curve.tres" type="Curve" id=2]
 [ext_resource path="res://game/players/stats/defense_curve.tres" type="Curve" id=3]
+[ext_resource path="res://game/players/jobs/VapeRider.tres" type="Resource" id=4]
 [ext_resource path="res://game/players/stats/mana_curve.tres" type="Curve" id=5]
 [ext_resource path="res://game/players/stats/speed_curve.tres" type="Curve" id=6]
 [ext_resource path="res://game/players/stats/strength_curve.tres" type="Curve" id=7]
+
+[sub_resource type="Curve" id=1]
+max_value = 1024.0
+_data = [ Vector2( 0.0232011, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 1024 ), 0.0, 0.0, 0, 0 ]
 
 [resource]
 resource_local_to_scene = true
@@ -16,6 +21,8 @@ max_mana_curve = ExtResource( 5 )
 strength_curve = ExtResource( 7 )
 defense_curve = ExtResource( 3 )
 speed_curve = ExtResource( 6 )
+experience_set_curve = SubResource( 1 )
+job = ExtResource( 4 )
 health = 0
 mana = 0
 max_health = 30

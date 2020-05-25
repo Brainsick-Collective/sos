@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://game/players/inventory/ItemDatabase.gd" type="Script" id=1]
 [ext_resource path="res://game/players/inventory/items/equipment/sword/Sword.tscn" type="PackedScene" id=2]
@@ -19,6 +19,8 @@
 [ext_resource path="res://game/players/inventory/items/equipment/shield/TrashCanLid.tscn" type="PackedScene" id=17]
 [ext_resource path="res://game/players/inventory/items/equipment/shield/V-WoodShield.tscn" type="PackedScene" id=18]
 [ext_resource path="res://game/players/inventory/items/equipment/shield/SmallShield.tscn" type="PackedScene" id=19]
+[ext_resource path="res://game/players/inventory/items/equipment/magic/Zap.tscn" type="PackedScene" id=20]
+[ext_resource path="res://game/players/inventory/items/equipment/magic/Ward.tscn" type="PackedScene" id=21]
 
 [node name="ItemDatabase" type="Node"]
 script = ExtResource( 1 )
@@ -61,3 +63,7 @@ price = 5
 [node name="TrashCanLid" parent="." instance=ExtResource( 17 )]
 
 [node name="V-WoodShield" parent="." instance=ExtResource( 18 )]
+
+[node name="Zap" parent="." instance=ExtResource( 20 )]
+
+[node name="Ward" parent="." instance=ExtResource( 21 )]

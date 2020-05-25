@@ -31,6 +31,7 @@ func _after_cutscene(curr_cutscene):
         queue.play_queue()
     else:
         first_turn = false
+    SoundManager.play_bgm(board.get_board().bgm)
 
 #func _process(_delta):
 #  if  Input.is_joy_known(0):
@@ -54,6 +55,7 @@ func enter_space_scene(player_pawn, scene):
         scene.connect("tree_exited", self, "resolve_scene")
         if scene is CombatArena:
             $UI/Transition/AnimationPlayer.play("versus")
+            SoundManager.play_bgm("battle1")
             yield($UI/Transition, "transitioned")
             remove_child(board)
             add_child(scene)
@@ -96,18 +98,18 @@ func play_transition():
 func resolve_scene():
     print("resolving scene")
     add_child(board)
-    print($UI/Transition/AnimationPlayer.is_playing())
+    SoundManager.play_bgm(board.get_board().bgm)
     if $UI/Transition/AnimationPlayer.is_playing():
         yield($UI/Transition/AnimationPlayer, "animation_finished")
     if cutscene:
         play_cutscene(cutscene)
     else:
         queue.play_queue()
-
-func _build_encounter(pawn, enemy, spawner):
-    var combat = CombatArenaScene.instance()
-    combat.setup(pawn.get_actor(), enemy, spawner)
-    return combat
+#
+#func _build_encounter(pawn, enemy, spawner):
+#    var combat = CombatArenaScene.instance()
+#    combat.setup(pawn.get_actor(), enemy, spawner)
+#    return combat
 
 func _on_move_finished(player, scene):
     print("back to game")

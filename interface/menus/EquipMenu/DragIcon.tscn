@@ -19,4 +19,8 @@ script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="ray" type="RayCast2D" parent="."]
+position = Vector2( 32.8944, 31.6292 )
+collide_with_areas = true
 [connection signal="gui_input" from="." to="." method="_on_gui_input"]

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/complete_fanfare.wav-86c5d444af80beca4e4844c4ef14a047.sample"
+
+[deps]
+
+source_file="res://assets/sounds/SFX/complete_fanfare.wav"
+dest_files=[ "res://.import/complete_fanfare.wav-86c5d444af80beca4e4844c4ef14a047.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

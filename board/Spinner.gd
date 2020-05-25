@@ -38,6 +38,7 @@ func _unhandled_input(event):
         spin_decaying = true
 
 func _on_Timer_timeout():
+    SoundManager.play_se("beep", true, false)
     if spin_decaying:
         if spin_decay <= 0:
             var new_timer = Timer.new()
@@ -46,6 +47,7 @@ func _on_Timer_timeout():
             new_timer.start(1)
             yield(new_timer, "timeout")
             queue_free()
+            SoundManager.play_se("item_get")
             emit_signal("item_chosen", get_focus_owner().get_item())
         else:
             spin_decay -= 1

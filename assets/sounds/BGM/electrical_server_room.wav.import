@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/electrical_server_room.wav-f8291ae2a197c1cd514735a711f72e35.sample"
+
+[deps]
+
+source_file="res://assets/sounds/BGM/electrical_server_room.wav"
+dest_files=[ "res://.import/electrical_server_room.wav-f8291ae2a197c1cd514735a711f72e35.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=true
+compress/mode=0

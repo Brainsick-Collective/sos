@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/slime3.wav-fcad0aab55cd9a6ee4aa91c45f87768c.sample"
+
+[deps]
+
+source_file="res://assets/sounds/SFX/slime3.wav"
+dest_files=[ "res://.import/slime3.wav-fcad0aab55cd9a6ee4aa91c45f87768c.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

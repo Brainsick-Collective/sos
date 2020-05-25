@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/beads.wav-355c26963063f106c7543eafd3e97ad8.sample"
+
+[deps]
+
+source_file="res://assets/sounds/SFX/RPG Sound Pack/inventory/beads.wav"
+dest_files=[ "res://.import/beads.wav-355c26963063f106c7543eafd3e97ad8.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
