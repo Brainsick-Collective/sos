@@ -4,11 +4,9 @@
 *** TODO Fix button neighbor system for player menu
 *** TODO add zoom to board preview
 *** TODO Add auto move functionality
-*** TODO Add drag and drop to equipment menu
 *** TODO add movement effect items and movement alteration system
 *** TODO Add functionality for Board loading
 *** TODO rework gui element handling from boardcharacter to board / gui
-*** TODO Add better Level up interface
 *** TODO towns (it's TIME)
 *** TODO tutorial cutscene?
 *** TODO look into making an online multiplayer demo
@@ -16,9 +14,8 @@
 *** TODO tool tips
 *** TODO Week rounds / day of the week or month
 *** TODO Random event encounters
-*** TODO Rework stat growth, make it flat rate to stats based on job
-*** TODO add manual stat point allotment
-*** TODO add battle animations
+*** DONE add battle animations
+    CLOSED: [2020-05-25 Mon 17:40]
 *** TODO animate health bar on heal and damage
 *** TODO Remove mobpawn after giveup or runaway
 *** TODO sometimes (once after loading and then using a potion) the board character still moves while player is navigating action menu
@@ -30,14 +27,24 @@
 **** weapon / equipment ?
 **** class
 **** face
-*** TODO battle theater scene for testing /debugging
 *** TODO fix spinners, add animation / notification
 *** TODO fix syndibox
-*** TODO [BUG] every time the inventory is opening, equipment duplicates
+*** TODO FIX MOVE COUNTER 
+*** DONE Add drag and drop to equipment menu
+    CLOSED: [2020-05-24 Sun 19:49]
+*** DONE Add better Level up interface
+    CLOSED: [2020-05-25 Mon 10:56]
+*** DONE Rework stat growth, make it flat rate to stats based on job
+    CLOSED: [2020-05-25 Mon 12:14]
+*** DONE add manual stat point allotment
+    CLOSED: [2020-05-25 Mon 12:14]
+*** DONE battle theater scene for testing /debugging
+    CLOSED: [2020-05-25 Mon 12:15]
+*** DONE [BUG] every time the inventory is opening, equipment duplicates
+    CLOSED: [2020-05-25 Mon 10:58]
 **** should have a functioning auto_advance, i.e. loads full string instantly
 **** should have functioning scroll, where pressing ui_accept speeds up or auto_advances the current string
 **** when a string is being processed and a new string is assigned, abandon current string
-*** TODO FIX MOVE COUNTER 
 *** DONE [#A] Player info screen
     CLOSED: [2020-05-03 Sun 02:55]
 *** DONE make each equipment slot unique
@@ -132,3 +139,4 @@
     CLOSED: [2020-02-11 Tue 10:53]
 *** DONE fix battles to reuse the dice popup when longer than one turn
     CLOSED: [2020-02-13 Thu 13:12]
+*

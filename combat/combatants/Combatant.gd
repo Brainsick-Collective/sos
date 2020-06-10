@@ -94,6 +94,13 @@ func play(string):
         $AnimationPlayer.play(string)
         yield($AnimationPlayer, "animation_finished")
 
+func play_choice(string):
+    if $Skin/AnimatedSprite.animation in ["win", "win_idle"]:
+        return
+    $Skin/AnimatedSprite.play(string + "_chosen")
+    yield($Skin/AnimatedSprite, "animation_finished")
+    $Skin/AnimatedSprite.play(string + "_idle")
+    
 func apply_effect(effect):
     if player.id != -1:
         player.apply_effect(effect)
@@ -118,3 +125,5 @@ func play_attack():
     yield($Tween, "tween_completed")
     emit_signal("attack_finished")
     
+func idle():
+    $Skin/AnimatedSprite.play("idle")

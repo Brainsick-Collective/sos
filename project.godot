@@ -159,6 +159,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://board/Spawners/MobSpawner.gd"
 }, {
+"base": "Area2D",
+"class": "MoveMarker",
+"language": "GDScript",
+"path": "res://board/MoveMarker.gd"
+}, {
 "base": "Popup",
 "class": "Notification",
 "language": "GDScript",
@@ -305,6 +310,7 @@ _global_script_class_icons={
 "Mob": "",
 "MobPawn": "",
 "MobSpawner": "",
+"MoveMarker": "",
 "Notification": "",
 "OffensiveMagic": "",
 "OffensiveMagicAction": "",
@@ -382,6 +388,10 @@ ui_accept={
 , Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":0,"pressure":0.0,"pressed":false,"script":null)
  ]
 }
+
+[rendering]
+
+quality/2d/use_pixel_snap=true
 
 [tiled_importer]
 

@@ -32,6 +32,8 @@ func do_phase(attacker : Combatant, defender : Combatant, attack_move : CombatAc
     if hit.damage > 0:
         play_contact(attacker)
         yield(timer, "timeout")
+        defender.idle()
+        attacker.idle()
         
     
     # if hit has an added effect, play here
@@ -56,7 +58,7 @@ func play_contact(attacker):
 func play_effect(combatant, move, anim : bool = true):
     timer.start()
     label_handler.spawn_label(move.name, combatant, "effect")
-    if anim:
-        combatant.play(move.anim_name) 
+    if anim and not (combatant is Mob): # TODO temp
+        combatant.play_choice(move.anim_name) 
 
     

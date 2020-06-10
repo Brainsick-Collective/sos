@@ -1,17 +1,24 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://interface/GUI/GUI.tscn" type="PackedScene" id=1]
 [ext_resource path="res://board/BoardManager.gd" type="Script" id=2]
 [ext_resource path="res://assets/new_crosshairs/c_cross.png" type="Texture" id=3]
 [ext_resource path="res://assets/new_crosshairs/c_dot.png" type="Texture" id=4]
 [ext_resource path="res://board/BoardViewer.gd" type="Script" id=5]
+[ext_resource path="res://assets/new_crosshairs/c_dot_hit.png" type="Texture" id=6]
 [ext_resource path="res://board/Levels/Fooberg/Fooberg.tscn" type="PackedScene" id=7]
+[ext_resource path="res://assets/new_crosshairs/c_cross_hit.png" type="Texture" id=8]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
 "frames": [ ExtResource( 3 ), ExtResource( 4 ) ],
 "loop": true,
 "name": "default",
+"speed": 2.0
+}, {
+"frames": [ ExtResource( 8 ), ExtResource( 6 ) ],
+"loop": true,
+"name": "selectable",
 "speed": 2.0
 } ]
 
@@ -30,10 +37,10 @@ script = ExtResource( 5 )
 
 [node name="Anim" type="AnimatedSprite" parent="BoardViewer"]
 frames = SubResource( 1 )
-frame = 1
 playing = true
 
 [node name="Camera2D" type="Camera2D" parent="BoardViewer"]
+zoom = Vector2( 2, 2 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="BoardViewer"]
 polygon = PoolVector2Array( -66.7205, -62.2228, -65.7499, 62.0161, 73.0482, 62.0161, 69.1658, -64.1641 )
@@ -48,8 +55,6 @@ collide_with_areas = true
 visible = false
 anchor_left = 0.000873677
 anchor_right = 1.00087
-margin_top = 0.0
-margin_bottom = 0.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 6720, 1216 )

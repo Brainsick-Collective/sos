@@ -11,6 +11,6 @@ modifier = null
 description = "defend with your shield and armor"
 base_damage = null
 success_chance = 0.95
-anim_name = "effect"
+anim_name = "defend"
 effect_chance = 0.0
 tags = [  ]

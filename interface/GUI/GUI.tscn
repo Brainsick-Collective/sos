@@ -250,10 +250,6 @@ tracks/3/keys = {
 pause_mode = 1
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -6.39624
-margin_top = -6.6015
-margin_right = -6.39624
-margin_bottom = -6.60156
 theme = ExtResource( 2 )
 script = ExtResource( 4 )
 __meta__ = {
@@ -519,6 +515,21 @@ anims/transition = SubResource( 4 )
 
 [node name="PlayerMenu" parent="." instance=ExtResource( 12 )]
 visible = false
+
+[node name="automove" type="Button" parent="."]
+visible = false
+anchor_left = 0.500989
+anchor_top = 0.5
+anchor_right = 0.500989
+anchor_bottom = 0.5
+margin_left = -120.0
+margin_top = 326.759
+margin_right = 120.0
+margin_bottom = 364.759
+text = "Auto Move"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="visibility_changed" from="ActionMenu" to="." method="_on_ActionMenu_visibility_changed"]
 [connection signal="pressed" from="ActionMenu/MarginContainer/VBoxContainer/RollButton" to="." method="_on_RollButton_pressed"]
 [connection signal="pressed" from="ActionMenu/MarginContainer/VBoxContainer/InventoryButton" to="." method="_on_InventoryButton_pressed"]
@@ -526,3 +537,4 @@ visible = false
 [connection signal="pressed" from="ActionMenu/MarginContainer/VBoxContainer/InfoButton" to="." method="_on_InfoButton_pressed"]
 [connection signal="pressed" from="ActionMenu/MarginContainer/VBoxContainer/SystemButton" to="." method="_on_SystemButton_pressed"]
 [connection signal="popup_hide" from="MoveConfirmPopup" to="." method="on_move_confirm_choice"]
+[connection signal="pressed" from="automove" to="." method="_on_automove_pressed"]

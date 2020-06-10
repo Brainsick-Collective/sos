@@ -48,6 +48,7 @@ func _process(_delta):
     
 func show_moves(_num):
     $Counter.show()
+#    $automove.show()
     
 func set_preview_actor(actors):
     $MapPreviewGUI.show()
@@ -80,3 +81,5 @@ func open_player_menu(menu_string):
     yield($PlayerMenu, "completed")
     last_focus.grab_focus()
     
+func _on_automove_pressed():
+    board.show_automove()

@@ -44,6 +44,9 @@ func initialize(_player):
     fighter2.stats.connect("leveled_up", self, "level_up", [fighter2.stats])
     fighter1chose = false
     fighter2chose = false
+    if not fighter1 is Mob:
+        fighter1.get_node("Skin/AnimatedSprite").show()
+        fighter1.get_node("Skin/Sprite").hide()
     $"1".add_child(fighter1)
     $UI/GUI/Combatant1Panel.set_actor(fighter1)
     $UI/GUI/Combatant2Panel.set_actor(fighter2)
@@ -90,16 +93,17 @@ func do_phase(attacker, defender, attacker_move, defender_move):
     fighter2chose = false
     phase_handler.do_phase(attacker, defender, attacker_move, defender_move)
     yield(phase_handler, "phase_completed")
-
-    round_num += 1
     
-    if round_num % 2 == 1:
-        isfighter1First = !isfighter1First
-        $UI/CombatInterface.do_combat_phase(isfighter1First)
-        set_process_input(true)
-        $MatchupInterface.set_predictions(defender)
-    elif not exiting:
-        _exit_transition()
+    if not exiting:
+        round_num += 1
+        
+        if round_num % 2 == 1:
+            isfighter1First = !isfighter1First
+            $UI/CombatInterface.do_combat_phase(isfighter1First)
+            set_process_input(true)
+            $MatchupInterface.set_predictions(defender)
+        elif not exiting:
+            _exit_transition()
 
 func _input(event):
     for key in choices:
@@ -125,7 +129,6 @@ func on_turnorder_popup_hide():
 func on_won_battle(killed, reward):
     exiting = true
     SoundManager.play_se("fanfare", true, false)
-    
     var winner : Combatant
     if killed == fighter1:
         winner = fighter2
@@ -135,6 +138,7 @@ func on_won_battle(killed, reward):
     if winner is Mob:
         winner = null
     if winner:
+        winner.play_choice("win")
         winner.player.receive_item(reward)
         if reward:
             var reward_note = Notification.instance()

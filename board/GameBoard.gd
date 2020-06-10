@@ -5,6 +5,8 @@ class_name Board
 enum CELL_TYPES {PATH, SPACE, GRASS, BUSH, DIRT}
 var CombatArena = preload("res://combat/CombatArena.tscn")
 var ChoseEncounterPanel = preload("res://interface/GUI/ChoseEncounterPanel.tscn")
+var marker = preload("res://board/MoveMarker.tscn")
+
 export (String) var bgm
 
 func initialize():
@@ -28,7 +30,14 @@ func find_space(tile, direction):
 func get_num_spaces(start, end):
     var path_spaces = $Pathfinder.find_path(world_to_map(start),world_to_map(end))
     return path_spaces.size() - 1
-    
+
+func get_moves(start, end):
+    var cell_arr : Array = $Pathfinder.find_path(start, end)
+    for index in cell_arr.size():
+        if $Spaces.get_cellv(cell_arr[index]) == -1:
+            cell_arr.remove(index)
+    return cell_arr
+
 func get_space_scene(player_pawn):
     print("getting space scene from game board")
     if !player_pawn.player.stats.is_alive:
@@ -71,6 +80,13 @@ func _build_encounter(pawn, enemy_pawn, spawner):
 #    combat.set_spawner(spawner)
     return combat
 
+func show_automoves(pawn : PlayerPawn):
+    var spaces = $Pathfinder.get_available_moves(pawn.position, pawn.moves_left)
+    for space in spaces:
+        var space_marker = marker.instance()
+        add_child(space_marker)
+        space_marker.position = space
+        
 #TODO fix this
 func _build_chose_encounter(pawns, spawner):
     var panel = ChoseEncounterPanel.instance()

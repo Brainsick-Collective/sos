@@ -3,7 +3,7 @@ extends Spawner
 class_name MobSpawner
 
 export (bool) var is_boss = false
-onready var MobPawn = preload("res://board/pawns/MobPawn.tscn")
+onready var mob_pawn = preload("res://board/pawns/MobPawn.tscn")
 
 func _ready():
     for child in $Mobs.get_children():
@@ -15,7 +15,7 @@ func _build_scene(player):
     return combat_arena
 
 func spawn_pawn(mob = $Mobs.get_child(0)):
-    var pawn = MobPawn.instance()
+    var pawn = mob_pawn.instance()
     add_child(pawn)
     pawn.initialize(self, mob, null)
     return pawn
@@ -30,6 +30,11 @@ func get_mob():
             choice -= child.spawn_rate
     if !mob:      
         mob = $Mobs.get_child(0)
+        
+    for child in get_children():
+        if child is MobPawn:
+            return child
+            
     var pawn = spawn_pawn(mob)
     return pawn
 

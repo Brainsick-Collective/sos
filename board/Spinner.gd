@@ -38,13 +38,16 @@ func _unhandled_input(event):
         spin_decaying = true
 
 func _on_Timer_timeout():
-    SoundManager.play_se("beep", true, false)
+    
     if spin_decaying:
         if spin_decay <= 0:
             var new_timer = Timer.new()
             new_timer.one_shot = true
             add_child(new_timer)
             new_timer.start(1)
+            for child in $Row.get_child_count():
+                if child != curr_item:
+                    $Row.get_child(child).hide()
             yield(new_timer, "timeout")
             queue_free()
             SoundManager.play_se("item_get")
@@ -52,7 +55,7 @@ func _on_Timer_timeout():
         else:
             spin_decay -= 1
             timer.wait_time += .03
-
+    SoundManager.play_se("beep", true, false)
     curr_item = (curr_item + 1) % item_num
     $Row.get_child(curr_item).grab_focus()
     timer.start()

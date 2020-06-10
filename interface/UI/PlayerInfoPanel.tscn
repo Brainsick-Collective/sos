@@ -18,54 +18,62 @@ __meta__ = {
 margin_right = 1920.0
 margin_bottom = 1080.0
 size_flags_vertical = 3
+custom_constants/separation = 64
 
-[node name="TextureRect" type="TextureRect" parent="Row"]
-margin_right = 637.0
+[node name="Column" type="VBoxContainer" parent="Row"]
+margin_right = 400.0
 margin_bottom = 1080.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
+
+[node name="TextureRect" type="TextureRect" parent="Row/Column"]
+margin_top = 187.0
+margin_right = 400.0
+margin_bottom = 687.0
+rect_min_size = Vector2( 400, 500 )
+size_flags_vertical = 6
 texture = ExtResource( 3 )
 expand = true
 stretch_mode = 6
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Row"]
-margin_left = 641.0
-margin_right = 1278.0
-margin_bottom = 1080.0
-size_flags_horizontal = 3
-
-[node name="CondensedPlayerPanel" parent="Row/VBoxContainer" instance=ExtResource( 4 )]
+[node name="CondensedPlayerPanel" parent="Row/Column" instance=ExtResource( 4 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 194.0
-margin_right = 637.0
-margin_bottom = 344.0
-rect_min_size = Vector2( 0, 150 )
+margin_top = 879.0
+margin_right = 400.0
+margin_bottom = 1079.0
+rect_min_size = Vector2( 0, 200 )
 size_flags_horizontal = 3
-size_flags_vertical = 6
+size_flags_vertical = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Row"]
+margin_left = 464.0
+margin_top = 828.0
+margin_right = 1160.0
+margin_bottom = 1080.0
+size_flags_horizontal = 3
+size_flags_vertical = 8
+alignment = 2
 
 [node name="grid" type="GridContainer" parent="Row/VBoxContainer"]
-margin_top = 542.0
-margin_right = 637.0
-margin_bottom = 1080.0
+margin_right = 696.0
+margin_bottom = 252.0
 size_flags_vertical = 3
 
 [node name="Label" type="Label" parent="Row/VBoxContainer/grid"]
-margin_right = 637.0
+margin_right = 696.0
 margin_bottom = 21.0
 size_flags_horizontal = 3
 text = "EXP"
 
 [node name="Exp" type="PanelContainer" parent="Row/VBoxContainer/grid"]
 margin_top = 25.0
-margin_right = 637.0
+margin_right = 696.0
 margin_bottom = 60.0
 size_flags_horizontal = 3
 
 [node name="Label" type="Label" parent="Row/VBoxContainer/grid/Exp"]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 630.0
+margin_right = 689.0
 margin_bottom = 28.0
 size_flags_horizontal = 3
 text = "next"
@@ -75,21 +83,21 @@ __meta__ = {
 
 [node name="Label2" type="Label" parent="Row/VBoxContainer/grid"]
 margin_top = 64.0
-margin_right = 637.0
+margin_right = 696.0
 margin_bottom = 85.0
 size_flags_horizontal = 3
 text = "NEXT"
 
 [node name="Next" type="PanelContainer" parent="Row/VBoxContainer/grid"]
 margin_top = 89.0
-margin_right = 637.0
+margin_right = 696.0
 margin_bottom = 124.0
 size_flags_horizontal = 3
 
 [node name="Label" type="Label" parent="Row/VBoxContainer/grid/Next"]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 630.0
+margin_right = 689.0
 margin_bottom = 28.0
 size_flags_horizontal = 3
 text = "next"
@@ -99,21 +107,21 @@ __meta__ = {
 
 [node name="Label3" type="Label" parent="Row/VBoxContainer/grid"]
 margin_top = 128.0
-margin_right = 637.0
+margin_right = 696.0
 margin_bottom = 149.0
 size_flags_horizontal = 3
 text = "JOB"
 
 [node name="Job" type="PanelContainer" parent="Row/VBoxContainer/grid"]
 margin_top = 153.0
-margin_right = 637.0
+margin_right = 696.0
 margin_bottom = 188.0
 size_flags_horizontal = 3
 
 [node name="Label" type="Label" parent="Row/VBoxContainer/grid/Job"]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 630.0
+margin_right = 689.0
 margin_bottom = 28.0
 size_flags_horizontal = 3
 text = "next"
@@ -123,21 +131,21 @@ __meta__ = {
 
 [node name="Label4" type="Label" parent="Row/VBoxContainer/grid"]
 margin_top = 192.0
-margin_right = 637.0
+margin_right = 696.0
 margin_bottom = 213.0
 size_flags_horizontal = 3
 text = "NET WORTH"
 
 [node name="NewWorth" type="PanelContainer" parent="Row/VBoxContainer/grid"]
 margin_top = 217.0
-margin_right = 637.0
+margin_right = 696.0
 margin_bottom = 252.0
 size_flags_horizontal = 3
 
 [node name="Label" type="Label" parent="Row/VBoxContainer/grid/NewWorth"]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 630.0
+margin_right = 689.0
 margin_bottom = 28.0
 size_flags_horizontal = 3
 text = "next"
@@ -146,7 +154,7 @@ __meta__ = {
 }
 
 [node name="Control" type="Control" parent="Row"]
-margin_left = 1282.0
+margin_left = 1224.0
 margin_right = 1920.0
 margin_bottom = 1080.0
 size_flags_horizontal = 3

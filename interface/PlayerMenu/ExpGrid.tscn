@@ -1,0 +1,110 @@
+[gd_scene format=2]
+
+[node name="VBoxContainer" type="VBoxContainer"]
+margin_left = 464.0
+margin_top = 828.0
+margin_right = 1160.0
+margin_bottom = 1080.0
+size_flags_horizontal = 3
+size_flags_vertical = 8
+alignment = 2
+
+[node name="grid" type="GridContainer" parent="."]
+margin_right = 696.0
+margin_bottom = 252.0
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="grid"]
+margin_right = 696.0
+margin_bottom = 21.0
+size_flags_horizontal = 3
+text = "EXP"
+
+[node name="Exp" type="PanelContainer" parent="grid"]
+margin_top = 25.0
+margin_right = 696.0
+margin_bottom = 60.0
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="grid/Exp"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 689.0
+margin_bottom = 28.0
+size_flags_horizontal = 3
+text = "next"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="grid"]
+margin_top = 64.0
+margin_right = 696.0
+margin_bottom = 85.0
+size_flags_horizontal = 3
+text = "NEXT"
+
+[node name="Next" type="PanelContainer" parent="grid"]
+margin_top = 89.0
+margin_right = 696.0
+margin_bottom = 124.0
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="grid/Next"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 689.0
+margin_bottom = 28.0
+size_flags_horizontal = 3
+text = "next"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label3" type="Label" parent="grid"]
+margin_top = 128.0
+margin_right = 696.0
+margin_bottom = 149.0
+size_flags_horizontal = 3
+text = "JOB"
+
+[node name="Job" type="PanelContainer" parent="grid"]
+margin_top = 153.0
+margin_right = 696.0
+margin_bottom = 188.0
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="grid/Job"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 689.0
+margin_bottom = 28.0
+size_flags_horizontal = 3
+text = "next"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label4" type="Label" parent="grid"]
+margin_top = 192.0
+margin_right = 696.0
+margin_bottom = 213.0
+size_flags_horizontal = 3
+text = "NET WORTH"
+
+[node name="NewWorth" type="PanelContainer" parent="grid"]
+margin_top = 217.0
+margin_right = 696.0
+margin_bottom = 252.0
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="grid/NewWorth"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 689.0
+margin_bottom = 28.0
+size_flags_horizontal = 3
+text = "next"
+__meta__ = {
+"_edit_use_anchors_": false
+}

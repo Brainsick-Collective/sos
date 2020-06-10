@@ -6,9 +6,10 @@ extends Control
 export(PackedScene) var ItemButton
 var inventory
 
-onready var _item_grid = $Margin/VBoxContainer/HBoxContainer/VBoxContainer/ScrollContainer/Grid
-onready var _description_label = $Margin/VBoxContainer/DescriptionPanel/Label
-onready var _cash_label = $Margin/VBoxContainer/HBoxContainer/VBoxContainer/Label
+onready var _item_grid = $Col3/ScrollContainer/Grid
+onready var _description_label = $Col3/DescriptionPanel/Label
+onready var _prog = $Col2/ProgressStats/grid
+
 var player
 func set_inventory(inv):
     inventory = inv
@@ -23,6 +24,11 @@ func initialize(_player):
         item_button.connect("pressed", self, "_on_ItemButton_pressed", [item])
 
     _item_grid.initialize()
+    $Col1/CondensedPlayerPanel.set_condensed(player)
+    $Col2/ProgressStats/grid/Exp/Label.text = String(player.stats.xp)
+    $Col2/ProgressStats/grid/Next/Label.text = String(player.stats.next_level_xp - player.stats.xp)
+    $Col2/ProgressStats/grid/Job/Label.text = player.stats.job.job_name
+    $Col2/ProgressStats/grid/NewWorth/Label.text = String(player.get_net_worth())
 
     inventory.connect("item_added", self, "create_item_button")
 

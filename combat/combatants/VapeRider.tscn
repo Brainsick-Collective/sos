@@ -23,6 +23,9 @@ texture = ExtResource( 4 )
 position = Vector2( 0.0191681, -1.2319 )
 size = Vector2( 100, 100 )
 
+[node name="AnimatedSprite" parent="Skin" index="2"]
+frame = 7
+
 [node name="BuffParticles" parent="." index="8"]
 position = Vector2( -3.12901, 41.7848 )
 lifetime = 1.5

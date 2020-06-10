@@ -37,7 +37,7 @@ export(int) var speed = 0 setget set_speed,_get_speed
 export(int) var magic = 0 setget ,_get_magic
 export(int) var xp = 0 setget set_xp, get_xp
 export(int) var kill_xp = 0
-var next_level_xp = 15
+var next_level_xp = 6
 
 
 var is_alive : bool setget ,_is_alive
@@ -118,6 +118,7 @@ func set_xp(value : int):
     xp = value
     var l = level
     var points_gained = 0
+    next_level_xp = get_level_xp(l)
     
     while xp >= next_level_xp:
         l+= 1

@@ -7,17 +7,14 @@ var unused_points = 0
 var orig_points = 0
 var stats
 
-func _ready():
-    "level up"
-    pass
-
 func initialize(old, new, points, stats_obj):
     old_stats = old
     new_stats = new
     stats = stats_obj
     unused_points = points
     orig_points = points
-    
+
+func _ready():
     for stat in $Panel/MarginContainer/VBoxContainer/OldStats.get_children():
         stat.text = String(old_stats[stat.name])
     

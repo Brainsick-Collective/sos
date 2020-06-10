@@ -7,3 +7,6 @@
 script = ExtResource( 1 )
 hurt_sound = "slime"
 death_sound = "slime"
+
+[node name="AnimatedSprite" parent="Skin" index="2"]
+frame = 4

@@ -12,7 +12,7 @@ func set_actor(a):
 
 func set_condensed(a):
     actor = a
-    $column/row/name.text = a.actor_name
-    $column/row/level.text = String(a.stats.level)
-    $column/HealthBar.set_actor(a)
-    $column/StatsRow.initialize(a.stats)
+    $margins/column/row/name.text = a.actor_name
+    $margins/column/row/level.text = "Lv. " + String(a.stats.level)
+    $margins/column/HealthBar.set_actor(a)
+    $margins/column/StatsRow.initialize(a.stats)

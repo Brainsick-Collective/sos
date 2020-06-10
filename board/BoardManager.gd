@@ -8,10 +8,12 @@ onready var board = get_board()
 onready var GUI = $UI/GUI
 onready var BoardNotification = preload("res://interface/UI/BoardNotification.tscn")
 onready var CombatArenaScene = preload("res://combat/CombatArena.tscn")
+
 signal turn_finished(player, scene)
+
 var game
 var num_players
-var current_player
+var current_player : PlayerPawn
 var turn_ind
 
 func _ready():
@@ -104,6 +106,9 @@ func _build_encounter(pawn, enemy, spawner):
     var combat = CombatArenaScene.instance()
     combat.setup(pawn.get_actor(), enemy, spawner)
     return combat
+
+func auto_move(pos, last_camera_pos):
+    current_player.auto_move(board.get_moves(current_player.position, pos), last_camera_pos)
     
 func new_turn_on_load():
     refresh_pathing()
@@ -134,6 +139,12 @@ func return_to_player(last_camera_position):
     $BoardViewer.set_physics_process(false)
     current_player.center_camera(last_camera_position)
     current_player.set_process_input(true)
+    $BoardViewer.moving = false
+    
+    for child in board.get_children():
+        if child is MoveMarker:
+            child.queue_free()
+    
     GUI.show_action_menu()
     
 func enter_shop(player_pawn, location):
@@ -144,6 +155,11 @@ func play_gui(gui : Node):
 func show_confirm_popup():
     $UI/GUI/MoveConfirmPopup.show()
 
+func show_automove():
+    var accesssible_spaces = board.show_automoves(current_player)
+    view_board()
+    $BoardViewer.moving = true
+    
 func move_camera(keyword):
     var pos = get_board().get_pos(keyword)
     $Tween.interpolate_property($Camera2D, "position", null, pos, .5, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
@@ -151,6 +167,8 @@ func move_camera(keyword):
     $Tween.start()
     yield($Tween, "tween_completed")
 
+func on_automove_selected(moves, last_cam_pos):
+    current_player.auto_move(moves, last_cam_pos)
     
 func get_board():
     for child in get_children():

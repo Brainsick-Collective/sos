@@ -73,7 +73,13 @@ func _process(_delta):
         if next_space :
             move_to(board.map_to_world(next_space) + board.cell_size / 2)
         _direction = Vector2()
-    
+
+func auto_move(moves, last_cam_pos):
+    center_camera(last_cam_pos)
+    set_process_input(false)
+    for pos in moves:
+        move_to(pos)
+
 func move_to(target_position):
     set_process(false)
     # Move the node to the target cell instantly,

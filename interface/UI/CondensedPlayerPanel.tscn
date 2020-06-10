@@ -15,47 +15,63 @@ margin_bottom = -865.0
 theme = ExtResource( 1 )
 custom_styles/panel = ExtResource( 2 )
 script = ExtResource( 6 )
-
-[node name="column" type="VBoxContainer" parent="."]
-margin_left = 2.0
-margin_top = 2.0
-margin_right = 572.0
-margin_bottom = 213.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="row" type="HBoxContainer" parent="column"]
-margin_right = 570.0
+[node name="margins" type="MarginContainer" parent="."]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 572.0
+margin_bottom = 213.0
+custom_constants/margin_right = 8
+custom_constants/margin_top = 8
+custom_constants/margin_left = 8
+custom_constants/margin_bottom = 8
+
+[node name="column" type="VBoxContainer" parent="margins"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 562.0
+margin_bottom = 203.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="row" type="HBoxContainer" parent="margins/column"]
+margin_right = 554.0
 margin_bottom = 31.0
 
-[node name="name" type="Label" parent="column/row"]
+[node name="name" type="Label" parent="margins/column/row"]
 margin_right = 254.0
 margin_bottom = 31.0
 size_flags_vertical = 0
 custom_fonts/font = ExtResource( 5 )
 text = "Player Name"
-align = 1
+
+[node name="level" type="Label" parent="margins/column/row"]
+margin_left = 383.0
+margin_top = 7.0
+margin_right = 440.0
+margin_bottom = 23.0
+size_flags_horizontal = 6
+size_flags_vertical = 6
+text = "Lv. 4"
+align = 2
 valign = 1
 
-[node name="level" type="Label" parent="column/row"]
-margin_left = 270.0
-margin_top = 7.0
-margin_right = 270.0
-margin_bottom = 23.0
-
-[node name="HealthBar" parent="column" instance=ExtResource( 3 )]
+[node name="HealthBar" parent="margins/column" instance=ExtResource( 3 )]
 margin_left = 0.0
 margin_top = 47.0
-margin_right = 570.0
+margin_right = 554.0
 margin_bottom = 67.0
 rect_min_size = Vector2( 0, 20 )
 size_flags_vertical = 0
 
-[node name="StatsRow" parent="column" instance=ExtResource( 4 )]
+[node name="StatsRow" parent="margins/column" instance=ExtResource( 4 )]
 margin_left = 0.0
 margin_top = 83.0
-margin_right = 570.0
-margin_bottom = 211.0
+margin_right = 554.0
+margin_bottom = 195.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
