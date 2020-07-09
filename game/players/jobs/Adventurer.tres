@@ -1,0 +1,27 @@
+[gd_resource type="Resource" load_steps=8 format=2]
+
+[ext_resource path="res://game/players/jobs/Job.gd" type="Script" id=1]
+[ext_resource path="res://combat/Actions/moves/Strike.tres" type="Resource" id=2]
+[ext_resource path="res://combat/Actions/moves/Defend.tres" type="Resource" id=3]
+[ext_resource path="res://combat/Actions/moves/Rally.tres" type="Resource" id=4]
+[ext_resource path="res://combat/Actions/moves/GiveUp.tres" type="Resource" id=5]
+[ext_resource path="res://combat/Actions/moves/Attack.tres" type="Resource" id=6]
+[ext_resource path="res://combat/Actions/moves/Parry.tres" type="Resource" id=7]
+
+[resource]
+script = ExtResource( 1 )
+job_name = "Adventurer"
+off_normal = ExtResource( 6 )
+off_special = ExtResource( 2 )
+off_effect = ExtResource( 4 )
+def_normal = ExtResource( 3 )
+def_special = ExtResource( 7 )
+def_effect = ExtResource( 5 )
+stat_boosts = {
+"defense": 0,
+"magic": 0,
+"max_health": 0,
+"max_mana": 0,
+"speed": 0,
+"strength": 0
+}

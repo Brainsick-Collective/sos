@@ -53,12 +53,24 @@ func set_moves_from_dict(_moves : Dictionary):
     special.initialize(self)
     var magic = OffensiveMagicAction.new()
     magic.move = moves["offense"]["magic"]
-    $OffenseMoves.add_child(magic)
-    magic.initialize(self)
+    if magic.move:
+        $OffenseMoves.add_child(magic)
+        magic.initialize(self)
     var effect = EffectAction.new()
     effect.move = moves["offense"]["effect"]
     $OffenseMoves.add_child(effect)
     effect.initialize(self)
+
+func has_move(move_type, isOffense):
+    if isOffense:
+        for move in $OffenseMoves.get_children():
+            if move.move.type == move_type:
+                return true
+    else:
+        for type in moves["defense"]:
+            if moves["defense"][type] and moves["defense"][type].type == move_type:
+                return true
+    return false
 
 func get_move(move_type, isOffense):
     if isOffense:
@@ -67,7 +79,7 @@ func get_move(move_type, isOffense):
                 return move
     else:
         for type in moves["defense"]:
-            if moves["defense"][type].type == move_type:
+            if moves["defense"][type] and moves["defense"][type].type == move_type:
                 return moves["defense"][type]
                 
 func get_stats_string():

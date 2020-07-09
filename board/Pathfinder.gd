@@ -72,3 +72,13 @@ func find_movable_spaces(curr, last, moves_left):
             ret += (find_movable_spaces(point, curr, moves_left))
     
     return ret
+    
+func set_barriers(barriers):
+    for barrier in barriers:
+        var a = calculate_point_index(barrier[0])
+        var b = calculate_point_index(barrier[1])
+        if astar.are_points_connected(a,b):
+            astar.disconnect_points(a,b)
+
+func remove_barrier(a,b):
+    astar.connect_points(calculate_point_index(a), calculate_point_index(b))

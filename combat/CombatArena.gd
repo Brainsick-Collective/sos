@@ -107,10 +107,14 @@ func do_phase(attacker, defender, attacker_move, defender_move):
 
 func _input(event):
     for key in choices:
-        if !fighter1chose and event.is_action_pressed(key + String(fighter1.get_id())):
+        if (!fighter1chose 
+        and event.is_action_pressed(key + String(fighter1.get_id())) 
+        and fighter1.has_move(choice_map[key], isfighter1First)):
             choice1 = choice_map[key]
             fighter1chose = true
-        elif !fighter2chose and !fighter2 is Mob and event.is_action_pressed(key + String(fighter2.get_id())):
+        elif (!fighter2chose 
+        and !fighter2 is Mob and event.is_action_pressed(key + String(fighter2.get_id())) 
+        and fighter2.has_move(choice_map[key], !isfighter1First)):
             choice2 = choice_map[key]
             fighter2chose = true
 

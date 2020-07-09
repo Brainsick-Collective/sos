@@ -32,6 +32,7 @@ func initialize(new_id, pawn, battler):
     stats.reset()
     cash = 100
     stats.connect("level_up", self, "level_up")
+    stats.connect("health_depleted", self, "on_death")
 
 func save_resources():
     stats = GameSerializer.save_resource(stats, SAVE_KEY, "stats")
@@ -84,7 +85,7 @@ func get_net_worth():
     return cash
 
 func on_death():
-    pass
+    board_character.on_killed(self, null)
 
 func on_revive():
     board_character.on_revive()

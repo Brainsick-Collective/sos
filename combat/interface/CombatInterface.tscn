@@ -123,7 +123,6 @@ __meta__ = {
 anchor_right = 1.0
 anchor_bottom = 1.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "Of. Magic"
 align = 1
 valign = 1
 __meta__ = {
@@ -216,14 +215,14 @@ margin_bottom = -136.989
 rect_min_size = Vector2( 100, 30 )
 texture_normal = ExtResource( 5 )
 __meta__ = {
-"_edit_group_": true
+"_edit_group_": true,
+"_edit_use_anchors_": false
 }
 
 [node name="Label" type="Label" parent="Options2/Magic"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "Of. Magic"
 align = 1
 valign = 1
 

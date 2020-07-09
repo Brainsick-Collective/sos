@@ -34,11 +34,6 @@ func _ready():
         
         queue_free()
 
-func _input(event):
-    if (event.is_action_pressed("ui_cancel") 
-        or event.is_action_pressed("ui_accept")):
-        queue_free()
-
 func _process(delta):
     $Panel/MarginContainer/VBoxContainer/UnusedPoints.text = String(unused_points)
     

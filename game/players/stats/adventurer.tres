@@ -1,0 +1,19 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://game/players/stats/Stats.gd" type="Script" id=1]
+[ext_resource path="res://game/players/jobs/Adventurer.tres" type="Resource" id=2]
+
+[resource]
+script = ExtResource( 1 )
+level = 1
+job = ExtResource( 2 )
+health = 10
+mana = 10
+max_health = 10
+max_mana = 10
+strength = 4
+defense = 4
+speed = 4
+magic = 4
+xp = 0
+kill_xp = 2

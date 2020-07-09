@@ -20,12 +20,7 @@ var modifiers = {
 var MAX_LEVEL = 100
 export(int) var level = 1
 var experience_curve = [ 0, 5, 15, 50, 120, 200, 325, 500, 800, 1250 ]
-export(Curve) var max_health_curve
-export(Curve) var max_mana_curve
-export(Curve) var strength_curve
-export(Curve) var defense_curve
-export(Curve) var speed_curve
-export(Curve) var experience_set_curve
+
 export(Resource) var job
 export(int) var health
 export(int) var mana setget set_mana

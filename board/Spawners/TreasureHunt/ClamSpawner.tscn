@@ -1,0 +1,67 @@
+[gd_scene load_steps=20 format=2]
+
+[ext_resource path="res://game/players/stats/defense_curve.tres" type="Curve" id=1]
+[ext_resource path="res://game/players/stats/health_curve.tres" type="Curve" id=2]
+[ext_resource path="res://game/players/stats/speed_curve.tres" type="Curve" id=3]
+[ext_resource path="res://game/players/stats/Stats.gd" type="Script" id=4]
+[ext_resource path="res://combat/Actions/moves/Ward.tres" type="Resource" id=5]
+[ext_resource path="res://game/players/stats/mana_curve.tres" type="Curve" id=6]
+[ext_resource path="res://combat/Actions/moves/Squirt.tres" type="Resource" id=7]
+[ext_resource path="res://game/players/jobs/Job.gd" type="Script" id=8]
+[ext_resource path="res://combat/Actions/moves/Defend.tres" type="Resource" id=9]
+[ext_resource path="res://combat/Actions/moves/ClamStrike.tres" type="Resource" id=10]
+[ext_resource path="res://game/players/stats/strength_curve.tres" type="Curve" id=11]
+[ext_resource path="res://combat/Actions/moves/Glock.tres" type="Resource" id=12]
+[ext_resource path="res://combat/Actions/moves/Rally.tres" type="Resource" id=13]
+[ext_resource path="res://combat/Actions/moves/GiveUp.tres" type="Resource" id=14]
+[ext_resource path="res://mobs/Clam.tscn" type="PackedScene" id=15]
+[ext_resource path="res://combat/Actions/moves/Parry.tres" type="Resource" id=16]
+[ext_resource path="res://board/Spawners/MobSpawner.tscn" type="PackedScene" id=17]
+
+[sub_resource type="Resource" id=1]
+resource_local_to_scene = true
+script = ExtResource( 4 )
+level = 1
+max_health_curve = ExtResource( 2 )
+max_mana_curve = ExtResource( 6 )
+strength_curve = ExtResource( 11 )
+defense_curve = ExtResource( 1 )
+speed_curve = ExtResource( 3 )
+health = 0
+mana = 0
+max_health = 15
+max_mana = 5
+strength = 3
+defense = 0
+speed = 5
+magic = 1
+xp = 0
+kill_xp = 15
+
+[sub_resource type="Resource" id=2]
+resource_local_to_scene = true
+script = ExtResource( 8 )
+job_name = "Clam"
+off_normal = ExtResource( 10 )
+off_special = ExtResource( 12 )
+off_effect = ExtResource( 13 )
+off_magic = ExtResource( 7 )
+def_normal = ExtResource( 9 )
+def_special = ExtResource( 16 )
+def_effect = ExtResource( 14 )
+def_magic = ExtResource( 5 )
+stat_boosts = {
+"defense": 0,
+"magic": 0,
+"max_health": 0,
+"max_mana": 0,
+"speed": 0,
+"strength": 0
+}
+
+[node name="MobSpawner" instance=ExtResource( 17 )]
+
+[node name="Clam" parent="Mobs" index="0" instance=ExtResource( 15 )]
+stats = SubResource( 1 )
+job = SubResource( 2 )
+spawn_rate = 1.0

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://interface/GUI/GUI.tscn" type="PackedScene" id=1]
 [ext_resource path="res://board/BoardManager.gd" type="Script" id=2]
@@ -6,7 +6,6 @@
 [ext_resource path="res://assets/new_crosshairs/c_dot.png" type="Texture" id=4]
 [ext_resource path="res://board/BoardViewer.gd" type="Script" id=5]
 [ext_resource path="res://assets/new_crosshairs/c_dot_hit.png" type="Texture" id=6]
-[ext_resource path="res://board/Levels/Fooberg/Fooberg.tscn" type="PackedScene" id=7]
 [ext_resource path="res://assets/new_crosshairs/c_cross_hit.png" type="Texture" id=8]
 
 [sub_resource type="SpriteFrames" id=1]
@@ -27,8 +26,6 @@ animations = [ {
 ]]
 script = ExtResource( 2 )
 
-[node name="Fooberg" parent="." instance=ExtResource( 7 )]
-
 [node name="BoardViewer" type="KinematicBody2D" parent="."]
 visible = false
 position = Vector2( 444.542, 449.395 )
@@ -37,6 +34,7 @@ script = ExtResource( 5 )
 
 [node name="Anim" type="AnimatedSprite" parent="BoardViewer"]
 frames = SubResource( 1 )
+frame = 1
 playing = true
 
 [node name="Camera2D" type="Camera2D" parent="BoardViewer"]

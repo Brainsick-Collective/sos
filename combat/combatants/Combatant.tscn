@@ -517,7 +517,6 @@ visible = false
 position = Vector2( 4.75842, -174.651 )
 frames = SubResource( 58 )
 animation = "idle"
-frame = 4
 playing = true
 
 [node name="TargetAnchor" type="Position2D" parent="."]

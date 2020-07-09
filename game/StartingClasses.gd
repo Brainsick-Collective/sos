@@ -13,6 +13,7 @@ var FistBladePawn = preload("res://board/pawns/FistSwordPawn.tscn")
 var EyeWizPawn = preload("res://board/pawns/EyeWizPawn.tscn")
 var starting_class_pawns = [VapeRiderPawn, EyeWizPawn, FistBladePawn]
 var list_size = starting_class_combatants.size()
+
 func initialize():
     # Called when the node is added to the scene for the first time.
     # Initialization here

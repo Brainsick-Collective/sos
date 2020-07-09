@@ -66,7 +66,8 @@ func do_combat_phase(choice):
         map_options($Options1, fighter1.moves["defense"])
 func map_options(Option, moves):
     for move in moves:
-        Option.get_child(moves[move].type).get_node("Label").text = moves[move].name
+        if moves[move]:
+            Option.get_child(moves[move].type).get_node("Label").text = moves[move].name
 
 
 func _on_TurnOrderPopup_chosen(_choice):

@@ -235,15 +235,15 @@ tracks/1/keys = {
 
 [sub_resource type="SpriteFrames" id=3]
 animations = [ {
-"frames": [ ExtResource( 25 ) ],
-"loop": true,
-"name": "empty",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 19 ), ExtResource( 18 ) ],
 "loop": true,
 "name": "idle",
 "speed": 2.0
+}, {
+"frames": [ ExtResource( 25 ) ],
+"loop": true,
+"name": "empty",
+"speed": 5.0
 }, {
 "frames": [ ExtResource( 19 ), ExtResource( 18 ), ExtResource( 16 ), ExtResource( 20 ), ExtResource( 12 ), ExtResource( 21 ), ExtResource( 22 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 17 ), ExtResource( 26 ), ExtResource( 23 ), ExtResource( 24 ), ExtResource( 13 ), ExtResource( 25 ) ],
 "loop": false,
@@ -258,15 +258,15 @@ animations = [ {
 
 [sub_resource type="SpriteFrames" id=4]
 animations = [ {
-"frames": [ ExtResource( 37 ) ],
-"loop": false,
-"name": "empty",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 27 ), ExtResource( 38 ) ],
 "loop": true,
 "name": "idle",
 "speed": 2.0
+}, {
+"frames": [ ExtResource( 37 ) ],
+"loop": false,
+"name": "empty",
+"speed": 5.0
 }, {
 "frames": [ ExtResource( 27 ), ExtResource( 38 ), ExtResource( 11 ), ExtResource( 29 ), ExtResource( 31 ), ExtResource( 28 ), ExtResource( 32 ), ExtResource( 30 ), ExtResource( 34 ), ExtResource( 39 ), ExtResource( 40 ), ExtResource( 33 ), ExtResource( 35 ), ExtResource( 36 ), ExtResource( 37 ) ],
 "loop": false,
@@ -281,15 +281,15 @@ animations = [ {
 
 [sub_resource type="SpriteFrames" id=5]
 animations = [ {
-"frames": [ ExtResource( 68 ) ],
-"loop": false,
-"name": "empty",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 46 ), ExtResource( 50 ) ],
 "loop": true,
 "name": "idle",
 "speed": 2.0
+}, {
+"frames": [ ExtResource( 68 ) ],
+"loop": false,
+"name": "empty",
+"speed": 5.0
 }, {
 "frames": [ ExtResource( 46 ), ExtResource( 50 ), ExtResource( 51 ), ExtResource( 54 ), ExtResource( 45 ), ExtResource( 63 ), ExtResource( 55 ), ExtResource( 53 ), ExtResource( 64 ), ExtResource( 65 ), ExtResource( 66 ), ExtResource( 58 ), ExtResource( 67 ), ExtResource( 68 ) ],
 "loop": false,
@@ -304,15 +304,15 @@ animations = [ {
 
 [sub_resource type="SpriteFrames" id=6]
 animations = [ {
-"frames": [ ExtResource( 52 ) ],
-"loop": true,
-"name": "empty",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 47 ), ExtResource( 48 ) ],
 "loop": true,
 "name": "idle",
 "speed": 2.0
+}, {
+"frames": [ ExtResource( 52 ) ],
+"loop": true,
+"name": "empty",
+"speed": 5.0
 }, {
 "frames": [ ExtResource( 47 ), ExtResource( 48 ), ExtResource( 62 ), ExtResource( 61 ), ExtResource( 41 ), ExtResource( 43 ), ExtResource( 59 ), ExtResource( 49 ), ExtResource( 60 ), ExtResource( 56 ), ExtResource( 44 ), ExtResource( 42 ), ExtResource( 57 ), ExtResource( 52 ) ],
 "loop": false,
@@ -377,7 +377,7 @@ position = Vector2( 369.25, 139.484 )
 scale = Vector2( 0.958064, 0.958064 )
 frames = ExtResource( 71 )
 animation = "slow"
-frame = 13
+frame = 10
 playing = true
 
 [node name="MarginContainer" type="MarginContainer" parent="bg/Console"]
@@ -515,16 +515,16 @@ __meta__ = {
 
 [node name="TitleMargins" type="MarginContainer" parent="Column2"]
 margin_right = 1920.0
-margin_bottom = 524.0
+margin_bottom = 458.0
 mouse_filter = 1
 size_flags_horizontal = 7
 size_flags_vertical = 7
 
 [node name="Title" type="Label" parent="Column2/TitleMargins"]
 margin_left = 16.0
-margin_top = 198.0
+margin_top = 165.0
 margin_right = 1904.0
-margin_bottom = 326.0
+margin_bottom = 293.0
 mouse_filter = 1
 size_flags_horizontal = 3
 custom_fonts/font = SubResource( 8 )
@@ -534,7 +534,7 @@ align = 1
 valign = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Column2"]
-margin_top = 782.0
+margin_top = 716.0
 margin_right = 1920.0
 margin_bottom = 1030.0
 
@@ -557,7 +557,7 @@ mouse_filter = 1
 size_flags_horizontal = 4
 text = "Continue"
 
-[node name="SettingsButton" type="Button" parent="Column2/VBoxContainer"]
+[node name="PartyModeButton" type="Button" parent="Column2/VBoxContainer"]
 margin_left = 810.0
 margin_top = 132.0
 margin_right = 1110.0
@@ -565,13 +565,23 @@ margin_bottom = 182.0
 rect_min_size = Vector2( 300, 50 )
 mouse_filter = 1
 size_flags_horizontal = 4
-text = "Settings"
+text = "Party Mode"
 
-[node name="QuitButton" type="Button" parent="Column2/VBoxContainer"]
+[node name="SettingsButton" type="Button" parent="Column2/VBoxContainer"]
 margin_left = 810.0
 margin_top = 198.0
 margin_right = 1110.0
 margin_bottom = 248.0
+rect_min_size = Vector2( 300, 50 )
+mouse_filter = 1
+size_flags_horizontal = 4
+text = "Settings"
+
+[node name="QuitButton" type="Button" parent="Column2/VBoxContainer"]
+margin_left = 810.0
+margin_top = 264.0
+margin_right = 1110.0
+margin_bottom = 314.0
 rect_min_size = Vector2( 300, 50 )
 mouse_filter = 1
 size_flags_horizontal = 4
@@ -584,3 +594,4 @@ stream = ExtResource( 10 )
 [connection signal="pressed" from="Column/Row/Right" to="." method="_on_right_pressed"]
 [connection signal="pressed" from="Column2/VBoxContainer/NewGameButton" to="." method="_menu_selected"]
 [connection signal="pressed" from="Column2/VBoxContainer/ContinueButton" to="." method="_on_continue"]
+[connection signal="pressed" from="Column2/VBoxContainer/PartyModeButton" to="." method="_on_PartyModeButton_pressed"]

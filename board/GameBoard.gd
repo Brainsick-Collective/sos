@@ -6,11 +6,17 @@ enum CELL_TYPES {PATH, SPACE, GRASS, BUSH, DIRT}
 var CombatArena = preload("res://combat/CombatArena.tscn")
 var ChoseEncounterPanel = preload("res://interface/GUI/ChoseEncounterPanel.tscn")
 var marker = preload("res://board/MoveMarker.tscn")
-
+export (String, FILE) var start_scene
 export (String) var bgm
-
+export (Dictionary) var barriers
+var barrier_states
 func initialize():
     $Pathfinder.initialize(self)
+
+    if barriers:
+        for barrier in barriers:
+            barrier_states.append(true)
+        $Pathfinder.set_barriers(barriers.values())
     
 func request_move(pawn, direction):
     var cell_start = world_to_map(pawn.position)

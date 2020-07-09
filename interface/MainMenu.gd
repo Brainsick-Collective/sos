@@ -7,7 +7,7 @@ onready var box = preload("res://addons/SyndiBox/SyndiBox.tscn")
 onready var num_players = 1
 const min_size = 1
 const max_size = 4
-
+var chosen_mode
 func close():
     get_tree().quit()
     
@@ -25,6 +25,10 @@ func _ready():
     $Column2/VBoxContainer/NewGameButton.grab_click_focus()
 
 func _menu_selected():
+    chosen_mode = "story"
+    _start_game_mode()
+    
+func _start_game_mode():
     SoundManager.play_se("click")
     $Column2/VBoxContainer.hide()
     $bg/Console/AnimatedSprite.hide()
@@ -54,7 +58,7 @@ func _on_confirm_pressed():
     SoundManager.play_se("click")
     var menu = CharacterSelectMenu.instance()
     game.add_child(menu)
-    menu.initialize(game, num_players)
+    menu.initialize(game, num_players, chosen_mode)
     queue_free()
 
 func _input(event):
@@ -82,3 +86,9 @@ func _on_right_pressed():
     
     $Controllers.get_child(num_players-1).play("out")
     $Vents.play()
+
+
+func _on_PartyModeButton_pressed():
+    chosen_mode = "party"
+    _start_game_mode()
+    

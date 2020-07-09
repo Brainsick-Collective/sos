@@ -24,7 +24,7 @@ func set_predictions(attacker):
         if attack.type == move_types.effect:
             continue
         for defense in defender.moves["defense"].values():
-            if defense.type == move_types.effect:
+            if !defense or defense.type == move_types.effect:
                 continue
             var option = MatchupOption.instance()
             option.initialize(attacker, attack, defender, defense)

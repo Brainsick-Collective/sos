@@ -2,28 +2,42 @@ extends Node2D
 
 
 onready var START
-onready var Characters = $Fooberg/Characters
 onready var PlayerPawnScene = preload("res://board/pawns/PlayerPawn.tscn")
 onready var board = get_board()
 onready var GUI = $UI/GUI
 onready var BoardNotification = preload("res://interface/UI/BoardNotification.tscn")
 onready var CombatArenaScene = preload("res://combat/CombatArena.tscn")
+onready var fooberg = preload("res://board/Levels/Fooberg/Fooberg.tscn")
+onready var party_map = preload("res://board/Levels/test/PartyMap.tscn")
 
 signal turn_finished(player, scene)
 
 var game
 var num_players
+var Characters 
 var current_player : PlayerPawn
 var turn_ind
 
 func _ready():
     var dummy = PlayerPawnScene.instance()
     current_player = dummy
-    Characters = board.get_node("Characters")
     
-func initialize(characters, _game):
+    
+func initialize(characters, _game, mode):
     game = _game
+    var b
+    if mode == "story":
+        b = fooberg.instance()
+    elif mode == "party":
+        b = party_map.instance()
+        
+    add_child(b)
+    board = b
+    
+    # need this? at least rename
     game.board = self
+    
+    Characters = board.get_node("Characters")
     START = get_board().get_pos("start")
     for character in characters:
         character.set_position(START)
@@ -34,7 +48,11 @@ func initialize(characters, _game):
     turn_ind = Characters.get_child_count() - 1
     board.initialize()
     GUI.initialize(self)
-    $Fooberg/Spawners/MushBossSpawner.spawn_pawn()
+    
+    for spawner in board.get_node("Spawners").get_children():
+        if spawner is MobSpawner and spawner.is_boss:
+            spawner.spawn_pawn()
+    
     current_player = characters[0]
     $Camera2D.current = true
 
@@ -57,8 +75,10 @@ func refresh_after_load():
 
 func start_game():
     GUI.hide()
-    var cutscene = game.load_cutscene("res://dialogue/intro.dialog")
-    yield(cutscene, "tree_exited")
+    if board.start_scene:
+        var cutscene = game.load_cutscene(board.start_scene)
+        if cutscene:
+            yield(cutscene, "tree_exited")
     GUI.show()
     ControlsHandler.give_player_ui_control(game.get_node("Players").get_child(0))
     play_turn(Characters.get_child(0), START)
@@ -93,7 +113,7 @@ func on_board_character_moves_finished():
     var scene = null
 
     if current_player.can_enter_scene:
-        scene = $Fooberg.get_space_scene(current_player)
+        scene = board.get_space_scene(current_player)
         if scene is ChoseEncounterPanel:
             scene.initialize(current_player)
             $UI.add_child(scene)
@@ -114,7 +134,7 @@ func new_turn_on_load():
     refresh_pathing()
     
 func refresh_pathing():
-    $Fooberg/Pathfinder.initialize($Fooberg)
+    board.get_node("Pathfinder").initialize(board)
 
 func next_turn():
     var last_camera_position = current_player.get_camera_position()
