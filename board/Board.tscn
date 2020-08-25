@@ -24,3 +24,7 @@ script = ExtResource( 1 )
 
 [node name="Spawners" type="TileMap" parent="."]
 format = 1
+
+[node name="Barriers" type="TileMap" parent="."]
+cell_size = Vector2( 128, 128 )
+format = 1

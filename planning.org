@@ -1,6 +1,13 @@
 ** Dokapon Clone TODO list
 *** TODO [#A] Make sure transition plays on leaving a shop
 *** TODO [#A] Fix prievew board viewer using tileArea
+*** TODO rewrite request_move logic at pawn level, find node before moving
+*** TODO Move stat refresh to _after_ adding new points
+*** TODO change the look of level up popup when you don't have poitns to add, still show increased stats
+*** TODO [PARTY MODE] Implement board blocker system for mid-boss 
+*** TODO [PARTY MODE] Add event encounters
+*** TODO [PARTY MODE] Add class gain system.
+*** TODO Fix move prediction
 *** TODO Fix button neighbor system for player menu
 *** TODO add zoom to board preview
 *** TODO Add auto move functionality

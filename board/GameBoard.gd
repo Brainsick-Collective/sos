@@ -8,15 +8,9 @@ var ChoseEncounterPanel = preload("res://interface/GUI/ChoseEncounterPanel.tscn"
 var marker = preload("res://board/MoveMarker.tscn")
 export (String, FILE) var start_scene
 export (String) var bgm
-export (Dictionary) var barriers
-var barrier_states
+
 func initialize():
     $Pathfinder.initialize(self)
-
-    if barriers:
-        for barrier in barriers:
-            barrier_states.append(true)
-        $Pathfinder.set_barriers(barriers.values())
     
 func request_move(pawn, direction):
     var cell_start = world_to_map(pawn.position)
@@ -29,8 +23,8 @@ func find_space(tile, direction):
     if space != -1:
         return tile
     space = $Path.get_cellv(tile)
-    if space == CELL_TYPES.PATH:
-        return find_space(tile + direction, direction)
+    if space == CELL_TYPES.PATH and $Barriers.get_cellv(tile) == -1:
+            return find_space(tile + direction, direction)
     return null
     
 func get_num_spaces(start, end):

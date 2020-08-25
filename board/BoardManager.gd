@@ -79,6 +79,8 @@ func start_game():
         var cutscene = game.load_cutscene(board.start_scene)
         if cutscene:
             yield(cutscene, "tree_exited")
+    else:
+        SoundManager.play_bgm(board.bgm)
     GUI.show()
     ControlsHandler.give_player_ui_control(game.get_node("Players").get_child(0))
     play_turn(Characters.get_child(0), START)
