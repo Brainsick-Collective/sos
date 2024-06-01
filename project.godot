@@ -6,347 +6,14 @@
 ;   [section] ; section goes between []
 ;   param=value ; assign values to parameters
 
-config_version=4
-
-_global_script_classes=[ {
-"base": "Resource",
-"class": "ActorPreview",
-"language": "GDScript",
-"path": "res://board/Spawners/ActorPreview.gd"
-}, {
-"base": "CombatAction",
-"class": "AttackAction",
-"language": "GDScript",
-"path": "res://combat/Actions/AttackAction.gd"
-}, {
-"base": "StaticBody2D",
-"class": "Barrier",
-"language": "GDScript",
-"path": "res://board/Actors/Barrier.gd"
-}, {
-"base": "Equipment",
-"class": "BattleMagic",
-"language": "GDScript",
-"path": "res://game/players/inventory/items/equipment/magic/BattleMagic.gd"
-}, {
-"base": "TileMap",
-"class": "Board",
-"language": "GDScript",
-"path": "res://board/GameBoard.gd"
-}, {
-"base": "Notification",
-"class": "BoardNotification",
-"language": "GDScript",
-"path": "res://BoardNotification.gd"
-}, {
-"base": "Item",
-"class": "BuffPotion",
-"language": "GDScript",
-"path": "res://game/players/inventory/items/usable/potions/BuffPotion.gd"
-}, {
-"base": "Item",
-"class": "CashItem",
-"language": "GDScript",
-"path": "res://game/players/inventory/items/Cash.gd"
-}, {
-"base": "Resource",
-"class": "Character",
-"language": "GDScript",
-"path": "res://game/Kabuki/Character.gd"
-}, {
-"base": "NinePatchRect",
-"class": "ChoseEncounterPanel",
-"language": "GDScript",
-"path": "res://interface/GUI/ChoseEncounterPanel.gd"
-}, {
-"base": "Node",
-"class": "CombatAction",
-"language": "GDScript",
-"path": "res://combat/Actions/CombatAction.gd"
-}, {
-"base": "Node2D",
-"class": "CombatArena",
-"language": "GDScript",
-"path": "res://combat/CombatArena.gd"
-}, {
-"base": "Resource",
-"class": "CombatMove",
-"language": "GDScript",
-"path": "res://combat/Actions/moves/CombatMove.gd"
-}, {
-"base": "Node",
-"class": "CombatPhaseEffect",
-"language": "GDScript",
-"path": "res://CombatPhaseEffect.gd"
-}, {
-"base": "Node",
-"class": "CombatPhaseHandler",
-"language": "GDScript",
-"path": "res://CombatPhaseHandler.gd"
-}, {
-"base": "Position2D",
-"class": "Combatant",
-"language": "GDScript",
-"path": "res://combat/combatants/Combatant.gd"
-}, {
-"base": "Control",
-"class": "Cutscene",
-"language": "GDScript",
-"path": "res://interface/UI/Cutscene.gd"
-}, {
-"base": "Node",
-"class": "CutsceneParser",
-"language": "GDScript",
-"path": "res://CutsceneParser.gd"
-}, {
-"base": "BattleMagic",
-"class": "DefensiveMagic",
-"language": "GDScript",
-"path": "res://DefensiveMagic.gd"
-}, {
-"base": "Node",
-"class": "DialogBuilder",
-"language": "GDScript",
-"path": "res://game/Kabuki/Dialog/DialogBuilder.gd"
-}, {
-"base": "Resource",
-"class": "Effect",
-"language": "GDScript",
-"path": "res://actors/effects/Effect.gd"
-}, {
-"base": "CombatAction",
-"class": "EffectAction",
-"language": "GDScript",
-"path": "res://combat/Actions/EffectAction.gd"
-}, {
-"base": "Item",
-"class": "Equipment",
-"language": "GDScript",
-"path": "res://game/players/inventory/items/equipment/Equipment.gd"
-}, {
-"base": "Button",
-"class": "EquipmentSlot",
-"language": "GDScript",
-"path": "res://interface/menus/EquipMenu/EquipmentSlot.gd"
-}, {
-"base": "Reference",
-"class": "Hit",
-"language": "GDScript",
-"path": "res://combat/Hit.gd"
-}, {
-"base": "Node",
-"class": "Inventory",
-"language": "GDScript",
-"path": "res://game/players/inventory/Inventory.gd"
-}, {
-"base": "Node",
-"class": "Item",
-"language": "GDScript",
-"path": "res://game/players/inventory/items/Item.gd"
-}, {
-"base": "Resource",
-"class": "Job",
-"language": "GDScript",
-"path": "res://game/players/jobs/Job.gd"
-}, {
-"base": "Combatant",
-"class": "Mob",
-"language": "GDScript",
-"path": "res://mobs/Mob.gd"
-}, {
-"base": "Pawn",
-"class": "MobPawn",
-"language": "GDScript",
-"path": "res://board/pawns/MobPawn.gd"
-}, {
-"base": "Spawner",
-"class": "MobSpawner",
-"language": "GDScript",
-"path": "res://board/Spawners/MobSpawner.gd"
-}, {
-"base": "Area2D",
-"class": "MoveMarker",
-"language": "GDScript",
-"path": "res://board/MoveMarker.gd"
-}, {
-"base": "Popup",
-"class": "Notification",
-"language": "GDScript",
-"path": "res://interface/UI/notification.gd"
-}, {
-"base": "BattleMagic",
-"class": "OffensiveMagic",
-"language": "GDScript",
-"path": "res://game/players/inventory/items/equipment/magic/OffensiveMagic.gd"
-}, {
-"base": "CombatAction",
-"class": "OffensiveMagicAction",
-"language": "GDScript",
-"path": "res://combat/Actions/OffensiveMagicAction.gd"
-}, {
-"base": "Node2D",
-"class": "Pawn",
-"language": "GDScript",
-"path": "res://board/pawns/Pawn.gd"
-}, {
-"base": "Node",
-"class": "Player",
-"language": "GDScript",
-"path": "res://game/players/Player.gd"
-}, {
-"base": "Inventory",
-"class": "PlayerInventory",
-"language": "GDScript",
-"path": "res://game/players/inventory/PlayerInventory.gd"
-}, {
-"base": "Pawn",
-"class": "PlayerPawn",
-"language": "GDScript",
-"path": "res://board/pawns/PlayerPawn.gd"
-}, {
-"base": "TextureRect",
-"class": "Portrait",
-"language": "GDScript",
-"path": "res://interface/UI/Cutscene/Portrait.gd"
-}, {
-"base": "Task",
-"class": "RandomSelector",
-"language": "GDScript",
-"path": "res://mobs/ai/RandomSelector.gd"
-}, {
-"base": "Node2D",
-"class": "RectExtents",
-"language": "GDScript",
-"path": "res://utils/RectExtents.gd"
-}, {
-"base": "Node",
-"class": "Rewards",
-"language": "GDScript",
-"path": "res://combat/combatants/Rewards.gd"
-}, {
-"base": "Resource",
-"class": "SaveGame",
-"language": "GDScript",
-"path": "res://SaveGame.gd"
-}, {
-"base": "Inventory",
-"class": "ShopInventory",
-"language": "GDScript",
-"path": "res://game/ShopInventory.gd"
-}, {
-"base": "Control",
-"class": "ShopMenu",
-"language": "GDScript",
-"path": "res://interface/menus/ShopMenu.gd"
-}, {
-"base": "Spawner",
-"class": "ShopSpawner",
-"language": "GDScript",
-"path": "res://board/Spawners/ShopSpawner.gd"
-}, {
-"base": "Node",
-"class": "SoundManagerModule",
-"language": "GDScript",
-"path": "res://addons/sound_manager/module/internal_scripts/SoundManager_config.gd"
-}, {
-"base": "Node2D",
-"class": "Spawner",
-"language": "GDScript",
-"path": "res://Spawner.gd"
-}, {
-"base": "CombatAction",
-"class": "SpecialAttackAction",
-"language": "GDScript",
-"path": "res://combat/Actions/SpecialAttackAction.gd"
-}, {
-"base": "Spawner",
-"class": "SpinnerSpawner",
-"language": "GDScript",
-"path": "res://board/Spawners/SpinnerSpawner.gd"
-}, {
-"base": "Effect",
-"class": "StatEffect",
-"language": "GDScript",
-"path": "res://actors/effects/StatEffect.gd"
-}, {
-"base": "Resource",
-"class": "Stats",
-"language": "GDScript",
-"path": "res://game/players/stats/Stats.gd"
-}, {
-"base": "Node",
-"class": "Task",
-"language": "GDScript",
-"path": "res://mobs/ai/Task.gd"
-}, {
-"base": "Area2D",
-"class": "TileArea",
-"language": "GDScript",
-"path": "res://board/Tiles/TileArea.gd"
-} ]
-_global_script_class_icons={
-"ActorPreview": "",
-"AttackAction": "",
-"Barrier": "",
-"BattleMagic": "",
-"Board": "",
-"BoardNotification": "",
-"BuffPotion": "",
-"CashItem": "",
-"Character": "",
-"ChoseEncounterPanel": "",
-"CombatAction": "",
-"CombatArena": "",
-"CombatMove": "",
-"CombatPhaseEffect": "",
-"CombatPhaseHandler": "",
-"Combatant": "",
-"Cutscene": "",
-"CutsceneParser": "",
-"DefensiveMagic": "",
-"DialogBuilder": "",
-"Effect": "",
-"EffectAction": "",
-"Equipment": "",
-"EquipmentSlot": "",
-"Hit": "",
-"Inventory": "",
-"Item": "",
-"Job": "",
-"Mob": "",
-"MobPawn": "",
-"MobSpawner": "",
-"MoveMarker": "",
-"Notification": "",
-"OffensiveMagic": "",
-"OffensiveMagicAction": "",
-"Pawn": "",
-"Player": "",
-"PlayerInventory": "",
-"PlayerPawn": "",
-"Portrait": "",
-"RandomSelector": "",
-"RectExtents": "",
-"Rewards": "",
-"SaveGame": "",
-"ShopInventory": "",
-"ShopMenu": "",
-"ShopSpawner": "",
-"SoundManagerModule": "",
-"Spawner": "",
-"SpecialAttackAction": "",
-"SpinnerSpawner": "",
-"StatEffect": "",
-"Stats": "",
-"Task": "",
-"TileArea": ""
-}
+config_version=5
 
 [application]
 
 config/name="Save Our System"
 config/description="A co-op rpg with a board game playstyle"
 run/main_scene="res://game/Game.tscn"
+config/features=PackedStringArray("4.2")
 config/icon="res://assets/animated_sprites/console_sprites/magicclass_card.png"
 rakugo/version="0.0.1"
 rakugo/game_credits="Your Company"
@@ -374,25 +41,23 @@ SoundManager="*res://addons/sound_manager/module/SoundManager.tscn"
 
 [display]
 
+window/stretch/mode="2d"
 window/size/width=1920
 window/size/height=1080
-window/dpi/allow_hidpi=true
-window/stretch/mode="2d"
-window/stretch/aspect="keep"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "SyndiBox", "editor_icon_previewer", "godot-plugin-refresher", "sound_manager" )
+enabled=PackedStringArray("SyndiBox", "editor_icon_previewer", "godot-plugin-refresher", "sound_manager")
 
 [input]
 
 ui_accept={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777221,"unicode":0,"echo":false,"script":null)
-, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777222,"unicode":0,"echo":false,"script":null)
-, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":32,"unicode":0,"echo":false,"script":null)
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":0,"key_label":0,"unicode":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":0,"key_label":0,"unicode":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":0,"key_label":0,"unicode":0,"echo":false,"script":null)
 , Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":0,"pressure":0.0,"pressed":false,"script":null)
- ]
+]
 }
 
 [rendering]
